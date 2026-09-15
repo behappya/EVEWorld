@@ -10,7 +10,7 @@ import shutil
 from glob import glob
 from pathlib import Path
 
-GAGI = Path('/data/datasets/wkq_vlm/gagi/eve_v2_outputs')
+GAGI = Path('/data/datasets/gagi/eve_v2_outputs')
 CMP = GAGI / 'compare_lazy13'
 MAP = json.load(open(GAGI / 'probe/anmixv3_epscan_lazy13_mapping.json'))
 SEEDS = ['6666', '1234', '2025', '777', '42', '314', '2718', '999']

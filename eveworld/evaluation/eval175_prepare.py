@@ -13,7 +13,7 @@ from typing import Any
 import cv2
 
 
-GAGI_ROOT = Path("/data/datasets/wkq_vlm/gagi")
+GAGI_ROOT = Path("/data/datasets/gagi")
 DEFAULT_GENERATION_ROOT = GAGI_ROOT / "eve_v2_outputs/eval175_gen"
 DEFAULT_INPUT_ROOT = GAGI_ROOT / "gr1_dreamgen_eval/giga_input"
 DEFAULT_OUTPUT_ROOT = GAGI_ROOT / "eve_v2_outputs/eval175_eval"

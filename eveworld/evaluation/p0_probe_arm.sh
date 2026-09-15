@@ -5,12 +5,12 @@
 # 用法: CKPT=/path/to/checkpoint_dir/transformer TAG=raft_s40 [LIMIT=12] bash p0_probe_arm.sh
 set -euo pipefail
 REPO=giga-world-0
-PRETRAIN=/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain
+PRETRAIN=/data/datasets/gagi/giga_world_0_video_pretrain
 CKPT="${CKPT:?需要 CKPT=transformer 目录路径}"
 TAG="${TAG:?需要 TAG=标签}"
 LIMIT="${LIMIT:-12}"
-MODEL_DIR=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/probe_${TAG}
-OUT_ROOT=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/probe/${TAG}
+MODEL_DIR=/data/datasets/gagi/eve_v2_outputs/anchor_models/probe_${TAG}
+OUT_ROOT=/data/datasets/gagi/eve_v2_outputs/probe/${TAG}
 
 [[ -d "$CKPT" ]] || { echo "缺 ckpt: $CKPT"; exit 1; }
 mkdir -p "$MODEL_DIR" "$OUT_ROOT"
@@ -22,7 +22,7 @@ echo "== 探针提交: $TAG (LIMIT=$LIMIT) =="
 cd "$REPO"
 export REPO_DIR="$REPO"
 export RL_DIR="${RL_DIR:-/home/jovyan/new_rl/rl}"
-export JOB_SCRIPT="$REPO/scripts/kjob_bestofn_8gpu.sh"
+export JOB_SCRIPT="$REPO/eveworld/method/scripts/kjob_bestofn_8gpu.sh"
 export MODEL_DIR
 bash "$REPO/scripts/submit_gigaworld0_kjob.sh" \
   "OUT_ROOT=$OUT_ROOT" \

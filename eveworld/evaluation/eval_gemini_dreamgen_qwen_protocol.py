@@ -14,30 +14,26 @@ from typing import Any
 
 from google.genai import types as gt
 
-QWEN_SCRIPT_DIR = Path("giga-world-0/scripts")
+QWEN_SCRIPT_DIR = Path("benchmarks/dreamgenbench")
 if str(QWEN_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(QWEN_SCRIPT_DIR))
 
-GEMINI_REF_DIR = Path("/home/jovyan/DataPipeline/scripts/eval_answer")
-if str(GEMINI_REF_DIR) not in sys.path:
-    sys.path.insert(0, str(GEMINI_REF_DIR))
-
-import eval_consensus_v2_gemini35_high4_qwenjudge as gemini_ref  # noqa: E402
+import gemini_consensus_judge as gemini_ref  # noqa: E402
 import eval_dreamgenbench_qwen_api as qwen_protocol  # noqa: E402
 
 
 DEFAULT_MANIFESTS = (
     Path(
-        "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/eval175_eval/manifests/"
+        "/data/datasets/gagi/eve_v2_outputs/eval175_eval/manifests/"
         "round0.jsonl"
     ),
     Path(
-        "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/eval175_eval_extended_s300/"
+        "/data/datasets/gagi/eve_v2_outputs/eval175_eval_extended_s300/"
         "manifests/t4g_wmapA_pre_seed42_s250.jsonl"
     ),
 )
 DEFAULT_OUTPUT_DIR = Path(
-    "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/gemini_eval/"
+    "/data/datasets/gagi/eve_v2_outputs/gemini_eval/"
     "dreamgen_qwen_protocol_v1"
 )
 

@@ -21,7 +21,7 @@
 用法:
   python3 qwen_laziness.py \
     --video-dir <side_by_side_dir> --crop 0.5,1.0 \
-    --qwen-base 10.60.32.38 --concurrency 128 \
+    --qwen-base 127.0.0.1 --concurrency 128 \
     --out-root /data/.../eve_outputs/tea_qwen --run-name sft_3p8s --limit 92
 """
 from __future__ import annotations
@@ -369,9 +369,9 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--video-dir", type=Path, required=True)
     ap.add_argument("--out-root", type=Path,
-                    default=Path("/data/datasets/wkq_vlm/gagi/eve_outputs/tea_qwen"))
+                    default=Path("/data/datasets/gagi/eve_outputs/tea_qwen"))
     ap.add_argument("--run-name", required=True)
-    ap.add_argument("--qwen-base", default="10.60.32.38")
+    ap.add_argument("--qwen-base", default="127.0.0.1")
     ap.add_argument("--qwen-model", default="auto")
     ap.add_argument("--crop", default=None, help="side-by-side 取右半: 0.5,1.0")
     ap.add_argument("--limit", type=int, default=0)

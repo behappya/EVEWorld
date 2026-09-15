@@ -16,22 +16,18 @@ from typing import Any
 
 from google.genai import types as gt
 
-REF_DIR = Path("/home/jovyan/DataPipeline/scripts/eval_answer")
-if str(REF_DIR) not in sys.path:
-    sys.path.insert(0, str(REF_DIR))
-
-import eval_consensus_v2_gemini35_high4_qwenjudge as gemini_ref  # noqa: E402
+import gemini_consensus_judge as gemini_ref  # noqa: E402
 
 
 DEFAULT_ROUND0_MANIFEST = Path(
-    "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/eval175_eval/manifests/round0.jsonl"
+    "/data/datasets/gagi/eve_v2_outputs/eval175_eval/manifests/round0.jsonl"
 )
 DEFAULT_EVE_MANIFEST = Path(
-    "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/eval175_eval_extended_s300/manifests/"
+    "/data/datasets/gagi/eve_v2_outputs/eval175_eval_extended_s300/manifests/"
     "t4g_wmapA_pre_seed42_s250.jsonl"
 )
 DEFAULT_OUTPUT_DIR = Path(
-    "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/gemini_eval/dreamgen_process_v1"
+    "/data/datasets/gagi/eve_v2_outputs/gemini_eval/dreamgen_process_v1"
 )
 DEFAULT_MODEL = os.getenv("DIFROST_MODEL", gemini_ref.DEFAULT_MODEL)
 

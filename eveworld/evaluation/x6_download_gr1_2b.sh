@@ -6,7 +6,7 @@ set -euo pipefail
 # 用法: bash x6_download_gr1_2b.sh
 # 下载完成后告诉 Claude, 由其组装模型目录并提交 92x8 推理 kjob。
 
-ROOT_DIR="${ROOT_DIR:-/data/datasets/wkq_vlm/gagi}"
+ROOT_DIR="${ROOT_DIR:-/data/datasets/gagi}"
 DEST="${DEST:-${ROOT_DIR}/gigaworld0_gr1_2b}"
 REPO_ID="open-gigaai/GigaWorld-0-Video-GR1-2b"
 

@@ -7,19 +7,19 @@
 set -eu
 source /home/jovyan/miniconda/etc/profile.d/conda.sh && conda activate giga_models
 REPO=giga-world-0
-QWEN_BASE="${QWEN_BASE:-10.60.32.9}"   # Qwen3.6-35B-A3B @ 8000, 2026-07-18 新起
+QWEN_BASE="${QWEN_BASE:-127.0.0.1}"   # Qwen3.6-35B-A3B @ 8000, 2026-07-18 新起
 POOL="${1:-longpool}"
 
 case "$POOL" in
   longpool)
-    ROOT=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/longpool_f125/gr1_sft_ema
+    ROOT=/data/datasets/gagi/eve_v2_outputs/longpool_f125/gr1_sft_ema
     TAG=longpool_f125 ; SUFFIX=f125 ;;
   round0)
-    ROOT=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/pool_round0_f93
+    ROOT=/data/datasets/gagi/eve_v2_outputs/pool_round0_f93
     TAG=pool_round0_f93 ; SUFFIX=f93 ;;
   *) echo "未知池: $POOL (longpool|round0)"; exit 1 ;;
 esac
-OUT=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/scores/$TAG
+OUT=/data/datasets/gagi/eve_v2_outputs/scores/$TAG
 mkdir -p "$OUT"
 
 cd "$REPO"

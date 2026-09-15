@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # X12: eval175 生成完成轮询 -> manifest -> qwen3.6@55 判分 (三臂: A-s50/A-s100/pretrain)
 set -uo pipefail
-GAGI=/data/datasets/wkq_vlm/gagi
+GAGI=/data/datasets/gagi
 GEN=$GAGI/eve_v2_outputs/eval175_gen
 ARMS="t4g_wmapA_s50 t4g_wmapA_s100 pretrain"
 declare -A TGT=( [gr1_env]=29 [gr1_object]=50 [gr1_behavior]=47 )
@@ -24,7 +24,7 @@ echo "[chain] 全部生成完成, 建 manifest..."
 
 python3 - <<'EOF'
 import json, os
-GAGI='/data/datasets/wkq_vlm/gagi'
+GAGI='/data/datasets/gagi'
 GEN=f'{GAGI}/eve_v2_outputs/eval175_gen'
 INP=f'{GAGI}/gr1_dreamgen_eval/giga_input'
 OUT=f'{GAGI}/gr1_dreamgen_eval/eval_manifests'
@@ -47,9 +47,9 @@ source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate giga_models
 cd giga-world-0
 for arm in $ARMS; do
   echo "[chain] 判分 $arm ..."
-  python scripts/eval_dreamgenbench_qwen_api.py \
+  python benchmarks/dreamgenbench/eval_dreamgenbench_qwen_api.py \
     --manifest $GAGI/gr1_dreamgen_eval/eval_manifests/eval175_${arm}.jsonl \
-    --qwen-base http://10.60.32.55:8000/v1 --metrics qwen_if,pa_i \
+    --qwen-base http://127.0.0.1:8000/v1 --metrics qwen_if,pa_i \
     --concurrency 400 --max-inflight 400 --model-timeout 1200 \
     --run-name eval175_${arm}_qwen36_55 2>&1 | tail -3
 done

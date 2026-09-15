@@ -162,7 +162,7 @@ def main():
     ap.add_argument('--out', required=True)
     ap.add_argument('--video-dir', default=None)
     ap.add_argument('--limit', type=int, default=0)
-    ap.add_argument('--qwen-base', default='http://10.60.32.9:8000/v1')
+    ap.add_argument('--qwen-base', default='http://127.0.0.1:8000/v1')
     ap.add_argument('--concurrency', type=int, default=16)
     ap.add_argument('--multi-image', action='store_true')
     a = ap.parse_args()

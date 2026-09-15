@@ -6,14 +6,14 @@
 #       ARM=pretrain bash l0_longhorizon_pool.sh   # 可选: pretrain 底座臂 (对照)
 set -euo pipefail
 REPO=giga-world-0
-PRETRAIN=/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain
-EMA_CKPT=/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/gr1_finetune/experiments_200_clean/models/checkpoint_epoch_100_step_200/transformer_ema
+PRETRAIN=/data/datasets/gagi/giga_world_0_video_pretrain
+EMA_CKPT=/data/datasets/gagi/giga_world_0_outputs/gr1_finetune/experiments_200_clean/models/checkpoint_epoch_100_step_200/transformer_ema
 ARM="${ARM:-gr1_sft_ema}"
-OUT_BASE=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/longpool_f125
+OUT_BASE=/data/datasets/gagi/eve_v2_outputs/longpool_f125
 
 if [[ "$ARM" == "gr1_sft_ema" ]]; then
   # bestofn 链路写死 MODEL_DIR/{transformer,text_encoder,vae} 结构, 用软链目录适配 EMA ckpt
-  MODEL_DIR=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/gr1_fullft_ema
+  MODEL_DIR=/data/datasets/gagi/eve_v2_outputs/anchor_models/gr1_fullft_ema
   mkdir -p "$MODEL_DIR"
   [[ -e "$MODEL_DIR/transformer"   ]] || ln -s "$EMA_CKPT" "$MODEL_DIR/transformer"
   [[ -e "$MODEL_DIR/text_encoder" ]] || ln -s "$PRETRAIN/text_encoder" "$MODEL_DIR/text_encoder"
@@ -33,7 +33,7 @@ echo "== 提交长档基线池: arm=$ARM  frames=125(7.8s)  out=$OUT_ROOT =="
 cd "$REPO"
 export REPO_DIR="$REPO"
 export RL_DIR="${RL_DIR:-/home/jovyan/new_rl/rl}"
-export JOB_SCRIPT="$REPO/scripts/kjob_bestofn_8gpu.sh"
+export JOB_SCRIPT="$REPO/eveworld/method/scripts/kjob_bestofn_8gpu.sh"
 export MODEL_DIR   # 白名单透传
 bash "$REPO/scripts/submit_gigaworld0_kjob.sh" \
   "OUT_ROOT=$OUT_ROOT" \

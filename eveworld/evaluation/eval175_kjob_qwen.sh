@@ -15,9 +15,9 @@ for arg in "$@"; do
   export "${arg}"
 done
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 DREAMGEN_REPO="${DREAMGEN_REPO:-/home/jovyan/gagibench/GR00T-Dreams}"
-EVAL_PYTHON="${EVAL_PYTHON:-/data/datasets/wkq_vlm/gagi/envs/dreamgenbench_eval_venv/bin/python}"
+EVAL_PYTHON="${EVAL_PYTHON:-/data/datasets/gagi/envs/dreamgenbench_eval_venv/bin/python}"
 MANIFEST="${MANIFEST:?Set MANIFEST to one audited model manifest}"
 OUTPUT_DIR="${OUTPUT_DIR:?Set OUTPUT_DIR}"
 CHECKPOINT="${CHECKPOINT:-Qwen/Qwen2.5-VL-7B-Instruct}"
@@ -28,9 +28,9 @@ LIMIT="${LIMIT:-0}"
 RUN_LOG="${RUN_LOG:-${OUTPUT_DIR}/qwen.log}"
 GPU_IDS="${GPU_IDS:-0}"
 
-export HF_HOME="${HF_HOME:-/data/datasets/wkq_vlm/gagi/.hf_home}"
-export HF_XET_CACHE="${HF_XET_CACHE:-/data/datasets/wkq_vlm/gagi/.hf_xet_cache}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-/data/datasets/wkq_vlm/gagi/.cache}"
+export HF_HOME="${HF_HOME:-/data/datasets/gagi/.hf_home}"
+export HF_XET_CACHE="${HF_XET_CACHE:-/data/datasets/gagi/.hf_xet_cache}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-/data/datasets/gagi/.cache}"
 export TOKENIZERS_PARALLELISM=false
 export PYTHONUNBUFFERED=1
 export PYTHONPATH="${DREAMGEN_REPO}:${REPO_DIR}:${PYTHONPATH:-}"
@@ -61,7 +61,7 @@ echo "Seed:       ${SEED}"
 echo "GPU:        ${CUDA_VISIBLE_DEVICES}"
 nvidia-smi || true
 
-"${EVAL_PYTHON}" "${REPO_DIR}/eveworld/evaluation/eval175_qwen_local.py" \
+"${EVAL_PYTHON}" "${EVEWORLD_ROOT}/eveworld/evaluation/eval175_qwen_local.py" \
   --manifest "${MANIFEST}" \
   --output-dir "${OUTPUT_DIR}" \
   --checkpoint "${CHECKPOINT}" \

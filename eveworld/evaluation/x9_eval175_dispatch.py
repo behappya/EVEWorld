@@ -10,7 +10,7 @@ import subprocess
 import sys
 import time
 
-GAGI = '/data/datasets/wkq_vlm/gagi'
+GAGI = '/data/datasets/gagi'
 MODELS = {
     'round0': f'{GAGI}/eve_v2_outputs/anchor_models/round0_ema_st',
     'anmix_s200': f'{GAGI}/eve_v2_outputs/anchor_models/probe_anmix_s200',

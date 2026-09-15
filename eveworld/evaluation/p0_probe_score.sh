@@ -5,9 +5,9 @@ set -eu
 source /home/jovyan/miniconda/etc/profile.d/conda.sh && conda activate giga_models
 REPO=giga-world-0
 TAG="${1:?TAG}"
-ROOT=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/probe/${TAG}
-OUT=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/scores/probe_${TAG}
-QWEN_BASE="${QWEN_BASE:-10.60.32.9}"
+ROOT=/data/datasets/gagi/eve_v2_outputs/probe/${TAG}
+OUT=/data/datasets/gagi/eve_v2_outputs/scores/probe_${TAG}
+QWEN_BASE="${QWEN_BASE:-127.0.0.1}"
 mkdir -p "$OUT"
 
 cd "$REPO"
@@ -30,8 +30,8 @@ def load(d):
             if r['laziness_severity'] and r.get('parsed_ok')=='1':
                 m[os.path.basename(r['video_path'])][seed] = float(r['laziness_severity'])
     return m
-probe = load(f'/data/datasets/wkq_vlm/gagi/eve_v2_outputs/scores/probe_{TAG}')
-base  = load('/data/datasets/wkq_vlm/gagi/eve_v2_outputs/scores/pool_round0_f93')
+probe = load(f'/data/datasets/gagi/eve_v2_outputs/scores/probe_{TAG}')
+base  = load('/data/datasets/gagi/eve_v2_outputs/scores/pool_round0_f93')
 common = sorted(set(probe) & set(base), key=lambda x: int(x.split('_')[0]))
 mean = lambda x: sum(x)/len(x)
 diffs, p_all, b_all = [], [], []
@@ -49,5 +49,5 @@ print(f'逐 prompt: 改善 {wins} / 持平 {ties} / 变差 {n-wins-ties}')
 verdict = '✅ 方向正确' if d < -0.1 and wins >= n/2 else ('⚠️ 无明显变化' if abs(d) <= 0.1 else '❌ 变差, 止损检查')
 print(f'裁决: {verdict}  (Gate-3 正式门槛: 全量40eval改善>=0.2 + 人眼可辨)')
 json.dump({'tag':TAG,'n':n,'probe_mean':mean(p_all),'round0_mean':mean(b_all),'delta':d,
-           'wins':wins,'ties':ties}, open(f'/data/datasets/wkq_vlm/gagi/eve_v2_outputs/scores/probe_{TAG}/verdict.json','w'), indent=1)
+           'wins':wins,'ties':ties}, open(f'/data/datasets/gagi/eve_v2_outputs/scores/probe_{TAG}/verdict.json','w'), indent=1)
 EOF
