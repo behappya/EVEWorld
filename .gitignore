@@ -1,0 +1,87 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# --- Model weights & tensors ---
+*.pth
+*.pt
+*.safetensors
+*.ckpt
+*.bin
+*.onnx
+*.params
+*.engine
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.msgpack
+
+# --- Data / large outputs ---
+*.mp4
+*.avi
+*.mov
+*.webm
+*.mkv
+*.mp3
+*.wav
+*.jsonl
+*.csv
+*.tsv
+*.parquet
+*.arrow
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+outputs/
+checkpoints/
+experiments/
+_tmp/
+data/
+
+# --- Media (selectively re-allowed in paper/ and assets/ via nested .gitignore) ---
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tif
+*.tiff
+*.webp
+*.pdf
+
+# --- LaTeX build artifacts ---
+*.aux
+*.bbl
+*.blg
+*.out
+*.log
+*.fls
+*.fdb_latexmk
+*.xdv
+*.synctex.gz
+missfont.log
+
+# --- Secrets must never be committed ---
+.env
+*.secret
+
+# --- misc ---
+*.swp
+*.swo
+gmon.out
