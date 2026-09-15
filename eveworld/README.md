@@ -2,7 +2,7 @@
 
 Python package implementing the EVEWorld stack: the IGR + TIA training pipeline that supervises target-instance evolution, the Model Laziness Rate (MLR) diagnostics, generation/evaluation tooling, domain and backbone transfer ports, and the alternative designs analyzed as negative controls in the paper appendix.
 
-The trainer entry points are exposed lazily from [`__init__.py`](__init__.py) (`EveCausalTrainer`, `EveLadLoraTrainer`, `EveFrontierTrainer`); GigaTrain configs select them through the `runners` field, e.g. `runners = ["eve.EveCausalTrainer"]`.
+The trainer entry points are exposed lazily from [`__init__.py`](__init__.py) (`EveCausalTrainer`, `EveLadLoraTrainer`, `EveFrontierTrainer`); GigaTrain configs select them through the `runners` field, e.g. `runners = ["eveworld.EveCausalTrainer"]`.
 
 ## Paper mapping
 

@@ -12,7 +12,7 @@ from eveworld.alternatives.physlatent.configs.gr1_physlatent_adapter import conf
 
 
 config = copy.deepcopy(_base)
-config["runners"] = ["eve.EveFrontierTrainer"]
+config["runners"] = ["eveworld.EveFrontierTrainer"]
 config["launch"]["deepspeed_config"]["deepspeed_config_file"] = str(
     Path(__file__).with_name("deepspeed_zero2_clip.json").resolve()
 )

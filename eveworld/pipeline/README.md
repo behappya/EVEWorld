@@ -15,8 +15,8 @@ backbone and [GigaModels](../../giga-models/) training stack.
 | `t4g_weightmap_*` (regional weight maps) | IGR spatial up-weighting; App. figure *Regional weights for the GR1 configuration* |
 | `t4g_corr_*` (contrastive correspondence loss/trainer) | Method, *Temporal Instance Alignment* (TIA) |
 | `t4g_probe.py`, `t4g_measure.py` (layer-wise probe) | App. *TIA Layer Selection* (layer-probe table) |
-| `t4g_joint_*` (IGR + TIA trainer/configs) | Main EVEWorld model; App. *Training Objective* |
-| `t4g_final_*` (final combined arm) | Main-results training run and its audit probes |
+| `t4g_joint_*` (IGR + TIA trainer/configs) | Main EVEWorld model (main run: `t4g_cfg_repro_seed42_config.py` via `kjob_cfg_train_then_sweep.sh`); App. *Training Objective* |
+| `t4g_final_*` (final combined arm) | Later exploratory arm (not the reported main configuration) and its audit probes |
 | `t4g_detect.py`, `t4g_gdino.py`, `t4g_exam*.py`, `ewm_dup.py` | MLR metric; App. *MLR Evaluation Protocol* and *Detector Calibration*; EWMBench transfer |
 | `t4g_ablation_*_config.py`, `kjob_eve_ablation_*`, `watch_eve_ablation_*` | Table *Component ablation on DreamGenBench* |
 | `t4g_ghost_probe.py`, `t4g_restore_probe.py`, `t4g_change_test.py`, `t4g_dup_test.py`, `t4g_empty_map.py` | Evidence chain behind the design; App. *Why Standard SFT becomes lazy and how IGR removes it* |

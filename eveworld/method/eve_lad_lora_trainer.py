@@ -10,7 +10,7 @@
   transition_error 无意义 -> 用 1/(1+sigma)(flow 模式下即 c_skip, "x0 中有多少是信号")
   加权, 只有低噪声步真正贡献正则。这也呼应 EAG 实测"大 sigma 无效、小 sigma 才有效"。
 
-runner 名: 'eve.EveLadLoraTrainer'(见 eve/__init__.py)。
+runner 名: 'eveworld.EveLadLoraTrainer'(见 eveworld/__init__.py)。
 主损失仍是父类 EDM 去噪(保证画质不塌); LAD 正则是辅助项 lad_reg。
 """
 from __future__ import annotations

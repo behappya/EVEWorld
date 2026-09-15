@@ -58,7 +58,7 @@ LIMIT=8 DRY_RUN=1 bash eveworld/method/scripts/launch_eag_generate_kjob.sh  # sm
 ```
 
 **LAD-LoRA — training-time transition-energy regularizer.**
-`EveLadLoraTrainer` (runner `eve.EveLadLoraTrainer`) keeps the EDM denoising
+`EveLadLoraTrainer` (runner `eveworld.EveLadLoraTrainer`) keeps the EDM denoising
 loss and adds the same soft top-3 transition energy of the denoised output as
 a sigma-gated regularizer, re-weighted every step so the energy gradient
 stays at a fixed fraction (target 0.1, capped at 1.0) of the denoising
@@ -80,7 +80,7 @@ reference-centered anti-skip ranking loss (immediate-next vs. later/terminal
 candidate, centered on the frozen base model); CPU mechanics tests live in
 [`../method/tests/test_eve_frontier.py`](../method/tests/test_eve_frontier.py).
 The earlier counterfactual-process variant (`eve_trainer.py`, runner
-`eve.EveCausalTrainer`, config `eve_causal_fullft.py`) instead keeps
+`eveworld.EveCausalTrainer`, config `eve_causal_fullft.py`) instead keeps
 full-sequence training and margin-ranks the real process against
 laziness-corrupted negatives (teleport / excision / freeze-jump). Entry
 points: `launch_frontier_mvp_kjob.sh` (8-GPU train-only overfit probe),

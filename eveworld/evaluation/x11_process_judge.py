@@ -16,6 +16,7 @@
   python x11_process_judge.py score --video-dir <dir> --out <jsonl> [--limit 0]
 """
 import argparse
+import os
 import base64
 import csv
 import json
@@ -27,7 +28,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-KP = Path('eveworld/next/kappa_pack')
+KP = Path(os.environ.get('EVEWORLD_KAPPA_PACK', 'kappa_pack'))  # human-annotation pack, not part of this release
 _TLS = threading.local()
 
 SCHEMA = {

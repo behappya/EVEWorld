@@ -39,20 +39,26 @@ the TIA attachment layer (blocks 22-23 on GigaWorld-0; block 12 on FlowWAM):
 ## 3. Train EVEWorld (IGR + TIA)
 
 The joint objective (IGR restoration + TIA correspondence) is implemented by
-`eveworld/pipeline/t4g_joint_trainer.py` with the final configuration
-`eveworld/pipeline/t4g_final_config.py`; launch through the GR1 fine-tuning
-wrapper with the EVEWorld config module:
+`eveworld/pipeline/t4g_joint_trainer.py`. The reported main run is the
+"A-pre" recipe at training seed 42: `eveworld/pipeline/t4g_cfg_repro_seed42_config.py`
+(deriving from `t4g_apre_noaug_config.py`, with `p_aug=0.5`), launched via
+`benchmarks/dreamgenbench/kjob_cfg_train_then_sweep.sh` and evaluated at the
+step-250 checkpoint:
 
 ```bash
 bash benchmarks/dreamgenbench/launch_gr1_train_kjob.sh \
-  BASE_CONFIG_MODULE=eveworld.pipeline.t4g_final_config
+  BASE_CONFIG_MODULE=eveworld.pipeline.t4g_cfg_repro_seed42_config MAX_STEPS=250
 ```
 
 Main-run recipe (paper, Appendix "Implementation Details"): full-parameter
-training from GigaWorld-0 Video-Pretrain-2B, CAME-8bit, lr 4.32e-5, effective
-batch 64, 250 steps, 480x768, 93-frame clips @16 FPS, on 92 GR1 videos.
-Controls: Standard SFT (uniform loss) and the component ablations
-(`t4g_ablation_*` configs).
+training from GigaWorld-0 Video-Pretrain-2B, CAME-8bit, lr 2^-14.5
+(~4.32e-5), effective batch 64, 250 steps, 480x768, 93-frame clips @16 FPS,
+on 92 GR1 videos; TIA lambda warms 0->0.5 over the first 20 steps and applies
+at sigma in [0.2, 0.5] (all visible in the config). Controls: Standard SFT
+(uniform loss) and the component ablations (`t4g_ablation_*` configs).
+`t4g_joint_cleanv2_config.py` is the uniform-3x weight-map sibling variant;
+`eveworld/pipeline/t4g_final_*` is a later exploratory arm, not the reported
+main configuration.
 
 ## 4. Generate evaluation videos
 

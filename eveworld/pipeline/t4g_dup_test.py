@@ -20,7 +20,7 @@ import t4g_probe as P
 from t4g_gdino import GDinoLocator
 from t4g_detect import detect_all, px_to_cell
 
-KP = 'eveworld/next/kappa_pack'
+KP = os.environ.get('EVEWORLD_KAPPA_PACK', 'kappa_pack')  # human-annotation pack, not part of this release
 H_LAT, W_LAT, T_LAT = 30, 48, 24
 
 

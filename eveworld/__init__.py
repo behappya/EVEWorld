@@ -1,4 +1,4 @@
-"""EVE 包:暴露 runner 供 giga_train 的 runners=['eve.EveCausalTrainer'] 解析。"""
+"""EVE 包:暴露 runner 供 giga_train 的 runners=['eveworld.EveCausalTrainer'] 解析。"""
 def __getattr__(name):
     if name == "EveCausalTrainer":
         from .method.eve_trainer import EveCausalTrainer

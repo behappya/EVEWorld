@@ -8,7 +8,7 @@ import copy
 from eveworld.alternatives.physlatent.configs.gr1_physlatent_adapter import config as _base
 
 config = copy.deepcopy(_base)
-config['runners'] = ['eve.EveCausalTrainer']
+config['runners'] = ['eveworld.EveCausalTrainer']
 config['project_dir'] = '/data/datasets/gagi/giga_world_0_outputs/eve/experiments_causal_fullft'
 
 # 全参微调 + 关闭 physics 辅助头

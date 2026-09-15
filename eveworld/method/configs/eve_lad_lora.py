@@ -11,7 +11,7 @@ from pathlib import Path
 from eveworld.alternatives.physlatent.configs.gr1_physlatent_adapter import config as _base
 
 config = copy.deepcopy(_base)
-config['runners'] = ['eve.EveLadLoraTrainer']
+config['runners'] = ['eveworld.EveLadLoraTrainer']
 config['launch']['deepspeed_config']['deepspeed_config_file'] = str(
     Path(__file__).with_name('deepspeed_zero2_clip.json').resolve()
 )
