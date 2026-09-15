@@ -1,0 +1,84 @@
+# End-to-End Reproduction Guide
+
+This guide walks through reproducing the paper's main results. Each stage has
+a canonical entry point; cluster (`kjob_*`) wrappers are SLURM-style templates
+— set `EVEWORLD_ROOT` (this repo) and `GAGI_ROOT` (data root) first and adapt
+site-specific paths. See `docs/ENVIRONMENT.md` for the software stack and
+`docs/DATASETS.md` for data acquisition.
+
+## 0. Setup
+
+```bash
+conda env create -f environment.yml && conda activate eveworld
+pip install -e ./giga-models
+export EVEWORLD_ROOT=$(pwd)
+export GAGI_ROOT=/path/to/your/data
+```
+
+Download the GigaWorld-0 Video-Pretrain-2B backbone and the GR1 fine-tuning
+split (scripts under `giga-world-0/scripts/download_*.sh`), and prepare
+GroundingDINO weights for the detection stages.
+
+## 1. IGR supervision assets (offline)
+
+Build the IGR training pairs: parse instructions, localize the target with
+GroundingDINO, sample paste regions, and precompute the spatial weight maps.
+
+- Detection and annotation: `eveworld/pipeline/t4g_detect.py`, `t4g_gdino.py`
+- Copy-paste corruption and weight maps: `eveworld/pipeline/t4g_aug_prep.py`, `t4g_weightmap_precompute.py`
+- Details: `eveworld/pipeline/README.md`
+
+## 2. TIA layer selection (offline probe)
+
+Run the layer-wise correspondence probe (endpoint error per block) to select
+the TIA attachment layer (blocks 22-23 on GigaWorld-0; block 12 on FlowWAM):
+
+- `eveworld/pipeline/t4g_probe.py`, `t4g_measure.py`
+- FlowWAM variant: `eveworld/flowwam_port/tia_probe.py`
+
+## 3. Train EVEWorld (IGR + TIA)
+
+The joint objective (IGR restoration + TIA correspondence) is implemented by
+`eveworld/pipeline/t4g_joint_trainer.py` with the final configuration
+`eveworld/pipeline/t4g_final_config.py`; launch through the GR1 fine-tuning
+wrapper with the EVEWorld config module:
+
+```bash
+bash benchmarks/dreamgenbench/launch_gr1_train_kjob.sh \
+  BASE_CONFIG_MODULE=eveworld.pipeline.t4g_final_config
+```
+
+Main-run recipe (paper, Appendix "Implementation Details"): full-parameter
+training from GigaWorld-0 Video-Pretrain-2B, CAME-8bit, lr 4.32e-5, effective
+batch 64, 250 steps, 480x768, 93-frame clips @16 FPS, on 92 GR1 videos.
+Controls: Standard SFT (uniform loss) and the component ablations
+(`t4g_ablation_*` configs).
+
+## 4. Generate evaluation videos
+
+- DreamGenBench (126 prompts, seed 004, 30 denoising steps, CFG 7.0):
+  `benchmarks/dreamgenbench/` generation chains (`kjob_gr1_dreamgen_generation.sh`, eval175 campaigns).
+- WorldArena 1.0 / EWMBench / RoboTwin: the per-benchmark `kjob_*` generation scripts under `benchmarks/`.
+
+## 5. Evaluate
+
+- **MLR** (deterministic GroundingDINO protocol): `benchmarks/worldarena/mlr_eval.py` + `mlr_dispatch.py`; per-benchmark drivers are linked from each benchmark README.
+- **DreamGenBench IF**: Qwen-IF (`benchmarks/dreamgenbench/eval_dreamgenbench_qwen_api.py`), Gemini-IF (`eveworld/evaluation/eval_gemini_dreamgen_qwen_protocol.py`); aggregate with `eval175_summarize.py`.
+- **WorldArena 1.0**: eight local metrics (`benchmarks/worldarena/local_metric_eval.py`) aggregated by `aggregate_core_scores.py`.
+- **EWMBench**: official-layout conversion + scoring (`benchmarks/ewmbench/`).
+- **RoboTwin/FlowWAM**: PSNR/SSIM/LPIPS/Flow-EPE + MLR (`benchmarks/robotwin_flowwam/`).
+
+## 6. Ablations and analyses
+
+- Component ablation (IGR-only / TIA-only / joint): `eveworld/pipeline/t4g_ablation_*` configs + `kjob_eve_ablation_*` chains.
+- CFG sensitivity grid: `eveworld/evaluation/cfg_grid_*`.
+- Sequence-length scaling: `benchmarks/pbench/` and `benchmarks/dreamgenbench/run_*length*` scripts.
+- Alternative designs (PhysicsLatent, EAG, LAD-LoRA, Causal Frontier, ICH-D): `eveworld/alternatives/README.md`.
+
+## Notes
+
+- Detector thresholds, checkpoints, and guidance settings were frozen on
+  development data before final evaluation; keep the published protocol
+  unchanged when comparing numbers.
+- Judge endpoints require API credentials via environment variables
+  (`OPENAI_API_KEY`, `DIFROST_*`); see `docs/ENVIRONMENT.md`.

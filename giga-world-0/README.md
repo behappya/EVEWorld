@@ -1,3 +1,5 @@
+> **Note (EVEWorld release):** this directory is a pinned, vendored snapshot of the upstream project (no submodule), frozen at the version used for all experiments in the EVEWorld paper. Upstream: https://github.com/open-gigaai/giga-world-0 — see `docs/ENVIRONMENT.md` and the top-level README.
+
 <div align="center" style="font-family: charter;">
     <h1> GigaWorld-0: World Models as Data Engine to Empower Embodied AI </h1>
 

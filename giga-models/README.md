@@ -1,3 +1,5 @@
+> **Note (EVEWorld release):** this directory is a pinned, vendored snapshot of the upstream project (no submodule), frozen at the version used for all experiments in the EVEWorld paper. Upstream: https://github.com/open-gigaai/giga-models — see `docs/ENVIRONMENT.md` and the top-level README. The upstream example collections under `projects/`/`example/` are omitted from this snapshot; the original README below references them, so follow the upstream repository for those examples.
+
 <p align="center">
 <img width="55%" alt="GigaModels" src="./docs/source/imgs/logo.png?raw=true">
 </p>

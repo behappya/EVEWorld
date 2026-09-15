@@ -55,7 +55,7 @@ See [`docs/ENVIRONMENT.md`](docs/ENVIRONMENT.md) for the full dependency list, C
 ## Quick Start
 
 1. **Prepare data & checkpoints** — see [`docs/DATASETS.md`](docs/DATASETS.md).
-2. **Train EVEWorld (IGR + TIA)** — see [`eveworld/training/`](eveworld/training/).
+2. **Train EVEWorld (IGR + TIA)** — method-side pipeline in [`eveworld/pipeline/`](eveworld/pipeline/), training launch in [`benchmarks/dreamgenbench/`](benchmarks/dreamgenbench/).
 3. **Generate & evaluate** — per-benchmark guides under [`benchmarks/`](benchmarks/).
 4. **End-to-end reproduction** — [`docs/REPRODUCTION.md`](docs/REPRODUCTION.md).
 
