@@ -8,7 +8,7 @@ source /home/jovyan/miniconda/etc/profile.d/conda.sh
 conda activate giga_models
 
 GAGI=/data/datasets/gagi
-REPO=giga-world-0
+REPO="${EVEWORLD_ROOT:-$(pwd)}"
 GEN_ROOT=${GAGI}/gr1_dreamgen_eval/xmodel_eval175
 OUT_ROOT=${GAGI}/eve_v2_outputs/xmodel_eval175_eval
 EVAL_OUT=${GAGI}/gr1_dreamgen_eval/eval_outputs

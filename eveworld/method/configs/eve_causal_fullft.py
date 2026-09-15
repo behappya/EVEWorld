@@ -5,7 +5,7 @@
 #   - physics aux loss 全 0(不用弱标签辅助头)
 #   - 新增 models.causal(EVE 因果损失权重,EveCausalTrainer.get_models 读取)
 import copy
-from physlatent_gigaworld.configs.gr1_physlatent_adapter import config as _base
+from eveworld.alternatives.physlatent.configs.gr1_physlatent_adapter import config as _base
 
 config = copy.deepcopy(_base)
 config['runners'] = ['eve.EveCausalTrainer']

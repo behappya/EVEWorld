@@ -20,8 +20,8 @@ import os
 
 from giga_train import TRANSFORMS
 
-from ..track4gen.t4g_aug_trainer import T4GAugTransform
-from ..track4gen.t4g_joint_trainer import T4GJointTrainer
+from ..pipeline.t4g_aug_trainer import T4GAugTransform
+from ..pipeline.t4g_joint_trainer import T4GJointTrainer
 
 SKILL_ZONE_BIAS = {
     'Pick': (0.0, 0.5, 0.5),

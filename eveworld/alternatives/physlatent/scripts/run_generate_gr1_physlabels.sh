@@ -9,4 +9,4 @@ PYTHON_BIN="${PYTHON_BIN:-${TRAIN_VENV}/bin/python}"
 
 export PYTHONPATH="${EVEWORLD_ROOT}:${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
 
-exec "${PYTHON_BIN}" -m physlatent_gigaworld.scripts.generate_gr1_physlabels "$@"
+exec "${PYTHON_BIN}" -m eveworld.alternatives.physlatent.scripts.generate_gr1_physlabels "$@"

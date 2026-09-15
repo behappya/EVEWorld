@@ -135,7 +135,7 @@ def _inference(
             lora_fuse=lora_fuse,
         )
     elif physics_latent_model_path:
-        from physlatent_gigaworld.pipeline import PhysLatentGigaWorld0Pipeline
+        from eveworld.alternatives.physlatent.pipeline import PhysLatentGigaWorld0Pipeline
 
         print(
             f'[gw0] process={process_index} loading PhysLatent pipeline '

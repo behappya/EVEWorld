@@ -47,7 +47,7 @@ require_video_dir() {
   count="$(mp4_count "${VIDEO_DIR}")"
   if [[ "${count}" != "${EXPECTED_COUNT}" ]]; then
     echo "Expected ${EXPECTED_COUNT} mp4 files in ${VIDEO_DIR}, found ${count}." >&2
-    echo "Run physlatent_gigaworld/scripts/run_physlatent_full92_pa2.sh first if generated-only videos are missing." >&2
+    echo "Run eveworld/alternatives/physlatent/scripts/run_physlatent_full92_pa2.sh first if generated-only videos are missing." >&2
     exit 1
   fi
 }

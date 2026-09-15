@@ -20,8 +20,8 @@ from typing import Any
 import torch
 from accelerate import DistributedType
 
-from physlatent_gigaworld.trainer import PhysicsLatentGigaWorld0Trainer
-from physlatent_gigaworld.modules import cfg_get
+from eveworld.alternatives.physlatent.trainer import PhysicsLatentGigaWorld0Trainer
+from eveworld.alternatives.physlatent.modules import cfg_get
 from .lam.latent_action_model import LatentActionModel
 
 

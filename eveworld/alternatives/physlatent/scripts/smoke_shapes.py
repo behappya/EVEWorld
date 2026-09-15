@@ -4,8 +4,8 @@ import argparse
 
 import torch
 
-from physlatent_gigaworld.losses import PhysicsAuxiliaryLoss
-from physlatent_gigaworld.modules import PhysicsLatentEncoder, append_physics_tokens
+from eveworld.alternatives.physlatent.losses import PhysicsAuxiliaryLoss
+from eveworld.alternatives.physlatent.modules import PhysicsLatentEncoder, append_physics_tokens
 
 
 def main() -> None:

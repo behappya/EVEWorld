@@ -9,7 +9,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from physlatent_gigaworld.prompt_parser import parse_pick_place_prompt
+from eveworld.alternatives.physlatent.prompt_parser import parse_pick_place_prompt
 
 
 COLOR_RANGES = {

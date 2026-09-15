@@ -3,7 +3,7 @@
 在父类 EDM 去噪损失之外叠加 CPC:真实过程去噪误差 < 偷懒负样本(latent 空间构造)。
 runner 名: 'eve.EveCausalTrainer'(见 eve/__init__.py)。
 
-实现按 physlatent_gigaworld/trainer.py 的真实 forward_step 精确复刻:
+实现按 eveworld/alternatives/physlatent/trainer.py 的真实 forward_step 精确复刻:
   transformer(x=, timesteps=, crossattn_emb=, padding_mask=, fps=)
   add_noise(latents)->(input,timesteps); denoise(pred); compute_loss(denoised)->标量
 """
@@ -13,8 +13,8 @@ from typing import Any
 import torch
 import torch.nn.functional as F
 
-from physlatent_gigaworld.trainer import PhysicsLatentGigaWorld0Trainer
-from physlatent_gigaworld.modules import append_physics_tokens, cfg_get
+from eveworld.alternatives.physlatent.trainer import PhysicsLatentGigaWorld0Trainer
+from eveworld.alternatives.physlatent.modules import append_physics_tokens, cfg_get
 from .losses.lazy_negatives import make_negatives, random_control
 
 

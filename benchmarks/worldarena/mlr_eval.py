@@ -14,7 +14,7 @@ import numpy as np
 from PIL import Image
 
 
-TRACK4GEN = Path(__file__).resolve().parents[2] / "eve" / "next" / "track4gen"
+TRACK4GEN = Path(__file__).resolve().parents[2] / "eveworld" / "pipeline"
 sys.path.insert(0, str(TRACK4GEN))
 
 from t4g_detect import detect_all  # noqa: E402

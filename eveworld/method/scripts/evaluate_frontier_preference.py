@@ -30,7 +30,7 @@ from eveworld.method.eve_frontier_loss import (
     prepare_frontier_candidate_batch,
     terminal_candidate_target,
 )
-from physlatent_gigaworld.transforms import PhysLatentGigaWorld0Transform
+from eveworld.alternatives.physlatent.transforms import PhysLatentGigaWorld0Transform
 
 
 def _parse_checkpoint(value: str) -> tuple[str, Path]:

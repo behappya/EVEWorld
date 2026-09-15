@@ -8,7 +8,7 @@
 import copy
 import os
 from pathlib import Path
-from physlatent_gigaworld.configs.gr1_physlatent_adapter import config as _base
+from eveworld.alternatives.physlatent.configs.gr1_physlatent_adapter import config as _base
 
 config = copy.deepcopy(_base)
 config['runners'] = ['eve.EveLadLoraTrainer']

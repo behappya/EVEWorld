@@ -16,7 +16,7 @@ import sys
 import cv2
 import numpy as np
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "track4gen"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pipeline"))
 from t4g_gdino import GDinoLocator  # noqa: E402
 
 N_LAT, H_LAT, W_LAT = 31, 30, 40

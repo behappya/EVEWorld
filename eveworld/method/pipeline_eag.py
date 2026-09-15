@@ -20,7 +20,7 @@ import torch
 from diffusers.utils.torch_utils import randn_tensor
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
-from physlatent_gigaworld.pipeline import PhysLatentGigaWorld0Pipeline
+from eveworld.alternatives.physlatent.pipeline import PhysLatentGigaWorld0Pipeline
 from eveworld.method.lam.latent_action_model import LatentActionModel
 from eveworld.method.eag import EAGGuidance
 

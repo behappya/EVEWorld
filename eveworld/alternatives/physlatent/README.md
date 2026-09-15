@@ -1,7 +1,17 @@
-# PhysLatent-GigaWorld
+# PhysLatent-GigaWorld (PhysicsLatent route)
 
 Experimental package for adding physics-aware latent condition tokens to
 GigaWorld-0-Video without changing the baseline transformer implementation.
+
+> **Location.** This package now lives at `eveworld/alternatives/physlatent/`
+> (import root `eveworld.alternatives.physlatent`) as the PhysicsLatent entry
+> among the five alternative designs analyzed in the paper — see
+> [`../README.md`](../README.md) for the route map and matched-control
+> results. It was originally developed as a top-level package inside the
+> `giga-world-0/` working tree and now lives at
+> `eveworld/alternatives/physlatent/`, imported as
+> `eveworld.alternatives.physlatent` (run entry points from the repository
+> root with the repository root on `PYTHONPATH`).
 
 ## First Target
 
@@ -26,7 +36,7 @@ pseudo labels are generated.
 
 ## Smoke Check
 
-From `giga-world-0`:
+From the repository root:
 
 ```bash
 python -m eveworld.alternatives.physlatent.scripts.smoke_shapes
