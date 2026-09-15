@@ -59,10 +59,10 @@ OLD_POOLS = ('mine_round0', 'mine_gr1_2b', 'mine_s150', 'mine_wmapA_pre_s250')
 A_BLOCKS = ['block10', 'block12', 'block16']     # 现有 12 维基线 (fusion 3L, 0.8047@0.4)
 CIC_BLOCKS_DEFAULT = 'block10,block12,block16'   # v2: 认亲特征改在涌现信号最强三层
 
-OUT_DIR_DEFAULT = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/cic_match_v2'
+OUT_DIR_DEFAULT = '/data/datasets/gagi/eve_v2_outputs/selfcase/cic_match_v2'
 CACHE_NAME = 'cic_cell_features.npz'
 REPORT_NAME = 'cic_match_report.json'
-OLD_CACHE = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/g1p/g1p_cell_features.npz'
+OLD_CACHE = '/data/datasets/gagi/eve_v2_outputs/selfcase/g1p/g1p_cell_features.npz'
 
 BASELINE_REF = 0.8047                            # 3L_block10_12_16|0.4 @ 34 例
 GAIN_GATE_DEFAULT = 0.01                         # v2 放宽: B-A>=0.01 即"可并入"
@@ -490,8 +490,8 @@ def fuse_loo(cache_path, sigmas, out_path, gain_gate=GAIN_GATE_DEFAULT,
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--pools', default=POOLS_DEFAULT)
-    ap.add_argument('--it2v', default='/data/datasets/wkq_vlm/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
-    ap.add_argument('--model-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
+    ap.add_argument('--it2v', default='/data/datasets/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
+    ap.add_argument('--model-dir', default='/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
     ap.add_argument('--sigmas', default='0.2,0.4')
     ap.add_argument('--cic-blocks', default=CIC_BLOCKS_DEFAULT)
     ap.add_argument('--gain-gate', type=float, default=GAIN_GATE_DEFAULT)

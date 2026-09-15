@@ -40,7 +40,7 @@ from giga_world_0.giga_world_0_transforms import GigaWorld0Transform
 
 from .t4g_corr_loss import compute_corr_losses
 
-DEFAULT_ANNO_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
+DEFAULT_ANNO_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
 DEFAULT_IDX2VID = os.path.join(DEFAULT_ANNO_DIR, '_packidx2vid.json')
 
 

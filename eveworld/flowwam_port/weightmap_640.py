@@ -13,8 +13,8 @@ import os
 
 import numpy as np
 
-ANNO_DIR = "/data/datasets/wkq_vlm/gagi/flowwam/igr/anno_640"
-OUT_DIR = "/data/datasets/wkq_vlm/gagi/flowwam/igr/weightmap_cache_640"
+ANNO_DIR = "/data/datasets/gagi/flowwam/igr/anno_640"
+OUT_DIR = "/data/datasets/gagi/flowwam/igr/weightmap_cache_640"
 N_LAT, H_LAT, W_LAT = 31, 30, 40
 CELL_PX = 16
 W_BG, W_OBJ = 0.5, 4.0

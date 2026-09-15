@@ -22,7 +22,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--video-dir", required=True)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--vae-path", default="/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/vae")
+    ap.add_argument("--vae-path", default="/data/datasets/gagi/giga_world_0_video_pretrain/vae")
     ap.add_argument("--num-frames", type=int, default=49)
     ap.add_argument("--height", type=int, default=480)
     ap.add_argument("--width", type=int, default=768)

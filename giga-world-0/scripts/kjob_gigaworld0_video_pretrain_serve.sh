@@ -29,13 +29,13 @@ for arg in "$@"; do
   export "${arg}"
 done
 
-REPO_DIR="${REPO_DIR:-/home/jovyan/giga-models/giga-world-0}"
-GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-/home/jovyan/giga-models}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
+GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-${EVEWORLD_ROOT}/giga-models}"
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
 CONDA_ENV="${CONDA_ENV:-giga_models}"
 
-MODEL_DIR="${MODEL_DIR:-/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain}"
-OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/gigaworld0_serving}"
+MODEL_DIR="${MODEL_DIR:-/data/datasets/gagi/giga_world_0_video_pretrain}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/gagi/giga_world_0_outputs/gigaworld0_serving}"
 RUN_NAME="${RUN_NAME:-serve_$(date +%Y%m%d_%H%M%S)}"
 SAVE_DIR="${SAVE_DIR:-${OUTPUT_ROOT}/${RUN_NAME}}"
 SERVE_LOG="${SERVE_LOG:-${LOG_FILE:-${SAVE_DIR}/serve.log}}"
@@ -53,7 +53,7 @@ GPU_IDS_RAW="${GPU_IDS:-0}"
 
 export PYTHONUNBUFFERED=1
 export TOKENIZERS_PARALLELISM=false
-export HF_HOME="${HF_HOME:-/data/datasets/wkq_vlm/gagi/.hf_home}"
+export HF_HOME="${HF_HOME:-/data/datasets/gagi/.hf_home}"
 export HF_HUB_OFFLINE="${HF_HUB_OFFLINE:-1}"
 export TRANSFORMERS_OFFLINE="${TRANSFORMERS_OFFLINE:-1}"
 export DIFFUSERS_OFFLINE="${DIFFUSERS_OFFLINE:-1}"
@@ -63,7 +63,7 @@ export NCCL_SOCKET_IFNAME="${NCCL_SOCKET_IFNAME:-eth0}"
 export GLOO_SOCKET_IFNAME="${GLOO_SOCKET_IFNAME:-eth0}"
 export NCCL_DEBUG="${NCCL_DEBUG:-WARN}"
 export CUDA_CACHE_PATH="${CUDA_CACHE_PATH:-${HOME}/.nv/ComputeCache}"
-export PYTHONPATH="${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
 
 IFS=' ,' read -r -a REQUESTED_GPU_IDS_ARGS <<< "${GPU_IDS_RAW}"
 if [[ ${#REQUESTED_GPU_IDS_ARGS[@]} -eq 0 ]]; then

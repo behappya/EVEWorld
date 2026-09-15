@@ -11,7 +11,7 @@ set -euo pipefail
 #
 # Re-run the same command if it is interrupted.
 
-ROOT_DIR="${ROOT_DIR:-/data/datasets/wkq_vlm/gagi}"
+ROOT_DIR="${ROOT_DIR:-/data/datasets/gagi}"
 BASE_DIR="${BASE_DIR:-${ROOT_DIR}/gr1_finetune_data}"
 RAW_HF_DIR="${RAW_HF_DIR:-${BASE_DIR}/raw_hf}"
 RAW_DATA_DIR="${RAW_DATA_DIR:-${BASE_DIR}/raw_data}"
@@ -186,7 +186,7 @@ main() {
   echo "  python scripts/pack_data.py \\"
   echo "    --video-dir ${RAW_DATA_DIR} \\"
   echo "    --save-dir ${BASE_DIR}/packed_data \\"
-  echo "    --text-encoder-model-path /data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/text_encoder"
+  echo "    --text-encoder-model-path /data/datasets/gagi/giga_world_0_video_pretrain/text_encoder"
   echo
   echo "Current size:"
   du -sh "${BASE_DIR}" 2>/dev/null || true

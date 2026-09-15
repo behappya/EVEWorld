@@ -38,7 +38,7 @@ for w in ${WEIGHTS}; do
   while job_alive "${JOB}"; do
     sleep "${POLL}"
   done
-  RUN_LOG="/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve/${RUN_NAME}/run.log"
+  RUN_LOG="/data/datasets/gagi/giga_world_0_outputs/eve/${RUN_NAME}/run.log"
   echo "[chain] $(date '+%T') W_LAD=${w} (job ${JOB}) 结束。run.log 尾部:"
   tail -4 "${RUN_LOG}" 2>/dev/null || echo "  (无 run.log)"
   # 校验完成标记

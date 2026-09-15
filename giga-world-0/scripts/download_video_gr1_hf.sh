@@ -8,7 +8,7 @@ set -euo pipefail
 # text_encoder and VAE from the existing video_pretrain directory via symlinks.
 # If those shared components are missing, it downloads them from Hugging Face.
 
-ROOT_DIR="${ROOT_DIR:-/data/datasets/wkq_vlm/gagi}"
+ROOT_DIR="${ROOT_DIR:-/data/datasets/gagi}"
 BASE_DIR="${BASE_DIR:-${ROOT_DIR}/giga_world_0_video_gr1}"
 PRETRAIN_DIR="${PRETRAIN_DIR:-${ROOT_DIR}/giga_world_0_video_pretrain}"
 PYTHON_BIN="${PYTHON_BIN:-python}"

@@ -35,7 +35,7 @@ import t4g_probe as P
 from t4g_ghost_probe import (forward_x0hat, decode_latent, T_LAT, H_LAT, W_LAT,
                              HPIX, WPIX, NF, CELL_PX, ANNO_DIR, VIDEO_ROOT)
 
-ASSETS_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
+ASSETS_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
 
 
 # ---------------------------------------------------------------- 段1/t_grasp
@@ -215,7 +215,7 @@ def run(args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--model-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
+    ap.add_argument('--model-dir', default='/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
     ap.add_argument('--transformer-dir', default=None)
     ap.add_argument('--sigmas', default='0.3,0.8,1.5,3.0')
     ap.add_argument('--fps', type=int, default=16)

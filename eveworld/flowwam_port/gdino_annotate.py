@@ -98,8 +98,8 @@ def annotate_episode(loc: GDinoLocator, row: dict) -> dict:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--manifest", default="/data/datasets/wkq_vlm/gagi/flowwam/igr/manifest_640.json")
-    ap.add_argument("--out-dir", default="/data/datasets/wkq_vlm/gagi/flowwam/igr/anno_640")
+    ap.add_argument("--manifest", default="/data/datasets/gagi/flowwam/igr/manifest_640.json")
+    ap.add_argument("--out-dir", default="/data/datasets/gagi/flowwam/igr/anno_640")
     ap.add_argument("--shard", default="0/1", help="i/n")
     ap.add_argument("--device", default="cuda")
     args = ap.parse_args()

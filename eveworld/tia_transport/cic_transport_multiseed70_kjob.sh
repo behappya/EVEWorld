@@ -17,9 +17,9 @@ for arg in "$@"; do
   export "${arg}"
 done
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
-GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-/home/jovyan/giga-models}"
-GAGI="${GAGI:-/data/datasets/wkq_vlm/gagi}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
+GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-${EVEWORLD_ROOT}/giga-models}"
+GAGI="${GAGI:-/data/datasets/gagi}"
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
 CONDA_ENV="${CONDA_ENV:-giga_models}"
 TRAIN_VENV="${TRAIN_VENV:-${GAGI}/envs/giga_world_train_venv}"
@@ -32,8 +32,8 @@ SEED_START="${SEED_START:?SEED_START is required}"
 SEED_END="${SEED_END:?SEED_END is required}"
 CHAIN_NAME="${CHAIN_NAME:?CHAIN_NAME is required}"
 RESUME="${RESUME:-0}"
-DISPATCHER="${REPO_DIR}/eveworld/tia_transport/cic_transport_multiseed70_dispatch.py"
-WORKER="${REPO_DIR}/eveworld/tia_transport/eval175_transport_worker.py"
+DISPATCHER="${EVEWORLD_ROOT}/eveworld/tia_transport/cic_transport_multiseed70_dispatch.py"
+WORKER="${EVEWORLD_ROOT}/eveworld/tia_transport/eval175_transport_worker.py"
 
 [[ "$(realpath -m "${OUTPUT_ROOT}")" == "${CAMPAIGN_ROOT}/eval175_transport_raw_s150_s200_multiseed70" ]] || {
   echo "Refusing unexpected OUTPUT_ROOT=${OUTPUT_ROOT}" >&2
@@ -80,7 +80,7 @@ fi
 # shellcheck disable=SC1090
 source "${CONDA_SH}"
 conda activate "${CONDA_ENV}"
-export PYTHONPATH="${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1 TOKENIZERS_PARALLELISM=false
 export HF_HOME="${HF_HOME:-${GAGI}/.hf_home}"
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 DIFFUSERS_OFFLINE=1

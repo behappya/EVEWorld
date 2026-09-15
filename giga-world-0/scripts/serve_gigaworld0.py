@@ -36,7 +36,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--transformer-model-path", required=True)
     parser.add_argument("--text-encoder-model-path", required=True)
     parser.add_argument("--vae-model-path", required=True)
-    parser.add_argument("--default-save-dir", default="/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/gigaworld0_serving/results")
+    parser.add_argument("--default-save-dir", default="/data/datasets/gagi/giga_world_0_outputs/gigaworld0_serving/results")
     parser.add_argument("--default-num-inference-steps", type=int, default=30)
     parser.add_argument("--default-fps", type=int, default=16)
     parser.add_argument("--default-num-frames", type=int, default=61)

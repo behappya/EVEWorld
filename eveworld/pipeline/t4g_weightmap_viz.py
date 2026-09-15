@@ -13,7 +13,7 @@ import t4g_probe as P
 from t4g_weightmap import build_weightmap, load_anno, T_LAT, H_LAT, W_LAT, W_OBJ, W_TRANS, W_EMPTY, W_BG
 
 NF, HPIX, WPIX, CELL = 93, 480, 768, 16
-VIDEO_ROOT = '/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data'
+VIDEO_ROOT = '/data/datasets/gagi/gr1_finetune_data/raw_data'
 
 
 def classify_color(anno, wmapinfo, t, gy, gx, w):
@@ -89,7 +89,7 @@ def main():
     ap.add_argument('--vids', default='2,21,12,6,15,89')
     ap.add_argument('--all', action='store_true', help='渲染 t4g_anno 全部视频')
     ap.add_argument('--allframes-vids', default='', help='指定视频渲染全部24帧(逗号分隔)')
-    ap.add_argument('--out-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/weightmap_viz')
+    ap.add_argument('--out-dir', default='/data/datasets/gagi/eve_v2_outputs/track4gen_probe/weightmap_viz')
     a = ap.parse_args()
     os.makedirs(a.out_dir, exist_ok=True)
     from t4g_weightmap import ANNO_DIR

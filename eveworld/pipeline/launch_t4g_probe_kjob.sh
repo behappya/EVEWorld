@@ -16,7 +16,7 @@ REPO_DIR="$(cd "${SCRIPT_DIR}/../../.." && pwd)"   # = giga-world-0
 export REPO_DIR
 export JOB_SCRIPT="${JOB_SCRIPT:-${SCRIPT_DIR}/t4g_probe_kjob.sh}"
 
-GAGI="${GAGI_ROOT:-/data/datasets/wkq_vlm/gagi}"
+GAGI="${GAGI_ROOT:-/data/datasets/gagi}"
 MODEL_DIR="${MODEL_DIR:-${GAGI}/eve_v2_outputs/anchor_models/probe_anmix_s200}"
 VIDEO_ROOT="${VIDEO_ROOT:-${GAGI}/gr1_finetune_data/raw_data}"
 VIDEO_IDS="${VIDEO_IDS:-13,32,76,14,15,16,17,18,19,20,21,23,24,25,26,27}"

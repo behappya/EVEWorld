@@ -19,13 +19,13 @@ for arg in "$@"; do
   [[ "${arg}" == *=* ]] && export "${arg}" || { echo "bad arg: ${arg}" >&2; exit 1; }
 done
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
 CONDA_ENV="${CONDA_ENV:-giga_models}"
-TRAIN_VENV="${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
+TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
 TRAIN_PYTHON="${TRAIN_PYTHON:-${TRAIN_VENV}/bin/python}"
 
-GAGI="${GAGI_ROOT:-/data/datasets/wkq_vlm/gagi}"
+GAGI="${GAGI_ROOT:-/data/datasets/gagi}"
 CKPT_TRANSFORMER="${CKPT_TRANSFORMER:-${GAGI}/eve_v2_outputs/t4g_ich_D/experiments/models/checkpoint_epoch_175_step_350/transformer_ema}"
 PRETRAIN="${PRETRAIN:-${GAGI}/giga_world_0_video_pretrain}"
 DATA_PATH="${DATA_PATH:-${GAGI}/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json}"
@@ -35,7 +35,7 @@ SEEDS="${SEEDS:-42 314 777 999}"
 # GEN_SCRIPT 可覆盖: t4g_ichD_generate.py (ICH 开, 门控由 T4G_ICH_SIGMA_GATE /
 # T4G_ICH_M_GATE env 决定) 或 eveworld/method/scripts/generate_eag.py (裸 backbone,
 # ich_d.* 被 from_pretrained 丢弃 = ICH 全关隔离臂)。
-GEN_SCRIPT="${GEN_SCRIPT:-${REPO_DIR}/eveworld/pipeline/t4g_ichD_generate.py}"
+GEN_SCRIPT="${GEN_SCRIPT:-${EVEWORLD_ROOT}/eveworld/pipeline/t4g_ichD_generate.py}"
 export T4G_ICH_SIGMA_GATE="${T4G_ICH_SIGMA_GATE:-}"
 export T4G_ICH_M_GATE="${T4G_ICH_M_GATE:-0}"
 
@@ -43,7 +43,7 @@ export T4G_ICH_M_GATE="${T4G_ICH_M_GATE:-0}"
 
 # shellcheck disable=SC1090
 source "${CONDA_SH}"; conda activate "${CONDA_ENV}"
-export PYTHONPATH="${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1
 export REPO_DIR
 cd "${REPO_DIR}"

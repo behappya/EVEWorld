@@ -4,11 +4,11 @@
 set -euo pipefail
 
 REPO_DIR="giga-world-0"
-TRAIN_PYTHON="/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv/bin/python"
-PACKED="/data/datasets/wkq_vlm/gagi/gr1_finetune_data/packed_data"
-PRETRAIN="/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/transformer"
-ROOT="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/eve_cic_transport_v1"
-PAYLOAD="${REPO_DIR}/eveworld/tia_transport/cic_transport_kjob_train.sh"
+TRAIN_PYTHON="/data/datasets/gagi/envs/giga_world_train_venv/bin/python"
+PACKED="/data/datasets/gagi/gr1_finetune_data/packed_data"
+PRETRAIN="/data/datasets/gagi/giga_world_0_video_pretrain/transformer"
+ROOT="/data/datasets/gagi/eve_v2_outputs/eve_cic_transport_v1"
+PAYLOAD="${EVEWORLD_ROOT}/eveworld/tia_transport/cic_transport_kjob_train.sh"
 CAMPAIGN_MODULE="eveworld.tia_transport.cic_transport_campaign"
 
 variant_output() {
@@ -29,7 +29,7 @@ variant_config() {
 
 run_python() {
   cd "${REPO_DIR}"
-  PYTHONPATH="/home/jovyan/giga-models:${REPO_DIR}:${PYTHONPATH:-}" \
+  PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}" \
     "${TRAIN_PYTHON}" "$@"
 }
 
@@ -73,7 +73,7 @@ submit_one() {
     BATCH_SIZE_PER_GPU=1 \
     GRADIENT_ACCUMULATION_STEPS=8 \
     GPU_IDS="0 1 2 3 4 5 6 7" \
-      ./scripts/launch_gr1_train_kjob.sh \
+      ./benchmarks/dreamgenbench/launch_gr1_train_kjob.sh \
         "CIC_TRANSPORT_VARIANT=${variant}" \
         "BASE_CONFIG_MODULE=${config}" \
         "TRANSFORMER_MODEL_PATH=${PRETRAIN}" \

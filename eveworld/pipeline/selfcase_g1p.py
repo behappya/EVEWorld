@@ -32,7 +32,7 @@ import numpy as np
 import selfcase_g1 as G1
 from selfcase_g1 import NF, HPIX, WPIX, T_LAT, H_LAT, W_LAT
 
-POOL_ROOT = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase'
+POOL_ROOT = '/data/datasets/gagi/eve_v2_outputs/selfcase'
 DEFAULT_POOLS = 'mine_round0,mine_gr1_2b,mine_s150,mine_wmapA_pre_s250'
 
 
@@ -364,8 +364,8 @@ def run(args):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--pools', default=DEFAULT_POOLS)
-    ap.add_argument('--it2v', default='/data/datasets/wkq_vlm/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
-    ap.add_argument('--model-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
+    ap.add_argument('--it2v', default='/data/datasets/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
+    ap.add_argument('--model-dir', default='/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
     ap.add_argument('--sigmas', default='0.2,0.4')
     ap.add_argument('--block-lo', type=int, default=8)
     ap.add_argument('--block-hi', type=int, default=26)
@@ -379,7 +379,7 @@ def main():
     ap.add_argument('--limit', type=int, default=100)
     ap.add_argument('--force-numpy-lr', action='store_true')
     ap.add_argument('--selftest', action='store_true')
-    ap.add_argument('--out-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/g1p')
+    ap.add_argument('--out-dir', default='/data/datasets/gagi/eve_v2_outputs/selfcase/g1p')
     args = ap.parse_args()
     if args.selftest:
         selftest()

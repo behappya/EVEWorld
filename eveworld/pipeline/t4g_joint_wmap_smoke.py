@@ -55,7 +55,7 @@ print('S5 归一化后 loss 尺度守恒 (均匀err下不变) PASS')
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import t4g_weightmap as W
-CACHE = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/weightmap_cache'
+CACHE = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/weightmap_cache'
 import glob
 vids = [os.path.basename(f)[:-4] for f in sorted(glob.glob(CACHE + '/*.npy'))[:5]]
 for vid in vids:

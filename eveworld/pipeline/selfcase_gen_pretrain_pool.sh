@@ -5,8 +5,8 @@
 # 输出: selfcase/pool_pretrain_f93/seed{S}_f93/generated_only/{idx}_{slug}.mp4
 set -eu
 REPO=giga-world-0
-PRETRAIN=/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain
-OUT_ROOT=/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/pool_pretrain_f93
+PRETRAIN=/data/datasets/gagi/giga_world_0_video_pretrain
+OUT_ROOT=/data/datasets/gagi/eve_v2_outputs/selfcase/pool_pretrain_f93
 
 [[ -d "$PRETRAIN/transformer" ]] || { echo "缺 pretrain transformer: $PRETRAIN/transformer"; exit 1; }
 [[ -d "$PRETRAIN/vae" ]] || { echo "缺 pretrain vae: $PRETRAIN/vae"; exit 1; }
@@ -16,7 +16,7 @@ echo "== 提交 pretrain 池生成: 92 prompt x 4 seed x 93f -> $OUT_ROOT =="
 cd "$REPO"
 export REPO_DIR="$REPO"
 export RL_DIR="${RL_DIR:-/home/jovyan/new_rl/rl}"
-export JOB_SCRIPT="$REPO/scripts/kjob_bestofn_8gpu.sh"
+export JOB_SCRIPT="$REPO/eveworld/method/scripts/kjob_bestofn_8gpu.sh"
 export MODEL_DIR="$PRETRAIN"   # 白名单透传
 bash "$REPO/scripts/submit_gigaworld0_kjob.sh" \
   "OUT_ROOT=$OUT_ROOT" \

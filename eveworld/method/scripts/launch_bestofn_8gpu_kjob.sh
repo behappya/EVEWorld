@@ -7,7 +7,7 @@ REPO_DIR="$(cd "${SCRIPT_DIR}/../../.." && pwd)"   # = giga-world-0
 
 export REPO_DIR
 export RL_DIR="${RL_DIR:-/home/jovyan/new_rl/rl}"
-export JOB_SCRIPT="${JOB_SCRIPT:-${REPO_DIR}/scripts/kjob_bestofn_8gpu.sh}"
+export JOB_SCRIPT="${JOB_SCRIPT:-${EVEWORLD_ROOT}/eveworld/method/scripts/kjob_bestofn_8gpu.sh}"
 
 # 透传给 payload 的覆盖项(submit_gigaworld0_kjob.sh 会 maybe_export 这些名字)
 export SEEDS="${SEEDS:-6666 1234 2025 777 42 314 2718 999}"

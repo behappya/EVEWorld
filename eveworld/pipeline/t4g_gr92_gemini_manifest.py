@@ -12,7 +12,7 @@ import os
 import sys
 from glob import glob
 
-IT2V = '/data/datasets/wkq_vlm/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json'
+IT2V = '/data/datasets/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json'
 
 
 def main():

@@ -12,7 +12,7 @@ import copy
 config = copy.deepcopy(_base)
 config["dataloaders"]["train"]["transform"]["p_aug"] = 0.5
 config["project_dir"] = \
-    "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_cfg_repro_seed42_s300/experiments"
+    "/data/datasets/gagi/eve_v2_outputs/t4g_cfg_repro_seed42_s300/experiments"
 config["train"]["seed"] = 42
 config["train"]["max_steps"] = 300
 config["train"]["checkpoint_interval"] = 50

@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np
 
 
-GAGI = Path('/data/datasets/wkq_vlm/gagi')
+GAGI = Path('/data/datasets/gagi')
 PROBE = GAGI / 'eve_v2_outputs/track4gen_probe'
 
 

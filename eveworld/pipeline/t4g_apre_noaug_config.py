@@ -1,6 +1,6 @@
 """A-pre-noaug: exact legacy A-pre recipe with static paste disabled."""
 
-GAGI = '/data/datasets/wkq_vlm/gagi'
+GAGI = '/data/datasets/gagi'
 ANNO_DIR = GAGI + '/eve_v2_outputs/track4gen_probe/t4g_anno'
 ASSETS_DIR = GAGI + '/eve_v2_outputs/track4gen_probe/aug_assets'
 PRETRAIN = GAGI + '/giga_world_0_video_pretrain'

@@ -9,7 +9,7 @@ from physlatent_gigaworld.configs.gr1_physlatent_adapter import config as _base
 
 config = copy.deepcopy(_base)
 config['runners'] = ['eve.EveCausalTrainer']
-config['project_dir'] = '/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve/experiments_causal_fullft'
+config['project_dir'] = '/data/datasets/gagi/giga_world_0_outputs/eve/experiments_causal_fullft'
 
 # 全参微调 + 关闭 physics 辅助头
 pl = config['models']['physics_latent']
@@ -25,7 +25,7 @@ config['models']['causal'] = dict(
     # w_dyn/w_prog 暂留 0:先验证 CPC 主干跑通,LAM/进度门控在 P0 通过后再开
     w_dyn=0.0,
     w_prog=0.0,
-    lam_ckpt='/data/datasets/wkq_vlm/gagi/eve_outputs/lam/lam_pretrained.pt',
+    lam_ckpt='/data/datasets/gagi/eve_outputs/lam/lam_pretrained.pt',
 )
 
 # 训练步数等沿用 base;如需覆盖用 kjob 的 MAX_STEPS 环境变量

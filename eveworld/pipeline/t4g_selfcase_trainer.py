@@ -28,7 +28,7 @@ from .t4g_aug_trainer import T4GAugTrainer, T4GAugTransform
 
 W_LAT = 48
 
-DEFAULT_CASE_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/mine_round0/case_bank'
+DEFAULT_CASE_DIR = '/data/datasets/gagi/eve_v2_outputs/selfcase/mine_round0/case_bank'
 
 
 @TRANSFORMS.register

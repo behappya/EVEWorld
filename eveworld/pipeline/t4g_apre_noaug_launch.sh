@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO_DIR="giga-world-0"
-GAGI="/data/datasets/wkq_vlm/gagi"
+GAGI="/data/datasets/gagi"
 PACKED="${GAGI}/gr1_finetune_data/packed_data"
 PRETRAIN="${GAGI}/giga_world_0_video_pretrain/transformer"
 OUT_ROOT="${GAGI}/eve_v2_outputs/t4g_joint_wmapA_pre_noaug"
@@ -16,7 +16,7 @@ PYTHON="/home/jovyan/miniconda/envs/giga_models/bin/python"
 
 run_check() {
   cd "${REPO_DIR}"
-  PYTHONPATH="/home/jovyan/giga-models:${REPO_DIR}:${PYTHONPATH:-}" \
+  PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}" \
     "${PYTHON}" eveworld/pipeline/t4g_apre_noaug_preflight.py
   "${PYTHON}" -m py_compile \
     eveworld/pipeline/t4g_apre_noaug_config.py \
@@ -43,7 +43,7 @@ run_submit() {
   BATCH_SIZE_PER_GPU=1 \
   GRADIENT_ACCUMULATION_STEPS=8 \
   GPU_IDS="0 1 2 3 4 5 6 7" \
-    ./scripts/launch_gr1_train_kjob.sh \
+    ./benchmarks/dreamgenbench/launch_gr1_train_kjob.sh \
       "BASE_CONFIG_MODULE=${BASE_CONFIG_MODULE}" \
       "TRANSFORMER_MODEL_PATH=${PRETRAIN}" \
       "PACKED_DATA_DIR=${PACKED}" \

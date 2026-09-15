@@ -115,7 +115,7 @@ def overlay(vid, out_dir, theta=3.0, delta=2):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--out-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/empty_map')
+    ap.add_argument('--out-dir', default='/data/datasets/gagi/eve_v2_outputs/track4gen_probe/empty_map')
     ap.add_argument('--workers', type=int, default=12)
     ap.add_argument('--n-overlay', type=int, default=8)
     a = ap.parse_args()

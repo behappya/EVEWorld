@@ -2,7 +2,7 @@
 """EVE · Track4Gen 式对应监督 —— CPU 冒烟 (工作机无 GPU, 真跑 43 号 §6 四硬检验)。
 
 跑法 (train venv):
-  /data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv/bin/python \
+  /data/datasets/gagi/envs/giga_world_train_venv/bin/python \
       eveworld/pipeline/t4g_corr_smoke.py
 
 四硬检验 (43 号 §6 检查点, 必过):

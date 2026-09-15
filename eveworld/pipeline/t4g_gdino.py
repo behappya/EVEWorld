@@ -5,7 +5,7 @@ import re
 
 import numpy as np
 
-GDINO_PATH = '/data/datasets/wkq_vlm/gagi/ext_data/grounding_dino_base'
+GDINO_PATH = '/data/datasets/gagi/ext_data/grounding_dino_base'
 
 
 def parse_objects(prompt):

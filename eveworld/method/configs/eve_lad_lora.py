@@ -21,7 +21,7 @@ config['launch']['deepspeed_config']['deepspeed_config_file'] = str(
 _w_lad_dir = os.environ.get('W_LAD', '0.1')
 _seed_dir = os.environ.get('SEED', '6666')
 config['project_dir'] = (
-    f'/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve/'
+    f'/data/datasets/gagi/giga_world_0_outputs/eve/'
     f'experiments_lad_lora_w{_w_lad_dir}_seed{_seed_dir}'
 )
 
@@ -43,7 +43,7 @@ config['models']['lad_lora'] = dict(
     sigma_max=float(os.environ.get('LAD_SIGMA_MAX', '0.0')),  # >0 硬门控; 默认软门控 1/(1+sigma)
     # w_lad 表示 LAD/EDM 在共享 x0 上的目标梯度比；此上限只防 LAD 梯度接近0时放大过头。
     balance_max_scale=float(os.environ.get('LAD_BALANCE_MAX_SCALE', '1.0')),
-    lam_ckpt=os.environ.get('LAM_CKPT', '/data/datasets/wkq_vlm/gagi/eve_outputs/lam/lam_gr1.pt'),
+    lam_ckpt=os.environ.get('LAM_CKPT', '/data/datasets/gagi/eve_outputs/lam/lam_gr1.pt'),
 )
 
 # 诊断默认 50 步, 每 5 步存点。launcher/runtime writer 可覆盖, 但这里也保持安全默认。

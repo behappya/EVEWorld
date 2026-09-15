@@ -15,7 +15,7 @@ import t4g_probe as P
 from t4g_gdino import GDinoLocator
 from t4g_detect import detect_all, px_to_cell, box_to_cells
 
-VIDEO_ROOT = '/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data'
+VIDEO_ROOT = '/data/datasets/gagi/gr1_finetune_data/raw_data'
 NUM_FRAMES, HIMG, WIMG = 93, 480, 768
 T_LAT = 24
 GRIPPER_QUERIES = 'robot gripper. robotic hand.'
@@ -58,13 +58,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--shard-index', type=int, default=0)
     ap.add_argument('--num-shards', type=int, default=1)
-    ap.add_argument('--out-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/gripper_anno')
+    ap.add_argument('--out-dir', default='/data/datasets/gagi/eve_v2_outputs/track4gen_probe/gripper_anno')
     ap.add_argument('--limit', type=int, default=0)
     ap.add_argument('--device', default='cuda')
     a = ap.parse_args()
     os.makedirs(a.out_dir, exist_ok=True)
     key = {i['source_file_name'].split('.')[0]: i['prompt']
-           for i in json.load(open('/data/datasets/wkq_vlm/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json'))}
+           for i in json.load(open('/data/datasets/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json'))}
     vids = sorted(key, key=lambda x: int(x) if x.isdigit() else 1e9)
     vids = vids[a.shard_index::a.num_shards]
     if a.limit:

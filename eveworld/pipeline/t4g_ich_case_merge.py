@@ -10,10 +10,10 @@ import argparse
 import json
 import os
 
-POOL_ROOT = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase'
+POOL_ROOT = '/data/datasets/gagi/eve_v2_outputs/selfcase'
 POOLS = ['mine_round0', 'mine_gr1_2b', 'mine_s150', 'mine_wmapA_pre_s250', 'mine_pretrain']
 OUT_DEFAULT = os.path.join(POOL_ROOT, 'case_bank_all')
-IDX2VID = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno/_packidx2vid.json'
+IDX2VID = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno/_packidx2vid.json'
 
 
 def main():

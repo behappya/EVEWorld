@@ -13,9 +13,9 @@ set -uo pipefail
 [[ "${ALLOW_LOCAL_RUN:-0}" != "1" && "$(hostname)" == coder-workspace-* ]] && { echo "no GPU"; exit 2; }
 for arg in "$@"; do [[ "${arg}" == *=* ]] && export "${arg}" || { echo "bad arg: ${arg}" >&2; exit 1; }; done
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
-GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-/home/jovyan/giga-models}"
-GAGI="${GAGI:-/data/datasets/wkq_vlm/gagi}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
+GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-${EVEWORLD_ROOT}/giga-models}"
+GAGI="${GAGI:-/data/datasets/gagi}"
 TRAIN_VENV="${TRAIN_VENV:-${GAGI}/envs/giga_world_train_venv}"
 PYTHON="${TRAIN_PYTHON:-${TRAIN_VENV}/bin/python}"
 
@@ -26,7 +26,7 @@ OUTPUT_ROOT="${OUTPUT_ROOT:-${GAGI}/eve_v2_outputs/t4g_final/eval175_seed004_ema
 MANIFEST_ROOT="${MANIFEST_ROOT:-${OUTPUT_ROOT}_eval}"
 
 source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-giga_models}"
-export PYTHONPATH="${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1 TOKENIZERS_PARALLELISM=false
 export HF_HOME="${HF_HOME:-${GAGI}/.hf_home}"
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 DIFFUSERS_OFFLINE=1
@@ -49,7 +49,7 @@ for step in ${STEPS}; do
     --seeds "${SEED}" \
     --gpu-count 8 \
     --python "${PYTHON}" \
-    --worker-script "${REPO_DIR}/eveworld/evaluation/eval175_multiseed_worker.py" \
+    --worker-script "${EVEWORLD_ROOT}/eveworld/evaluation/eval175_multiseed_worker.py" \
     --num-inference-steps 30 \
     --num-frames 93 \
     --fps 16 \

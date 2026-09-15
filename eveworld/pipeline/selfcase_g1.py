@@ -207,9 +207,9 @@ def run(args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--report', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/mine_round0/case_bank_report.json')
-    ap.add_argument('--it2v', default='/data/datasets/wkq_vlm/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
-    ap.add_argument('--model-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
+    ap.add_argument('--report', default='/data/datasets/gagi/eve_v2_outputs/selfcase/mine_round0/case_bank_report.json')
+    ap.add_argument('--it2v', default='/data/datasets/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
+    ap.add_argument('--model-dir', default='/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
     ap.add_argument('--sigmas', default='0.2,0.4')
     ap.add_argument('--block-lo', type=int, default=22)
     ap.add_argument('--block-hi', type=int, default=26)
@@ -218,7 +218,7 @@ def main():
     ap.add_argument('--edge', type=int, default=2)
     ap.add_argument('--seed', type=int, default=0)
     ap.add_argument('--limit', type=int, default=100)
-    ap.add_argument('--out-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/g1')
+    ap.add_argument('--out-dir', default='/data/datasets/gagi/eve_v2_outputs/selfcase/g1')
     run(ap.parse_args())
 
 

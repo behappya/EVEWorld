@@ -119,7 +119,7 @@ def _inference(
     if pipeline_variant == 'cic-transport':
         if physics_latent_model_path:
             raise ValueError('CIC-Transport cannot be combined with PhysicsLatent')
-        from eve.next.cic_transport.cic_transport_pipeline import (
+        from eveworld.tia_transport.cic_transport_pipeline import (
             CICTransportGigaWorld0Pipeline,
         )
 

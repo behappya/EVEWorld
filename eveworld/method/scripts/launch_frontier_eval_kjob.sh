@@ -11,8 +11,8 @@ done
 
 export REPO_DIR
 export JOB_SCRIPT
-export TRAIN_VENV="${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
-export OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve}"
+export TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
+export OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/gagi/giga_world_0_outputs/eve}"
 export RUN_NAME="${RUN_NAME:-frontier_preference_eval_$(date +%Y%m%d_%H%M%S)}"
 export LOG_DIR="${LOG_DIR:-${OUTPUT_ROOT}/kjob_logs}"
 export RUN_LOG="${RUN_LOG:-${LOG_DIR}/${RUN_NAME}.log}"

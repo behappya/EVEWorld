@@ -12,7 +12,7 @@ config["runners"] = [
     "eveworld.tia_transport.cic_transport_trainer.CICTransportJointTrainer"
 ]
 config["project_dir"] = (
-    "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/eve_cic_transport_v1/"
+    "/data/datasets/gagi/eve_v2_outputs/eve_cic_transport_v1/"
     "cic_transport_seed42_s300/experiments"
 )
 config["models"].update(

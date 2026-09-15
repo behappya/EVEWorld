@@ -22,7 +22,7 @@ import t4g_probe as P
 from t4g_ghost_probe import cell_motion, T_LAT, H_LAT, W_LAT, HPIX, WPIX, NF, CELL_PX, ANNO_DIR, VIDEO_ROOT
 from t4g_empty_map import window_static
 
-OUT_DIR_DEFAULT = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
+OUT_DIR_DEFAULT = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
 THETA, DELTA = 3.0, 2
 CORR_TFRAMES, CORR_R = 2, 2          # 走廊: 访问时刻 ±2 帧, 空间膨胀 2 格
 

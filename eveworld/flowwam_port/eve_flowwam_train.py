@@ -304,8 +304,8 @@ def main():
         required=True,
     )
     ap.add_argument("--output-path", required=True)
-    ap.add_argument("--models-root", default="/data/datasets/wkq_vlm/gagi/flowwam/models")
-    ap.add_argument("--resume-checkpoint", default="/data/datasets/wkq_vlm/gagi/flowwam/checkpoints/flowwam_worldarena_stage1.safetensors")
+    ap.add_argument("--models-root", default="/data/datasets/gagi/flowwam/models")
+    ap.add_argument("--resume-checkpoint", default="/data/datasets/gagi/flowwam/checkpoints/flowwam_worldarena_stage1.safetensors")
     ap.add_argument("--t-lat-win", type=int, default=8)
     ap.add_argument("--paste-prob", type=float, default=0.5)
     ap.add_argument("--flow-mode", choices=["full_scene","robot_only"], default="full_scene")

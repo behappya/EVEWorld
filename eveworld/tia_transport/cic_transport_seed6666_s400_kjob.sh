@@ -7,9 +7,9 @@
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
-GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-/home/jovyan/giga-models}"
-TRAIN_PYTHON="${TRAIN_PYTHON:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv/bin/python}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
+GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-${EVEWORLD_ROOT}/giga-models}"
+TRAIN_PYTHON="${TRAIN_PYTHON:-/data/datasets/gagi/envs/giga_world_train_venv/bin/python}"
 
 for arg in "$@"; do
   [[ "${arg}" == *=* ]] || { echo "Unknown argument: ${arg}" >&2; exit 2; }
@@ -18,7 +18,7 @@ done
 
 OUTPUT_ROOT="${OUTPUT_ROOT:?OUTPUT_ROOT is required}"
 ALLOW_RESUME="${CIC_TRANSPORT_ALLOW_RESUME:-0}"
-export PYTHONPATH="${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
 
 preflight_args=(
   -m eveworld.tia_transport.cic_transport_seed6666_s400_campaign
@@ -29,4 +29,4 @@ if [[ "${ALLOW_RESUME}" == "1" ]]; then
 fi
 "${TRAIN_PYTHON}" "${preflight_args[@]}"
 
-exec "${REPO_DIR}/scripts/kjob_train_gr1_finetune.sh" "$@"
+exec "${EVEWORLD_ROOT}/benchmarks/dreamgenbench/kjob_train_gr1_finetune.sh" "$@"

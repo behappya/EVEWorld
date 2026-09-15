@@ -15,13 +15,13 @@ for arg in "$@"; do
   export "${arg}"
 done
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
-TRAIN_VENV="${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
+TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
 TRAIN_PYTHON="${TRAIN_VENV}/bin/python"
-GAGI="${GAGI_ROOT:-/data/datasets/wkq_vlm/gagi}"
+GAGI="${GAGI_ROOT:-/data/datasets/gagi}"
 MODEL_DIR="${MODEL_DIR:-${GAGI}/giga_world_0_video_pretrain}"
 DATA_PATH="${DATA_PATH:-${GAGI}/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json}"
-SPLIT_MANIFEST="${SPLIT_MANIFEST:-${REPO_DIR}/eveworld/data_curation/splits/frontier_20260715/train.jsonl}"
+SPLIT_MANIFEST="${SPLIT_MANIFEST:-${EVEWORLD_ROOT}/eveworld/data_curation/splits/frontier_20260715/train.jsonl}"
 EXPECTED_SPLIT="${EXPECTED_SPLIT:-train}"
 OUT_ROOT="${OUT_ROOT:?OUT_ROOT is required}"
 TASK_SPECS="${TASK_SPECS:?TASK_SPECS is required}"
@@ -37,7 +37,7 @@ BOUNDARY_GUARD_DECAY="${BOUNDARY_GUARD_DECAY:-1.0}"
 SKIP_EXISTING="${SKIP_EXISTING:-0}"
 
 source "${TRAIN_VENV}/bin/activate"
-export PYTHONPATH="/home/jovyan/giga-models:${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1
 export HF_HUB_OFFLINE=1
 export TRANSFORMERS_OFFLINE=1
@@ -60,7 +60,7 @@ nvidia-smi
   --transformer "${MODEL_DIR}/transformer" \
   --text-encoder "${MODEL_DIR}/text_encoder" \
   --vae "${MODEL_DIR}/vae" \
-  --gen-script "${REPO_DIR}/eveworld/method/scripts/generate_frontier.py" \
+  --gen-script "${EVEWORLD_ROOT}/eveworld/method/scripts/generate_frontier.py" \
   --python "${TRAIN_PYTHON}" \
   --limit "${LIMIT}" \
   --steps "${STEPS}" \

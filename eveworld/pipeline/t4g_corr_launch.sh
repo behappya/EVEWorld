@@ -26,11 +26,11 @@
 set -euo pipefail
 
 REPO_DIR="giga-world-0"
-DATA_ROOT="/data/datasets/wkq_vlm/gagi/gr1_finetune_data"
+DATA_ROOT="/data/datasets/gagi/gr1_finetune_data"
 PACKED="${DATA_ROOT}/packed_data"                                   # 92 条 GT
-OUT_ROOT="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_corr"
-ROUND0_EMA_TRANSFORMER="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st/transformer"
-ANNO_DIR="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno"
+OUT_ROOT="/data/datasets/gagi/eve_v2_outputs/t4g_corr"
+ROUND0_EMA_TRANSFORMER="/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st/transformer"
+ANNO_DIR="/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno"
 
 BASE_CONFIG_MODULE="eveworld.pipeline.t4g_corr_config"
 RUN_NAME="${RUN_NAME:-t4g_corr_probe50}"
@@ -42,7 +42,7 @@ CHECKPOINT_START_STEP="${CHECKPOINT_START_STEP:-0}"
 # ---- 预检 (缺件早失败, 不进 kjob) ----
 [[ -f "${PACKED}/config.json" ]]                                   || { echo "缺 ${PACKED}/config.json"; exit 1; }
 [[ -f "${ROUND0_EMA_TRANSFORMER}/diffusion_pytorch_model.safetensors" ]] || { echo "缺底座 ${ROUND0_EMA_TRANSFORMER}"; exit 1; }
-[[ -f "${REPO_DIR}/eveworld/pipeline/t4g_corr_config.py" ]]      || { echo "缺 t4g_corr_config.py"; exit 1; }
+[[ -f "${EVEWORLD_ROOT}/eveworld/pipeline/t4g_corr_config.py" ]]      || { echo "缺 t4g_corr_config.py"; exit 1; }
 [[ -f "${ANNO_DIR}/_packidx2vid.json" ]]                          || { echo "缺 data_index->vid 映射 ${ANNO_DIR}/_packidx2vid.json"; exit 1; }
 [[ -d "${ANNO_DIR}" ]]                                            || { echo "缺 anno 目录 ${ANNO_DIR}"; exit 1; }
 
@@ -62,7 +62,7 @@ run_submit() {
   BATCH_SIZE_PER_GPU=1 \
   GRADIENT_ACCUMULATION_STEPS=8 \
   GPU_IDS="0 1 2 3 4 5 6 7" \
-    ./scripts/launch_gr1_train_kjob.sh \
+    ./benchmarks/dreamgenbench/launch_gr1_train_kjob.sh \
       "BASE_CONFIG_MODULE=${BASE_CONFIG_MODULE}" \
       "TRANSFORMER_MODEL_PATH=${ROUND0_EMA_TRANSFORMER}" \
       "CHECKPOINT_TOTAL_LIMIT=${CHECKPOINT_TOTAL_LIMIT}" \

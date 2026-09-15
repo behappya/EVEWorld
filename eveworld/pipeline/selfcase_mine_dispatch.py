@@ -15,9 +15,9 @@ import subprocess
 import sys
 
 POOL_DIR = os.environ.get(
-    'POOL_DIR', '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/pool_round0_f93')
+    'POOL_DIR', '/data/datasets/gagi/eve_v2_outputs/pool_round0_f93')
 IT2V = os.environ.get(
-    'IT2V', '/data/datasets/wkq_vlm/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
+    'IT2V', '/data/datasets/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
 
 
 def run_shards(cmd_tpl, n, tag):

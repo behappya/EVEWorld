@@ -37,7 +37,7 @@ from .t4g_ich_d_trainer import CIC_BLOCK, ICHDModule, NOVELTY_BLOCKS
 
 T_LAT, H_LAT, W_LAT = 24, 30, 48
 
-DEFAULT_WEIGHTS = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/cic_match/ich_d_frozen_lr.npz'
+DEFAULT_WEIGHTS = '/data/datasets/gagi/eve_v2_outputs/selfcase/cic_match/ich_d_frozen_lr.npz'
 
 
 # ====================================================================================

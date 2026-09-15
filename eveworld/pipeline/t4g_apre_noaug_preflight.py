@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 
 
-GAGI = Path('/data/datasets/wkq_vlm/gagi')
+GAGI = Path('/data/datasets/gagi')
 REPO = Path(__file__).resolve().parents[3]
 WORKSPACE = REPO.parent
 GOLDEN_RUNTIME = (

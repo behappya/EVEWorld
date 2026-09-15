@@ -6,7 +6,7 @@ import os
 import subprocess
 import sys
 
-GAGI = '/data/datasets/wkq_vlm/gagi'
+GAGI = '/data/datasets/gagi'
 GEN = os.environ.get('EXAM_GEN', f'{GAGI}/eve_v2_outputs/eval175_gen')
 SEED = os.environ.get('EXAM_SEED', '').strip()
 INP = f'{GAGI}/gr1_dreamgen_eval/giga_input'

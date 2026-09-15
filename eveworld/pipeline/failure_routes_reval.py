@@ -22,7 +22,7 @@ from typing import Any, Iterable
 import cv2
 
 
-GAGI = Path("/data/datasets/wkq_vlm/gagi")
+GAGI = Path("/data/datasets/gagi")
 IT2V = GAGI / "gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json"
 DEFAULT_ROOT = GAGI / "eve_v2_outputs/failure_routes_reval_v1"
 EXPECTED_ROUTE_PAIRS = {

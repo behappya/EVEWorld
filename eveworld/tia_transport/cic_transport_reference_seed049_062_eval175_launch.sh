@@ -2,12 +2,12 @@
 set -euo pipefail
 
 REPO_DIR="giga-world-0"
-GAGI="/data/datasets/wkq_vlm/gagi"
+GAGI="/data/datasets/gagi"
 ROOT="${GAGI}/eve_v2_outputs/eve_cic_transport_v1"
 OUTPUT_ROOT="${ROOT}/eval175_references_pretrain_s000_sft_s150_seed049_seed062"
 PROBE_ROOT="${ROOT}/eval175_references_pretrain_s000_sft_s150_seed049_seed062_probes"
 MANIFEST_ROOT="${ROOT}/eval175_references_pretrain_s000_sft_s150_seed049_seed062_eval"
-PAYLOAD="${REPO_DIR}/eveworld/tia_transport/cic_transport_reference_seed049_062_eval175_kjob.sh"
+PAYLOAD="${EVEWORLD_ROOT}/eveworld/tia_transport/cic_transport_reference_seed049_062_eval175_kjob.sh"
 PRETRAIN_WEIGHT_DIR="${GAGI}/giga_world_0_video_pretrain/transformer"
 SFT_WEIGHT_DIR="${GAGI}/eve_v2_outputs/round0_fullft/experiments_round0/models/checkpoint_epoch_150_step_150/transformer"
 
@@ -19,7 +19,7 @@ run_check() {
   bash -n "${PAYLOAD}"
   bash -n "$0"
   PYTHONWARNINGS=ignore \
-  PYTHONPATH="/home/jovyan/giga-models:${REPO_DIR}:${PYTHONPATH:-}" \
+  PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}" \
     "${GAGI}/envs/giga_world_train_venv/bin/python" \
     eveworld/evaluation/eval175_multiseed_worker.py --help >/dev/null
   echo "Pretrain s000, SFT raw s150, and seed049/062 worker are ready."

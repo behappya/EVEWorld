@@ -13,12 +13,12 @@ for _arg in "$@"; do
 done
 
 export REPO_DIR
-export JOB_SCRIPT="${JOB_SCRIPT:-${REPO_DIR}/scripts/kjob_train_gr1_finetune.sh}"
-export TRAIN_VENV="${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
-export DATA_ROOT="${DATA_ROOT:-/data/datasets/wkq_vlm/gagi/gr1_finetune_data}"
+export JOB_SCRIPT="${JOB_SCRIPT:-${EVEWORLD_ROOT}/benchmarks/dreamgenbench/kjob_train_gr1_finetune.sh}"
+export TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
+export DATA_ROOT="${DATA_ROOT:-/data/datasets/gagi/gr1_finetune_data}"
 export PACKED_DATA_DIR="${PACKED_DATA_DIR:-${DATA_ROOT}/packed_data}"
-export MODEL_DIR="${MODEL_DIR:-/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain}"
-export OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve}"
+export MODEL_DIR="${MODEL_DIR:-/data/datasets/gagi/giga_world_0_video_pretrain}"
+export OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/gagi/giga_world_0_outputs/eve}"
 
 # ★ W_LAD/SEED 提前定义: TRAIN_PROJECT_DIR 需用它们隔离消融目录(否则 w=0.1/0.0/0.2 共用一个
 # project_dir -> resume 互相误 resume + ckpt 互相覆盖, 已两次踩坑)。runtime config 由
@@ -69,7 +69,7 @@ PASS_ARGS=(
   "MAX_GRAD_NORM=${MAX_GRAD_NORM}"
   "RESUME=${RESUME}"
   "CHECKPOINT_TOTAL_LIMIT=${CHECKPOINT_TOTAL_LIMIT}"
-  "LAM_CKPT=${LAM_CKPT:-/data/datasets/wkq_vlm/gagi/eve_outputs/lam/lam_gr1.pt}"
+  "LAM_CKPT=${LAM_CKPT:-/data/datasets/gagi/eve_outputs/lam/lam_gr1.pt}"
   "LAD_TOPK=${LAD_TOPK:-3}"
   "LAD_TAU=${LAD_TAU:-0.5}"
   "LAD_SIGMA_MAX=${LAD_SIGMA_MAX:-0.0}"
@@ -87,4 +87,4 @@ if [[ "${DRY_RUN:-0}" == "1" ]]; then
   exit 0
 fi
 # launch_gr1 以 "$@" 结尾 -> submit 以 "$@" 结尾 -> kjob for-arg export。尾随参数一路透传。
-exec "${REPO_DIR}/scripts/launch_gr1_train_kjob.sh" "${PASS_ARGS[@]}"
+exec "${EVEWORLD_ROOT}/benchmarks/dreamgenbench/launch_gr1_train_kjob.sh" "${PASS_ARGS[@]}"

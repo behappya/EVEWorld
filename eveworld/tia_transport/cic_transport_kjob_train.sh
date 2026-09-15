@@ -7,9 +7,9 @@
 
 set -euo pipefail
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
-GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-/home/jovyan/giga-models}"
-TRAIN_PYTHON="${TRAIN_PYTHON:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv/bin/python}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
+GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-${EVEWORLD_ROOT}/giga-models}"
+TRAIN_PYTHON="${TRAIN_PYTHON:-/data/datasets/gagi/envs/giga_world_train_venv/bin/python}"
 
 for arg in "$@"; do
   if [[ "${arg}" != *=* ]]; then
@@ -27,8 +27,8 @@ case "${VARIANT}" in
   *) echo "Unknown CIC_TRANSPORT_VARIANT=${VARIANT}" >&2; exit 2 ;;
 esac
 
-export PYTHONPATH="${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
 "${TRAIN_PYTHON}" -m eveworld.tia_transport.cic_transport_campaign \
   node-preflight --variant "${VARIANT}" --output "${OUTPUT_ROOT}"
 
-exec "${REPO_DIR}/scripts/kjob_train_gr1_finetune.sh" "$@"
+exec "${EVEWORLD_ROOT}/benchmarks/dreamgenbench/kjob_train_gr1_finetune.sh" "$@"

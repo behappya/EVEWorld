@@ -17,13 +17,13 @@ t4g_corr_launch.sh 的尾随 KEY=VALUE 才是最终事实来源。本文件默�
   - checkpoint_total_limit=8 (> 探针档数, 杜绝轮转删档)
 """
 
-ANNO_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
+ANNO_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
 IDX2VID = ANNO_DIR + '/_packidx2vid.json'
-ROUND0_EMA_TRANSFORMER = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st/transformer'
+ROUND0_EMA_TRANSFORMER = '/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st/transformer'
 
 config = dict(
     runners=['eveworld.pipeline.t4g_corr_trainer.T4GCorrTrainer'],
-    project_dir='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_corr/experiments',
+    project_dir='/data/datasets/gagi/eve_v2_outputs/t4g_corr/experiments',
     launch=dict(
         gpu_ids=[0, 1, 2, 3, 4, 5, 6, 7],
         distributed_type='DEEPSPEED',
@@ -34,7 +34,7 @@ config = dict(
     dataloaders=dict(
         train=dict(
             data_or_config=[
-                '/data/datasets/wkq_vlm/gagi/gr1_finetune_data/packed_data',
+                '/data/datasets/gagi/gr1_finetune_data/packed_data',
             ],
             batch_size_per_gpu=1,
             num_workers=6,
@@ -61,7 +61,7 @@ config = dict(
         ),
     ),
     models=dict(
-        vae_model_path='/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/vae',
+        vae_model_path='/data/datasets/gagi/giga_world_0_video_pretrain/vae',
         transformer_model_path=ROUND0_EMA_TRANSFORMER,
         # ---- t4g 对应 loss 超参 (43 号实证版; env 可再覆盖) ----
         t4g_id_block='block22',      # L_id 甜点层 (E4 EPE0.55)

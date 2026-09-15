@@ -11,7 +11,7 @@ import numpy as np
 
 N_GPU = int(os.environ.get("N_GPU", "8"))
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT_DIR = "/data/datasets/wkq_vlm/gagi/flowwam/igr/tia_probe"
+OUT_DIR = "/data/datasets/gagi/flowwam/igr/tia_probe"
 
 procs = []
 for g in range(N_GPU):

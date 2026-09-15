@@ -45,7 +45,7 @@ from .t4g_selfcase_trainer import T4GSelfCaseTrainer
 
 W_LAT = 48
 
-DEFAULT_WEIGHTS = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/cic_match/ich_d_frozen_lr.npz'
+DEFAULT_WEIGHTS = '/data/datasets/gagi/eve_v2_outputs/selfcase/cic_match/ich_d_frozen_lr.npz'
 NOVELTY_BLOCKS = ('block10', 'block12', 'block16')
 CIC_BLOCK = 'block22'
 

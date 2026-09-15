@@ -22,11 +22,11 @@ with checkpoints at steps 150, 300, and 450.
 cd giga-world-0
 PHASE=train \
 RUN_TAG=eve_heldout_v1 \
-bash eveworld/method/scripts/heldout_main_serial_chain.sh
+bash eveworld/method/eveworld/method/scripts/heldout_main_serial_chain.sh
 ```
 
 This writes `checkpoint_candidates.tsv` below
-`/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve/heldout_main/eve_heldout_v1/`.
+`/data/datasets/gagi/giga_world_0_outputs/eve/heldout_main/eve_heldout_v1/`.
 
 The train phase is restart-safe. A completed logical run is discovered and
 skipped. An interrupted run is preserved, and the replacement starts from
@@ -42,10 +42,10 @@ checkpoint wins any remaining tie.
 ```bash
 PHASE=validate \
 RUN_TAG=eve_heldout_v1 \
-VAL_DATA_PATH=/data/datasets/wkq_vlm/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json \
+VAL_DATA_PATH=/data/datasets/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json \
 VAL_MANIFEST=eveworld/data_curation/splits/frontier_20260715/val.jsonl \
 EXPECTED_VAL_SPLIT=val \
-bash eveworld/method/scripts/heldout_main_serial_chain.sh
+bash eveworld/method/eveworld/method/scripts/heldout_main_serial_chain.sh
 ```
 
 The frozen result is `selected_checkpoints.tsv`. Do not edit it after test
@@ -56,11 +56,11 @@ generation starts.
 ```bash
 PHASE=generate \
 RUN_TAG=eve_heldout_v1 \
-SELECTED_CHECKPOINTS=/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve/heldout_main/eve_heldout_v1/selected_checkpoints.tsv \
+SELECTED_CHECKPOINTS=/data/datasets/gagi/giga_world_0_outputs/eve/heldout_main/eve_heldout_v1/selected_checkpoints.tsv \
 TEST_DATA_PATH=/path/to/frozen_test_inputs.json \
 TEST_MANIFEST=/path/to/frozen_test.jsonl \
 EXPECTED_TEST_SPLIT=test \
-bash eveworld/method/scripts/heldout_main_serial_chain.sh
+bash eveworld/method/eveworld/method/scripts/heldout_main_serial_chain.sh
 ```
 
 Each checkpoint is one eight-GPU job. The controller submits the next job only
@@ -69,9 +69,9 @@ after the current job leaves the active queue and its dispatch summary exists.
 ## 4. Score
 
 ```bash
-SELECTED_CHECKPOINTS=/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve/heldout_main/eve_heldout_v1/selected_checkpoints.tsv \
-GEN_ROOT=/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve/heldout_main/eve_heldout_v1/generation \
-bash eveworld/method/scripts/score_heldout_main.sh
+SELECTED_CHECKPOINTS=/data/datasets/gagi/giga_world_0_outputs/eve/heldout_main/eve_heldout_v1/selected_checkpoints.tsv \
+GEN_ROOT=/data/datasets/gagi/giga_world_0_outputs/eve/heldout_main/eve_heldout_v1/generation \
+bash eveworld/method/eveworld/method/scripts/score_heldout_main.sh
 ```
 
 Scoring runs Judge B, Judge A, TEA, and paired comparisons against Joint Base.

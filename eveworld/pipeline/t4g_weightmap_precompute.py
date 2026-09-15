@@ -6,7 +6,7 @@ import os
 import numpy as np
 import t4g_weightmap as W
 
-OUT = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/weightmap_cache'
+OUT = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/weightmap_cache'
 
 
 def main():

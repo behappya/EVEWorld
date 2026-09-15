@@ -10,7 +10,7 @@ import requests
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Call a running GigaWorld-0 HTTP service.")
-    parser.add_argument("--url", required=True, help="Base URL, for example http://10.60.32.39:8000")
+    parser.add_argument("--url", required=True, help="Base URL, for example http://127.0.0.1:8000")
     parser.add_argument("--prompt", default=None, help="Prompt for a single request.")
     parser.add_argument("--image-path", default=None, help="Shared filesystem image path for a single request.")
     parser.add_argument("--request-id", default=None, help="Optional output id for a single request.")

@@ -17,7 +17,7 @@ import numpy as np
 
 import t4g_probe as P
 
-ANNO_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
+ANNO_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
 
 
 def chained_epe_and_sim(feat, tgt_cells):
@@ -67,7 +67,7 @@ def run(args):
         anno = json.load(open(ap))
         tgt_cells = [f['target_cell'] for f in anno['per_lat_frame']]
         frames = P.sample_frames_like_training(
-            f'/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data/{vid}.mp4', 93, 480, 768)
+            f'/data/datasets/gagi/gr1_finetune_data/raw_data/{vid}.mp4', 93, 480, 768)
         fr = torch.from_numpy(frames).float().permute(0, 3, 1, 2) / 255.0
         frames_norm = ((fr - 0.5) / 0.5).unsqueeze(0).to(device)
         with torch.no_grad():
@@ -103,7 +103,7 @@ def run(args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--model-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
+    ap.add_argument('--model-dir', default='/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
     ap.add_argument('--vids', required=True)
     ap.add_argument('--sigmas', default='0.2,0.4,0.7')
     ap.add_argument('--block-lo', type=int, default=8)

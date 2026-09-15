@@ -4,7 +4,7 @@ set -euo pipefail
 REPO_DIR="giga-world-0"
 CONDA_SH="/home/jovyan/miniconda/etc/profile.d/conda.sh"
 CONDA_ENV="giga_models"
-GAGI="/data/datasets/wkq_vlm/gagi"
+GAGI="/data/datasets/gagi"
 ROOT="${GAGI}/eve_v2_outputs/eve_cic_transport_v1"
 GENERATION_ROOT="${ROOT}/eval175_transport_raw_s150_s200_multiseed70/transport_raw_s150"
 MANIFEST_BASE="${ROOT}/eval175_transport_raw_s150_s200_multiseed70_eval"
@@ -82,7 +82,7 @@ for repeat in 01 02 03; do
   output_dir="${QWEN_ROOT}/${run_name}"
   log_path="${QWEN_ROOT}/logs/${run_name}.log"
   command=(
-    python scripts/eval_dreamgenbench_qwen_api.py
+    python benchmarks/dreamgenbench/eval_dreamgenbench_qwen_api.py
     --manifest "${manifest}"
     --output-root "${output_dir}"
     --run-name "${run_name}"

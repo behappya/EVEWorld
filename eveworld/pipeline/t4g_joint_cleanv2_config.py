@@ -1,6 +1,6 @@
 """A-pre-clean-v4-u3: pretrain + clean-v2 + L_id + static paste + uniform 3x."""
 
-GAGI = '/data/datasets/wkq_vlm/gagi'
+GAGI = '/data/datasets/gagi'
 PROBE = GAGI + '/eve_v2_outputs/track4gen_probe'
 ANNO_DIR = PROBE + '/t4g_anno_nohuman_v2'
 ASSETS_DIR = PROBE + '/aug_assets_nohuman_v2_cleanframe'

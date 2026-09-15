@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 
-GAGI = Path("/data/datasets/wkq_vlm/gagi")
+GAGI = Path("/data/datasets/gagi")
 REPO = Path(__file__).resolve().parents[3]
 CAMPAIGN_ROOT = GAGI / "eve_v2_outputs/eve_cic_transport_v1"
 HISTORICAL_ROOT = GAGI / "eve_v2_outputs/t4g_joint_wmapA_pre_seed42_s300"

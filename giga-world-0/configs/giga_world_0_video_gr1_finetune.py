@@ -1,6 +1,6 @@
 config = dict(
     runners=['giga_world_0.GigaWorld0Trainer'],
-    project_dir='/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/gr1_finetune/experiments',
+    project_dir='/data/datasets/gagi/giga_world_0_outputs/gr1_finetune/experiments',
     launch=dict(
         gpu_ids=[0, 1, 2, 3, 4, 5, 6, 7],
         distributed_type='DEEPSPEED',
@@ -11,7 +11,7 @@ config = dict(
     dataloaders=dict(
         train=dict(
             data_or_config=[
-                '/data/datasets/wkq_vlm/gagi/gr1_finetune_data/packed_data',
+                '/data/datasets/gagi/gr1_finetune_data/packed_data',
             ],
             batch_size_per_gpu=1,
             num_workers=6,
@@ -36,8 +36,8 @@ config = dict(
         ),
     ),
     models=dict(
-        vae_model_path='/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/vae',
-        transformer_model_path='/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/transformer',
+        vae_model_path='/data/datasets/gagi/giga_world_0_video_pretrain/vae',
+        transformer_model_path='/data/datasets/gagi/giga_world_0_video_pretrain/transformer',
     ),
     optimizers=dict(
         type='CAME8Bit',

@@ -28,7 +28,7 @@ for _p in (FLOWWAM_ROOT, os.path.join(FLOWWAM_ROOT, "inference")):
 from pipeline_loader import build_pipeline  # noqa: E402
 import diffsynth.pipelines.wan_video_dual_stream as ds  # noqa: E402
 
-ANNO_DIR = "/data/datasets/wkq_vlm/gagi/flowwam/igr/anno_640"
+ANNO_DIR = "/data/datasets/gagi/flowwam/igr/anno_640"
 N_LAT, GH, GW = 31, 15, 20  # DiT token 网格 (patch 1,2,2 于 latent 31x30x40)
 NF, WPIX, HPIX = 121, 640, 480
 
@@ -143,10 +143,10 @@ def probe_episode(pipe, flow_stream, anno, video, instruction, t_fracs, device):
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--manifest", default="/data/datasets/wkq_vlm/gagi/flowwam/igr/manifest_640.json")
-    ap.add_argument("--ckpt", default="/data/datasets/wkq_vlm/gagi/flowwam/checkpoints/flowwam_worldarena_stage1.safetensors")
-    ap.add_argument("--models-root", default="/data/datasets/wkq_vlm/gagi/flowwam/models")
-    ap.add_argument("--out-dir", default="/data/datasets/wkq_vlm/gagi/flowwam/igr/tia_probe")
+    ap.add_argument("--manifest", default="/data/datasets/gagi/flowwam/igr/manifest_640.json")
+    ap.add_argument("--ckpt", default="/data/datasets/gagi/flowwam/checkpoints/flowwam_worldarena_stage1.safetensors")
+    ap.add_argument("--models-root", default="/data/datasets/gagi/flowwam/models")
+    ap.add_argument("--out-dir", default="/data/datasets/gagi/flowwam/igr/tia_probe")
     ap.add_argument("--per-task", type=int, default=3, help="每任务采样条数(取检出率最高者)")
     ap.add_argument("--t-fracs", default="0.1,0.3,0.5")
     ap.add_argument("--shard", default="0/1")

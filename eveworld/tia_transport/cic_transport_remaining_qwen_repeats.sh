@@ -4,13 +4,13 @@ set -euo pipefail
 REPO_DIR="giga-world-0"
 CONDA_SH="/home/jovyan/miniconda/etc/profile.d/conda.sh"
 CONDA_ENV="giga_models"
-ROOT="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/eve_cic_transport_v1"
+ROOT="/data/datasets/gagi/eve_v2_outputs/eve_cic_transport_v1"
 MANIFEST_BASE="${ROOT}/eval175_transport_raw_s150_s200_multiseed70_eval"
 S150_MANIFEST_ROOT="${MANIFEST_BASE}/transport_raw_s150_qwen_ready_late06"
 S200_MANIFEST_ROOT="${MANIFEST_BASE}/transport_raw_s200_qwen_ready_all70"
 S150_BATCH01_AUDIT="${ROOT}/qwen_transport_raw_s150_multiseed70_thinking_off/batch01_three_repeat_audit.json"
 OUTPUT_ROOT="${ROOT}/qwen_transport_s150_late06_s200_all70_thinking_off"
-QWEN_BASE="${QWEN_BASE:-http://10.60.32.27:8000/v1}"
+QWEN_BASE="${QWEN_BASE:-http://127.0.0.1:8000/v1}"
 GLOBAL_CONCURRENCY="${GLOBAL_CONCURRENCY:-600}"
 WAIT_SEC="${WAIT_SEC:-60}"
 
@@ -60,7 +60,7 @@ run_batch() {
     log_path="${OUTPUT_ROOT}/logs/${run_name}.log"
     printf '[launch] %s %s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "${run_name}" \
       | tee -a "${log_path}"
-    python scripts/eval_dreamgenbench_qwen_api.py \
+    python benchmarks/dreamgenbench/eval_dreamgenbench_qwen_api.py \
       --manifest "${manifest}" \
       --output-root "${output_dir}" \
       --run-name "${run_name}" \

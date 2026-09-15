@@ -12,10 +12,10 @@ for arg in "$@"; do
   export "${arg}"
 done
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
-TRAIN_VENV="${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
+TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
 PYTHON="${TRAIN_VENV}/bin/python"
-MODEL_DIR="${MODEL_DIR:-/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain}"
+MODEL_DIR="${MODEL_DIR:-/data/datasets/gagi/giga_world_0_video_pretrain}"
 PIPELINE="${PIPELINE:?PIPELINE is required}"
 METHOD="${METHOD:?METHOD is required}"
 TRAINING_SEED="${TRAINING_SEED:?TRAINING_SEED is required}"
@@ -27,7 +27,7 @@ OUT_ROOT="${OUT_ROOT:?OUT_ROOT is required}"
 LORA="${LORA:-NONE}"
 
 source "${TRAIN_VENV}/bin/activate"
-export PYTHONPATH="/home/jovyan/giga-models:${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1
 export HF_HUB_OFFLINE=1
 export TRANSFORMERS_OFFLINE=1
@@ -57,8 +57,8 @@ nvidia-smi
   --text-encoder "${MODEL_DIR}/text_encoder" \
   --vae "${MODEL_DIR}/vae" \
   --lora "${LORA}" \
-  --joint-script "${REPO_DIR}/eveworld/method/scripts/generate_joint.py" \
-  --frontier-script "${REPO_DIR}/eveworld/method/scripts/generate_frontier.py" \
+  --joint-script "${EVEWORLD_ROOT}/eveworld/method/scripts/generate_joint.py" \
+  --frontier-script "${EVEWORLD_ROOT}/eveworld/method/scripts/generate_frontier.py" \
   --python "${PYTHON}" \
   --limit "${LIMIT:-0}" \
   --steps "${STEPS:-30}" \

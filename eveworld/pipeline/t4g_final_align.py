@@ -20,9 +20,9 @@ import os
 
 import numpy as np
 
-CASE_BANK = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/case_bank_all'
-VAE_PATH = '/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/vae'
-OUT_DEFAULT = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_final/align'
+CASE_BANK = '/data/datasets/gagi/eve_v2_outputs/selfcase/case_bank_all'
+VAE_PATH = '/data/datasets/gagi/giga_world_0_video_pretrain/vae'
+OUT_DEFAULT = '/data/datasets/gagi/eve_v2_outputs/t4g_final/align'
 
 
 def main():

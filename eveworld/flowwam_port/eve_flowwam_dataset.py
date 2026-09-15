@@ -37,9 +37,9 @@ def lat_to_frame(t: int) -> int:
 class EVEFlowWAMWindowDataset:
     def __init__(
         self,
-        manifest_path: str = "/data/datasets/wkq_vlm/gagi/flowwam/igr/manifest_640.json",
-        anno_dir: str = "/data/datasets/wkq_vlm/gagi/flowwam/igr/anno_640",
-        wmap_dir: str = "/data/datasets/wkq_vlm/gagi/flowwam/igr/weightmap_cache_640",
+        manifest_path: str = "/data/datasets/gagi/flowwam/igr/manifest_640.json",
+        anno_dir: str = "/data/datasets/gagi/flowwam/igr/anno_640",
+        wmap_dir: str = "/data/datasets/gagi/flowwam/igr/weightmap_cache_640",
         heldout_per_task: int = 5,
         split: str = "train",
         t_lat_win: int = 8,

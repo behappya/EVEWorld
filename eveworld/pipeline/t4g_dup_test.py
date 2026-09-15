@@ -109,7 +109,7 @@ def run(args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--model-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
+    ap.add_argument('--model-dir', default='/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
     ap.add_argument('--sigmas', default='0.2,0.4')
     ap.add_argument('--block-lo', type=int, default=8)
     ap.add_argument('--block-hi', type=int, default=26)

@@ -13,21 +13,21 @@
 set -euo pipefail
 
 REPO_DIR="giga-world-0"
-PACKED="/data/datasets/wkq_vlm/gagi/gr1_finetune_data/packed_data"
-PRETRAIN_TRANSFORMER="/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/transformer"
-ANNO_DIR="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno"
-ICH_D_WEIGHTS="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/cic_match/ich_d_frozen_lr.npz"
+PACKED="/data/datasets/gagi/gr1_finetune_data/packed_data"
+PRETRAIN_TRANSFORMER="/data/datasets/gagi/giga_world_0_video_pretrain/transformer"
+ANNO_DIR="/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno"
+ICH_D_WEIGHTS="/data/datasets/gagi/eve_v2_outputs/selfcase/cic_match/ich_d_frozen_lr.npz"
 
 BASE_CONFIG_MODULE="eveworld.pipeline.t4g_final_config"
 SMOKE="${SMOKE:-0}"
 if [[ "${SMOKE}" == "1" ]]; then
-  OUT_ROOT="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_final/smoke"
+  OUT_ROOT="/data/datasets/gagi/eve_v2_outputs/t4g_final/smoke"
   RUN_NAME="${RUN_NAME:-t4g_final_smoke}"
   MAX_STEPS="${MAX_STEPS:-4}"
   CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-2}"
   A2_P="${A2_P:-0.5}"                 # smoke: 抬高 A2 占比, 两分支必现
 else
-  OUT_ROOT="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_final"
+  OUT_ROOT="/data/datasets/gagi/eve_v2_outputs/t4g_final"
   RUN_NAME="${RUN_NAME:-t4g_final_s400}"
   MAX_STEPS="${MAX_STEPS:-400}"
   CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-50}"
@@ -56,7 +56,7 @@ run_submit() {
   BATCH_SIZE_PER_GPU=1 \
   GRADIENT_ACCUMULATION_STEPS=8 \
   GPU_IDS="0 1 2 3 4 5 6 7" \
-    ./scripts/launch_gr1_train_kjob.sh \
+    ./benchmarks/dreamgenbench/launch_gr1_train_kjob.sh \
       "BASE_CONFIG_MODULE=${BASE_CONFIG_MODULE}" \
       "TRANSFORMER_MODEL_PATH=${PRETRAIN_TRANSFORMER}" \
       "CHECKPOINT_TOTAL_LIMIT=${CHECKPOINT_TOTAL_LIMIT}" \

@@ -8,14 +8,14 @@ transform=T4GSelfCaseTransform (p_aug=0, 病例替换), runner=T4GSelfCaseTraine
 launcher 尾随 KEY=VALUE 是最终事实来源。
 """
 
-ANNO_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
-ASSETS_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
-CASE_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/mine_round0/case_bank'
-ROUND0_EMA_TRANSFORMER = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st/transformer'
+ANNO_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
+ASSETS_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
+CASE_DIR = '/data/datasets/gagi/eve_v2_outputs/selfcase/mine_round0/case_bank'
+ROUND0_EMA_TRANSFORMER = '/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st/transformer'
 
 config = dict(
     runners=['eveworld.pipeline.t4g_selfcase_trainer.T4GSelfCaseTrainer'],
-    project_dir='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_selfcase/experiments',
+    project_dir='/data/datasets/gagi/eve_v2_outputs/t4g_selfcase/experiments',
     launch=dict(
         gpu_ids=[0, 1, 2, 3, 4, 5, 6, 7],
         distributed_type='DEEPSPEED',
@@ -26,7 +26,7 @@ config = dict(
     dataloaders=dict(
         train=dict(
             data_or_config=[
-                '/data/datasets/wkq_vlm/gagi/gr1_finetune_data/packed_data',
+                '/data/datasets/gagi/gr1_finetune_data/packed_data',
             ],
             batch_size_per_gpu=1,
             num_workers=6,
@@ -55,7 +55,7 @@ config = dict(
         ),
     ),
     models=dict(
-        vae_model_path='/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/vae',
+        vae_model_path='/data/datasets/gagi/giga_world_0_video_pretrain/vae',
         transformer_model_path=ROUND0_EMA_TRANSFORMER,
         t4g_w_paste=4.0,               # 病例区 loss 上权重 (env T4G_W_PASTE 可覆盖)
     ),

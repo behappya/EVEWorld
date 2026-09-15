@@ -13,18 +13,18 @@ fi
 for arg in "$@"; do
   [[ "${arg}" == *=* ]] && export "${arg}" || { echo "bad arg: ${arg}" >&2; exit 1; }
 done
-REPO_DIR="${REPO_DIR:-giga-world-0}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-TRAIN_VENV="${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
+TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
 TRAIN_PYTHON="${TRAIN_PYTHON:-${TRAIN_VENV}/bin/python}"
-OUT_DIR="${OUT_DIR:-/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/viz}"
+OUT_DIR="${OUT_DIR:-/data/datasets/gagi/eve_v2_outputs/track4gen_probe/viz}"
 VIDEO_IDS="${VIDEO_IDS:-13,76}"
 LAYERS="${LAYERS:-block13,block17,block21}"
 SIGMAS="${SIGMAS:-0.2,0.4}"
 
 source "${CONDA_SH}"; conda activate giga_models
-export PYTHONPATH="${REPO_DIR}:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
-cd "${REPO_DIR}/eveworld/pipeline"
+export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
+cd "${EVEWORLD_ROOT}/eveworld/pipeline"
 nvidia-smi || true
 IFS=',' read -r -a VIDS <<< "${VIDEO_IDS}"
 IFS=',' read -r -a SIGS <<< "${SIGMAS}"

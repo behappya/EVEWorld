@@ -24,7 +24,7 @@ import numpy as np
 
 import selfcase_g1 as G1
 
-CIC_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/cic_match'
+CIC_DIR = '/data/datasets/gagi/eve_v2_outputs/selfcase/cic_match'
 CACHE_DEFAULT = os.path.join(CIC_DIR, 'cic_cell_features.npz')
 OUT_DEFAULT = os.path.join(CIC_DIR, 'ich_d_frozen_lr.npz')
 A_BLOCKS = ['block10', 'block12', 'block16']

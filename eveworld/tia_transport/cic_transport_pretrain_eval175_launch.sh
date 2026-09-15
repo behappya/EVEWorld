@@ -2,12 +2,12 @@
 set -euo pipefail
 
 REPO_DIR="giga-world-0"
-GAGI="/data/datasets/wkq_vlm/gagi"
+GAGI="/data/datasets/gagi"
 ROOT="${GAGI}/eve_v2_outputs/eve_cic_transport_v1"
 OUTPUT_ROOT="${ROOT}/eval175_seed004_pretrain_raw_s000"
 PROBE_ROOT="${ROOT}/eval175_seed004_pretrain_raw_s000_probes"
 MANIFEST_ROOT="${ROOT}/eval175_seed004_pretrain_raw_s000_eval"
-PAYLOAD="${REPO_DIR}/eveworld/tia_transport/cic_transport_pretrain_eval175_kjob.sh"
+PAYLOAD="${EVEWORLD_ROOT}/eveworld/tia_transport/cic_transport_pretrain_eval175_kjob.sh"
 WEIGHT_DIR="${GAGI}/giga_world_0_video_pretrain/transformer"
 
 run_check() {
@@ -19,7 +19,7 @@ run_check() {
   bash -n "${PAYLOAD}"
   bash -n "$0"
   PYTHONWARNINGS=ignore \
-  PYTHONPATH="/home/jovyan/giga-models:${REPO_DIR}:${PYTHONPATH:-}" \
+  PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}" \
     "${GAGI}/envs/giga_world_train_venv/bin/python" \
     eveworld/evaluation/eval175_multiseed_worker.py --help >/dev/null
   echo "Pretrained Transformer and standard EVAL-175 worker are ready."

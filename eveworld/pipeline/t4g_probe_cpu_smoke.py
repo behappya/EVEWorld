@@ -24,7 +24,7 @@ import torch
 
 import t4g_probe as T
 
-VIDEO = os.environ.get('SMOKE_VIDEO', '/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data/13.mp4')
+VIDEO = os.environ.get('SMOKE_VIDEO', '/data/datasets/gagi/gr1_finetune_data/raw_data/13.mp4')
 NUM_BLOCKS = 28
 
 

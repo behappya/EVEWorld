@@ -34,8 +34,8 @@ import numpy as np
 
 import t4g_probe as P
 
-ANNO_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
-VIDEO_ROOT = '/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data'
+ANNO_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
+VIDEO_ROOT = '/data/datasets/gagi/gr1_finetune_data/raw_data'
 T_LAT, H_LAT, W_LAT = 24, 30, 48
 HPIX, WPIX, NF = 480, 768, 93
 CELL_PX = 16                     # 480/30 = 768/48 = 16 像素/格
@@ -389,7 +389,7 @@ def run(args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--model-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
+    ap.add_argument('--model-dir', default='/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
     ap.add_argument('--sigmas', default='0.3,0.7,1.5,3.0')
     ap.add_argument('--fps', type=int, default=16)
     ap.add_argument('--paste-per-shard', type=int, default=2)

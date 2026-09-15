@@ -680,7 +680,7 @@ def build_argparser():
     ap.add_argument('--vae', required=False)
     ap.add_argument('--text-encoder', required=False, dest='text_encoder')
     ap.add_argument('--video-root', dest='video_root',
-                    default='/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data')
+                    default='/data/datasets/gagi/gr1_finetune_data/raw_data')
     ap.add_argument('--video-ids', dest='video_ids',
                     default='13,32,76,14,15,16,17,18,19,20,21,23,24,25,26,27')
     ap.add_argument('--sigmas', default='0.25,0.7,2.0,5.0', help='低/中/高噪声级, 逗号分隔')
@@ -696,7 +696,7 @@ def build_argparser():
     ap.add_argument('--dtype', default='bf16', choices=['bf16', 'fp16', 'fp32'])
     ap.add_argument('--device', default='cuda')
     ap.add_argument('--out-dir', dest='out_dir', required=False,
-                    default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/run')
+                    default='/data/datasets/gagi/eve_v2_outputs/track4gen_probe/run')
     ap.add_argument('--num-shards', dest='num_shards', type=int, default=1)
     ap.add_argument('--shard-index', dest='shard_index', type=int, default=0)
     ap.add_argument('--dispatch-gpus', dest='dispatch_gpus', type=int, default=0,

@@ -18,7 +18,7 @@ config["launch"]["deepspeed_config"]["deepspeed_config_file"] = str(
 )
 config["project_dir"] = os.environ.get(
     "FRONTIER_PROJECT_DIR",
-    "/data/datasets/wkq_vlm/gagi/giga_world_0_outputs/eve/frontier_mvp_dev",
+    "/data/datasets/gagi/giga_world_0_outputs/eve/frontier_mvp_dev",
 )
 config["models"]["train_mode"] = "lora"
 config["models"]["lora_rank"] = int(os.environ.get("FRONTIER_LORA_RANK", "64"))

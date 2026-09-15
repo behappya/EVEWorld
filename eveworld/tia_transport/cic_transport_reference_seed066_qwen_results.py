@@ -16,7 +16,7 @@ SEEDS = (66,)
 SPLITS = {"gr1_env": 29, "gr1_object": 50, "gr1_behavior": 47}
 TRANSPORT_MODEL = "transport_raw_s200"
 DEFAULT_TRANSPORT_ROOT = Path(
-    "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/eve_cic_transport_v1/"
+    "/data/datasets/gagi/eve_v2_outputs/eve_cic_transport_v1/"
     "qwen_transport_s150_late06_s200_all70_thinking_off"
 )
 

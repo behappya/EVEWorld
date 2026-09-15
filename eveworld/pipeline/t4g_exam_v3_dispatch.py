@@ -6,7 +6,7 @@ import os
 import subprocess
 import sys
 
-GAGI = '/data/datasets/wkq_vlm/gagi'
+GAGI = '/data/datasets/gagi'
 INP = f'{GAGI}/gr1_dreamgen_eval/giga_input'
 SPLITS = ['gr1_env', 'gr1_object', 'gr1_behavior']
 

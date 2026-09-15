@@ -4,7 +4,7 @@ set -euo pipefail
 # Resumable downloader for GigaWorld-0 video_pretrain inference weights.
 # Re-run this script if the download is interrupted.
 
-ROOT_DIR="${ROOT_DIR:-/data/datasets/wkq_vlm/gagi}"
+ROOT_DIR="${ROOT_DIR:-/data/datasets/gagi}"
 BASE_DIR="${BASE_DIR:-${ROOT_DIR}/giga_world_0_video_pretrain}"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 MAX_WORKERS="${MAX_WORKERS:-8}"

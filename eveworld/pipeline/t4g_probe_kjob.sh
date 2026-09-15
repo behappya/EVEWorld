@@ -22,13 +22,13 @@ for arg in "$@"; do
   [[ "${arg}" == *=* ]] && export "${arg}" || { echo "bad arg: ${arg}" >&2; exit 1; }
 done
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
 CONDA_ENV="${CONDA_ENV:-giga_models}"
-TRAIN_VENV="${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
+TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
 TRAIN_PYTHON="${TRAIN_PYTHON:-${TRAIN_VENV}/bin/python}"
 
-GAGI="${GAGI_ROOT:-/data/datasets/wkq_vlm/gagi}"
+GAGI="${GAGI_ROOT:-/data/datasets/gagi}"
 # 探针默认底座 = anmix_s200 (当前最优, 对应 loss 训练底座候选)。
 MODEL_DIR="${MODEL_DIR:-${GAGI}/eve_v2_outputs/anchor_models/probe_anmix_s200}"
 TRANSFORMER="${TRANSFORMER:-${MODEL_DIR}/transformer}"
@@ -50,9 +50,9 @@ OUT_DIR="${OUT_DIR:-${GAGI}/eve_v2_outputs/track4gen_probe/anmix_s200}"
 
 # shellcheck disable=SC1090
 source "${CONDA_SH}"; conda activate "${CONDA_ENV}"
-export PYTHONPATH="${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1
-cd "${REPO_DIR}/eveworld/pipeline"
+cd "${EVEWORLD_ROOT}/eveworld/pipeline"
 
 echo "=========================================="
 echo " Track4Gen 探针  host=$(hostname)"

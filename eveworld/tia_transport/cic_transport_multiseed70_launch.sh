@@ -2,15 +2,15 @@
 set -euo pipefail
 
 REPO_DIR="giga-world-0"
-GAGI="/data/datasets/wkq_vlm/gagi"
+GAGI="/data/datasets/gagi"
 ROOT="${GAGI}/eve_v2_outputs/eve_cic_transport_v1"
 OUTPUT_ROOT="${ROOT}/eval175_transport_raw_s150_s200_multiseed70"
 PROBE_ROOT="${ROOT}/eval175_transport_raw_s150_s200_multiseed70_probes"
 MANIFEST_ROOT="${ROOT}/eval175_transport_raw_s150_s200_multiseed70_eval"
 PROJECT="${ROOT}/cic_transport_seed42_s300/experiments"
-PAYLOAD="${REPO_DIR}/eveworld/tia_transport/cic_transport_multiseed70_kjob.sh"
-DISPATCHER="${REPO_DIR}/eveworld/tia_transport/cic_transport_multiseed70_dispatch.py"
-WORKER="${REPO_DIR}/eveworld/tia_transport/eval175_transport_worker.py"
+PAYLOAD="${EVEWORLD_ROOT}/eveworld/tia_transport/cic_transport_multiseed70_kjob.sh"
+DISPATCHER="${EVEWORLD_ROOT}/eveworld/tia_transport/cic_transport_multiseed70_dispatch.py"
+WORKER="${EVEWORLD_ROOT}/eveworld/tia_transport/eval175_transport_worker.py"
 PYTHON="${GAGI}/envs/giga_world_train_venv/bin/python"
 
 checkpoint_for_step() {
@@ -60,7 +60,7 @@ dry_run_range() {
   local model="$1" start="$2" end="$3" chain="$4" probe
   probe="${PROBE_ROOT}/${model}"
   CIC_TRANSPORT_MODEL_NAME="${model}" CIC_TRANSPORT_MODEL_DIR="${probe}" \
-  PYTHONPATH="/home/jovyan/giga-models:${REPO_DIR}:${PYTHONPATH:-}" \
+  PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}" \
     "${PYTHON}" "${DISPATCHER}" \
       --model "${model}" \
       --data-root "${GAGI}/gr1_dreamgen_eval/giga_input" \

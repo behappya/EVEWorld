@@ -6,7 +6,7 @@ import os
 import subprocess
 import sys
 
-GAGI = '/data/datasets/wkq_vlm/gagi'
+GAGI = '/data/datasets/gagi'
 GEN = f'{GAGI}/eve_v2_outputs/eval175_gen'
 INP = f'{GAGI}/gr1_dreamgen_eval/giga_input'
 ARMS = ['pretrain', 'gr1_2b', 'round0', 't4g_wmapA_s50', 't4g_wmapA_s100',

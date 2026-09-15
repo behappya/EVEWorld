@@ -45,8 +45,8 @@ def overlay_heat(frame_bgr, simmap):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--video-id', required=True)
-    ap.add_argument('--video-root', default='/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data')
-    ap.add_argument('--model-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/probe_anmix_s200')
+    ap.add_argument('--video-root', default='/data/datasets/gagi/gr1_finetune_data/raw_data')
+    ap.add_argument('--model-dir', default='/data/datasets/gagi/eve_v2_outputs/anchor_models/probe_anmix_s200')
     ap.add_argument('--layers', default='block13,block17,block21')
     ap.add_argument('--sigma', type=float, default=0.4)
     ap.add_argument('--num-frames', type=int, default=93)

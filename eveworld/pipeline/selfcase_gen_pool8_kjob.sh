@@ -12,10 +12,10 @@ set -uo pipefail
 [[ "${ALLOW_LOCAL_RUN:-0}" != "1" && "$(hostname)" == coder-workspace-* ]] && { echo "no GPU"; exit 2; }
 for arg in "$@"; do [[ "${arg}" == *=* ]] && export "${arg}" || { echo "bad arg: ${arg}" >&2; exit 1; }; done
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
-TRAIN_VENV="${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
+TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
 TRAIN_PYTHON="${TRAIN_PYTHON:-${TRAIN_VENV}/bin/python}"
-GAGI="${GAGI_ROOT:-/data/datasets/wkq_vlm/gagi}"
+GAGI="${GAGI_ROOT:-/data/datasets/gagi}"
 
 MODEL_DIR="${MODEL_DIR:?必填: transformer/vae/text_encoder 合成目录}"
 OUT_ROOT="${OUT_ROOT:?必填: 池输出目录}"
@@ -30,7 +30,7 @@ SEEDS="${SEEDS:-42 314 777 999}"
 LAM="${LAM:-${GAGI}/eve_outputs/lam/lam_gr1.pt}"
 
 source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-giga_models}"
-export PYTHONPATH="${REPO_DIR}:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
+export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
 cd "${REPO_DIR}"
 
 echo "== 重考池 8 卡满载生成: seeds=${SEEDS} x ${#DATA_PATHS[@]} shard -> ${OUT_ROOT} =="
@@ -45,6 +45,6 @@ nvidia-smi || true
   --vae "${MODEL_DIR}/vae" \
   --lam "${LAM}" \
   --python "${TRAIN_PYTHON}" \
-  --gen-script "${REPO_DIR}/eveworld/method/scripts/generate_eag.py" \
+  --gen-script "${EVEWORLD_ROOT}/eveworld/method/scripts/generate_eag.py" \
   --eag-weight 0 --num-frames 93 --steps 30 --height 480 --width 768 --fps 16
 echo KJOB_DONE

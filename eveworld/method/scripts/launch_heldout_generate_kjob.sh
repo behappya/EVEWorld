@@ -18,7 +18,7 @@ EXPECTED_SPLIT="${EXPECTED_SPLIT:-test}"
 OUT_ROOT="${OUT_ROOT:?OUT_ROOT is required}"
 LORA="${LORA:-NONE}"
 
-python3 "${REPO_DIR}/eveworld/data_curation/scripts/heldout_manifest_tool.py" validate-eval \
+python3 "${EVEWORLD_ROOT}/eveworld/data_curation/scripts/heldout_manifest_tool.py" validate-eval \
   --manifest "${SPLIT_MANIFEST}" \
   --expected-split "${EXPECTED_SPLIT}" \
   --data-path "${DATA_PATH}"

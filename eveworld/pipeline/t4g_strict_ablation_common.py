@@ -5,7 +5,7 @@ from __future__ import annotations
 import copy
 
 
-GAGI = "/data/datasets/wkq_vlm/gagi"
+GAGI = "/data/datasets/gagi"
 PRETRAIN = f"{GAGI}/giga_world_0_video_pretrain"
 PACKED = f"{GAGI}/gr1_finetune_data/packed_data"
 PROBE = f"{GAGI}/eve_v2_outputs/track4gen_probe"

@@ -22,7 +22,7 @@ import numpy as np
 import selfcase_g1 as G1
 import selfcase_g1p as G1P
 
-G1P_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/g1p'
+G1P_DIR = '/data/datasets/gagi/eve_v2_outputs/selfcase/g1p'
 CACHE_DEFAULT = os.path.join(G1P_DIR, 'g1p_cell_features.npz')
 OUT_DEFAULT = os.path.join(G1P_DIR, 'fusion_ablation.json')
 
@@ -193,8 +193,8 @@ def selftest():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--pools', default=G1P.DEFAULT_POOLS)
-    ap.add_argument('--it2v', default='/data/datasets/wkq_vlm/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
-    ap.add_argument('--model-dir', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
+    ap.add_argument('--it2v', default='/data/datasets/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json')
+    ap.add_argument('--model-dir', default='/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st')
     ap.add_argument('--sigmas', default='0.2,0.4')
     ap.add_argument('--fps', type=int, default=16)
     ap.add_argument('--win', type=int, default=3)

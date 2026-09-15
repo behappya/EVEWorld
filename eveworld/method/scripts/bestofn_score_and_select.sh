@@ -16,15 +16,15 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 cd "${REPO_DIR}"
 
-GAGI="${GAGI_ROOT:-/data/datasets/wkq_vlm/gagi}"
+GAGI="${GAGI_ROOT:-/data/datasets/gagi}"
 BON="${BON_ROOT:-${GAGI}/eve_outputs/bestofn}"
 TQ="${TQ_ROOT:-${GAGI}/eve_outputs/tea_qwen}"
 SEEDS="${SEEDS:-6666 1234 2025 777 42 314 2718 999}"
 NUM_FRAMES="${NUM_FRAMES:-93}"
 LIMIT="${LIMIT:-0}"
 CONC="${CONCURRENCY:-64}"
-PY="${PY:-/data/datasets/wkq_vlm/gagi/envs/dreamgenbench_eval_venv/bin/python}"
-QWEN_BASE="${QWEN_BASE:-10.60.32.38}"
+PY="${PY:-/data/datasets/gagi/envs/dreamgenbench_eval_venv/bin/python}"
+QWEN_BASE="${QWEN_BASE:-127.0.0.1}"
 
 echo "[bon] seeds=[${SEEDS}] frames=${NUM_FRAMES} limit=${LIMIT} py=${PY}"
 

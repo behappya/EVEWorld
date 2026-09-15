@@ -20,9 +20,9 @@ import os
 
 import numpy as np
 
-ANNO_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
-ASSETS_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
-GRIPPER_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/gripper_anno'
+ANNO_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
+ASSETS_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
+GRIPPER_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/gripper_anno'
 T_LAT, H_LAT, W_LAT = 24, 30, 48
 CELL_PX = 16
 

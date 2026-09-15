@@ -35,8 +35,8 @@ from giga_world_0.giga_world_0_transforms import GigaWorld0Transform
 
 from .t4g_corr_trainer import ParamDisplacementProbe
 
-DEFAULT_ANNO_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
-DEFAULT_ASSETS = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
+DEFAULT_ANNO_DIR = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
+DEFAULT_ASSETS = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
 from .t4g_aug_paste import (sample_paste_plan, prep_patch, paste_lat_region,
                             sample_follow_plan, build_follow_boxes, static_boxes,
                             T_LAT, H_LAT, W_LAT, NF, HPIX, WPIX, CELL_PX, VAE_SP)
@@ -75,7 +75,7 @@ class T4GAugTransform(GigaWorld0Transform):
         self.anno_dir = anno_dir
         self.alien_bank = sorted(f[:-4] for f in os.listdir(assets_dir)
                                  if f.endswith('.npz')) if os.path.isdir(assets_dir) else []
-        default_wmap = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/weightmap_cache'
+        default_wmap = '/data/datasets/gagi/eve_v2_outputs/track4gen_probe/weightmap_cache'
         self.wmap_dir = os.environ.get('T4G_WMAP_DIR', wmap_dir or default_wmap)
         self.wmap_values = None
         if wmap_values is not None:

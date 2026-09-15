@@ -1,8 +1,8 @@
 {
   "created": "2026-07-15",
   "seed": 20260715,
-  "old_manifest": "/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data/manifest.jsonl",
-  "metadata": "/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_hf/metadata.csv",
+  "old_manifest": "/data/datasets/gagi/gr1_finetune_data/raw_data/manifest.jsonl",
+  "metadata": "/data/datasets/gagi/gr1_finetune_data/raw_hf/metadata.csv",
   "old_manifest_count": 92,
   "train_count": 72,
   "val_count": 20,

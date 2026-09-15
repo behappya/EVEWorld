@@ -8,13 +8,13 @@
 # 特性: 幂等 + 断点续传 + 下完自检权重存在。可反复执行。
 #
 # 用法:
-#   bash eve/scripts/download_idm_gr1.sh              # 下到默认目录
-#   DEST=/your/path bash eve/scripts/download_idm_gr1.sh
-#   DRY_RUN=1 bash eve/scripts/download_idm_gr1.sh    # 只打印计划
+#   bash eveworld/data_curation/scripts/download_idm_gr1.sh              # 下到默认目录
+#   DEST=/your/path bash eveworld/data_curation/scripts/download_idm_gr1.sh
+#   DRY_RUN=1 bash eveworld/data_curation/scripts/download_idm_gr1.sh    # 只打印计划
 set -euo pipefail
 
 REPO_ID="${REPO_ID:-seonghyeonye/IDM_gr1}"
-DEST="${DEST:-/data/datasets/wkq_vlm/gagi/idm_gr1_probe}"
+DEST="${DEST:-/data/datasets/gagi/idm_gr1_probe}"
 # 若你的网络需要镜像, 取消下一行注释(或在调用前 export):
 # export HF_ENDPOINT="${HF_ENDPOINT:-https://hf-mirror.com}"
 

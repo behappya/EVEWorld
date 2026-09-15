@@ -39,7 +39,7 @@ T_LAT, H_LAT, W_LAT = 24, 30, 48
 NF, HPIX, WPIX, CELL = 93, 480, 768, 16
 W_BG, W_MARK = 1.0, 3.0
 
-ROOT = Path("/data/datasets/wkq_vlm/gagi")
+ROOT = Path("/data/datasets/gagi")
 RAW_ROOT = ROOT / "gr1_finetune_data/raw_data_t4g_nohuman_v2"
 ANNO_DIR = ROOT / "eve_v2_outputs/track4gen_probe/t4g_anno_nohuman_v2"
 GRIPPER_DIR = ROOT / "eve_v2_outputs/track4gen_probe/gripper_anno_nohuman_v2"

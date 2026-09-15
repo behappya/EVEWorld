@@ -15,7 +15,7 @@ def main():
         print("CUDA initialization failed.", file=sys.stderr)
         print("This usually means the PyTorch CUDA wheel is newer than the node driver.", file=sys.stderr)
         print("For this cluster, install the CUDA 12.8 stack with:", file=sys.stderr)
-        print("  cd /home/jovyan/giga-models/giga-world-0", file=sys.stderr)
+        print("  cd giga-world-0", file=sys.stderr)
         print("  ./scripts/install_torch_cuda128.sh", file=sys.stderr)
         print("", file=sys.stderr)
         raise

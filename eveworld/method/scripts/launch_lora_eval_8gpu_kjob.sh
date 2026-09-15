@@ -8,9 +8,9 @@ for arg in "$@"; do
 done
 
 export REPO_DIR
-export JOB_SCRIPT="${JOB_SCRIPT:-${REPO_DIR}/scripts/kjob_lora_eval_8gpu.sh}"
+export JOB_SCRIPT="${JOB_SCRIPT:-${EVEWORLD_ROOT}/eveworld/method/scripts/kjob_lora_eval_8gpu.sh}"
 TASK_SPECS="${TASK_SPECS:?TASK_SPECS is required}"
-OUT_ROOT="${OUT_ROOT:-/data/datasets/wkq_vlm/gagi/eve_outputs/lad_lora_eval}"
+OUT_ROOT="${OUT_ROOT:-/data/datasets/gagi/eve_outputs/lad_lora_eval}"
 LIMIT="${LIMIT:-16}"
 
 echo "[lora-eval] submit one node via ${JOB_SCRIPT}"

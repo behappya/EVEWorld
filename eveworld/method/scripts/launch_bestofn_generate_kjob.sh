@@ -12,9 +12,9 @@ set -uo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 export REPO_DIR
-export JOB_SCRIPT="${JOB_SCRIPT:-${REPO_DIR}/scripts/kjob_eve_eag_generate.sh}"
+export JOB_SCRIPT="${JOB_SCRIPT:-${EVEWORLD_ROOT}/eveworld/method/scripts/kjob_eve_eag_generate.sh}"
 
-GAGI="${GAGI_ROOT:-/data/datasets/wkq_vlm/gagi}"
+GAGI="${GAGI_ROOT:-/data/datasets/gagi}"
 LAM="${LAM:-${GAGI}/eve_outputs/lam/lam_gr1.pt}"
 DATA_PATH="${DATA_PATH:-${GAGI}/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json}"
 BON_ROOT="${BON_ROOT:-${GAGI}/eve_outputs/bestofn}"

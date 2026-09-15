@@ -24,10 +24,10 @@ import os
 
 import numpy as np
 
-OUT_DEFAULT = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_final/kprobe'
-PRETRAIN = '/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain'
-IT2V = '/data/datasets/wkq_vlm/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json'
-CASE_BANK_ALL = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/case_bank_all'
+OUT_DEFAULT = '/data/datasets/gagi/eve_v2_outputs/t4g_final/kprobe'
+PRETRAIN = '/data/datasets/gagi/giga_world_0_video_pretrain'
+IT2V = '/data/datasets/gagi/gr1_dreamgen_eval/giga_input/gr1_dreamgen_it2v.json'
+CASE_BANK_ALL = '/data/datasets/gagi/eve_v2_outputs/selfcase/case_bank_all'
 K_LIST = (2, 4, 6, 8)
 
 
@@ -276,7 +276,7 @@ def run(args):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--model-dir', default=PRETRAIN)
-    ap.add_argument('--weights', default='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/cic_match/ich_d_frozen_lr.npz')
+    ap.add_argument('--weights', default='/data/datasets/gagi/eve_v2_outputs/selfcase/cic_match/ich_d_frozen_lr.npz')
     ap.add_argument('--it2v', default=IT2V)
     ap.add_argument('--out-dir', default=OUT_DEFAULT)
     ap.add_argument('--n-conds', type=int, default=12)

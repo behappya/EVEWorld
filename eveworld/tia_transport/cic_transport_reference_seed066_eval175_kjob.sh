@@ -17,9 +17,9 @@ for arg in "$@"; do
   export "${arg}"
 done
 
-REPO_DIR="${REPO_DIR:-giga-world-0}"
-GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-/home/jovyan/giga-models}"
-GAGI="${GAGI:-/data/datasets/wkq_vlm/gagi}"
+REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
+GIGA_MODELS_DIR="${GIGA_MODELS_DIR:-${EVEWORLD_ROOT}/giga-models}"
+GAGI="${GAGI:-/data/datasets/gagi}"
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
 CONDA_ENV="${CONDA_ENV:-giga_models}"
 PYTHON="${TRAIN_PYTHON:-${GAGI}/envs/giga_world_train_venv/bin/python}"
@@ -29,7 +29,7 @@ PROBE_ROOT="${PROBE_ROOT:-${CAMPAIGN_ROOT}/eval175_references_pretrain_s000_sft_
 MANIFEST_ROOT="${MANIFEST_ROOT:-${CAMPAIGN_ROOT}/eval175_references_pretrain_s000_sft_s200_seed066_eval}"
 PRETRAIN_WEIGHT_DIR="${GAGI}/giga_world_0_video_pretrain/transformer"
 SFT_WEIGHT_DIR="${GAGI}/eve_v2_outputs/round0_fullft/experiments_round0/models/checkpoint_epoch_200_step_200/transformer"
-WORKER="${REPO_DIR}/eveworld/evaluation/eval175_multiseed_worker.py"
+WORKER="${EVEWORLD_ROOT}/eveworld/evaluation/eval175_multiseed_worker.py"
 RESUME="${RESUME:-0}"
 models=(pretrain_raw_s000 standard_sft_raw_s200)
 seeds=(66)
@@ -69,7 +69,7 @@ fi
 # shellcheck disable=SC1090
 source "${CONDA_SH}"
 conda activate "${CONDA_ENV}"
-export PYTHONPATH="${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="${EVEWORLD_ROOT}:${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1 TOKENIZERS_PARALLELISM=false
 export HF_HOME="${HF_HOME:-${GAGI}/.hf_home}"
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 DIFFUSERS_OFFLINE=1

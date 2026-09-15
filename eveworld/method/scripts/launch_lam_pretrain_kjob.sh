@@ -16,15 +16,15 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(cd "${SCRIPT_DIR}/../../.." && pwd)"   # = giga-world-0
 
 export REPO_DIR
-export JOB_SCRIPT="${JOB_SCRIPT:-${REPO_DIR}/scripts/kjob_eve_lam_pretrain.sh}"
+export JOB_SCRIPT="${JOB_SCRIPT:-${EVEWORLD_ROOT}/eveworld/method/scripts/kjob_eve_lam_pretrain.sh}"
 
 PASS=(
   "REPO_DIR=${REPO_DIR}"
-  "GAGI_ROOT=${GAGI_ROOT:-/data/datasets/wkq_vlm/gagi}"
-  "TRAIN_VENV=${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
-  "LAM_VIDEO_DIR=${LAM_VIDEO_DIR:-/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_hf/gr1}"
-  "LAT_CACHE=${LAT_CACHE:-/data/datasets/wkq_vlm/gagi/eve_outputs/latents/gr1_real.pt}"
-  "LAM_OUT=${LAM_OUT:-/data/datasets/wkq_vlm/gagi/eve_outputs/lam/lam_gr1.pt}"
+  "GAGI_ROOT=${GAGI_ROOT:-/data/datasets/gagi}"
+  "TRAIN_VENV=${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
+  "LAM_VIDEO_DIR=${LAM_VIDEO_DIR:-/data/datasets/gagi/gr1_finetune_data/raw_hf/gr1}"
+  "LAT_CACHE=${LAT_CACHE:-/data/datasets/gagi/eve_outputs/latents/gr1_real.pt}"
+  "LAM_OUT=${LAM_OUT:-/data/datasets/gagi/eve_outputs/lam/lam_gr1.pt}"
   "NUM_FRAMES=${NUM_FRAMES:-49}"
   "HEIGHT=${HEIGHT:-480}"
   "WIDTH=${WIDTH:-768}"

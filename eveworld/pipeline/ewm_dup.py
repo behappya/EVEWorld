@@ -19,8 +19,8 @@ from t4g_gdino import GDinoLocator
 from t4g_detect import detect_all
 from t4g_exam_v2 import count_valid_instances, NF, HPIX, WPIX, T_LAT
 
-GEN = "/data/datasets/wkq_vlm/gagi/eve_v2_outputs/ewmbench_gen"
-GT = "/data/datasets/wkq_vlm/gagi/ewmbench_data/gt_dataset"
+GEN = "/data/datasets/gagi/eve_v2_outputs/ewmbench_gen"
+GT = "/data/datasets/gagi/ewmbench_data/gt_dataset"
 
 # 21 episode 人工 mover(要检测的目标物); 每 task 的 episode 见注释
 MOVER = {

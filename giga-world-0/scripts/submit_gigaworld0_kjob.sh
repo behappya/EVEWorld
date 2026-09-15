@@ -104,7 +104,7 @@ echo "Repo dir:   ${REPO_DIR}"
 echo "RL dir:     ${RL_DIR}"
 echo "Job script: ${JOB_SCRIPT}"
 if [[ -n "${RUN_NAME:-}" ]]; then
-  EXPECTED_OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/wkq_vlm/gagi/giga_world_0_outputs}"
+  EXPECTED_OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/gagi/giga_world_0_outputs}"
   EXPECTED_SAVE_DIR="${SAVE_DIR:-${EXPECTED_OUTPUT_ROOT}/${RUN_NAME}}"
   EXPECTED_LOG_FILE="${LOG_FILE:-${EXPECTED_SAVE_DIR}/run.log}"
   echo "Run name:   ${RUN_NAME}"

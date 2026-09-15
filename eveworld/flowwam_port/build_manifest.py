@@ -42,8 +42,8 @@ def probe_video(path: Path) -> tuple[int, int, int]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--root", default="/data/datasets/wkq_vlm/gagi/flowwam/data_worldarena/640_extracted")
-    ap.add_argument("--output", default="/data/datasets/wkq_vlm/gagi/flowwam/igr/manifest_640.json")
+    ap.add_argument("--root", default="/data/datasets/gagi/flowwam/data_worldarena/640_extracted")
+    ap.add_argument("--output", default="/data/datasets/gagi/flowwam/igr/manifest_640.json")
     ap.add_argument("--probe-videos", action="store_true", help="逐条解码探测帧数(慢)")
     args = ap.parse_args()
 

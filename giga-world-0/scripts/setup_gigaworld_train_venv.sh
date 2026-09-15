@@ -10,8 +10,8 @@ set -euo pipefail
 
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
 CONDA_ENV="${CONDA_ENV:-giga_models}"
-TRAIN_VENV="${TRAIN_VENV:-/data/datasets/wkq_vlm/gagi/envs/giga_world_train_venv}"
-PYTHONPATH_ROOT="${PYTHONPATH_ROOT:-/home/jovyan/giga-models:/home/jovyan/giga-models/giga-world-0}"
+TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
+PYTHONPATH_ROOT="${PYTHONPATH_ROOT:-${EVEWORLD_ROOT}:${EVEWORLD_ROOT}/giga-world-0:${EVEWORLD_ROOT}/giga-models}"
 export TRAIN_VENV
 
 if [[ -f "${CONDA_SH}" ]]; then

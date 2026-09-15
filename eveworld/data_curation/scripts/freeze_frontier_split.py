@@ -57,17 +57,17 @@ def main() -> None:
     parser.add_argument(
         "--old-manifest",
         type=Path,
-        default=Path("/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data/manifest.jsonl"),
+        default=Path("/data/datasets/gagi/gr1_finetune_data/raw_data/manifest.jsonl"),
     )
     parser.add_argument(
         "--metadata",
         type=Path,
-        default=Path("/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_hf/metadata.csv"),
+        default=Path("/data/datasets/gagi/gr1_finetune_data/raw_hf/metadata.csv"),
     )
     parser.add_argument(
         "--raw-root",
         type=Path,
-        default=Path("/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_hf/gr1"),
+        default=Path("/data/datasets/gagi/gr1_finetune_data/raw_hf/gr1"),
     )
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--val-count", type=int, default=20)

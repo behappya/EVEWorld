@@ -12,11 +12,11 @@
 set -euo pipefail
 
 REPO_DIR="giga-world-0"
-PACKED="/data/datasets/wkq_vlm/gagi/gr1_finetune_data/packed_data"
-OUT_ROOT="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_selfcase"
-ROUND0_EMA_TRANSFORMER="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st/transformer"
-ANNO_DIR="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno"
-CASE_DIR="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/mine_round0/case_bank"
+PACKED="/data/datasets/gagi/gr1_finetune_data/packed_data"
+OUT_ROOT="/data/datasets/gagi/eve_v2_outputs/t4g_selfcase"
+ROUND0_EMA_TRANSFORMER="/data/datasets/gagi/eve_v2_outputs/anchor_models/round0_ema_st/transformer"
+ANNO_DIR="/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno"
+CASE_DIR="/data/datasets/gagi/eve_v2_outputs/selfcase/mine_round0/case_bank"
 
 BASE_CONFIG_MODULE="eveworld.pipeline.t4g_selfcase_config"
 RUN_NAME="${RUN_NAME:-t4g_selfcase_s250}"
@@ -45,7 +45,7 @@ run_submit() {
   BATCH_SIZE_PER_GPU=1 \
   GRADIENT_ACCUMULATION_STEPS=8 \
   GPU_IDS="0 1 2 3 4 5 6 7" \
-    ./scripts/launch_gr1_train_kjob.sh \
+    ./benchmarks/dreamgenbench/launch_gr1_train_kjob.sh \
       "BASE_CONFIG_MODULE=${BASE_CONFIG_MODULE}" \
       "TRANSFORMER_MODEL_PATH=${ROUND0_EMA_TRANSFORMER}" \
       "CHECKPOINT_TOTAL_LIMIT=${CHECKPOINT_TOTAL_LIMIT}" \

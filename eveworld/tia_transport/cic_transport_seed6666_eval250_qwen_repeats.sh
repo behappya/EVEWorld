@@ -4,10 +4,10 @@ set -euo pipefail
 REPO_DIR="giga-world-0"
 CONDA_SH="/home/jovyan/miniconda/etc/profile.d/conda.sh"
 CONDA_ENV="giga_models"
-ROOT="/data/datasets/wkq_vlm/gagi/eve_v2_outputs/eve_cic_transport_v1"
+ROOT="/data/datasets/gagi/eve_v2_outputs/eve_cic_transport_v1"
 MANIFEST_ROOT="${ROOT}/eval175_seed004_transport_seed6666_raw_s150_s250_eval"
 OUTPUT_ROOT="${ROOT}/qwen_seed004_transport_seed6666_raw_s150_s250_thinking_off"
-QWEN_BASE="${QWEN_BASE:-http://10.60.32.27:8000/v1}"
+QWEN_BASE="${QWEN_BASE:-http://127.0.0.1:8000/v1}"
 GLOBAL_CONCURRENCY="${GLOBAL_CONCURRENCY:-100}"
 RERUN_ERRORS="${RERUN_ERRORS:-0}"
 models=(
@@ -61,7 +61,7 @@ for model in "${models[@]}"; do
     output_dir="${OUTPUT_ROOT}/${run_name}"
     log_path="${OUTPUT_ROOT}/logs/${run_name}.log"
     command=(
-      python scripts/eval_dreamgenbench_qwen_api.py
+      python benchmarks/dreamgenbench/eval_dreamgenbench_qwen_api.py
       --manifest "${manifest}"
       --output-root "${output_dir}"
       --run-name "${run_name}"
