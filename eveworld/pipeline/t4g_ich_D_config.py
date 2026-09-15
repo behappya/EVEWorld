@@ -1,0 +1,88 @@
+"""ICH-D 训练 config (71 号 B1 固化预案 D 臂) —— 350 步。
+
+与 C 臂 (t4g_ich_3L_config) 差异:
+  1. runner = T4GICHDTrainer: 检测子 = 固化 LR (16 维 = block10/12/16 novelty +
+     block22 认亲, t4g_ich_d_fit.py 产物, buffer 永不更新); λ_det=0 无 BCE;
+     只训擦除子 (gate+W_out, 注入点 block22) + 主干。
+  2. 预算 350 步, 每 50 步存档。
+其余 (底座 round0_ema / batch64 / 40 例库 / p_case=0.8) 原样。
+launcher 尾随 KEY=VALUE 是最终事实来源。
+"""
+
+ANNO_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/t4g_anno'
+ASSETS_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/track4gen_probe/aug_assets'
+CASE_DIR = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/case_bank_all'
+ROUND0_EMA_TRANSFORMER = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/anchor_models/round0_ema_st/transformer'
+ICH_D_WEIGHTS = '/data/datasets/wkq_vlm/gagi/eve_v2_outputs/selfcase/cic_match/ich_d_frozen_lr.npz'
+
+config = dict(
+    runners=['eveworld.pipeline.t4g_ich_d_trainer.T4GICHDTrainer'],
+    project_dir='/data/datasets/wkq_vlm/gagi/eve_v2_outputs/t4g_ich_D/experiments',
+    launch=dict(
+        gpu_ids=[0, 1, 2, 3, 4, 5, 6, 7],
+        distributed_type='DEEPSPEED',
+        deepspeed_config=dict(
+            deepspeed_config_file='accelerate_configs/zero2.json',
+        ),
+    ),
+    dataloaders=dict(
+        train=dict(
+            data_or_config=[
+                '/data/datasets/wkq_vlm/gagi/gr1_finetune_data/packed_data',
+            ],
+            batch_size_per_gpu=1,
+            num_workers=6,
+            transform=dict(
+                type='T4GSelfCaseTransform',
+                num_frames=93,
+                height=480,
+                width=768,
+                fps=16,
+                image_cfg=dict(
+                    mask_generator=dict(
+                        max_ref_frames=1,
+                        start=1,
+                        factor=4,
+                    ),
+                ),
+                idx2vid_path=ANNO_DIR + '/_packidx2vid.json',
+                assets_dir=ASSETS_DIR,
+                case_dir=CASE_DIR,
+                p_case=0.8,
+            ),
+            sampler=dict(
+                type='DefaultSampler',
+                shuffle=True,
+            ),
+        ),
+    ),
+    models=dict(
+        vae_model_path='/data/datasets/wkq_vlm/gagi/giga_world_0_video_pretrain/vae',
+        transformer_model_path=ROUND0_EMA_TRANSFORMER,
+        t4g_w_paste=4.0,                   # 病例区 loss 上权重 (env T4G_W_PASTE 可覆盖)
+        t4g_ich_d_weights=ICH_D_WEIGHTS,   # 固化 LR (env T4G_ICH_D_WEIGHTS 可覆盖)
+        t4g_ich_win=3,
+    ),
+    optimizers=dict(
+        type='CAME8Bit',
+        lr=2 ** (-14.5),
+    ),
+    schedulers=dict(
+        type='ConstantScheduler',
+    ),
+    train=dict(
+        resume=True,
+        max_steps=350,
+        gradient_accumulation_steps=8,
+        mixed_precision='bf16',
+        checkpoint_interval=50,
+        checkpoint_total_limit=8,
+        checkpoint_start_step=0,
+        checkpoint_strict=False,
+        log_with='tensorboard',
+        log_interval=1,
+        with_ema=True,
+        activation_checkpointing=True,
+        activation_class_names=['TransformerBlock'],
+    ),
+)
