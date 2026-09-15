@@ -1,0 +1,7 @@
+# EVE P0 纯 CPU 依赖(本机/任意机器可装)
+numpy>=1.23
+opencv-python-headless>=4.7
+matplotlib>=3.6
+scipy>=1.10
+# 可选(更强 tracker,后续替换 cheap detector 时装):
+# cotracker  # 见 https://github.com/facebookresearch/co-tracker

@@ -1,0 +1,24 @@
+{
+  "created": "2026-07-15",
+  "seed": 20260715,
+  "old_manifest": "/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_data/manifest.jsonl",
+  "metadata": "/data/datasets/wkq_vlm/gagi/gr1_finetune_data/raw_hf/metadata.csv",
+  "old_manifest_count": 92,
+  "train_count": 72,
+  "val_count": 20,
+  "clean_test_candidate_count": 8,
+  "clean_test_candidate_ids": [
+    "11.mp4",
+    "22.mp4",
+    "28.mp4",
+    "44.mp4",
+    "5.mp4",
+    "7.mp4",
+    "8.mp4",
+    "87.mp4"
+  ],
+  "clean_test_media_available": 0,
+  "final_test_ready": false,
+  "final_test_blocker": "The eight reserved GR1 rows are not downloaded and are insufficient for the preregistered held-out claim; acquire them and expand with external/new data before final model tuning is frozen.",
+  "leakage_policy": "train/val are development-only; test_candidate is never used for tuning or checkpoint selection."
+}
