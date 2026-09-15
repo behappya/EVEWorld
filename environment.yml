@@ -1,0 +1,12 @@
+name: eveworld
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11
+  - libgl
+  - libglib
+  - git-lfs
+  - pip
+  - pip:
+    - -r requirements.txt

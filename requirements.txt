@@ -1,0 +1,46 @@
+# Core dependencies of the reference environment (Python 3.11, CUDA 12.8).
+# GigaWorld-0 training/inference also requires giga-train and giga-datasets:
+#   pip install git+https://github.com/open-gigaai/giga-train.git
+#   pip install git+https://github.com/open-gigaai/giga-datasets.git
+# and the pinned in-repo framework: pip install -e ./giga-models
+torch==2.11.0
+torchvision==0.26.0
+diffusers==0.38.0
+transformers==4.33.2
+accelerate==1.13.0
+deepspeed==0.19.1
+peft==0.5.0
+safetensors==0.8.0
+einops==0.8.2
+omegaconf==2.3.1
+numpy==1.26.4
+scipy==1.17.1
+scikit-image==0.26.0
+scikit-learn==1.9.0
+scikit-video==1.1.11
+opencv-python==4.11.0.86
+av==17.1.0
+decord==0.6.0
+torchcodec==0.14.0
+pillow==12.3.0
+imageio==2.37.3
+imageio-ffmpeg==0.6.0
+lpips==0.1.4
+timm==1.0.12
+openai-clip==1.0.1
+segment-anything==1.0
+datasets==3.6.0
+pandas==3.0.3
+matplotlib==3.11.0
+tqdm==4.68.3
+tensorboard==2.20.0
+openai==2.44.0
+google-genai==2.10.0
+pyyaml==6.0.3
+pyyaml-include==1.4.1
+jsonlines==4.0.0
+rich==15.0.0
+regex==2026.5.9
+sentencepiece==0.2.1
+ftfy==6.3.1
+fairscale==0.4.13
