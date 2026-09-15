@@ -1,0 +1,51 @@
+diff --git a/video_quality/WorldArena/__init__.py b/video_quality/WorldArena/__init__.py
+index 448b14a..936a581 100644
+--- a/video_quality/WorldArena/__init__.py
++++ b/video_quality/WorldArena/__init__.py
+@@ -26,7 +26,10 @@ from .imaging_quality import compute_imaging_quality
+ from .subject_consistency import compute_subject_consistency
+ from .flow_score import compute_flow_score
+ from .flow_aepe_metrics import compute_photometric_smoothness
+-from .motion_smoothness_metrics import compute_motion_smoothness
++try:
++    from .motion_smoothness_metrics import compute_motion_smoothness
++except ImportError:
++    compute_motion_smoothness = None
+ 
+ import re
+ from collections import defaultdict
+diff --git a/video_quality/WorldArena/third_party/SEA-RAFT/core/utils/utils.py b/video_quality/WorldArena/third_party/SEA-RAFT/core/utils/utils.py
+index d665761..9c17611 100644
+--- a/video_quality/WorldArena/third_party/SEA-RAFT/core/utils/utils.py
++++ b/video_quality/WorldArena/third_party/SEA-RAFT/core/utils/utils.py
+@@ -5,7 +5,12 @@ from scipy import interpolate
+ 
+ def load_ckpt(model, path):
+     """ Load checkpoint """
+-    state_dict = torch.load(path, map_location=torch.device('cpu'))
++    if str(path).endswith(".safetensors"):
++        from safetensors.torch import load_file
++
++        state_dict = load_file(path, device="cpu")
++    else:
++        state_dict = torch.load(path, map_location=torch.device('cpu'))
+     model.load_state_dict(state_dict, strict=False)
+ 
+ def resize_data(img1, img2, flow, factor=1.0):
+diff --git a/video_quality/WorldArena/utils.py b/video_quality/WorldArena/utils.py
+index ab2ad87..9c07e3a 100644
+--- a/video_quality/WorldArena/utils.py
++++ b/video_quality/WorldArena/utils.py
+@@ -40,6 +40,11 @@ logger = logging.getLogger(__name__)
+ 
+ from pathlib import Path
+ 
++CACHE_DIR = os.environ.get(
++    "WORLDARENA_CACHE_DIR", os.path.expanduser("~/.cache/worldarena")
++)
++os.makedirs(CACHE_DIR, exist_ok=True)
++
+ 
+ def dino_transform(n_px):
+     return Compose([
+

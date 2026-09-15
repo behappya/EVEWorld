@@ -1,0 +1,23 @@
+ckpt:
+  aesthetic_quality:
+    clip: /data/datasets/gagi/worldarena_models/clip_model/ViT-L-14.pt
+    aesthetic_head: /data/datasets/gagi/worldarena_evaluator/checkpoints/aesthetic/sa_0_4_vit_l_14_linear.pth
+  background_consistency:
+    clip: /data/datasets/gagi/worldarena_models/clip_model/ViT-B-32.pt
+    raft: /data/datasets/gagi/worldarena_models/raft_model/models/raft-things.pth
+  dynamic_degree:
+    raft: /data/datasets/gagi/worldarena_models/raft_model/models/raft-things.pth
+  flow_score:
+    raft: /data/datasets/gagi/worldarena_models/raft_model/models/raft-things.pth
+  photometric_smoothness:
+    cfg: /home/jovyan/gagibench/WorldArena_WA1_EVAL/video_quality/WorldArena/third_party/SEA-RAFT/config/eval/spring-M.json
+    model: /data/datasets/gagi/worldarena_evaluator/checkpoints/sea_raft/model.safetensors
+  motion_smoothness:
+    model: /data/datasets/gagi/worldarena_evaluator/checkpoints/vfimamba/model.pkl
+  image_quality:
+    musiq: /data/datasets/gagi/worldarena_models/pyiqa_model/musiq_spaq_ckpt-358bb6af.pth
+  subject_consistency:
+    repo: /data/datasets/gagi/worldarena_evaluator/checkpoints/dino
+    weight: /data/datasets/gagi/worldarena_models/dino_model/dino_vitbase16_pretrain.pth
+    model: dino_vitb16
+    raft: /data/datasets/gagi/worldarena_models/raft_model/models/raft-things.pth
