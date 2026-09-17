@@ -63,6 +63,10 @@ See [`docs/ENVIRONMENT.md`](docs/ENVIRONMENT.md) for the full dependency list, C
 
 The paper source lives in [`paper/`](paper/). A preprint link will be added upon publication.
 
+## Project Page
+
+An interactive project page with qualitative video comparisons lives in [`index.html`](index.html). It is a plain static page served from the repository root and needs no build step — open the file directly, or serve the root with any static file server.
+
 ## License
 
 This project is licensed under the Apache License 2.0 — see [LICENSE](LICENSE). Vendored snapshots retain their original licenses.
