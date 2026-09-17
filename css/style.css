@@ -160,7 +160,7 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 6px 16px rgba(0, 0, 0, .10);
 }
 .reel-tile.lv { box-shadow: 0 6px 16px color-mix(in srgb, var(--tone, var(--primary)) 32%, rgba(0,0,0,.08)); }
-.reel-tile video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.reel-tile video { width: 100%; height: 100%; object-fit: cover; object-position: 100% 50%; display: block; }
 
 .hero-scrim {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -767,15 +767,22 @@ table.data td.best { font-weight: 650; }
   background: var(--border); border-bottom: 1px solid var(--border);
 }
 .demo-tiles.single { grid-template-columns: 1fr; }
+/* Each source clip is a single wide frame: the frozen conditioning still on the
+   left (identical across the four arms) and the generated rollout on the right,
+   split at exactly 50%. Tiles show the generated half only, via a right-anchored
+   cover crop -- the still is not repeated four times per card, and the files
+   themselves stay unedited. 776/480 is the half-width of the 1552px sources;
+   .narrow covers the 1296px sources (367-yes), whose half is 648px. */
 .demo-tile {
-  position: relative; background: #000; aspect-ratio: 4 / 3;
+  position: relative; background: #000; aspect-ratio: 776 / 480;
   overflow: hidden; cursor: pointer;
 }
 .demo-tiles.single .demo-tile { aspect-ratio: 16 / 9; }
-.demo-tile video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.demo-tiles.narrow .demo-tile { aspect-ratio: 648 / 480; }
+.demo-tile video { width: 100%; height: 100%; object-fit: cover; object-position: 100% 50%; display: block; }
 /* reference montages are 4:3 grids of four systems: letterbox, never crop */
 .demo-tiles.single.montage .demo-tile { aspect-ratio: 4 / 3; }
-.demo-tiles.single.montage .demo-tile video { object-fit: contain; }
+.demo-tiles.single.montage .demo-tile video { object-fit: contain; object-position: 50% 50%; }
 .demo-tile-label {
   position: absolute; left: 6px; top: 6px; z-index: 2; pointer-events: none;
   font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;

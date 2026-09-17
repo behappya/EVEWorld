@@ -324,8 +324,8 @@
       </figure>
 
       <figure class="figcard reveal">
-        <img src="assets/site/figures/fig_persistence.png" alt="Persistence analysis: the fraction of videos violating for at least k consecutive sampled timestamps, and the cumulative fraction of violations by sampled timestamp" loading="lazy">
-        <figcaption><b>The two-frame rule is not load-bearing.</b> <b>(a)</b> Fraction of videos whose violation persists for at least <span class="mono">k</span> consecutive sampled timestamps. <b>(b)</b> Cumulative fraction of violating videos as a function of the sampled timestamp. The trend is stable across the threshold, so MLR is not an artifact of the choice <span class="mono">k&nbsp;=&nbsp;2</span>.</figcaption>
+        <img src="assets/site/figures/fig_persistence.png" alt="Persistence analysis: the share of videos whose deviation lasts at least k consecutive sampled timestamps, and the cumulative share of videos that have shown a deviation by each sampled timestamp" loading="lazy">
+        <figcaption><b>How long a violation lasts, and when it starts.</b> <b>(a)</b> Share of detector-eligible videos whose deviation lasts for at least <span class="mono">k</span> consecutive sampled timestamps. <b>(b)</b> Cumulative share of videos that have shown a deviation by each sampled timestamp. The single EVEWorld violation is confined to short persistence lengths, while the general image-to-video baselines extend to larger <span class="mono">k</span>.</figcaption>
       </figure>
     </div>
   </div>
@@ -336,7 +336,7 @@
   <div class="lp-inner wide">
     <div class="eyebrow"><span class="e-no">05</span><span class="e-label">Qualitative Comparison</span><span class="e-rule"></span></div>
     <h2 class="band-title">The same instruction, four supervisors</h2>
-    <p class="band-lede">Every clip below is a rollout of the <b>same backbone</b>, the <b>same instruction</b> and the <b>same start frame</b> &mdash; only the supervision changes. <b>GigaWorld-0</b> is the pre-trained video backbone, <b>Standard SFT</b> is the conventional fine-tune, <b>IGR only</b> adds instance-guided restoration without temporal alignment, and <b>EVEWorld</b> combines both supervisors. Hover (or tap) any tile to play it.</p>
+    <p class="band-lede">Every clip below is a rollout of the <b>same backbone</b>, the <b>same instruction</b> and the <b>same start frame</b> &mdash; only the supervision changes. <b>GigaWorld-0</b> is the pre-trained video backbone, <b>Standard SFT</b> is the conventional fine-tune, <b>IGR only</b> adds instance-guided restoration without temporal alignment, and <b>EVEWorld</b> combines both supervisors. Hover (or tap) any tile to play it. Each tile shows the <b>generated rollout</b>; the conditioning frame is identical across the four arms of a task and is therefore shown once rather than repeated in every tile.</p>
 
     <div class="arm-legend">
       <span class="arm-chip eve"><i></i><b>EVEWorld</b>&nbsp;&mdash; IGR + TIA</span>
@@ -419,7 +419,7 @@
       </div>
 
       <div class="demo-card reveal" data-suite="success">
-        <div class="demo-tiles">
+        <div class="demo-tiles narrow">
           <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/367-yes/eve.mp4" poster="assets/site/videos/posters/367-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
           <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/367-yes/sft.mp4" poster="assets/site/videos/posters/367-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
           <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/367-yes/igt.mp4" poster="assets/site/videos/posters/367-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
@@ -461,7 +461,7 @@
 
     <div class="ref-strip">
       <h3>Where these clips come from</h3>
-      <p>All 32 tiles are GR1 tabletop manipulation rollouts produced under identical instructions and initial conditions, taken from our internal evaluation sheets. The <span class="mono">-yes</span> / <span class="mono">-no</span> suffixes are carried over verbatim from the source directory names and are shown for traceability only; the videos themselves are unedited model outputs. The <b>GigaWorld-0</b> column is the pre-trained backbone without any task fine-tuning, and <b>IGR only</b> isolates the restoration supervisor from the temporal-alignment supervisor.</p>
+      <p>All 32 tiles are GR1 tabletop manipulation rollouts produced under identical instructions and initial conditions, taken from our internal evaluation sheets. The <span class="mono">-yes</span> / <span class="mono">-no</span> suffixes are carried over verbatim from the source directory names and are shown for traceability only; the videos themselves are unedited model outputs. Each source clip is a single wide frame holding the frozen conditioning still on the left and the generated rollout on the right, split at exactly 50%; these tiles crop to the generated rollout, because that still is identical across the four arms of a task. The <b>GigaWorld-0</b> column is the pre-trained backbone without any task fine-tuning, and <b>IGR only</b> isolates the restoration supervisor from the temporal-alignment supervisor.</p>
     </div>
   </div>
 </section>
@@ -590,7 +590,7 @@
         <div class="ig-figure">
           <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 1</span><span class="ig-figure-title">Guidance scale sweep</span></div>
           <img src="assets/site/figures/fig_cfg.png" alt="Gemini instruction-following and Model Laziness Rate as a function of classifier-free guidance scale, one curve per training stage" loading="lazy">
-          <p class="ig-figure-caption"><b>Guidance is not the lever.</b> Gemini-IF and MLR as a function of the classifier-free guidance weight <span class="mono">w</span>, one curve per training stage. Gemini-IF peaks at <b>42.33</b> with <span class="mono">w&nbsp;=&nbsp;7.5</span> at step 100, and MLR bottoms out at <b>2.56%</b> for <span class="mono">w&nbsp;=&nbsp;5.0</span> or <span class="mono">7.5</span> at step 200 &mdash; well above the <b>1.59%</b> reached by the default setting we report.</p>
+          <p class="ig-figure-caption"><b>Guidance is not the lever.</b> <b>(a)</b> Gemini-IF and <b>(b)</b> MLR as a function of the classifier-free guidance weight <span class="mono">w</span>, one curve per training stage. Gemini-IF peaks at <b>42.33</b> at <span class="mono">w&nbsp;=&nbsp;7.5</span> (step 100), and MLR bottoms out at <b>2.56%</b> for <span class="mono">w&nbsp;=&nbsp;5.0</span> or <span class="mono">7.5</span> at step 200 &mdash; well above the <b>1.59%</b> reached by the default setting we report.</p>
         </div>
       </div>
       <div class="figdeck-panel" data-panel="1">
