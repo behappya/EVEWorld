@@ -33,6 +33,12 @@
       row.innerHTML += row.innerHTML; /* seamless -50% marquee loop */
     });
     var reelVideos = reel.querySelectorAll("video");
+    /* the reel tiles carry preload="none", so borrow the qualitative posters to
+       paint them immediately instead of showing black until playback starts */
+    reelVideos.forEach(function (v) {
+      var s = v.getAttribute("src");
+      if (s) v.poster = s.replace("videos/gr1/", "videos/posters/").replace(/([^/]+)\/([^/]+)\.mp4$/, "$1-$2.jpg");
+    });
     if ("IntersectionObserver" in window) {
       var rio = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
