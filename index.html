@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVEWorld — Evolution Supervision for Instance-Consistent Embodied World Models</title>
+  <meta name="description" content="EVEWorld: an evolution-supervision framework that keeps the manipulated target instance alive across a generated rollout. IGR restores duplicated targets, TIA holds the target's identity across frames, and MLR measures how often instance conservation breaks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Webfont loads async (media="print" → swap): a hanging fonts.googleapis.com
+       connection must never block first paint — visitors on networks where it is
+       unreachable get the system font stack instantly instead of a white page. -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='4' fill='%230071e3'/><path d='M6.5 4.5l5.5 3.5-5.5 3.5z' fill='white'/></svg>">
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"><i id="scrollBar"></i></div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a class="brand" href="#top"><span class="brand-dot"></span>EVE<b>World</b></a>
+    <nav class="header-nav" aria-label="Sections">
+      <a href="#abstract">Abstract</a>
+      <a href="#laziness">Laziness</a>
+      <a href="#method">Method</a>
+      <a href="#metric">MLR</a>
+      <a href="#qualitative">Qualitative</a>
+      <a href="#generalization">Generalization</a>
+      <a href="#results">Results</a>
+      <a href="#citation">Citation</a>
+    </nav>
+    <div class="header-end">
+      <a class="hbtn" href="#" title="Code release coming soon">
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        Code
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="landing">
+
+<!-- ================= HERO ================= -->
+<section class="hero-band">
+  <div class="hero-reel" id="heroReel" aria-hidden="true">
+    <div class="reel-row" data-dir="left" style="--dur:88s">
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/011-yes/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/034-yes/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/035-yes/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/036-no/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/037-no/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/367-yes/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/hlg-yes/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/016-yes/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+    </div>
+    <div class="reel-row" data-dir="right" style="--dur:104s">
+      <div class="reel-tile arm-sft"><video src="assets/site/videos/gr1/011-yes/sft.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/034-yes/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-sft"><video src="assets/site/videos/gr1/035-yes/sft.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/036-no/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-sft"><video src="assets/site/videos/gr1/037-no/sft.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/367-yes/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-sft"><video src="assets/site/videos/gr1/hlg-yes/sft.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+      <div class="reel-tile arm-eve"><video src="assets/site/videos/gr1/016-yes/eve.mp4" muted loop playsinline preload="none" disablepictureinpicture></video></div>
+    </div>
+  </div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="lp-inner hero-copy">
+    <div class="hero-badges">
+      <span class="vbadge"><svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.5L8 11.3 3.9 13.5l.9-4.5L1.4 5.8 6 5.2z"/></svg>ICLR 2027 Submission</span>
+      <span class="vbadge">Evolution Supervision</span>
+      <span class="vbadge">MLR 10.94% &rarr; 1.59%</span>
+    </div>
+
+    <h1 class="hero-title">EVE<span class="hl">World</span></h1>
+    <p class="hero-tag">Evolution Supervision for <b>Instance-Consistent</b> Embodied World Models</p>
+
+    <div class="hero-authors">
+      <p class="hero-author-names">Anonymous Author(s)</p>
+      <p class="hero-affil">Anonymized for double-blind review</p>
+      <div class="hero-venue-row">
+        <span class="vbadge subtle"><span class="pulse-dot"></span>Under review</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn primary" href="#" title="Preprint coming soon">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5.5L9.5 0H4zm5 1.5L13.5 6H9V1.5zM4.5 8h7v1.2h-7V8zm0 2.8h7V12h-7v-1.2z"/></svg>
+        Paper <span class="btn-tag">soon</span></a>
+      <a class="btn" href="#" title="Code release coming soon">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        Code <span class="btn-tag">soon</span></a>
+      <a class="btn" href="#" title="Dataset release coming soon">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 1C4.1 1 1 2.3 1 4v8c0 1.7 3.1 3 7 3s7-1.3 7-3V4c0-1.7-3.1-3-7-3zm0 1.5c3.3 0 5.5 1 5.5 1.5S11.3 5.5 8 5.5 2.5 4.5 2.5 4 4.7 2.5 8 2.5zM2.5 5.9C3.9 6.6 5.8 7 8 7s4.1-.4 5.5-1.1V8c0 .5-2.2 1.5-5.5 1.5S2.5 8.5 2.5 8V5.9zm0 4C3.9 10.6 5.8 11 8 11s4.1-.4 5.5-1.1V12c0 .5-2.2 1.5-5.5 1.5S2.5 12.5 2.5 12V9.9z"/></svg>
+        Dataset <span class="btn-tag">soon</span></a>
+      <a class="btn ghost" href="#citation">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M2.5 2A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h4v-1.3h-4a.2.2 0 0 1-.2-.2v-9a.2.2 0 0 1 .2-.2h4V2h-4zM10.5 2l4 4v8a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h1zm-.2 1.4V6h2.4l-2.4-2.6z"/></svg>
+        Cite</a>
+    </div>
+
+    <div class="hero-metrics">
+      <div class="hm"><b>1.59%</b><span>MLR on DreamGenBench<br>vs 10.94% Standard SFT</span></div>
+      <div class="hm"><b>&minus;85.5%</b><span>relative reduction<br>in Model Laziness</span></div>
+      <div class="hm"><b>80.16</b><span>Qwen-IF<br>vs 73.81 Standard SFT</span></div>
+      <div class="hm"><b>60.85</b><span>Gemini-IF<br>vs 53.57 Standard SFT</span></div>
+      <div class="hm"><b>2B</b><span>embodied video backbone<br>GigaWorld-0 Video-Pretrain</span></div>
+      <div class="hm"><b>4</b><span>evaluation protocols<br>DreamGen / WorldArena / EWMBench / RoboTwin</span></div>
+    </div>
+  </div>
+  <div class="hero-caret" aria-hidden="true"><svg viewBox="0 0 16 16" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6l5 5 5-5"/></svg></div>
+</section>
+
+<!-- ================= 01 ABSTRACT ================= -->
+<section class="band" id="abstract">
+  <div class="lp-inner">
+    <div class="eyebrow"><span class="e-no">01</span><span class="e-label">Abstract</span><span class="e-rule"></span></div>
+    <h2 class="band-title">From <i>&ldquo;Is the frame plausible?&rdquo;</i> to <i>&ldquo;Does the target survive the rollout?&rdquo;</i></h2>
+
+    <div class="abstract-card reveal">
+      <p>Video world models have emerged as a promising approach to simulating environment dynamics for embodied intelligence. However, existing models are prone to <b>Model Laziness</b>: they focus on visual fidelity at the expense of physical reasoning and lack process-level supervision over the temporal dynamics of manipulated objects. In this work, we propose <b>EVEWorld</b>, an evolution-supervision framework that preserves the target instance over time. First, we propose <b>Instance-Guided Restoration (IGR)</b>, which preserves target-instance existence over time. Second, we introduce <b>Temporal Instance Alignment (TIA)</b>, which aligns the target across adjacent frames to preserve its identity and temporal continuity. We further introduce the <b>Model Laziness Rate (MLR)</b>, a metric that measures target-instance count violations over time. Extensive experiments on DreamGenBench, WorldArena, EWMBench, and RoboTwin demonstrate that EVEWorld consistently mitigates Model Laziness and improves process fidelity and task performance. Relative to Standard SFT, EVEWorld reduces MLR by <b>85.5%</b> &mdash; from 10.94% to 1.59% &mdash; while improving instruction following under both Qwen-IF (73.81 &rarr; 80.16) and Gemini-IF (53.57 &rarr; 60.85).</p>
+    </div>
+
+    <div class="pipeline">
+      <div class="stage reveal">
+        <div class="stage-no">Component 1</div>
+        <h3>Instance-Guided Restoration (IGR)</h3>
+        <p>Duplicate-corrupted inputs are constructed by pasting an extra target instance into a clean demonstration. The model is trained to restore the original video, with the reconstruction error <b>mildly up-weighted inside the perturbed region</b> so that a small corrupted patch is not washed out by the surrounding scene. This directly supervises target-instance conservation.</p>
+        <div class="chips">
+          <span class="chip">count perturbation</span><span class="chip">spatial weighting</span><span class="chip">VAE latent space</span>
+        </div>
+        <span class="stage-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+      <div class="stage reveal">
+        <div class="stage-no">Component 2</div>
+        <h3>Temporal Instance Alignment (TIA)</h3>
+        <p>A correct count is not enough: the target can still distort, fade, or jump between frames. TIA first selects, offline, the feature layer whose nearest-neighbour correspondences best track the target, then matches the target within a local window and <b>migrates the matched feature from the previous frame</b> into the current representation, pulling the generated target back onto its real trajectory.</p>
+        <div class="chips">
+          <span class="chip">layer probe (EPE)</span><span class="chip">local instance localization</span><span class="chip">cross-frame transfer</span>
+        </div>
+        <span class="stage-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+      <div class="stage reveal">
+        <div class="stage-no">Component 3</div>
+        <h3>Model Laziness Rate (MLR)</h3>
+        <p>Existing metrics score a rollout frame by frame, so a shortcut that duplicates or drops the target can still look plausible. MLR instead counts the target instances at sampled timestamps and flags a violation only when the count deviates from the initial frame at <b>two consecutive sampled timestamps</b>, separating genuine instance loss from a single-frame occlusion.</p>
+        <div class="chips">
+          <span class="chip">process-level</span><span class="chip">count-based</span><span class="chip">persistence rule</span>
+        </div>
+      </div>
+    </div>
+
+    <figure class="figcard wide reveal">
+      <img src="assets/site/figures/fig2.png" alt="Model Laziness under standard supervised fine-tuning: the manipulated target is duplicated in Task A and disappears in Task B, while EVEWorld preserves a single target throughout" loading="eager" fetchpriority="high">
+      <figcaption><b>Model Laziness.</b> Under standard supervised fine-tuning the manipulated target duplicates (Task A) or disappears (Task B) even though every individual frame remains plausible. <span style="color:var(--arm-sft)">Red</span> marks Standard SFT; <span style="color:var(--arm-eve)">green</span> marks EVEWorld, which preserves target-instance conservation throughout the interaction. Dashed arrows trace target evolution over time.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= 02 MODEL LAZINESS ================= -->
+<section class="band alt" id="laziness">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">02</span><span class="e-label">Model Laziness</span><span class="e-rule"></span></div>
+    <h2 class="band-title">One target in, two out &mdash; or none at all</h2>
+    <p class="band-lede">A rollout can be globally coherent and still wrong: the manipulated object duplicates, disappears, or changes identity while every single frame stays plausible. We call this <b>Model Laziness</b>, and it is a violation of <b>target-instance conservation</b> rather than of pixel quality. Pick a failure mode to see how it breaks the interaction.</p>
+
+    <div class="defn reveal">
+      <h3>Model Laziness, formally</h3>
+      <p>Let <span class="mono">I<sub>0</sub></span> be the first frame, <span class="mono">x<sub>1:T</sub></span> the generated rollout, <span class="mono">c</span> the instruction, and <span class="mono">N<sub>t</sub></span> the number of target instances in frame <span class="mono">t</span>. A rollout exhibits Model Laziness when the target-instance count ever departs from the initial count:</p>
+      <div class="formula wrap">ML( I<sub>0</sub>, x<sub>1:T</sub>, c )  =  &#120140;[ &#8707; t &#8712; {1, &hellip;, T} :  N<sub>t</sub> &#8800; N<sub>0</sub> ]</div>
+      <p style="margin-top:12px">Because the predicate is <span class="mono">N<sub>t</sub> &#8800; N<sub>0</sub></span> rather than an inequality in one direction, a single definition covers both regimes: <b>duplication</b> (<span class="mono">N<sub>t</sub> &gt; N<sub>0</sub></span>), where the goal is reached by spawning an extra target, and <b>disappearance</b> (<span class="mono">N<sub>t</sub> &lt; N<sub>0</sub></span>), where the target leaves the scene before the interaction closes.</p>
+    </div>
+
+    <div class="lvl-widget" id="lvlWidget">
+      <div class="lvl-tabs three" role="tablist" aria-label="Failure modes">
+        <button class="lvl-tab is-active" role="tab" aria-selected="true" data-level="l4" style="--lvl-c:var(--l4)" id="tab-dup">
+          <span class="lvl-tab-id">DUP</span>
+          <span class="lvl-tab-name">Duplication</span>
+          <span class="lvl-tab-note">N<sub>t</sub> &gt; N<sub>0</sub></span>
+        </button>
+        <button class="lvl-tab" role="tab" aria-selected="false" data-level="l3" style="--lvl-c:var(--l3)" id="tab-vanish">
+          <span class="lvl-tab-id">VAN</span>
+          <span class="lvl-tab-name">Disappearance</span>
+          <span class="lvl-tab-note">N<sub>t</sub> &lt; N<sub>0</sub></span>
+        </button>
+        <button class="lvl-tab" role="tab" aria-selected="false" data-level="l1" style="--lvl-c:var(--l1)" id="tab-distort">
+          <span class="lvl-tab-id">DIS</span>
+          <span class="lvl-tab-name">Distortion</span>
+          <span class="lvl-tab-note">N<sub>t</sub> = N<sub>0</sub></span>
+        </button>
+      </div>
+
+      <div class="lvl-stage" style="--lvl-c:var(--l4)">
+        <div class="lvl-stage-media still">
+          <img class="lvl-still" data-for="l4" src="assets/site/figures/fig_conservation_dup_a.png" alt="Target-instance conservation under duplication: red marks the Standard SFT rollout that keeps an extra duplicate, green marks EVEWorld" loading="lazy">
+          <img class="lvl-still" data-for="l3" src="assets/site/figures/fig_conservation_dup_b.png" alt="Further duplication cases comparing Standard SFT with EVEWorld" loading="lazy" hidden>
+          <img class="lvl-still" data-for="l1" src="assets/site/figures/fig_conservation_distort.png" alt="Target distortion: the instance count is preserved but the target shape drifts, green marks EVEWorld" loading="lazy" hidden>
+        </div>
+
+        <div class="lvl-stage-info">
+          <span class="lvl-stage-badge" id="lvlBadge">Duplication &middot; N<sub>t</sub> &gt; N<sub>0</sub></span>
+          <h3 class="lvl-stage-name" id="lvlName">Two targets where there should be one</h3>
+          <p class="lvl-stage-blurb" id="lvlBlurb">Frame-level reconstruction admits a shortcut: leave a copy of the target at the destination, or keep the source instance in place while a second one appears at the goal. The endpoint cue is satisfied, so the loss stays low &mdash; but the scene now contains an instance that the demonstration never had.</p>
+          <div class="lvl-capability" id="lvlCap"><span class="cap-chip">instance conservation</span><span class="cap-chip">spatial emphasis &mdash; IGR</span></div>
+          <div class="lvl-stage-stat">
+            <span class="lvl-stage-stat-v" id="lvlStatV">N<sub>t</sub> &gt; N<sub>0</sub></span>
+            <span class="lvl-stage-stat-l" id="lvlStatL">the target count exceeds the initial frame &mdash; the goal is reached by spawning an additional instance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">1</span>
+          <h3>Missing instance-conservation supervision</h3>
+        </div>
+        <p>Standard fine-tuning has no signal that says <i>the number of targets must not change</i>. In our controlled probe, Standard SFT fails to restore the correct target-instance count on <b>92%&ndash;99%</b> of duplicate-corrupted inputs: because the perturbed region is small relative to the frame, its reconstruction error is diluted by the surrounding scene and the shortcut survives training. <b>IGR</b> supplies the missing signal directly &mdash; it names the restoration target and up-weights the error precisely where the perturbation was injected.</p>
+      </div>
+
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">2</span>
+          <h3>Missing instance-continuity supervision</h3>
+        </div>
+        <p>The count alone is not enough. A rollout can report <span class="mono">N<sub>t</sub> = N<sub>0</sub></span> at every sampled timestamp while the target <b>deforms, fades, or jumps</b> across frames &mdash; each frame still contains <i>a</i> target, but not <i>the same</i> target. Nothing in a frame-level objective links one frame's instance to the next, so identity drifts freely. <b>TIA</b> supplies that link by establishing explicit cross-frame correspondence for the target instance.</p>
+      </div>
+    </div>
+
+    <figure class="figcard reveal">
+      <img src="assets/site/figures/fig_mechanism.png" alt="Mechanism analysis: Standard SFT rarely removes the injected duplicate while IGR removes most of it, and the alignment residual concentrates on the injected duplicate" loading="lazy">
+      <figcaption><b>Why the shortcut survives, and what removes it.</b> <b>(a)</b> Standard SFT very rarely removes the injected duplicate, whereas IGR improves removal substantially. <b>(b)</b> The alignment residual under Standard SFT concentrates on the injected duplicate; IGR reduces that alignment. Standard SFT retains 92&ndash;99% of the injected area, while IGR brings it down to 23&ndash;42% after 50 steps.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= 03 METHOD ================= -->
+<section class="band" id="method">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">03</span><span class="e-label">Method</span><span class="e-rule"></span></div>
+    <h2 class="band-title">Restore the instance, then hold it across time</h2>
+    <p class="band-lede">EVEWorld adds two complementary supervisors to an otherwise unchanged video backbone. <b>IGR</b> fixes <i>how many</i> target instances the rollout contains; <b>TIA</b> fixes <i>which</i> instance each frame contains. Both act in the pre-trained latent space, so no new generative capacity is required.</p>
+
+    <div class="pipeline">
+      <div class="stage reveal">
+        <div class="stage-no">Step 1</div>
+        <h3>Build a count perturbation and restore it</h3>
+        <p>For a clean demonstration <span class="mono">x</span>, a language model and an open-vocabulary detector trace the target across the clip. A target patch <span class="mono">p</span> is then sampled and pasted into a valid region <span class="mono">&#937;</span>, giving <span class="mono">x&#771; = Paste(x, p, &#937;)</span>. The model sees <span class="mono">z&#771; = VAE(x&#771;)</span> and is trained to reconstruct <span class="mono">z = VAE(x)</span> &mdash; that is, to <b>delete</b> the instance that was never there.</p>
+        <div class="chips">
+          <span class="chip">language + detector target trace</span><span class="chip">Paste(x, p, &#937;)</span><span class="chip">pre-trained VAE latent</span>
+        </div>
+        <span class="stage-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+      <div class="stage reveal">
+        <div class="stage-no">Step 2</div>
+        <h3>Re-weight the error where it matters</h3>
+        <p>The perturbed patch is small, so a plain reconstruction loss would barely notice it. IGR applies a <b>mildly up-weighted</b> reconstruction weight inside the perturbed region, normalized per sample so the overall loss scale is unchanged. Higher weight is placed on the region where the pasted target interacts with the robot arm; the background keeps a base weight.</p>
+        <div class="chips">
+          <span class="chip">sample-normalized weighting</span><span class="chip">interaction region boosted</span><span class="chip">global scale preserved</span>
+        </div>
+        <span class="stage-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+      <div class="stage reveal">
+        <div class="stage-no">Step 3</div>
+        <h3>Align the target to its previous frame</h3>
+        <p>TIA first probes candidate feature layers offline and selects the layer <span class="mono">&#8467;*</span> whose nearest-neighbour correspondences track the target most reliably. On that layer it runs two operations per frame: <b>local instance localization</b>, which finds the target inside a local window by matching against neighbouring frames, and <b>cross-frame instance transfer</b>, which migrates the matched previous-frame feature into the current representation through a zero-initialized residual <span class="mono">&#916;H</span>. An InfoNCE-style objective then prefers the true next-frame location.</p>
+        <div class="chips">
+          <span class="chip">layer probe via EPE</span><span class="chip">local window matching</span><span class="chip">zero-init residual &#916;H</span><span class="chip">correspondence loss</span>
+        </div>
+      </div>
+    </div>
+
+    <figure class="figcard wide reveal">
+      <img src="assets/site/figures/fig3.png" alt="EVEWorld architecture: Instance-Guided Restoration on the left restores a clean video from a duplicate-corrupted input, Temporal Instance Alignment on the right aligns the target across adjacent frames" loading="lazy">
+      <figcaption><b>EVEWorld overview.</b> <b>Left &mdash; Instance-Guided Restoration.</b> A duplicate-corrupted input is restored to the clean video, with the reconstruction error re-weighted inside the perturbed region. <b>Right &mdash; Temporal Instance Alignment.</b> Target features are matched and migrated across adjacent frames so that the instance keeps its identity and its temporal continuity.</figcaption>
+    </figure>
+
+    <figure class="figcard reveal">
+      <img src="assets/site/figures/fig1.png" alt="Comparison of Standard SFT, IGR, and EVEWorld: Standard SFT reaches the goal by duplicating the target, IGR suppresses duplication but leaves cross-frame distortion, EVEWorld preserves a single continuously evolving target" loading="lazy">
+      <figcaption><b>What each component buys.</b> <b>(a)</b> Standard SFT may reach the goal by duplicating the manipulated target. <b>(b)</b> IGR suppresses duplication, but cross-frame distortion can remain. <b>(c)</b> EVEWorld combines IGR and TIA to preserve a single target with continuous evolution throughout the interaction. Relative to Standard SFT, EVEWorld reduces MLR by 85.5% and improves overall Gemini-IF by 13.6%.</figcaption>
+    </figure>
+
+    <figure class="figcard reveal">
+      <img src="assets/site/figures/fig_igr_weightmap24.png" alt="IGR region weighting map: the pasted target and robot-arm interaction region receives a higher weight while the background keeps a base weight" loading="lazy">
+      <figcaption><b>IGR region weighting.</b> The pasted target&ndash;arm interaction region receives a higher reconstruction weight, while the background keeps a base weight. The weight map is normalized to unit mean, so the global loss scale is left intact.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= 04 MODEL LAZINESS RATE ================= -->
+<section class="band alt" id="metric">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">04</span><span class="e-label">Model Laziness Rate</span><span class="e-rule"></span></div>
+    <h2 class="band-title">A metric for the process, not the pixels</h2>
+    <p class="band-lede">Instruction-following and generation-quality metrics judge a rollout by what its frames look like. Model Laziness is a <b>process-level</b> violation, so it needs its own measure. <b>MLR</b> counts how often the target-instance count departs from the initial frame and stays departed, averaged over the videos where the target is actually present at the start.</p>
+
+    <div class="metrics">
+      <div class="metric reveal">
+        <div class="m-name"><span class="m-abbr">MLR</span><span class="m-full">Model Laziness Rate</span></div>
+        <div class="formula wrap">MLR  =  100 / |&#120027;<sub>+</sub>| &nbsp;&sum;<sub>x&isin;&#120027;<sub>+</sub></sub> &#120140;[ &exist;t&isin;{1,&hellip;,23} : N<sub>t</sub>(x) &ne; N<sub>0</sub>(x) &and; N<sub>t+1</sub>(x) &ne; N<sub>0</sub>(x) ]</div>
+        <p>The rate is computed per video and reported as a percentage. Lower is better: a rollout whose target count never persistently departs from the initial frame contributes zero. <span class="mono">N<sub>t</sub></span> is read by GroundingDINO at the initial frame and at uniformly sampled timestamps along the rollout.</p>
+      </div>
+
+      <div class="metric reveal">
+        <div class="m-name"><span class="m-abbr">&#120027;<sub>+</sub></span><span class="m-full">Eligible set</span></div>
+        <div class="formula">&#120027;<sub>+</sub>  =  { x &isin; &#120027; : N<sub>0</sub>(x) &gt; 0 }</div>
+        <p>Only rollouts in which the target is detected in the <i>initial</i> frame enter the denominator. A generation that never renders the target at all cannot be counted as a conservation violation &mdash; there is no instance whose fate could be tracked &mdash; so it is excluded rather than scored as a failure.</p>
+      </div>
+
+      <div class="metric reveal">
+        <div class="m-name"><span class="m-abbr">k = 2</span><span class="m-full">Persistence rule</span></div>
+        <div class="formula wrap">violation  &hArr;  N<sub>t</sub> &ne; N<sub>0</sub>  &and;  N<sub>t+1</sub> &ne; N<sub>0</sub></div>
+        <p>A single deviating timestamp is not enough: the count must deviate at <b>two consecutive</b> sampled timestamps. This suppresses isolated detector noise and momentary occlusion, so MLR tracks violations that persist rather than flicker. The appendix reports the same analysis swept over a duration threshold of <span class="mono">&ge; k</span> consecutive timestamps.</p>
+      </div>
+    </div>
+
+    <div class="find-pair" style="margin-top:26px">
+      <figure class="figcard reveal">
+        <img src="assets/site/figures/fig_mlr_count_example.png" alt="How MLR counts: a red case where the deviation persists across two consecutive sampled frames is counted, a green case where a single frame is occluded is discarded" loading="lazy">
+        <figcaption><b>What counts as a violation.</b> <span style="color:var(--arm-sft);font-weight:600">Red</span> marks a count that stays deviated across two consecutive sampled frames and is therefore counted; <span style="color:var(--good);font-weight:600">green</span> marks a single-frame deviation that the persistence rule discards.</figcaption>
+      </figure>
+
+      <figure class="figcard reveal">
+        <img src="assets/site/figures/fig_persistence.png" alt="Persistence analysis: the fraction of videos violating for at least k consecutive sampled timestamps, and the cumulative fraction of violations by sampled timestamp" loading="lazy">
+        <figcaption><b>The two-frame rule is not load-bearing.</b> <b>(a)</b> Fraction of videos whose violation persists for at least <span class="mono">k</span> consecutive sampled timestamps. <b>(b)</b> Cumulative fraction of violating videos as a function of the sampled timestamp. The trend is stable across the threshold, so MLR is not an artifact of the choice <span class="mono">k&nbsp;=&nbsp;2</span>.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 QUALITATIVE COMPARISON ================= -->
+<section class="band" id="qualitative">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">05</span><span class="e-label">Qualitative Comparison</span><span class="e-rule"></span></div>
+    <h2 class="band-title">The same instruction, four supervisors</h2>
+    <p class="band-lede">Every clip below is a rollout of the <b>same backbone</b>, the <b>same instruction</b> and the <b>same start frame</b> &mdash; only the supervision changes. <b>GigaWorld-0</b> is the pre-trained video backbone, <b>Standard SFT</b> is the conventional fine-tune, <b>IGR only</b> adds instance-guided restoration without temporal alignment, and <b>EVEWorld</b> combines both supervisors. Hover (or tap) any tile to play it.</p>
+
+    <div class="arm-legend">
+      <span class="arm-chip eve"><i></i><b>EVEWorld</b>&nbsp;&mdash; IGR + TIA</span>
+      <span class="arm-chip sft"><i></i><b>Standard SFT</b>&nbsp;&mdash; conventional fine-tune</span>
+      <span class="arm-chip igt"><i></i><b>IGR only</b>&nbsp;&mdash; no temporal alignment</span>
+      <span class="arm-chip pre"><i></i><b>GigaWorld-0</b>&nbsp;&mdash; pre-trained backbone</span>
+    </div>
+
+    <div class="explorer-filter" role="group" aria-label="Filter qualitative comparisons by task outcome">
+      <span class="filter-pill active" data-suite="all">All tasks (8)</span>
+      <span class="filter-pill" data-suite="success">Task success (6)</span>
+      <span class="filter-pill" data-suite="failure-prone">Failure-prone (2)</span>
+    </div>
+
+    <div class="demo-grid three">
+
+      <div class="demo-card reveal" data-suite="success">
+        <div class="demo-tiles">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/011-yes/eve.mp4" poster="assets/site/videos/posters/011-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/011-yes/sft.mp4" poster="assets/site/videos/posters/011-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/011-yes/igt.mp4" poster="assets/site/videos/posters/011-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/011-yes/pre.mp4" poster="assets/site/videos/posters/011-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the left hand to pick up blue clock from bottom wooden shelf to center of teal plate.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; 011-yes</span><span class="demo-outcome ok">Task success</span></div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="success">
+        <div class="demo-tiles">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/034-yes/eve.mp4" poster="assets/site/videos/posters/034-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/034-yes/sft.mp4" poster="assets/site/videos/posters/034-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/034-yes/igt.mp4" poster="assets/site/videos/posters/034-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/034-yes/pre.mp4" poster="assets/site/videos/posters/034-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the left hand to pick up clear blue glass from blue plate to teal plate.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; 034-yes</span><span class="demo-outcome ok">Task success</span></div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="success">
+        <div class="demo-tiles">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/035-yes/eve.mp4" poster="assets/site/videos/posters/035-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/035-yes/sft.mp4" poster="assets/site/videos/posters/035-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/035-yes/igt.mp4" poster="assets/site/videos/posters/035-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/035-yes/pre.mp4" poster="assets/site/videos/posters/035-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the right hand to pick up purple grapes from center of table to lower white plastic tray.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; 035-yes</span><span class="demo-outcome ok">Task success</span></div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="failure-prone">
+        <div class="demo-tiles">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/036-no/eve.mp4" poster="assets/site/videos/posters/036-no-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/036-no/sft.mp4" poster="assets/site/videos/posters/036-no-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/036-no/igt.mp4" poster="assets/site/videos/posters/036-no-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/036-no/pre.mp4" poster="assets/site/videos/posters/036-no-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the right hand to pick up green apple from top tier of wooden shelf to bottom tier of wooden shelf.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; 036-no</span><span class="demo-outcome bad">Failure-prone</span></div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="failure-prone">
+        <div class="demo-tiles">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/037-no/eve.mp4" poster="assets/site/videos/posters/037-no-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/037-no/sft.mp4" poster="assets/site/videos/posters/037-no-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/037-no/igt.mp4" poster="assets/site/videos/posters/037-no-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/037-no/pre.mp4" poster="assets/site/videos/posters/037-no-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the right hand to pick up red apple from pink plate to teal plate.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; 037-no</span><span class="demo-outcome bad">Failure-prone</span></div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="success">
+        <div class="demo-tiles">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/367-yes/eve.mp4" poster="assets/site/videos/posters/367-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/367-yes/sft.mp4" poster="assets/site/videos/posters/367-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/367-yes/igt.mp4" poster="assets/site/videos/posters/367-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/367-yes/pre.mp4" poster="assets/site/videos/posters/367-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the right hand to pick up the bread slice from the toaster and place it on the blue plate.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; 367-yes</span><span class="demo-outcome ok">Task success</span></div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="success">
+        <div class="demo-tiles">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/hlg-yes/eve.mp4" poster="assets/site/videos/posters/hlg-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/hlg-yes/sft.mp4" poster="assets/site/videos/posters/hlg-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/hlg-yes/igt.mp4" poster="assets/site/videos/posters/hlg-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/hlg-yes/pre.mp4" poster="assets/site/videos/posters/hlg-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the left hand to pick up dragonfruit from pink plate to teal plate.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; hlg-yes</span><span class="demo-outcome ok">Task success</span></div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="success">
+        <div class="demo-tiles">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/016-yes/eve.mp4" poster="assets/site/videos/posters/016-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/016-yes/sft.mp4" poster="assets/site/videos/posters/016-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/016-yes/igt.mp4" poster="assets/site/videos/posters/016-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/016-yes/pre.mp4" poster="assets/site/videos/posters/016-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the right hand to pick up red tomato from upper black tray of plastic shelf to inside of brown paper bag.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; 016-yes</span><span class="demo-outcome ok">Task success</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ref-strip">
+      <h3>Where these clips come from</h3>
+      <p>All 32 tiles are GR1 tabletop manipulation rollouts produced under identical instructions and initial conditions, taken from our internal evaluation sheets. The <span class="mono">-yes</span> / <span class="mono">-no</span> suffixes are carried over verbatim from the source directory names and are shown for traceability only; the videos themselves are unedited model outputs. The <b>GigaWorld-0</b> column is the pre-trained backbone without any task fine-tuning, and <b>IGR only</b> isolates the restoration supervisor from the temporal-alignment supervisor.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 GENERALIZATION ================= -->
+<section class="band alt" id="generalization">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">06</span><span class="e-label">Generalization</span><span class="e-rule"></span></div>
+    <h2 class="band-title">The same supervision, three other protocols</h2>
+    <p class="band-lede">Instance conservation is not a DreamGenBench-specific artifact. We keep the training recipe fixed and move the evaluation to <b>WorldArena 1.0</b>, <b>EWMBench</b> after an AgiBot transfer, and <b>RoboTwin</b> after a backbone swap to FlowWAM. Gains follow the same pattern everywhere: the largest movements are in consistency and target fidelity, the smallest in raw appearance.</p>
+
+    <div class="findings">
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">1</span>
+          <h3>WorldArena 1.0, zero-shot</h3>
+        </div>
+        <p>Evaluated without any protocol-specific tuning, EVEWorld raises the local overall score from <b>53.95</b> to <b>56.76</b> over Standard SFT (<span class="pos">+5.21%</span>) while cutting MLR from <b>27.39</b> to <b>13.38</b> (<span class="pos">&minus;51.20%</span>). Per the caption of our WorldArena table, MLR here is computed on the common set of <b>157 eligible prompts</b>, and the highlighted rows are limited to GigaWorld-based models.</p>
+        <div class="table-card">
+          <p class="t-caption">WorldArena 1.0 &mdash; zero-shot transfer. MLR on 157 common eligible prompts.</p>
+          <table class="data tight">
+            <thead><tr><th>Method</th><th>Overall &uarr;</th><th>MLR (%) &darr;</th></tr></thead>
+            <tbody>
+              <tr><td>GigaWorld-0</td><td>53.18</td><td>&mdash;</td></tr>
+              <tr><td>Standard SFT</td><td>53.95</td><td>27.39</td></tr>
+              <tr><td>EVEWorld</td><td class="best">56.76</td><td class="best">13.38</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">2</span>
+          <h3>AgiBot &rarr; EWMBench</h3>
+        </div>
+        <p>After transferring to the AgiBot data regime and scoring on EWMBench, EVEWorld improves <b>Motion</b> by <span class="pos">+3.50%</span> and <b>Overall</b> by <span class="pos">+1.20%</span> over Standard SFT. The gain is concentrated in motion dynamics (DYN 14.88 &rarr; <b>17.55</b>), while scene fidelity is slightly lower (89.58 vs.&nbsp;86.37) &mdash; the trade-off we would expect from supervising the target instance rather than the whole frame.</p>
+        <div class="table-card">
+          <p class="t-caption">AgiBot &rarr; EWMBench transfer. Scene fidelity is the one dimension where EVEWorld sits below GigaWorld-0.</p>
+          <table class="data tight">
+            <thead><tr><th>Method</th><th>Motion &uarr;</th><th>Semantics &uarr;</th><th>DYN &uarr;</th><th>HSD &uarr;</th><th>nDTW &uarr;</th><th>Scene &uarr;</th><th>Overall &uarr;</th></tr></thead>
+            <tbody>
+              <tr><td>GigaWorld-0</td><td>50.30</td><td>2.2497</td><td>7.19</td><td>23.29</td><td>19.83</td><td class="best">89.58</td><td>3.6486</td></tr>
+              <tr><td>Standard SFT</td><td>61.51</td><td>2.2477</td><td>14.88</td><td class="best">24.35</td><td class="best">22.28</td><td>84.38</td><td>3.7066</td></tr>
+              <tr><td>EVEWorld</td><td class="best">63.65</td><td class="best">2.2524</td><td class="best">17.55</td><td>24.12</td><td>21.97</td><td>86.37</td><td class="best">3.7525</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="findings" style="grid-template-columns:1fr">
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">3</span>
+          <h3>FlowWAM &rarr; RoboTwin</h3>
+        </div>
+        <p>Swapping the backbone for FlowWAM and evaluating reference-video fidelity on RoboTwin, EVEWorld improves MLR by <span class="pos">16.84 points</span> over the matched FlowWAM control, with <b>PSNR +4.48%</b> and <b>SSIM +2.81%</b>. The component rows are informative: <b>TIA alone reaches the lowest MLR (22.54)</b> on this backbone, so the two supervisors are not additive in a backbone-independent way &mdash; how much each contributes varies with the backbone they are attached to.</p>
+        <div class="table-card">
+          <p class="t-caption">FlowWAM &rarr; RoboTwin transfer. Reference-video fidelity and MLR under each component combination.</p>
+          <table class="data tight">
+            <thead><tr><th>Variant</th><th>IGR</th><th>TIA</th><th>PSNR (dB) &uarr;</th><th>SSIM &uarr;</th><th>LPIPS &darr;</th><th>Flow-EPE &darr;</th><th>MLR (%) &darr;</th></tr></thead>
+            <tbody>
+              <tr><td>FlowWAM</td><td>&middot;</td><td>&middot;</td><td>12.218</td><td>0.748</td><td>0.383</td><td>3.033</td><td>52.05</td></tr>
+              <tr><td>Standard SFT</td><td>&middot;</td><td>&middot;</td><td>11.687</td><td>0.735</td><td>0.414</td><td>2.828</td><td>47.89</td></tr>
+              <tr><td>+ IGR</td><td>&#10003;</td><td>&middot;</td><td>12.544</td><td>0.770</td><td>0.380</td><td>2.487</td><td>50.70</td></tr>
+              <tr><td>+ TIA</td><td>&middot;</td><td>&#10003;</td><td class="best">13.445</td><td class="best">0.776</td><td class="best">0.333</td><td class="best">1.850</td><td class="best">22.54</td></tr>
+              <tr><td>EVEWorld</td><td>&#10003;</td><td>&#10003;</td><td>12.765</td><td>0.769</td><td>0.365</td><td>2.207</td><td>35.21</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-strip">
+      <h3>WorldArena 2.0 reference rollouts &mdash; external baselines</h3>
+      <p>These clips are <b>not</b> produced by EVEWorld. They are rollouts from the WorldArena 2.0 evaluation harness, where our entry is scored alongside externally submitted systems, and we include them only as visual reference for the protocol. Each tile is a 2&times;2 montage of four systems on one prompt; the quadrant-to-system mapping is defined by the harness, so the tiles are labelled by prompt ID only and no individual system is identified here.</p>
+      <div class="ref-grid">
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/425/combined.mp4" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 425</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/570/combined.mp4" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 570</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/637/combined.mp4" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 637</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 EXPERIMENTS ================= -->
+<section class="band" id="results">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">07</span><span class="e-label">Experiments</span><span class="e-rule"></span></div>
+    <h2 class="band-title">Ablations, dynamics, and where it still fails</h2>
+    <p class="band-lede">All models share the same initialization (<b>GigaWorld-0 Video-Pretrain-2B</b>), the same data and the same <b>250-step</b> budget, trained with CAME-8bit on <b>8&times; NVIDIA H20Z</b> at an effective batch size of 64 and a learning rate of <span class="mono">4.32e-5</span>. The main comparison post-trains on the DreamGen GR1 official fine-tune split (92 robot-manipulation videos with instructions) and is evaluated on <b>DreamGenBench</b> (126 manipulation tasks).</p>
+
+    <div class="figdeck" id="figdeck">
+      <div class="figdeck-head">
+        <div class="figdeck-controls">
+          <button class="figdeck-arrow" id="deckPrev" type="button" aria-label="Previous figure">&lsaquo;</button>
+          <span class="figdeck-counter" id="deckCounter">1 / 10</span>
+          <button class="figdeck-arrow" id="deckNext" type="button" aria-label="Next figure">&rsaquo;</button>
+        </div>
+      </div>
+      <div class="figdeck-rail" id="deckRail" role="tablist" aria-label="Figures"></div>
+
+      <div class="figdeck-panel is-active" data-panel="0">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 1</span><span class="ig-figure-title">Guidance scale sweep</span></div>
+          <img src="assets/site/figures/fig_cfg.png" alt="Gemini instruction-following and Model Laziness Rate as a function of classifier-free guidance scale, one curve per training stage" loading="lazy">
+          <p class="ig-figure-caption"><b>Guidance is not the lever.</b> Gemini-IF and MLR as a function of the classifier-free guidance weight <span class="mono">w</span>, one curve per training stage. Gemini-IF peaks at <b>42.33</b> with <span class="mono">w&nbsp;=&nbsp;7.5</span> at step 100, and MLR bottoms out at <b>2.56%</b> for <span class="mono">w&nbsp;=&nbsp;5.0</span> or <span class="mono">7.5</span> at step 200 &mdash; well above the <b>1.59%</b> reached by the default setting we report.</p>
+        </div>
+      </div>
+      <div class="figdeck-panel" data-panel="1">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 2</span><span class="ig-figure-title">Training dynamics</span></div>
+          <img src="assets/site/figures/fig_mlr_vs_step.png" alt="Model Laziness Rate decreasing and Qwen instruction following rising over training steps" loading="lazy">
+          <p class="ig-figure-caption"><b>The two objectives move together.</b> <b>(a)</b> MLR falls over the course of training. <b>(b)</b> Qwen-IF rises over the same interval &mdash; suppressing the shortcut does not cost instruction following.</p>
+        </div>
+      </div>
+      <div class="figdeck-panel" data-panel="2">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 3</span><span class="ig-figure-title">Conservation under duplication (i)</span></div>
+          <img src="assets/site/figures/fig_conservation_dup_a.png" alt="Target-instance conservation under duplication: red marks the Standard SFT rollout that keeps an extra duplicate, green marks EVEWorld" loading="lazy">
+          <p class="ig-figure-caption"><b>One target stays one target.</b> <span style="color:var(--arm-sft);font-weight:600">Red</span> marks a Standard SFT rollout that violates conservation; <span style="color:var(--good);font-weight:600">green</span> marks EVEWorld, which keeps the count conserved throughout.</p>
+        </div>
+      </div>
+      <div class="figdeck-panel" data-panel="3">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 4</span><span class="ig-figure-title">Conservation under duplication (ii)</span></div>
+          <img src="assets/site/figures/fig_conservation_dup_b.png" alt="Additional duplication cases comparing Standard SFT with EVEWorld" loading="lazy">
+          <p class="ig-figure-caption"><b>Further duplication cases.</b> The same comparison on additional instructions, where Standard SFT again leaves a second instance behind.</p>
+        </div>
+      </div>
+      <div class="figdeck-panel" data-panel="4">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 5</span><span class="ig-figure-title">Conservation under duplication (iii)</span></div>
+          <img src="assets/site/figures/fig_conservation_dup_c.png" alt="Further duplication cases where Standard SFT adds an extra instance and EVEWorld does not" loading="lazy">
+          <p class="ig-figure-caption"><b>Duplication is systematic, not incidental.</b> The pattern repeats across unrelated objects and scene layouts, which is what motivates treating it as a property of the supervision rather than of any one task.</p>
+        </div>
+      </div>
+      <div class="figdeck-panel" data-panel="5">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 6</span><span class="ig-figure-title">Conservation under distortion</span></div>
+          <img src="assets/site/figures/fig_conservation_distort.png" alt="Target distortion: the instance count is preserved but the target shape drifts, green marks EVEWorld" loading="lazy">
+          <p class="ig-figure-caption"><b>Counting right is not enough.</b> Here the count is preserved but the target deforms over the rollout. EVEWorld keeps the instance shape, which is the failure mode TIA is meant to address.</p>
+        </div>
+      </div>
+      <div class="figdeck-panel" data-panel="6">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 7</span><span class="ig-figure-title">Qualitative components &mdash; duplication (i)</span></div>
+          <img src="assets/site/figures/fig_qual_dup1.png" alt="Qualitative component comparison on a duplication instruction: red boxes mark Model Laziness, green boxes mark EVEWorld conservation" loading="lazy">
+          <p class="ig-figure-caption"><b>Matched interaction stages.</b> Four instructions shown at the same point of the interaction. <span style="color:var(--arm-sft);font-weight:600">Red boxes</span> mark Model Laziness; <span style="color:var(--good);font-weight:600">green boxes</span> mark where EVEWorld conserves the target.</p>
+        </div>
+      </div>
+      <div class="figdeck-panel" data-panel="7">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 8</span><span class="ig-figure-title">Qualitative components &mdash; duplication (ii)</span></div>
+          <img src="assets/site/figures/fig_qual_dup2.png" alt="Continuation of the qualitative duplication comparison across components" loading="lazy">
+          <p class="ig-figure-caption"><b>Continuation of the duplication comparison.</b> Same layout, further instructions and objects.</p>
+        </div>
+      </div>
+      <div class="figdeck-panel" data-panel="8">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 9</span><span class="ig-figure-title">Qualitative components &mdash; disappearance (i)</span></div>
+          <img src="assets/site/figures/fig_qual_vanish1.png" alt="Qualitative component comparison on a disappearance instruction" loading="lazy">
+          <p class="ig-figure-caption"><b>The other direction.</b> Instructions where the target leaves the scene before the interaction closes, again at matched interaction stages.</p>
+        </div>
+      </div>
+      <div class="figdeck-panel" data-panel="9">
+        <div class="ig-figure">
+          <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 10</span><span class="ig-figure-title">Qualitative components &mdash; disappearance (ii)</span></div>
+          <img src="assets/site/figures/fig_qual_vanish2.png" alt="Continuation of the qualitative disappearance comparison across components" loading="lazy">
+          <p class="ig-figure-caption"><b>Continuation of the disappearance comparison.</b> Same layout, further instructions and objects.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-card reveal">
+      <p class="t-caption">DreamGenBench overall results. Bold marks the best value in each column; arrows give the preferred direction. Note that no single method leads every column.</p>
+      <table class="data">
+        <thead><tr><th>Method</th><th>MLR (%) &darr;</th><th>Qwen-IF (%) &uarr;</th><th>Gemini-IF (%) &uarr;</th></tr></thead>
+        <tbody>
+          <tr><td>CogVideoX1.5-5B-I2V</td><td>28.57</td><td>38.89</td><td>5.56</td></tr>
+          <tr><td>Wan2.2-TI2V-5B</td><td>18.03</td><td>38.89</td><td>10.32</td></tr>
+          <tr><td>Wan2.2-I2V-A14B</td><td>11.11</td><td>64.29</td><td>15.87</td></tr>
+          <tr><td>Cosmos-Predict2-2B</td><td>15.00</td><td>62.70</td><td>24.60</td></tr>
+          <tr><td>GigaWorld-0</td><td>13.33</td><td class="best">79.37</td><td>60.19</td></tr>
+          <tr><td>Standard SFT</td><td>10.94</td><td>73.81</td><td>53.57</td></tr>
+          <tr><td>EVEWorld</td><td class="best">1.59</td><td>80.16</td><td class="best">60.85</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="findings" style="margin-top:26px">
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">1</span><h3>Model Laziness collapses, instruction following does not</h3></div>
+        <p>Against Standard SFT, MLR drops from <b>10.94%</b> to <b>1.59%</b> &mdash; a <span class="pos">85.5% relative reduction</span> &mdash; while Qwen-IF rises 73.81 &rarr; <b>80.16</b> and Gemini-IF rises 53.57 &rarr; <b>60.85</b>. The reduction is not bought by trading away instruction following; both move in the preferred direction.</p>
+      </div>
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">2</span><h3>The gain tracks where the laziness was</h3></div>
+        <p>Under Standard SFT, Model Laziness is concentrated in the Object and Behavior splits (MLR <b>16.22%</b> and <b>8.33%</b>) with no observed cases on Environment. EVEWorld cuts Object MLR by <b>82.9%</b> and eliminates the observed Behavior cases. Qwen-IF improves on all three splits, with the largest gain on Behavior (68.09 &rarr; <b>76.60</b>). One column moves the other way: <b>Gemini-IF on Behavior falls from 67.02 to 64.89</b>, which we report as-is.</p>
+      </div>
+    </div>
+
+    <div class="table-card reveal">
+      <p class="t-caption">Fine-grained instruction following on DreamGenBench. GR1-Env / GR1-Object / GR1-Behavior denote generalization to unseen environments, objects and behaviors. The last two columns of the Gemini block are the two exceptions where EVEWorld sits below GigaWorld-0.</p>
+      <table class="data tight">
+        <thead>
+          <tr><th rowspan="2">Method</th><th rowspan="2">Param.</th><th colspan="2">GR1-Env IF (%)</th><th colspan="2">GR1-Object IF (%)</th><th colspan="2">GR1-Behavior IF (%)</th></tr>
+          <tr><th>Qwen</th><th>Gemini</th><th>Qwen</th><th>Gemini</th><th>Qwen</th><th>Gemini</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group-row"><td colspan="8">General video models</td></tr>
+          <tr><td>CogVideoX1.5-5B-I2V</td><td>5B</td><td>48.28</td><td>15.52</td><td>24.00</td><td>1.00</td><td>48.94</td><td>4.26</td></tr>
+          <tr><td>Wan2.2-TI2V-5B</td><td>5B</td><td>51.72</td><td>17.24</td><td>24.00</td><td>5.00</td><td>46.81</td><td>11.70</td></tr>
+          <tr><td>Wan2.2-I2V-A14B</td><td>A14B</td><td>58.62</td><td>20.69</td><td>66.00</td><td>13.00</td><td>65.96</td><td>15.96</td></tr>
+          <tr><td>Cosmos-Predict2-2B</td><td>2B</td><td>68.97</td><td>31.03</td><td>60.00</td><td>28.00</td><td>61.70</td><td>17.02</td></tr>
+          <tr class="group-row"><td colspan="8">GigaWorld-based models</td></tr>
+          <tr><td>GigaWorld-0</td><td>2B</td><td>79.31</td><td>54.60</td><td class="best">82.00</td><td class="best">54.33</td><td>76.60</td><td class="best">69.86</td></tr>
+          <tr><td>Standard SFT</td><td>2B</td><td>79.31</td><td>51.72</td><td>76.00</td><td>42.00</td><td>68.09</td><td>67.02</td></tr>
+          <tr><td>EVEWorld</td><td>2B</td><td class="best">82.76</td><td class="best">72.41</td><td class="best">82.00</td><td>50.33</td><td class="best">76.60</td><td>64.89</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-card reveal">
+      <p class="t-caption">Component ablation. Gemini-IF per split and overall, plus MLR. IGR alone helps MLR most on the Behavior split (69.50) but leaves the overall score below Standard SFT; TIA alone raises overall above Standard SFT but leaves more laziness.</p>
+      <table class="data tight">
+        <thead><tr><th>Variant</th><th>IGR</th><th>TIA</th><th>Env &uarr;</th><th>Object &uarr;</th><th>Behavior &uarr;</th><th>Overall &uarr;</th><th>MLR (%) &darr;</th></tr></thead>
+        <tbody>
+          <tr><td>Standard SFT</td><td>&middot;</td><td>&middot;</td><td>51.72</td><td>42.00</td><td>67.02</td><td>53.57</td><td>10.94</td></tr>
+          <tr><td>IGR only</td><td>&#10003;</td><td>&middot;</td><td>49.43</td><td>36.67</td><td class="best">69.50</td><td>51.85</td><td>4.69</td></tr>
+          <tr><td>TIA only</td><td>&middot;</td><td>&#10003;</td><td>55.17</td><td>42.67</td><td>68.79</td><td>55.29</td><td>7.94</td></tr>
+          <tr><td>EVEWorld</td><td>&#10003;</td><td>&#10003;</td><td class="best">72.41</td><td class="best">50.33</td><td>64.89</td><td class="best">60.85</td><td class="best">1.59</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="find-pair" style="margin-top:16px">
+      <div class="table-card reveal">
+        <p class="t-caption">IGR restoration controls. Spatial emphasis alone is worse than using no weighting at all, so the benefit comes from the restored target region rather than from re-weighting the frame in general.</p>
+        <table class="data tight">
+          <thead><tr><th>Variant</th><th>MLR (%) &darr;</th><th>Env &uarr;</th><th>Object &uarr;</th><th>Behavior &uarr;</th><th>Overall &uarr;</th></tr></thead>
+          <tbody>
+            <tr><td>IGR w/o spatial emphasis</td><td>6.45</td><td class="best">56.32</td><td>44.00</td><td class="best">82.27</td><td class="best">61.11</td></tr>
+            <tr><td>Spatial emphasis only</td><td>14.06</td><td>34.48</td><td>34.67</td><td>62.41</td><td>44.97</td></tr>
+            <tr><td>IGR only</td><td>4.69</td><td>49.43</td><td>36.67</td><td>69.50</td><td>51.85</td></tr>
+            <tr><td>EVEWorld</td><td class="best">1.59</td><td>72.41</td><td class="best">50.33</td><td>64.89</td><td>60.85</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-card reveal">
+        <p class="t-caption">Failure-mode comparison against methods that target related behaviors. &Delta;MLR: negative is better; &Delta;IF: positive is better.</p>
+        <table class="data tight">
+          <thead><tr><th>Method</th><th>&Delta;MLR &darr;</th><th>&Delta;IF &uarr;</th></tr></thead>
+          <tbody>
+            <tr><td>PhysicsLatent</td><td class="pos">&minus;7.0</td><td class="neg">&minus;11.9</td></tr>
+            <tr><td>EAG</td><td class="neg">+150.0</td><td class="pos">+10.0</td></tr>
+            <tr><td>LAD-LoRA</td><td>0.0</td><td class="neg">&minus;6.1</td></tr>
+            <tr><td>Causal Frontier</td><td class="neg">+35.4</td><td class="neg">&minus;53.8</td></tr>
+            <tr><td>ICH-D</td><td class="neg">+16.6</td><td class="neg">&minus;30.6</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-card reveal">
+      <p class="t-caption">Rollout length, latency, throughput, memory and cost. Latency is reported as p50 / p95 in seconds; the longer the rollout, the higher the per-video cost.</p>
+      <table class="data tight">
+        <thead><tr><th>Output (duration, frames)</th><th>Latency p50 / p95 (s)</th><th>Throughput (frames/min) &uarr;</th><th>Peak memory / GPU (GiB) &darr;</th><th>Cost (GPU-h / 1k) &darr;</th></tr></thead>
+        <tbody>
+          <tr><td>3.8 s &middot; 61</td><td>8.166 / 8.403</td><td>442.1</td><td class="best">38.19</td><td class="best">18.40</td></tr>
+          <tr><td>5.8 s &middot; 93</td><td>10.932 / 11.352</td><td>502.2</td><td>38.33</td><td>24.69</td></tr>
+          <tr><td>9.8 s &middot; 157</td><td>18.323 / 19.249</td><td class="best">504.8</td><td>38.99</td><td>41.46</td></tr>
+          <tr><td>15.8 s &middot; 253</td><td>31.503 / 33.523</td><td>469.5</td><td>41.47</td><td>71.85</td></tr>
+          <tr><td>19.8 s &middot; 317</td><td>41.737 / 45.007</td><td>443.3</td><td>40.70</td><td>95.34</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="findings" style="margin-top:26px">
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">3</span><h3>Both supervisors are needed</h3></div>
+        <p>Neither component alone reproduces the full effect. IGR alone suppresses duplication but drags the overall Gemini-IF <b>below</b> Standard SFT (51.85 vs.&nbsp;53.57); TIA alone raises the overall score to 55.29 but leaves MLR at 7.94%. Only the combination reaches <b>1.59%</b> MLR with a <b>60.85</b> overall score. In the IGR controls, spatial emphasis on its own is worse than no emphasis at all.</p>
+      </div>
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">4</span><h3>The cost is rollout length, not the method</h3></div>
+        <p>Peak memory stays essentially flat across output lengths (38.19 &rarr; 41.47 GiB), so the additional cost of longer rollouts is latency and GPU-hours rather than model size. Throughput peaks at the 9.8 s / 157-frame setting and declines slightly after that.</p>
+      </div>
+      <div class="finding reveal">
+        <div class="finding-head"><span class="f-no">5</span><h3>Against methods that target related failures</h3></div>
+        <p>We compare with methods aimed at related behaviors: <b>PhysicsLatent</b> reduces MLR slightly (&minus;7.0) but costs instruction following (&minus;11.9); <b>LAD-LoRA</b> changes neither; <b>Causal Frontier</b> and <b>ICH-D</b> both worsen MLR substantially while losing instruction following. <b>EAG</b> is the one baseline that improves both, though from a much smaller starting point on MLR than ours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 CITATION ================= -->
+<section class="band alt" id="citation">
+  <div class="lp-inner">
+    <div class="eyebrow"><span class="e-no">08</span><span class="e-label">Citation</span><span class="e-rule"></span></div>
+    <h2 class="band-title">Cite this work</h2>
+    <p class="band-lede">The paper is under double-blind review, so this entry is anonymized. It will be updated with the final author list and the arXiv identifier once the review process closes.</p>
+
+    <div class="bibtex-box reveal">
+      <button class="copy-btn" id="copyBibtex" type="button">Copy BibTeX</button>
+      <pre id="bibtex">@misc{eveworld2027,
+  title  = {EVEWorld: Evolution Supervision for Instance-Consistent Embodied World Models},
+  author = {Anonymous},
+  year   = {2027},
+  note   = {Under double-blind review}
+}</pre>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="lp-footer">
+  <div class="lp-inner">
+    <div class="foot-levels">
+      <span><i style="background:var(--arm-eve)"></i>EVEWorld &mdash; IGR + TIA</span>
+      <span><i style="background:var(--arm-sft)"></i>Standard SFT</span>
+      <span><i style="background:var(--arm-igt)"></i>IGR only</span>
+      <span><i style="background:var(--arm-pre)"></i>GigaWorld-0</span>
+    </div>
+    <p>All models and results on this page are built on <b>GigaWorld-0 Video-Pretrain-2B</b>. Videos are unedited model rollouts from GR1 tabletop manipulation tasks; the WorldArena 2.0 tiles are externally produced reference rollouts and are labelled as such.</p>
+    <p>Links will be filled in after the review period. This page is for research communication only and is not an official venue publication.</p>
+  </div>
+</footer>
+
+<script src="js/main.js?v=2" defer></script>
+</body>
+</html>

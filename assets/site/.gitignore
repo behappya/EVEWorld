@@ -1,0 +1,6 @@
+# Project page media: re-allow web assets that the repository root ignores.
+!*.mp4
+!*.png
+!*.jpg
+!*.jpeg
+!*.webp
