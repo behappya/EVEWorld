@@ -1,6 +1,6 @@
-# EVEWorld: Evolution-Supervised Process-Faithful World Model for Embodied AI
+# EVEWorld: Evolution Supervision for Instance-Consistent Embodied World Models
 
-Official code release for the paper **"EVEWorld: Evolution-Supervised Process-Faithful World Model for Embodied AI"** (under review).
+Official code release for the paper **"EVEWorld: Evolution Supervision for Instance-Consistent Embodied World Models"** (under review).
 
 ![Teaser: EVEWorld vs. Standard SFT on Model Laziness](assets/teaser.png)
 

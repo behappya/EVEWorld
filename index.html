@@ -122,7 +122,7 @@
     <h2 class="band-title">From <i>&ldquo;Is the frame plausible?&rdquo;</i> to <i>&ldquo;Does the target survive the rollout?&rdquo;</i></h2>
 
     <div class="abstract-card reveal">
-      <p>Video world models have emerged as a promising approach to simulating environment dynamics for embodied intelligence. However, existing models are prone to <b>Model Laziness</b>: they focus on visual fidelity at the expense of physical reasoning and lack process-level supervision over the temporal dynamics of manipulated objects. In this work, we propose <b>EVEWorld</b>, an evolution-supervision framework that preserves the target instance over time. First, we propose <b>Instance-Guided Restoration (IGR)</b>, which preserves target-instance existence over time. Second, we introduce <b>Temporal Instance Alignment (TIA)</b>, which aligns the target across adjacent frames to preserve its identity and temporal continuity. We further introduce the <b>Model Laziness Rate (MLR)</b>, a metric that measures target-instance count violations over time. Extensive experiments on DreamGenBench, WorldArena, EWMBench, and RoboTwin demonstrate that EVEWorld consistently mitigates Model Laziness and improves process fidelity and task performance. Relative to Standard SFT, EVEWorld reduces MLR by <b>85.5%</b> &mdash; from 10.94% to 1.59% &mdash; while improving instruction following under both Qwen-IF (73.81 &rarr; 80.16) and Gemini-IF (53.57 &rarr; 60.85).</p>
+      <p>Video world models have emerged as a promising approach to simulating environment dynamics for embodied intelligence. However, existing models are prone to <b>Model Laziness</b>: they focus on visual fidelity at the expense of physical reasoning and lack process-level supervision over the temporal dynamics of manipulated objects. In this work, we propose <b>EVEWorld</b>, an evolution-supervision framework that preserves the target instance over time. First, we propose <b>Instance-Guided Restoration (IGR)</b>, which preserves target-instance existence over time. Second, we introduce <b>Temporal Instance Alignment (TIA)</b>, which aligns the target across adjacent frames to preserve its identity and temporal continuity. We further introduce the <b>Model Laziness Rate (MLR)</b>, a metric that measures target-instance count violations over time. Extensive experiments on DreamGenBench, EWMBench, and PBench demonstrate that EVEWorld consistently mitigates Model Laziness and improves process fidelity and task performance, ranking <b>6th in JEPA Similarity</b> and <b>17th overall</b> on the final WorldArena 2.0 Track 1 leaderboard. Relative to Standard SFT, EVEWorld reduces MLR by <b>85.5%</b> &mdash; from 10.94% to 1.59% &mdash; while improving instruction following under both Qwen-IF (73.81 &rarr; 80.16) and Gemini-IF (53.57 &rarr; 60.85).</p>
     </div>
 
     <div class="pipeline">
@@ -219,7 +219,7 @@
         <div class="finding-head"><span class="f-no">1</span>
           <h3>Missing instance-conservation supervision</h3>
         </div>
-        <p>Standard fine-tuning has no signal that says <i>the number of targets must not change</i>. In our controlled probe, Standard SFT fails to restore the correct target-instance count on <b>92%&ndash;99%</b> of duplicate-corrupted inputs: because the perturbed region is small relative to the frame, its reconstruction error is diluted by the surrounding scene and the shortcut survives training. <b>IGR</b> supplies the missing signal directly &mdash; it names the restoration target and up-weights the error precisely where the perturbation was injected.</p>
+        <p>Standard fine-tuning has no signal that says <i>the number of targets must not change</i>. In our controlled probe, Standard SFT fails to restore the correct target-instance count on <b>92%&ndash;99%</b> of perturbed inputs: because the corrupted region is small relative to the full frame, its reconstruction error is diluted by the surrounding scene and the shortcut survives training. <b>IGR</b> supplies the missing signal directly &mdash; it names the restoration target and up-weights the error precisely where the perturbation was injected.</p>
       </div>
 
       <div class="finding reveal">
@@ -478,13 +478,13 @@
         <div class="finding-head"><span class="f-no">1</span>
           <h3>WorldArena 1.0, zero-shot</h3>
         </div>
-        <p>Evaluated without any protocol-specific tuning, EVEWorld raises the local overall score from <b>53.95</b> to <b>56.76</b> over Standard SFT (<span class="pos">+5.21%</span>) while cutting MLR from <b>27.39</b> to <b>13.38</b> (<span class="pos">&minus;51.20%</span>). Per the caption of our WorldArena table, MLR here is computed on the common set of <b>157 eligible prompts</b>, and the highlighted rows are limited to GigaWorld-based models.</p>
+        <p>Evaluated without any protocol-specific tuning, EVEWorld raises the local overall score from <b>53.95</b> to <b>56.76</b> over Standard SFT (<span class="pos">+5.21%</span>) while cutting MLR from <b>27.39</b> to <b>13.38</b> (<span class="pos">&minus;51.20%</span>). MLR is evaluated on the common set of <b>157 eligible prompts</b>.</p>
         <div class="table-card">
-          <p class="t-caption">WorldArena 1.0 &mdash; zero-shot transfer. MLR on 157 common eligible prompts.</p>
+          <p class="t-caption">WorldArena 1.0 &mdash; zero-shot transfer. Bold denotes the best result among GigaWorld-based models.</p>
           <table class="data tight">
             <thead><tr><th>Method</th><th>Overall &uarr;</th><th>MLR (%) &darr;</th></tr></thead>
             <tbody>
-              <tr><td>GigaWorld-0</td><td>53.18</td><td>&mdash;</td></tr>
+              <tr><td>GigaWorld-0</td><td>53.18</td><td>27.39</td></tr>
               <tr><td>Standard SFT</td><td>53.95</td><td>27.39</td></tr>
               <tr><td>EVEWorld</td><td class="best">56.76</td><td class="best">13.38</td></tr>
             </tbody>
@@ -535,7 +535,7 @@
 
     <div class="ref-strip">
       <h3>WorldArena 2.0 reference rollouts &mdash; external baselines</h3>
-      <p>These clips are <b>not</b> produced by EVEWorld. They are rollouts from the WorldArena 2.0 evaluation harness, where our entry is scored alongside externally submitted systems, and we include them only as visual reference for the protocol. Each tile is a 2&times;2 montage of four systems on one prompt; the quadrant-to-system mapping is defined by the harness, so the tiles are labelled by prompt ID only and no individual system is identified here.</p>
+      <p>On the final <b>WorldArena 2.0 Track 1</b> leaderboard our entry ranks <b>6th in JEPA Similarity</b> and <b>17th overall</b>. These clips are <b>not</b> produced by EVEWorld. They are rollouts from the WorldArena 2.0 evaluation harness, where our entry is scored alongside externally submitted systems, and we include them only as visual reference for the protocol. Each tile is a 2&times;2 montage of four systems on one prompt; the quadrant-to-system mapping is defined by the harness, so the tiles are labelled by prompt ID only and no individual system is identified here.</p>
       <div class="ref-grid">
         <div class="demo-card reveal">
           <div class="demo-tiles single montage">
@@ -659,7 +659,7 @@
     </div>
 
     <div class="table-card reveal">
-      <p class="t-caption">DreamGenBench overall results. Bold marks the best value in each column; arrows give the preferred direction. Note that no single method leads every column.</p>
+      <p class="t-caption">DreamGenBench overall results. EVEWorld achieves the best result on all three metrics and is shown in bold; arrows give the preferred direction.</p>
       <table class="data">
         <thead><tr><th>Method</th><th>MLR (%) &darr;</th><th>Qwen-IF (%) &uarr;</th><th>Gemini-IF (%) &uarr;</th></tr></thead>
         <tbody>
@@ -761,6 +761,23 @@
       </table>
     </div>
 
+    <div class="table-card reveal">
+      <p class="t-caption">PBench Robot physical-QA accuracy across output durations &mdash; 913 QA pairs over the same 174 videos per duration. Domain is the overall PBench Robot score; Phys., Space, and Time are accuracy on physical, spatial, and temporal reasoning. Both models degrade as the rollout lengthens, and the temporal dimension drops fastest. All values are percentages.</p>
+      <table class="data tight">
+        <thead>
+          <tr><th rowspan="2">Duration (s)</th><th colspan="4">GigaWorld-0 (pretrained)</th><th colspan="4">Standard SFT</th></tr>
+          <tr><th>Domain</th><th>Phys.</th><th>Space</th><th>Time</th><th>Domain</th><th>Phys.</th><th>Space</th><th>Time</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>3.8</td><td>82.43</td><td>85.71</td><td>84.24</td><td>82.18</td><td>80.98</td><td>86.69</td><td>83.33</td><td>79.64</td></tr>
+          <tr><td>5.8</td><td>79.87</td><td>84.42</td><td>82.12</td><td>74.18</td><td>79.89</td><td>85.71</td><td>83.94</td><td>74.91</td></tr>
+          <tr><td>9.8</td><td>74.32</td><td>83.77</td><td>76.06</td><td>65.09</td><td>78.90</td><td>87.99</td><td>79.70</td><td>74.55</td></tr>
+          <tr><td>15.8</td><td>67.54</td><td>79.22</td><td>73.03</td><td>49.82</td><td>68.12</td><td>79.55</td><td>70.61</td><td>53.82</td></tr>
+          <tr><td>19.8</td><td>66.97</td><td>76.95</td><td>74.55</td><td>50.18</td><td>66.76</td><td>78.25</td><td>73.94</td><td>49.45</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="findings" style="margin-top:26px">
       <div class="finding reveal">
         <div class="finding-head"><span class="f-no">3</span><h3>Both supervisors are needed</h3></div>
@@ -772,7 +789,7 @@
       </div>
       <div class="finding reveal">
         <div class="finding-head"><span class="f-no">5</span><h3>Against methods that target related failures</h3></div>
-        <p>We compare with methods aimed at related behaviors: <b>PhysicsLatent</b> reduces MLR slightly (&minus;7.0) but costs instruction following (&minus;11.9); <b>LAD-LoRA</b> changes neither; <b>Causal Frontier</b> and <b>ICH-D</b> both worsen MLR substantially while losing instruction following. <b>EAG</b> is the one baseline that improves both, though from a much smaller starting point on MLR than ours.</p>
+        <p>We compare with methods aimed at related behaviors: <b>PhysicsLatent</b> reduces MLR slightly (&minus;7.0) but costs instruction following (&minus;11.9); <b>LAD-LoRA</b> changes neither; <b>Causal Frontier</b> and <b>ICH-D</b> both worsen MLR substantially while losing instruction following. <b>EAG</b> improves instruction fidelity by 10.0% but increases Model Laziness by 150.0%.</p>
       </div>
     </div>
   </div>
