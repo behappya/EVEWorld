@@ -54,7 +54,7 @@ experiments/
 _tmp/
 data/
 
-# --- Media (selectively re-allowed in paper/ and assets/ via nested .gitignore) ---
+# --- Media (selectively re-allowed in assets/ via a nested .gitignore) ---
 *.png
 *.jpg
 *.jpeg
@@ -64,6 +64,9 @@ data/
 *.tiff
 *.webp
 *.pdf
+
+# --- Paper source (kept local while under review, never published) ---
+paper/
 
 # --- LaTeX build artifacts ---
 *.aux

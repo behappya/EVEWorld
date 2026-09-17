@@ -36,8 +36,7 @@ On DreamGenBench, EVEWorld reduces MLR from 10.94% to 1.59% relative to Standard
 | [`giga-models/`](giga-models/) | Pinned snapshot of the [GigaModels](https://github.com/open-gigaai/giga-models) framework (training infrastructure used by the backbone) |
 | [`benchmarks/`](benchmarks/) | Evaluation pipelines: DreamGenBench, WorldArena 1.0, EWMBench (AgiBot), RoboTwin-FlowWAM, PBench, and cross-model baselines |
 | [`docs/`](docs/) | Environment setup, data preparation, and end-to-end reproduction guides |
-| [`paper/`](paper/) | Paper source (LaTeX) |
-| [`assets/`](assets/) | Images used by this README |
+| [`assets/`](assets/) | Images used by this README and by the project page |
 
 > **Note on vendored code.** `giga-world-0/` and `giga-models/` are plain-directory snapshots (not git submodules), pinned to the exact versions used in our experiments so the release is self-contained. The FlowWAM backbone used for the cross-backbone experiment is referenced externally; see [`benchmarks/robotwin_flowwam/`](benchmarks/robotwin_flowwam/).
 
@@ -61,7 +60,7 @@ See [`docs/ENVIRONMENT.md`](docs/ENVIRONMENT.md) for the full dependency list, C
 
 ## Paper
 
-The paper source lives in [`paper/`](paper/). A preprint link will be added upon publication.
+The paper is not distributed in this repository while it is under review. A preprint link will be added here upon publication.
 
 ## Project Page
 
