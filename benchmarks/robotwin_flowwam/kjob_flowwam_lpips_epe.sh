@@ -18,7 +18,7 @@ OUTPUT_DIR="${OUTPUT_DIR:-/data/datasets/gagi/flowwam/heldout_r250_v1/lpips_flow
 PYTHON="${PYTHON:-/home/jovyan/miniconda/envs/giga_models/bin/python}"
 
 source /home/jovyan/miniconda/etc/profile.d/conda.sh
-conda activate giga_models
+conda activate "${CONDA_ENV:-giga_models}"
 cd "$REPO_DIR"
 export PYTHONPATH="${REPO_DIR}:${FLOWWAM_ROOT}:${FLOWWAM_ROOT}/inference:${FLOWWAM_ROOT}/training:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1

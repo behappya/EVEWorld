@@ -9,7 +9,7 @@ set -uo pipefail
 for arg in "$@"; do [[ "${arg}" == *=* ]] && export "${arg}"; done
 REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 TP="${TRAIN_PYTHON:-/data/datasets/gagi/envs/giga_world_train_venv/bin/python}"
-source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate giga_models
+source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-giga_models}"
 export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
 cd "${EVEWORLD_ROOT}/eveworld/pipeline"
 # 34 例 x 2 sigma x 10 层重抽 + 逐格特征落盘 + CPU 融合 LOO (整节点占位, 与 g1p_kjob 同款)

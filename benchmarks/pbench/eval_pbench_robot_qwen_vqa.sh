@@ -56,7 +56,7 @@ Missing Python package: openai
 
 Install it in the conda env with:
   source ~/miniconda/etc/profile.d/conda.sh
-  conda activate giga_models
+  conda activate "${CONDA_ENV:-giga_models}"
   python -m pip install openai
 
 Then rerun:

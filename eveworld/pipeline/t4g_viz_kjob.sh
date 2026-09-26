@@ -22,7 +22,7 @@ VIDEO_IDS="${VIDEO_IDS:-13,76}"
 LAYERS="${LAYERS:-block13,block17,block21}"
 SIGMAS="${SIGMAS:-0.2,0.4}"
 
-source "${CONDA_SH}"; conda activate giga_models
+source "${CONDA_SH}"; conda activate "${CONDA_ENV:-giga_models}"
 export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
 cd "${EVEWORLD_ROOT}/eveworld/pipeline"
 nvidia-smi || true

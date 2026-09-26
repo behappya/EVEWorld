@@ -14,7 +14,7 @@ export HF_HOME="${HF_HOME:-${ROOT_DIR}/.hf_home}"
 export HF_XET_CACHE="${HF_XET_CACHE:-${ROOT_DIR}/.hf_xet_cache}"
 
 source /home/jovyan/miniconda/etc/profile.d/conda.sh
-conda activate giga_models
+conda activate "${CONDA_ENV:-giga_models}"
 
 python - <<PY
 from huggingface_hub import snapshot_download
