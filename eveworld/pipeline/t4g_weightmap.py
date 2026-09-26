@@ -10,6 +10,8 @@
   背景         其余                                  w_bg=0.5    全覆盖但低配
 漏检帧 detected=false -> 该帧全 1.0 (宁可少重点不打错)。
 gate_enabled=false -> 关 B 相关(放置窗/该空B), 物体轨迹/抓取窗照常。
+build_weightmap 返回 (权重图, 段位); build_weightmap_regions 是其等价实现, 额外返回
+逐区域布尔掩码 (REGION_KEYS: obj/trans/b_dest/grip/empty/distractor/bg), 供权重图变体复用。
 
 段位估计器 (纯轨迹, 无 GDINO):
   t_grasp   = target_cell 首次离初始位 >2 格
@@ -32,6 +34,14 @@ W_DISTRACTOR = 2.0                    # 干扰物 permanence: 全程该静止不
 WIN_T, STAB_K = 2, 3
 OBJ_MARGIN, TRANS_MARGIN = 1, 2      # 物体框外扩格数 (物体区+1, 抓放窗+2含夹爪)
 DEFAULT_HALF = (2, 2)                 # 无框回退半尺寸 (5x5格)
+
+# 区域组分解 (供 build_weightmap_regions / 权重图变体使用)
+MARK = 1.0                            # 区域掩码戳印值 (掩码只用于"该格属哪组")
+REGION_KEYS = ('obj', 'trans', 'b_dest', 'grip', 'empty', 'distractor', 'bg')
+REGION_VALUES = dict(obj=W_OBJ, trans=W_TRANS, empty=W_EMPTY, b_dest=W_BDEST,
+                     grip=W_GRIP, distractor=W_DISTRACTOR, bg=W_BG)
+# 合成时的落值顺序: 级别升序 (同格被多组标记时高档覆盖低档, 等价于逐格 max)
+REGION_ORDER = tuple(sorted(REGION_KEYS, key=lambda k: REGION_VALUES[k]))
 
 
 def smooth_traj(anno, jump_thr=6):
@@ -147,8 +157,24 @@ def object_halfsize(vid):
     return DEFAULT_HALF
 
 
-def build_weightmap(anno, t_grasp=None, t_release=None):
-    """返回 (T_LAT,30,48) float32 权重图 + 段位 dict。
+def _compose_weightmap(regions):
+    """把逐区域掩码合成权重图: 按 REGION_VALUES 级别升序落值
+    (同格被多组标记时高档覆盖低档, 与老实现逐格 max 等价)。"""
+    w = np.full((T_LAT, H_LAT, W_LAT), W_BG, np.float32)
+    for k in REGION_ORDER:
+        w[regions[k]] = np.float32(REGION_VALUES[k])
+    return w
+
+
+def build_weightmap_regions(anno, t_grasp=None, t_release=None):
+    """返回 (w, seg, regions): 权重图 + 段位 dict + 逐区域布尔掩码。
+
+    regions: dict[k] -> bool (T_LAT,H_LAT,W_LAT), k ∈ REGION_KEYS:
+      obj   物体轨迹区 (含降级锚)      trans 抓取窗/放置窗
+      b_dest 到达前 B 目的地该空       grip  空爪检测框
+      empty 拿走后物体原位该空         distractor 干扰物
+      bg    其余 (未被任何组标记)
+    同一格可被多组标记 (老实现逐格取 max); 各区域级别互不冲突, 升序落值即等价。
     轨迹先清洗(smooth_traj); 不可靠视频降级(只标 B该空+原位, 不标物体轨迹/转换窗)。"""
     per = anno['per_lat_frame']
     gate = anno.get('gate_enabled', False)
@@ -174,7 +200,7 @@ def build_weightmap(anno, t_grasp=None, t_release=None):
     if t_release is None:
         t_release = estimate_t_release_traj(traj, t_arr, t_grasp) if traj_reliable else None
 
-    w = np.full((T_LAT, H_LAT, W_LAT), W_BG, np.float32)
+    m = {k: np.zeros((T_LAT, H_LAT, W_LAT), np.float32) for k in REGION_KEYS if k != 'bg'}
     half = object_halfsize(anno['vid'])          # 物体真实框半尺寸 (格)
 
     # --- 目的地 B: 优先用【物体轨迹落点】(gate 无关, 覆盖模糊容器); 回退 GDINO 稳定众数 ---
@@ -185,57 +211,72 @@ def build_weightmap(anno, t_grasp=None, t_release=None):
     # B 到达前该空 (W_BDEST=3x, 终态提前生成高发): 目的地在物体到达前一直该空
     if dest is not None and b_cut is not None:
         for t in range(0, b_cut):
-            _stamp_box(w, t, dest, half, W_BDEST)
+            _stamp_box(m['b_dest'], t, dest, half, MARK)
     elif gate and t_arr is not None:                         # 回退: GDINO B 众数
         stable_b = stable_b_region(per, t_arr)
         for t in range(t_arr):
-            _stamp(w, t, list(stable_b), W_BDEST)
+            _stamp(m['b_dest'], t, list(stable_b), MARK)
     # 拿走后物体原位该空
     if traj_reliable and t_grasp is not None and origin is not None:
         for t in range(t_grasp + WIN_T, T_LAT):
-            _stamp_box(w, t, origin, half, W_EMPTY)
+            _stamp_box(m['empty'], t, origin, half, MARK)
 
-    # --- 空爪 (W_GRIP=3x): 逐帧检测的爪框 (防生成/形变); max 让持物爪的物体区(4-6x)自动占先 ---
+    # --- 空爪 (W_GRIP=3x): 逐帧检测的爪框 (防生成/形变) ---
     grip = load_gripper(anno['vid'])
     if grip is not None:
         for t in range(min(T_LAT, len(grip))):
             for g in grip[t]:
-                _stamp(w, t, [tuple(c) for c in g['cells']], W_GRIP)
+                _stamp(m['grip'], t, [tuple(c) for c in g['cells']], MARK)
 
     # --- 干扰物 permanence (恒可标, 不依赖轨迹): 全程该静止不变 ---
     for c in anno.get('distractor_cells', []):
         for t in range(T_LAT):
-            _stamp_box(w, t, tuple(c), half, W_DISTRACTOR)
+            _stamp_box(m['distractor'], t, tuple(c), half, MARK)
 
     # --- 降级视频最小物体锚: 帧0原位标物体(段1静止段), 保底监督 ---
     if not traj_reliable:
         o0 = anno.get('target_cell_0')
         if o0:
             for t in range(min(4, T_LAT)):       # 前几帧物体必在原位
-                _stamp_box(w, t, tuple(o0), half, W_OBJ, margin=OBJ_MARGIN)
+                _stamp_box(m['obj'], t, tuple(o0), half, MARK, margin=OBJ_MARGIN)
 
     if traj_reliable:
         # --- 物体轨迹区 (w_obj): 清洗轨迹逐帧, 物体真实框大小 +margin ---
         for t in range(T_LAT):
             if traj[t]:
-                _stamp_box(w, t, traj[t], half, W_OBJ, margin=OBJ_MARGIN)
+                _stamp_box(m['obj'], t, traj[t], half, MARK, margin=OBJ_MARGIN)
         # --- 抓取窗 (w_trans): t_grasp±WIN_T × 原位 & 当帧物体 (物体框+夹爪余量) ---
         if t_grasp is not None:
             for t in range(max(0, t_grasp - WIN_T), min(T_LAT, t_grasp + WIN_T + 1)):
                 if origin:
-                    _stamp_box(w, t, origin, half, W_TRANS, margin=TRANS_MARGIN)
+                    _stamp_box(m['trans'], t, origin, half, MARK, margin=TRANS_MARGIN)
                 if traj[t]:
-                    _stamp_box(w, t, traj[t], half, W_TRANS, margin=TRANS_MARGIN)
+                    _stamp_box(m['trans'], t, traj[t], half, MARK, margin=TRANS_MARGIN)
         # --- 放置窗 (w_trans): t_release±WIN_T × 落点 & 当帧物体 (gate 无关) ---
         if t_release is not None:
             for t in range(max(0, t_release - WIN_T), min(T_LAT, t_release + WIN_T + 1)):
                 if dest is not None:
-                    _stamp_box(w, t, dest, half, W_TRANS, margin=TRANS_MARGIN)
+                    _stamp_box(m['trans'], t, dest, half, MARK, margin=TRANS_MARGIN)
                 if traj[t]:
-                    _stamp_box(w, t, traj[t], half, W_TRANS, margin=TRANS_MARGIN)
+                    _stamp_box(m['trans'], t, traj[t], half, MARK, margin=TRANS_MARGIN)
 
-    return w, dict(t_grasp=t_grasp, t_release=t_release, t_arrival=t_arr, gate=gate,
-                   traj_reliable=traj_reliable, jumps=jumps, origin=origin, traj=traj)
+    regions = {k: (v > 0.5) for k, v in m.items()}
+    covered = np.zeros((T_LAT, H_LAT, W_LAT), bool)
+    for v in regions.values():
+        covered |= v
+    regions['bg'] = ~covered                                  # 其余 = 未被任何组标记的格
+
+    seg = dict(t_grasp=t_grasp, t_release=t_release, t_arrival=t_arr, gate=gate,
+               traj_reliable=traj_reliable, jumps=jumps, origin=origin, traj=traj)
+    return _compose_weightmap(regions), seg, regions
+
+
+def build_weightmap(anno, t_grasp=None, t_release=None):
+    """返回 (T_LAT,30,48) float32 权重图 + 段位 dict (向后兼容薄包装)。
+    轨迹先清洗(smooth_traj); 不可靠视频降级(只标 B该空+原位, 不标物体轨迹/转换窗)。
+    需要逐区域掩码时用 build_weightmap_regions。"""
+    w, seg, _ = build_weightmap_regions(anno, t_grasp=t_grasp, t_release=t_release)
+    return w, seg
 
 
 def estimate_t_release_traj(traj, t_arr, t_grasp):
