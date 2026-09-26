@@ -154,7 +154,9 @@ def build_jobs(args: argparse.Namespace) -> tuple[list[dict[str, str]], dict[str
     if missing:
         raise FileNotFoundError(f"Missing {len(missing)} inputs; examples: {missing[:5]}")
     audit = {
-        "protocol": "worldarena1_mlr_gdino_v2",
+        "protocol": args.profile or "worldarena1_mlr_gdino_v2",
+        "profile": args.profile,
+        "mlr_flags": list(args.mlr_flag or []),
         "manifest": str(args.manifest.resolve()),
         "manifest_count": len(manifest),
         "selected_prompt_count": len(selected),
@@ -239,6 +241,24 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--python", required=True)
     parser.add_argument("--num-shards", type=int, default=8)
     parser.add_argument("--limit", type=int)
+    parser.add_argument(
+        "--profile",
+        default=None,
+        help="MLR protocol profile from mlr_protocol_profiles.yaml, forwarded to mlr_eval.py "
+        "(e.g. appendix_alg1_sam2_occlusion). Default: the frozen WorldArena 1.0 protocol.",
+    )
+    parser.add_argument(
+        "--profiles-file", type=Path, default=None, help="profile YAML path forwarded to mlr_eval.py"
+    )
+    parser.add_argument(
+        "--mlr-flag",
+        action="append",
+        default=None,
+        metavar="FLAG",
+        help="extra mlr_eval.py flag forwarded verbatim; repeat for several flags. "
+        "Use the --mlr-flag=--flag=value form for flags that start with a dash, "
+        "e.g. --mlr-flag=--compare-all",
+    )
     return parser.parse_args()
 
 
@@ -249,6 +269,12 @@ def main() -> None:
     atomic_write_json(args.output_dir / "jobs.json", jobs)
     atomic_write_json(args.output_dir / "parser_audit.json", audit)
     script = Path(__file__).with_name("mlr_eval.py")
+    forwarded = []
+    if args.profile:
+        forwarded += ["--profile", args.profile]
+    if args.profiles_file is not None:
+        forwarded += ["--profiles-file", str(args.profiles_file)]
+    forwarded += list(args.mlr_flag or [])
     processes = []
     for shard in range(args.num_shards):
         environment = dict(os.environ, CUDA_VISIBLE_DEVICES=str(shard), PYTHONUNBUFFERED="1")
@@ -265,6 +291,7 @@ def main() -> None:
                     str(args.num_shards),
                     "--output",
                     str(args.output_dir / f"part{shard}.json"),
+                    *forwarded,
                 ],
                 env=environment,
             )

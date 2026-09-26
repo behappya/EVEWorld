@@ -1,0 +1,260 @@
+# MLR protocol profiles: a menu, not a recommendation.
+#
+# Every entry below is a complete, self-consistent set of MLR settings. Pick one
+# with `--profile <name>` in `mlr_occlusion.py` or `mlr_eval.py`; any option also
+# given explicitly on the command line overrides the profile. `mlr_eval.py`
+# defaults to `worldarena1_mlr_gdino_v2` so that existing shards stay comparable.
+# Nothing here is privileged: the entries differ in which part of the pipeline
+# they hold fixed, and the later ones trade the repository's detection hygiene
+# for a more literal reading of the method.
+#
+# Key names match the `DEFAULTS` table in `mlr_occlusion.py`. CLI equivalents:
+#   deviation_mode            --deviation-mode        over_only | symmetric
+#   occlusion_rule            --occlusion-rule        none | paper_overlap | sam_presence | contact_recovery
+#   sample_mode               --sample-mode           round | linspace
+#   tau_occ                   --tau-occ
+#   reliable_logit            --reliable-logit
+#   reliable_area_ratio       --reliable-area-ratio
+#   presence_logit            --presence-logit
+#   contact_margin_ratio      --contact-margin-ratio
+#   object_topk               --object-topk
+#   object_box_threshold      --object-box-threshold
+#   robot_prompt              --robot-prompt
+#   robot_topk                --robot-topk
+#   robot_box_threshold       --robot-box-threshold
+#   gripper_overlap_threshold --gripper-overlap-threshold
+#   min_center_distance       --min-center-distance
+#   initial_count_source      --initial-count-source  filtered | raw
+#   sampled_count_source      --sampled-count-source  filtered | raw
+#   device                    --device
+#   gdino_path                --gdino-path            (or $GDINO_PATH)
+#   sam2_checkpoint           --sam2-checkpoint       (or $SAM2_CHECKPOINT)
+#   sam2_model_config         --sam2-model-config
+#
+# Two count definitions are in play. `initial_count_source` picks the reference
+# inventory N_0, `sampled_count_source` picks the per-timestamp count N_t that
+# both the over-count and the under-count side are compared against:
+#   filtered  target detections after spatial merging (`min_center_distance`
+#             apart), minus any detection whose box overlaps a robot-gripper box
+#             by more than `gripper_overlap_threshold`
+#   raw       len(objects) straight from GroundingDINO, before merging/filtering
+# A `gripper_overlap_threshold` of 1.0 switches the gripper rule off (box overlap
+# ratios cannot exceed 1), which leaves plain spatial merging.
+profiles:
+
+  # ------------------------------------------------------------------------- #
+  # Detection-only protocols (no SAM2 evidence, count deviations only)
+  # ------------------------------------------------------------------------- #
+
+  worldarena1_mlr_gdino_v2:
+    description: >-
+      The protocol of this repository's own WorldArena 1.0 MLR run, unchanged: a
+      frame counts as an MLR event only when the gripper-filtered GroundingDINO
+      instance count exceeds the initial inventory on two consecutive samples
+      (over-count only; under-counts are ignored), with `linspace` sampling,
+      object topk 6 / box 0.35, robot gripper topk 3 / box 0.15, gripper-overlap
+      filter 0.35 and a minimum center distance of 60 px. Keep this as the
+      default for `mlr_eval.py` so that existing shards stay comparable: it is a
+      repository-side counting rule, not a transcription of an equation.
+    deviation_mode: over_only
+    occlusion_rule: none
+    sample_mode: linspace
+    frame_count: 24
+    persistence: 2
+    object_topk: 6
+    object_box_threshold: 0.35
+    robot_prompt: "robot gripper"
+    robot_topk: 3
+    robot_box_threshold: 0.15
+    gripper_overlap_threshold: 0.35
+    min_center_distance: 60
+    initial_count_source: filtered
+    sampled_count_source: filtered
+
+  raw_symmetric_count:
+    description: >-
+      The plainest rule in the file: symmetric count comparison on raw
+      GroundingDINO detections, with no spatial merging, no gripper filtering
+      and no occlusion evidence, so any sample whose count differs from the
+      initial inventory is a deviation and `persistence` consecutive samples
+      raise the event. `min_center_distance` and `gripper_overlap_threshold` are
+      inert here because both counts are raw. Compared against
+      `appendix_alg1_sam2_occlusion` this measures what merging and the
+      occlusion rule together do.
+    deviation_mode: symmetric
+    occlusion_rule: none
+    sample_mode: round
+    frame_count: 24
+    persistence: 2
+    object_topk: 6
+    object_box_threshold: 0.35
+    robot_prompt: "robot gripper"
+    robot_topk: 3
+    robot_box_threshold: 0.15
+    gripper_overlap_threshold: 1.0
+    min_center_distance: 60
+    initial_count_source: raw
+    sampled_count_source: raw
+
+  # ------------------------------------------------------------------------- #
+  # SAM2 occlusion-supported protocols
+  # ------------------------------------------------------------------------- #
+
+  appendix_alg1_sam2_occlusion:
+    description: >-
+      Appendix Algorithm 1 read literally: over-count is always evidence; an
+      under-count is exempted only when every missing instance is covered by the
+      robot, r_occ = |M_target ∩ M_robot| / |M_target| >= tau_occ with tau_occ =
+      0.15 on the last reliable SAM2 mask (reliable = presence logit >= 0 and
+      mask area >= 0.50x of the first-frame area). Exempted samples reset the
+      persistence counter. Counts are spatially merged target detections
+      (`min_center_distance` 60 px is the repository's merge radius; the
+      algorithm does not fix one), with the gripper-overlap rule switched off
+      since no gripper rule appears in the algorithm. Sampling axis is
+      `round(i*(F-1)/23)`; the algorithm says the timestamps are uniform but not
+      how they round, so `--sample-mode linspace` is the alternative.
+    deviation_mode: symmetric
+    occlusion_rule: paper_overlap
+    sample_mode: round
+    frame_count: 24
+    persistence: 2
+    tau_occ: 0.15
+    reliable_logit: 0.0
+    reliable_area_ratio: 0.50
+    object_topk: 6
+    object_box_threshold: 0.35
+    robot_prompt: "robot gripper"
+    robot_topk: 3
+    robot_box_threshold: 0.15
+    gripper_overlap_threshold: 1.0
+    min_center_distance: 60
+    initial_count_source: filtered
+    sampled_count_source: filtered
+
+  appendix_alg1_sam2_occlusion_filtered:
+    description: >-
+      Identical to `appendix_alg1_sam2_occlusion` except that the repository's
+      gripper-overlap filter stays on (0.35). Run both to see how much of the
+      MLR number comes from the algorithm itself and how much from dropping
+      target detections that sit inside a gripper box.
+    deviation_mode: symmetric
+    occlusion_rule: paper_overlap
+    sample_mode: round
+    frame_count: 24
+    persistence: 2
+    tau_occ: 0.15
+    reliable_logit: 0.0
+    reliable_area_ratio: 0.50
+    object_topk: 6
+    object_box_threshold: 0.35
+    robot_prompt: "robot gripper"
+    robot_topk: 3
+    robot_box_threshold: 0.15
+    gripper_overlap_threshold: 0.35
+    min_center_distance: 60
+    initial_count_source: filtered
+    sampled_count_source: filtered
+
+  appendix_alg1_probe_detectors:
+    description: >-
+      Same rule set as `appendix_alg1_sam2_occlusion`, but with the detector and
+      reliability knobs used by `paper/repair/sam2_occlusion_probe/`: object
+      topk 3 / box 0.25, robot gripper topk 3 / box 0.15 (capped at 2 grippers
+      there), per-target reliability area 0.15x and `linspace` sampling. The
+      gripper-overlap filter stays at 0.35, i.e. the probe's own counting. Use
+      this to line the MLR numbers up with the probe's per-frame logs.
+    deviation_mode: symmetric
+    occlusion_rule: paper_overlap
+    sample_mode: linspace
+    frame_count: 24
+    persistence: 2
+    tau_occ: 0.15
+    reliable_logit: 0.0
+    reliable_area_ratio: 0.15
+    contact_margin_ratio: 0.035
+    object_topk: 3
+    object_box_threshold: 0.25
+    robot_prompt: "robot gripper"
+    robot_topk: 3
+    robot_box_threshold: 0.15
+    gripper_overlap_threshold: 0.35
+    min_center_distance: 60
+    initial_count_source: filtered
+    sampled_count_source: filtered
+
+  sam2_presence_only:
+    description: >-
+      Exemption by SAM2 presence alone: an under-count is exempted when at least
+      as many missing targets carry a low SAM2 presence logit (< 0) as the number
+      of missing instances. This is the `sam_presence_only` variant of the
+      visibility-gate probe; it ignores geometric overlap with the robot
+      entirely, so it also fires when a target simply leaves the frame.
+    deviation_mode: symmetric
+    occlusion_rule: sam_presence
+    sample_mode: round
+    frame_count: 24
+    persistence: 2
+    presence_logit: 0.0
+    object_topk: 6
+    object_box_threshold: 0.35
+    robot_prompt: "robot gripper"
+    robot_topk: 3
+    robot_box_threshold: 0.15
+    gripper_overlap_threshold: 0.35
+    min_center_distance: 60
+    initial_count_source: filtered
+    sampled_count_source: filtered
+
+  contact_recovery_gate:
+    description: >-
+      Exemption by contact-then-recovery: for each maximal run of under-count
+      samples, the whole run is exempted when some sample in the run shows the
+      target in contact with the robot (mask or box distance <= 0.035x of the
+      frame diagonal) AND the count recovers right after the run. A run that
+      never recovers before the clip ends stays a deviation. This is the
+      `visibility_aware` variant of the probe; distinct from Algorithm 1 in that
+      it needs a later recovery frame and a contact margin rather than a
+      per-instance overlap ratio.
+    deviation_mode: symmetric
+    occlusion_rule: contact_recovery
+    sample_mode: round
+    frame_count: 24
+    persistence: 2
+    contact_margin_ratio: 0.035
+    reliable_logit: 0.0
+    reliable_area_ratio: 0.50
+    object_topk: 6
+    object_box_threshold: 0.35
+    robot_prompt: "robot gripper"
+    robot_topk: 3
+    robot_box_threshold: 0.15
+    gripper_overlap_threshold: 0.35
+    min_center_distance: 60
+    initial_count_source: filtered
+    sampled_count_source: filtered
+
+  occlusion_from_raw_counts:
+    description: >-
+      Algorithm 1's rule set driven entirely by raw GroundingDINO detections:
+      the reference inventory and every sampled count are `len(objects)`, with no
+      spatial merging and no gripper filtering (`initial_count_source: raw`,
+      `sampled_count_source: raw`, `gripper_overlap_threshold: 1.0`, so
+      `min_center_distance` is inert). Compared against
+      `appendix_alg1_sam2_occlusion` this isolates what merging alone moves.
+    deviation_mode: symmetric
+    occlusion_rule: paper_overlap
+    sample_mode: round
+    frame_count: 24
+    persistence: 2
+    tau_occ: 0.15
+    reliable_logit: 0.0
+    reliable_area_ratio: 0.50
+    object_topk: 6
+    object_box_threshold: 0.35
+    robot_prompt: "robot gripper"
+    robot_topk: 3
+    robot_box_threshold: 0.15
+    gripper_overlap_threshold: 1.0
+    min_center_distance: 60
+    initial_count_source: raw
+    sampled_count_source: raw

@@ -9,7 +9,7 @@ site-specific paths. See `docs/ENVIRONMENT.md` for the software stack and
 ## 0. Setup
 
 ```bash
-conda env create -f environment.yml && conda activate eveworld
+conda env create -f environment.yml && conda activate EVEWorld
 pip install -e ./giga-models
 export EVEWORLD_ROOT=$(pwd)
 export GAGI_ROOT=/path/to/your/data
@@ -26,6 +26,7 @@ GroundingDINO, sample paste regions, and precompute the spatial weight maps.
 
 - Detection and annotation: `eveworld/pipeline/t4g_detect.py`, `t4g_gdino.py`
 - Copy-paste corruption and weight maps: `eveworld/pipeline/t4g_aug_prep.py`, `t4g_weightmap_precompute.py`
+- Alternative weight-map designs (legacy multi-level, binary, path+loc, interaction; side-by-side configs, no preferred default): `eveworld/pipeline/t4g_weightmap_variants.py` + `t4g_weightmap_<variant>_config.py` / `_launch.sh`, driven by `t4g_weightmap_variant_matrix.sh`
 - Details: `eveworld/pipeline/README.md`
 
 ## 2. TIA layer selection (offline probe)
@@ -68,7 +69,7 @@ main configuration.
 
 ## 5. Evaluate
 
-- **MLR** (deterministic GroundingDINO protocol): `benchmarks/worldarena/mlr_eval.py` + `mlr_dispatch.py`; per-benchmark drivers are linked from each benchmark README.
+- **MLR** (deterministic GroundingDINO protocol, plus the SAM2 occlusion check of Appendix `app:mlr_protocol`): `benchmarks/worldarena/mlr_eval.py` + `mlr_dispatch.py`, with the occlusion evidence in `mlr_occlusion.py` and the runnable presets in `benchmarks/worldarena/mlr_protocol_profiles.yaml`. The default profile `worldarena1_mlr_gdino_v2` reproduces the frozen WorldArena 1.0 rule; the appendix's occlusion-aware Algorithm 1 is `appendix_alg1_sam2_occlusion` (needs SAM2, `--occlusion-rule paper_overlap`). Per-benchmark drivers are linked from each benchmark README.
 - **DreamGenBench IF**: Qwen-IF (`benchmarks/dreamgenbench/eval_dreamgenbench_qwen_api.py`), Gemini-IF (`eveworld/evaluation/eval_gemini_dreamgen_qwen_protocol.py`); aggregate with `eval175_summarize.py`.
 - **WorldArena 1.0**: eight local metrics (`benchmarks/worldarena/local_metric_eval.py`) aggregated by `aggregate_core_scores.py`.
 - **EWMBench**: official-layout conversion + scoring (`benchmarks/ewmbench/`).
@@ -77,7 +78,7 @@ main configuration.
 ## 6. Ablations and analyses
 
 - Component ablation (IGR-only / TIA-only / joint): `eveworld/pipeline/t4g_ablation_*` configs + `kjob_eve_ablation_*` chains.
-- CFG sensitivity grid: `eveworld/evaluation/cfg_grid_*`.
+- CFG sensitivity grid: `eveworld/evaluation/cfg_grid_*`, default grid `{1.0, 2.5, 5.0, 7.0}` (override with `--cfg-values` on `build_cfg_gemini_manifest.py` or `CFG_VALUES` in the `kjob_cfg_*` wrappers).
 - Sequence-length scaling: `benchmarks/pbench/` and `benchmarks/dreamgenbench/run_*length*` scripts.
 - Alternative designs (PhysicsLatent, EAG, LAD-LoRA, Causal Frontier, ICH-D): `eveworld/alternatives/README.md`.
 
@@ -85,6 +86,8 @@ main configuration.
 
 - Detector thresholds, checkpoints, and guidance settings were frozen on
   development data before final evaluation; keep the published protocol
-  unchanged when comparing numbers.
+  unchanged when comparing numbers. Each MLR entry in
+  `benchmarks/worldarena/mlr_protocol_profiles.yaml` is such a frozen,
+  self-contained set — record which profile produced a given number.
 - Judge endpoints require API credentials via environment variables
   (`OPENAI_API_KEY`, `DIFROST_*`); see `docs/ENVIRONMENT.md`.

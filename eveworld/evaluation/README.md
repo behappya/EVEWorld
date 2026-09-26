@@ -22,6 +22,9 @@ CFG-sweep generation, and process-laziness judge-agreement tooling.
   `x11_process_judge.py`; the MLR detector itself lives in
   [`eveworld/pipeline/t4g_gdino.py`](../pipeline/t4g_gdino.py) and
   [`benchmarks/worldarena/mlr_eval.py`](../../benchmarks/worldarena/mlr_eval.py).
+  The Gemini-assisted occlusion/persistence audit in `eval_gemini_mlr_audit.py` layers the
+  protocol's repeated multimodal verification (Algorithm 1: MLR sampling, occlusion gating,
+  persistence) on top of that frozen detector.
 
 ## Contents
 
@@ -56,6 +59,7 @@ CFG-sweep generation, and process-laziness judge-agreement tooling.
 | `eval_gemini_dreamgen_process.py` | Gemini physical-process judge (instruction completion, physical validity, target conservation, duplicate shortcut); writes `records.jsonl` + `summary.json`. |
 | `gemini_consensus_judge.py` | Repeated-sample Gemini answering over a multiple-choice embodied-QA set stored in Lance format, with a served Qwen judge grading attempts into a per-question consensus summary (JSONL + Lance). |
 | `failure_routes_gemini_serial.py` | Three resumable Gemini-IF repeats over the uniform negative-route failure set (1,048 manifest rows), with automatic error-retry passes. |
+| `eval_gemini_mlr_audit.py` | Gemini-assisted MLR occlusion/persistence audit (Appendix "Model Laziness and MLR"): repeated Pass A global views (24-sample MLR + 49-frame dense) vote on candidates, Pass B verifies and Pass C refutes each candidate on a dense near-onset window, and the repeated answers are aggregated into a per-video verdict; optional detector records feed hints/baseline metrics. Resumable, with `--dry-run` (offline request planning) and `--self-test`. |
 
 ### CFG sweeps
 
