@@ -95,6 +95,10 @@ AgiBot 双臂配方 launcher
 Commands:
   bash $(basename "$0") check  [ARM=wmaponly|full]
   bash $(basename "$0") submit [ARM=wmaponly|full] [T4G_ID_BLOCK=blockN] [T4G_WMAP_DIR=...]
+
+Recipe length follows MAX_STEPS (defaults: wmaponly=150, full=300); both are
+overridable, e.g. MAX_STEPS=50 for the AgiBot clip budget and MAX_STEPS=250
+for the GR1/DreamGenBench budget. RUN_NAME/CHECKPOINT_INTERVAL track it too.
 EOF
     ;;
 esac

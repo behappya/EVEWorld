@@ -84,6 +84,8 @@ python eveworld/agibot/agi_zones_originfix.py
 # 3. Train (preflight runs automatically); wmaponly gate first, then full
 bash eveworld/agibot/agi_joint_launch.sh submit ARM=wmaponly
 bash eveworld/agibot/agi_joint_launch.sh submit ARM=full T4G_ID_BLOCK=block<N>
+# Recipe length is a knob, not a constant: MAX_STEPS=50 matches the AgiBot clip
+# budget, MAX_STEPS=250 the GR1/DreamGenBench one; the defaults stay 150/300.
 
 # 4. Probe -> generation/evaluation
 python eveworld/agibot/agi_make_probe.py --run agi_apre_full_s300 --step 50
