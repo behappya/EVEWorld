@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EVEWorld — Evolution Supervision for Instance-Consistent Embodied World Models</title>
+  <title>EVEWorld — Physical Evolution Supervision for Embodied World Models</title>
   <meta name="description" content="EVEWorld: an evolution-supervision framework that keeps the manipulated target instance alive across a generated rollout. IGR restores duplicated targets, TIA holds the target's identity across frames, and MLR measures how often instance conservation breaks.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,11 +74,11 @@
     <div class="hero-badges">
       <span class="vbadge"><svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.5L8 11.3 3.9 13.5l.9-4.5L1.4 5.8 6 5.2z"/></svg>ICLR 2027 Submission</span>
       <span class="vbadge">Evolution Supervision</span>
-      <span class="vbadge">MLR 10.94% &rarr; 1.59%</span>
+      <span class="vbadge">MLR 11.11% &rarr; 1.59%</span>
     </div>
 
     <h1 class="hero-title">EVE<span class="hl">World</span></h1>
-    <p class="hero-tag">Evolution Supervision for <b>Instance-Consistent</b> Embodied World Models</p>
+    <p class="hero-tag"><b>Physical Evolution Supervision</b> for Embodied World Models</p>
 
     <div class="hero-authors">
       <p class="hero-author-names">Anonymous Author(s)</p>
@@ -104,8 +104,8 @@
     </div>
 
     <div class="hero-metrics">
-      <div class="hm"><b>1.59%</b><span>MLR on DreamGenBench<br>vs 10.94% Standard SFT</span></div>
-      <div class="hm"><b>&minus;85.5%</b><span>relative reduction<br>in Model Laziness</span></div>
+      <div class="hm"><b>1.59%</b><span>MLR on DreamGenBench<br>vs 11.11% Standard SFT</span></div>
+      <div class="hm"><b>&minus;85.7%</b><span>relative reduction<br>in Model Laziness</span></div>
       <div class="hm"><b>80.16</b><span>Qwen-IF<br>vs 73.81 Standard SFT</span></div>
       <div class="hm"><b>60.85</b><span>Gemini-IF<br>vs 53.57 Standard SFT</span></div>
       <div class="hm"><b>2B</b><span>embodied video backbone<br>GigaWorld-0 Video-Pretrain</span></div>
@@ -122,7 +122,7 @@
     <h2 class="band-title">From <i>&ldquo;Is the frame plausible?&rdquo;</i> to <i>&ldquo;Does the target survive the rollout?&rdquo;</i></h2>
 
     <div class="abstract-card reveal">
-      <p>Video world models have emerged as a promising approach to simulating environment dynamics for embodied intelligence. However, existing models are prone to <b>Model Laziness</b>: they focus on visual fidelity at the expense of physical reasoning and lack process-level supervision over the temporal dynamics of manipulated objects. In this work, we propose <b>EVEWorld</b>, an evolution-supervision framework that preserves the target instance over time. First, we propose <b>Instance-Guided Restoration (IGR)</b>, which preserves target-instance existence over time. Second, we introduce <b>Temporal Instance Alignment (TIA)</b>, which aligns the target across adjacent frames to preserve its identity and temporal continuity. We further introduce the <b>Model Laziness Rate (MLR)</b>, a metric that measures target-instance count violations over time. Extensive experiments on DreamGenBench, EWMBench, and PBench demonstrate that EVEWorld consistently mitigates Model Laziness and improves process fidelity and task performance, ranking <b>6th in JEPA Similarity</b> and <b>17th overall</b> on the final WorldArena 2.0 Track 1 leaderboard. Relative to Standard SFT, EVEWorld reduces MLR by <b>85.5%</b> &mdash; from 10.94% to 1.59% &mdash; while improving instruction following under both Qwen-IF (73.81 &rarr; 80.16) and Gemini-IF (53.57 &rarr; 60.85).</p>
+      <p>Video world models have emerged as a promising approach to simulating environment dynamics for embodied intelligence. However, existing models are prone to <b>Model Laziness</b>: they focus on visual fidelity at the expense of physical reasoning and lack process-level supervision over the temporal dynamics of manipulated objects. In this work, we propose <b>EVEWorld</b>, an evolution-supervision framework that preserves the target instance over time. First, we propose <b>Instance-Guided Restoration (IGR)</b>, which preserves target-instance existence over time. Second, we introduce <b>Temporal Instance Alignment (TIA)</b>, which aligns the target across adjacent frames to preserve its identity and temporal continuity. We further introduce the <b>Model Laziness Rate (MLR)</b>, a metric that measures target-instance count violations over time. Extensive experiments on DreamGenBench, EWMBench, and PBench demonstrate that EVEWorld consistently mitigates Model Laziness and improves process fidelity and task performance, ranking <b>6th in JEPA Similarity</b> and <b>17th overall</b> on the final WorldArena 2.0 Track 1 leaderboard. Relative to Standard SFT, EVEWorld reduces MLR by <b>85.7%</b> &mdash; from 11.11% to 1.59% &mdash; while improving instruction following under both Qwen-IF (73.81 &rarr; 80.16) and Gemini-IF (53.57 &rarr; 60.85).</p>
     </div>
 
     <div class="pipeline">
@@ -280,7 +280,7 @@
 
     <figure class="figcard reveal">
       <img src="assets/site/figures/fig1.png" alt="Comparison of Standard SFT, IGR, and EVEWorld: Standard SFT reaches the goal by duplicating the target, IGR suppresses duplication but leaves cross-frame distortion, EVEWorld preserves a single continuously evolving target" loading="lazy">
-      <figcaption><b>What each component buys.</b> <b>(a)</b> Standard SFT may reach the goal by duplicating the manipulated target. <b>(b)</b> IGR suppresses duplication, but cross-frame distortion can remain. <b>(c)</b> EVEWorld combines IGR and TIA to preserve a single target with continuous evolution throughout the interaction. Relative to Standard SFT, EVEWorld reduces MLR by 85.5% and improves overall Gemini-IF by 13.6%.</figcaption>
+      <figcaption><b>What each component buys.</b> <b>(a)</b> Standard SFT may reach the goal by duplicating the manipulated target. <b>(b)</b> IGR suppresses duplication, but cross-frame distortion can remain. <b>(c)</b> EVEWorld combines IGR and TIA to preserve a single target with continuous evolution throughout the interaction. Relative to Standard SFT, EVEWorld reduces MLR by 85.7% and improves overall Gemini-IF by 13.6%.</figcaption>
     </figure>
 
     <figure class="figcard reveal">
@@ -478,7 +478,7 @@
         <div class="finding-head"><span class="f-no">1</span>
           <h3>WorldArena 1.0, zero-shot</h3>
         </div>
-        <p>Evaluated without any protocol-specific tuning, EVEWorld raises the local overall score from <b>53.95</b> to <b>56.76</b> over Standard SFT (<span class="pos">+5.21%</span>) while cutting MLR from <b>27.39</b> to <b>13.38</b> (<span class="pos">&minus;51.20%</span>). MLR is evaluated on the common set of <b>157 eligible prompts</b>.</p>
+        <p>Evaluated without any protocol-specific tuning, EVEWorld raises the local overall score from <b>53.95</b> to <b>56.76</b> over Standard SFT (<span class="pos">+5.21%</span>) while cutting MLR from <b>27.39</b> to <b>13.38</b> (<span class="pos">&minus;51.15%</span>). MLR is evaluated on the common set of <b>157 eligible prompts</b>.</p>
         <div class="table-card">
           <p class="t-caption">WorldArena 1.0 &mdash; zero-shot transfer. Bold denotes the best result among GigaWorld-based models.</p>
           <table class="data tight">
@@ -496,7 +496,7 @@
         <div class="finding-head"><span class="f-no">2</span>
           <h3>AgiBot &rarr; EWMBench</h3>
         </div>
-        <p>After transferring to the AgiBot data regime and scoring on EWMBench, EVEWorld improves <b>Motion</b> by <span class="pos">+3.50%</span> and <b>Overall</b> by <span class="pos">+1.20%</span> over Standard SFT. The gain is concentrated in motion dynamics (DYN 14.88 &rarr; <b>17.55</b>), while scene fidelity is slightly lower (89.58 vs.&nbsp;86.37) &mdash; the trade-off we would expect from supervising the target instance rather than the whole frame.</p>
+        <p>After transferring to the AgiBot data regime and scoring on EWMBench, EVEWorld improves <b>Motion</b> by <span class="pos">+3.48%</span> and <b>Overall</b> by <span class="pos">+1.24%</span> over Standard SFT. The gain is concentrated in motion dynamics (DYN 14.88 &rarr; <b>17.55</b>), while scene fidelity is slightly lower (89.58 vs.&nbsp;86.37) &mdash; the trade-off we would expect from supervising the target instance rather than the whole frame.</p>
         <div class="table-card">
           <p class="t-caption">AgiBot &rarr; EWMBench transfer. Scene fidelity is the one dimension where EVEWorld sits below GigaWorld-0.</p>
           <table class="data tight">
@@ -524,7 +524,7 @@
             <tbody>
               <tr><td>FlowWAM</td><td>&middot;</td><td>&middot;</td><td>12.218</td><td>0.748</td><td>0.383</td><td>3.033</td><td>52.05</td></tr>
               <tr><td>Standard SFT</td><td>&middot;</td><td>&middot;</td><td>11.687</td><td>0.735</td><td>0.414</td><td>2.828</td><td>47.89</td></tr>
-              <tr><td>+ IGR</td><td>&#10003;</td><td>&middot;</td><td>12.544</td><td>0.770</td><td>0.380</td><td>2.487</td><td>50.70</td></tr>
+              <tr><td>+ IGR</td><td>&#10003;</td><td>&middot;</td><td>12.544</td><td>0.770</td><td>0.380</td><td>2.487</td><td>40.03</td></tr>
               <tr><td>+ TIA</td><td>&middot;</td><td>&#10003;</td><td class="best">13.445</td><td class="best">0.776</td><td class="best">0.333</td><td class="best">1.850</td><td class="best">22.54</td></tr>
               <tr><td>EVEWorld</td><td>&#10003;</td><td>&#10003;</td><td>12.765</td><td>0.769</td><td>0.365</td><td>2.207</td><td>35.21</td></tr>
             </tbody>
@@ -590,7 +590,7 @@
         <div class="ig-figure">
           <div class="ig-figure-head"><span class="ig-figure-tag">Analysis 1</span><span class="ig-figure-title">Guidance scale sweep</span></div>
           <img src="assets/site/figures/fig_cfg.png" alt="Gemini instruction-following and Model Laziness Rate as a function of classifier-free guidance scale, one curve per training stage" loading="lazy">
-          <p class="ig-figure-caption"><b>Guidance is not the lever.</b> <b>(a)</b> Gemini-IF and <b>(b)</b> MLR as a function of the classifier-free guidance weight <span class="mono">w</span>, one curve per training stage. Gemini-IF peaks at <b>42.33</b> at <span class="mono">w&nbsp;=&nbsp;7.5</span> (step 100), and MLR bottoms out at <b>2.56%</b> for <span class="mono">w&nbsp;=&nbsp;5.0</span> or <span class="mono">7.5</span> at step 200 &mdash; well above the <b>1.59%</b> reached by the default setting we report.</p>
+          <p class="ig-figure-caption"><b>Guidance is not the lever.</b> <b>(a)</b> Gemini-IF and <b>(b)</b> MLR as a function of the classifier-free guidance weight <span class="mono">w</span>, one curve per training stage. Stronger guidance generally raises Gemini-IF, but MLR is substantially less monotonic: the lowest values occur only at particular stage&ndash;weight combinations rather than systematically at the strongest guidance. The configuration we report is <span class="mono">step&nbsp;250</span> at <span class="mono">w&nbsp;=&nbsp;7.0</span>, with Gemini-IF <b>60.85</b> and MLR <b>1.59%</b>. The complete CFG-weight &times; training-step sensitivity grid is reported in the paper's CFG sensitivity table.</p>
         </div>
       </div>
       <div class="figdeck-panel" data-panel="1">
@@ -664,12 +664,12 @@
         <thead><tr><th>Method</th><th>MLR (%) &darr;</th><th>Qwen-IF (%) &uarr;</th><th>Gemini-IF (%) &uarr;</th></tr></thead>
         <tbody>
           <tr><td>CogVideoX1.5-5B-I2V</td><td>28.57</td><td>38.89</td><td>5.56</td></tr>
-          <tr><td>Wan2.2-TI2V-5B</td><td>18.03</td><td>38.89</td><td>10.32</td></tr>
+          <tr><td>Wan2.2-TI2V-5B</td><td>17.46</td><td>38.89</td><td>10.32</td></tr>
           <tr><td>Wan2.2-I2V-A14B</td><td>11.11</td><td>64.29</td><td>15.87</td></tr>
-          <tr><td>Cosmos-Predict2-2B</td><td>15.00</td><td>62.70</td><td>24.60</td></tr>
-          <tr><td>GigaWorld-0</td><td>13.33</td><td class="best">79.37</td><td>60.19</td></tr>
-          <tr><td>Standard SFT</td><td>10.94</td><td>73.81</td><td>53.57</td></tr>
-          <tr><td>EVEWorld</td><td class="best">1.59</td><td>80.16</td><td class="best">60.85</td></tr>
+          <tr><td>Cosmos-Predict2-2B</td><td>14.29</td><td>62.70</td><td>24.60</td></tr>
+          <tr><td>GigaWorld-0</td><td>12.70</td><td>79.37</td><td>60.19</td></tr>
+          <tr><td>Standard SFT</td><td>11.11</td><td>73.81</td><td>53.57</td></tr>
+          <tr><td>EVEWorld</td><td class="best">1.59</td><td class="best">80.16</td><td class="best">60.85</td></tr>
         </tbody>
       </table>
     </div>
@@ -677,11 +677,11 @@
     <div class="findings" style="margin-top:26px">
       <div class="finding reveal">
         <div class="finding-head"><span class="f-no">1</span><h3>Model Laziness collapses, instruction following does not</h3></div>
-        <p>Against Standard SFT, MLR drops from <b>10.94%</b> to <b>1.59%</b> &mdash; a <span class="pos">85.5% relative reduction</span> &mdash; while Qwen-IF rises 73.81 &rarr; <b>80.16</b> and Gemini-IF rises 53.57 &rarr; <b>60.85</b>. The reduction is not bought by trading away instruction following; both move in the preferred direction.</p>
+        <p>Against Standard SFT, MLR drops from <b>11.11%</b> to <b>1.59%</b> &mdash; a <span class="pos">85.7% relative reduction</span> &mdash; while Qwen-IF rises 73.81 &rarr; <b>80.16</b> and Gemini-IF rises 53.57 &rarr; <b>60.85</b>. The reduction is not bought by trading away instruction following; both move in the preferred direction.</p>
       </div>
       <div class="finding reveal">
-        <div class="finding-head"><span class="f-no">2</span><h3>The gain tracks where the laziness was</h3></div>
-        <p>Under Standard SFT, Model Laziness is concentrated in the Object and Behavior splits (MLR <b>16.22%</b> and <b>8.33%</b>) with no observed cases on Environment. EVEWorld cuts Object MLR by <b>82.9%</b> and eliminates the observed Behavior cases. Qwen-IF improves on all three splits, with the largest gain on Behavior (68.09 &rarr; <b>76.60</b>). One column moves the other way: <b>Gemini-IF on Behavior falls from 67.02 to 64.89</b>, which we report as-is.</p>
+        <div class="finding-head"><span class="f-no">2</span><h3>The gain spans all three generalization splits</h3></div>
+        <p>Relative to Standard SFT, Qwen-IF improves on all three splits &mdash; Environment, Object, and Behavior &mdash; with the largest gain on Behavior (<b>68.09</b> &rarr; <b>76.60</b>), while Gemini-IF improves notably on Environment (<b>51.72</b> &rarr; <b>72.41</b>) and Object (<b>42.00</b> &rarr; <b>50.33</b>). One column moves the other way: <b>Gemini-IF on Behavior falls from 67.02 to 64.89</b>, which we report as-is.</p>
       </div>
     </div>
 
@@ -711,8 +711,8 @@
       <table class="data tight">
         <thead><tr><th>Variant</th><th>IGR</th><th>TIA</th><th>Env &uarr;</th><th>Object &uarr;</th><th>Behavior &uarr;</th><th>Overall &uarr;</th><th>MLR (%) &darr;</th></tr></thead>
         <tbody>
-          <tr><td>Standard SFT</td><td>&middot;</td><td>&middot;</td><td>51.72</td><td>42.00</td><td>67.02</td><td>53.57</td><td>10.94</td></tr>
-          <tr><td>IGR only</td><td>&#10003;</td><td>&middot;</td><td>49.43</td><td>36.67</td><td class="best">69.50</td><td>51.85</td><td>4.69</td></tr>
+          <tr><td>Standard SFT</td><td>&middot;</td><td>&middot;</td><td>51.72</td><td>42.00</td><td>67.02</td><td>53.57</td><td>11.11</td></tr>
+          <tr><td>IGR only</td><td>&#10003;</td><td>&middot;</td><td>49.43</td><td>36.67</td><td class="best">69.50</td><td>51.85</td><td>4.76</td></tr>
           <tr><td>TIA only</td><td>&middot;</td><td>&#10003;</td><td>55.17</td><td>42.67</td><td>68.79</td><td>55.29</td><td>7.94</td></tr>
           <tr><td>EVEWorld</td><td>&#10003;</td><td>&#10003;</td><td class="best">72.41</td><td class="best">50.33</td><td>64.89</td><td class="best">60.85</td><td class="best">1.59</td></tr>
         </tbody>
@@ -725,9 +725,9 @@
         <table class="data tight">
           <thead><tr><th>Variant</th><th>MLR (%) &darr;</th><th>Env &uarr;</th><th>Object &uarr;</th><th>Behavior &uarr;</th><th>Overall &uarr;</th></tr></thead>
           <tbody>
-            <tr><td>IGR w/o spatial emphasis</td><td>6.45</td><td class="best">56.32</td><td>44.00</td><td class="best">82.27</td><td class="best">61.11</td></tr>
-            <tr><td>Spatial emphasis only</td><td>14.06</td><td>34.48</td><td>34.67</td><td>62.41</td><td>44.97</td></tr>
-            <tr><td>IGR only</td><td>4.69</td><td>49.43</td><td>36.67</td><td>69.50</td><td>51.85</td></tr>
+            <tr><td>IGR w/o spatial emphasis</td><td>6.35</td><td class="best">56.32</td><td>44.00</td><td class="best">82.27</td><td class="best">61.11</td></tr>
+            <tr><td>Spatial emphasis only</td><td>14.29</td><td>34.48</td><td>34.67</td><td>62.41</td><td>44.97</td></tr>
+            <tr><td>IGR only</td><td>4.76</td><td>49.43</td><td>36.67</td><td>69.50</td><td>51.85</td></tr>
             <tr><td>EVEWorld</td><td class="best">1.59</td><td>72.41</td><td class="best">50.33</td><td>64.89</td><td>60.85</td></tr>
           </tbody>
         </table>
@@ -805,7 +805,7 @@
     <div class="bibtex-box reveal">
       <button class="copy-btn" id="copyBibtex" type="button">Copy BibTeX</button>
       <pre id="bibtex">@misc{eveworld2027,
-  title  = {EVEWorld: Evolution Supervision for Instance-Consistent Embodied World Models},
+  title  = {EVEWorld: Physical Evolution Supervision for Embodied World Models},
   author = {Anonymous},
   year   = {2027},
   note   = {Under double-blind review}

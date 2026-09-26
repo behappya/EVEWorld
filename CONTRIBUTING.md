@@ -17,7 +17,7 @@ fixes — are welcome.
 ## Development setup
 
 ```bash
-conda env create -f environment.yml && conda activate eveworld
+conda env create -f environment.yml && conda activate EVEWorld
 pip install -e ./giga-models
 pip install pre-commit && pre-commit install
 ```

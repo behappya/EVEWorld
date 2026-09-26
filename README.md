@@ -1,6 +1,6 @@
-# EVEWorld: Evolution Supervision for Instance-Consistent Embodied World Models
+# EVEWorld: Physical Evolution Supervision for Embodied World Models
 
-Official code release for the paper **"EVEWorld: Evolution Supervision for Instance-Consistent Embodied World Models"** (under review).
+Official code release for the paper **"EVEWorld: Physical Evolution Supervision for Embodied World Models"** (under review).
 
 ![Teaser: EVEWorld vs. Standard SFT on Model Laziness](assets/teaser.png)
 
@@ -13,18 +13,18 @@ Video world models can generate plausible robot-interaction rollouts, yet the ma
 - **Instance-Guided Restoration (IGR)** — trains the model to restore clean videos from duplicate-corrupted inputs, with spatially up-weighted reconstruction over the corrupted region.
 - **Temporal Instance Alignment (TIA)** — enforces local cross-frame correspondence of the target at a probed Transformer layer via feature transport and a contrastive correspondence loss.
 
-On DreamGenBench, EVEWorld reduces MLR from 10.94% to 1.59% relative to Standard SFT while improving both instruction-following metrics. Transfer is validated on WorldArena 1.0 (zero-shot domains), EWMBench (AgiBot training distribution), and RoboTwin (FlowWAM backbone).
+On DreamGenBench, EVEWorld reduces MLR from 11.11% to 1.59% relative to Standard SFT while improving both instruction-following metrics. Transfer is validated on WorldArena 1.0 (zero-shot domains), EWMBench (AgiBot training distribution), and RoboTwin (FlowWAM backbone).
 
 ## Main Results (DreamGenBench)
 
 | Method | MLR (%) ↓ | Qwen-IF (%) ↑ | Gemini-IF (%) ↑ |
 |---|---|---|---|
 | CogVideoX1.5-5B-I2V | 28.57 | 38.89 | 5.56 |
-| Wan2.2-TI2V-5B | 18.03 | 38.89 | 10.32 |
+| Wan2.2-TI2V-5B | 17.46 | 38.89 | 10.32 |
 | Wan2.2-I2V-A14B | 11.11 | 64.29 | 15.87 |
-| Cosmos-Predict2-2B | 15.00 | 62.70 | 24.60 |
-| GigaWorld-0 | 13.33 | 79.37 | 60.19 |
-| Standard SFT | 10.94 | 73.81 | 53.57 |
+| Cosmos-Predict2-2B | 14.29 | 62.70 | 24.60 |
+| GigaWorld-0 | 12.70 | 79.37 | 60.19 |
+| Standard SFT | 11.11 | 73.81 | 53.57 |
 | **EVEWorld (ours)** | **1.59** | **80.16** | **60.85** |
 
 ## Repository Layout
@@ -43,8 +43,8 @@ On DreamGenBench, EVEWorld reduces MLR from 10.94% to 1.59% relative to Standard
 ## Installation
 
 ```bash
-conda create -n eveworld python=3.11.10 -y
-conda activate eveworld
+conda create -n EVEWorld python=3.11.10 -y
+conda activate EVEWorld
 pip install -e ./giga-models
 # plus the evaluation/training dependencies documented in docs/ENVIRONMENT.md
 ```

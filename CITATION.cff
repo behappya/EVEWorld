@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the EVEWorld paper."
-title: "EVEWorld: Evolution Supervision for Instance-Consistent Embodied World Models"
+title: "EVEWorld: Physical Evolution Supervision for Embodied World Models"
 abstract: >-
   EVEWorld supervises target-instance evolution in embodied video world
   models to overcome Model Laziness: Instance-Guided Restoration (IGR)
@@ -9,4 +9,3 @@ abstract: >-
   Model Laziness Rate (MLR) measures persistent target-count violations.
 type: software
 license: Apache-2.0
-repository-code: "https://github.com/behappya/EVEWorld"
