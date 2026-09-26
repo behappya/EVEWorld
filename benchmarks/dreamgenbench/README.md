@@ -39,8 +39,8 @@ End-to-end DreamGenBench pipeline on the GigaWorld-0 backbone: pack the GR1 fine
 | `run_indomain_eval175_rejudge.sh` | Re-judges all models' EVAL-175 outputs with one judge endpoint for cross-run comparability. |
 | **CFG grid and length sweeps** | |
 | `kjob_cfg_train_then_sweep.sh` | Trains the seed-42 reproduction to step 300, assembles per-step anchor roots, then runs the CFG sweep. |
-| `kjob_cfg_grid_serial.sh` | Serial generation over the 24-cell grid: steps {50..300} x CFG {1.0, 2.5, 5.0, 7.5} via `eveworld/evaluation/cfg_grid_serial_dispatch.py`. |
-| `build_cfg_gemini_manifest.py` | Builds the 3,024-row Gemini-IF manifest for the grid and validates every video exists. |
+| `kjob_cfg_grid_serial.sh` | Serial generation over the 24-cell grid: steps {50..300} x CFG weights via `eveworld/evaluation/cfg_grid_serial_dispatch.py`. Default grid `1.0 2.5 5.0 7.0` (the paper's `w=7.0` setting); override with `CFG_VALUES="1.0 2.5 5.0 7.5"` for the wider grid. |
+| `build_cfg_gemini_manifest.py` | Builds the 3,024-row Gemini-IF manifest for the grid and validates every video exists; `--cfg-values` must match the sweep grid. |
 | `run_sft_pretrain_dreamgen_long_pa2_sweep.sh` / `run_pretrain_dreamgen_length_pa2_sweep.sh` / `run_short_length_generation_only.sh` / `run_short_length_dreamgen_only.sh` | Sequence-length sweeps (3.8s-29.8s at 16 FPS): 8-GPU generation per length plus VideoPhy PA-II (runner in [`../pbench/`](../pbench/)). |
 | **Summaries** | |
 | `summarize_dreamgenbench_csv.py` / `summarize_dreamgenbench_full.py` | Average binary Qwen-IF/GPT-IF/PA-I CSVs into a JSON summary; the "full" variant also thresholds VideoPhy PA-II and reports `PA = mean(PA-I, PA-II)`. |

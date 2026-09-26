@@ -24,7 +24,7 @@ def main() -> int:
     ap.add_argument("--data-root", type=Path, required=True)
     ap.add_argument("--out-root", type=Path, required=True)
     ap.add_argument("--steps-list", nargs="+", type=int, default=[50, 100, 150, 200, 250, 300])
-    ap.add_argument("--cfg-values", nargs="+", type=float, default=[1.0, 2.5, 5.0, 7.5])
+    ap.add_argument("--cfg-values", nargs="+", type=float, default=[1.0, 2.5, 5.0, 7.0])
     ap.add_argument("--gpu-count", type=int, default=8)
     ap.add_argument("--seed", type=int, default=4)
     ap.add_argument("--inference-steps", type=int, default=30)

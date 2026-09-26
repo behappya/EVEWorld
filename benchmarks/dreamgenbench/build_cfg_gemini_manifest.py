@@ -26,18 +26,24 @@ def load_rows(data_root: Path) -> list[dict[str, object]]:
     return rows
 
 
+def cfg_tag(cfg: float) -> str:
+    return f"cfg_{cfg:g}".replace(".", "p")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--data-root", type=Path, required=True)
     ap.add_argument("--cfg-root", type=Path, required=True)
     ap.add_argument("--output", type=Path, required=True)
+    ap.add_argument("--cfg-values", nargs="+", type=float, default=[1.0, 2.5, 5.0, 7.0])
+    ap.add_argument("--steps-list", nargs="+", type=int, default=[50, 100, 150, 200, 250, 300])
     args = ap.parse_args()
 
     rows = load_rows(args.data_root)
     output_rows: list[dict[str, object]] = []
-    for step in (50, 100, 150, 200, 250, 300):
-        for cfg, tag in ((1.0, "cfg_1"), (2.5, "cfg_2p5"),
-                         (5.0, "cfg_5"), (7.5, "cfg_7p5")):
+    for step in args.steps_list:
+        for cfg in args.cfg_values:
+            tag = cfg_tag(cfg)
             model = f"step_{step:03d}_{tag}"
             directory = args.cfg_root / f"step_{step:03d}" / tag / "generated_only"
             for row in rows:
@@ -57,7 +63,7 @@ def main() -> int:
                     "image": str(row["image"]),
                 })
 
-    expected = 6 * 4 * 126
+    expected = len(args.steps_list) * len(args.cfg_values) * 126
     if len(output_rows) != expected:
         raise RuntimeError(f"expected {expected} rows, got {len(output_rows)}")
     keys = [str(row["key"]) for row in output_rows]
@@ -69,8 +75,9 @@ def main() -> int:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
     print(json.dumps({
         "rows": len(output_rows),
-        "cells": 24,
+        "cells": len(args.steps_list) * len(args.cfg_values),
         "rows_per_cell": 126,
+        "cfg_values": args.cfg_values,
         "output": str(args.output.resolve()),
     }, ensure_ascii=False))
     return 0
