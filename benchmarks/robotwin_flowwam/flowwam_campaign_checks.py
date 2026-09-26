@@ -30,6 +30,7 @@ def main() -> int:
     p.add_argument("output", type=Path)
     p.add_argument("manifest")
     p.add_argument("stage1")
+    p.add_argument("--tia-inject", choices=("on", "off"), default="off")
 
     p = sub.add_parser("train")
     p.add_argument("path", type=Path)
@@ -72,7 +73,7 @@ def main() -> int:
                 "split": "episodes 45-49", "videos": 250,
                 "flow_condition": "robot_only", "trajectory": "direct",
                 "cfg": 5.0, "steps": 40, "seed": 42,
-                "tia_inject": False,
+                "tia_inject": args.tia_inject == "on",
             },
         }
         args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -33,6 +33,7 @@ SOURCE_MANIFEST="${SOURCE_MANIFEST:-/data/datasets/gagi/flowwam/heldout_r250_v1/
 STAGE1="${STAGE1:-/data/datasets/gagi/flowwam/checkpoints/flowwam_worldarena_stage1.safetensors}"
 EXISTING_EVE_VIDEOS="${EXISTING_EVE_VIDEOS:-/data/datasets/gagi/flowwam/heldout_r250_v1/arm_eve_final_robot_only}"
 N_GPU="${N_GPU:-8}"
+TIA_INJECT="${TIA_INJECT:-off}"  # on|off; forwarded to the protocol record and every generate call
 
 MANIFEST="${CAMPAIGN_ROOT}/manifest.json"
 CHECKPOINT_ROOT="${CAMPAIGN_ROOT}/checkpoints"
@@ -71,7 +72,8 @@ python "${CODE_ROOT}/benchmarks/robotwin_flowwam/flowwam_campaign_checks.py" man
 [[ "$(sha256sum "${STAGE1}" | cut -c1-24)" == "e211e32b6b79b293f7dec1a7" ]]
 
 python "${CODE_ROOT}/benchmarks/robotwin_flowwam/flowwam_campaign_checks.py" protocol \
-  "${CAMPAIGN_ROOT}/protocol.node_${ROLE,,}.json" "${MANIFEST}" "${STAGE1}"
+  "${CAMPAIGN_ROOT}/protocol.node_${ROLE,,}.json" "${MANIFEST}" "${STAGE1}" \
+  --tia-inject "${TIA_INJECT}"
 
 mark_stage() {
   CURRENT_STAGE="$1"
@@ -145,7 +147,7 @@ smoke_variant() {
   N_GPU=2 python "${CODE_ROOT}/eveworld/flowwam_port/arm_generate_dispatch.py" \
     --arm-ckpt "${ckpt}/final.safetensors" --out "${videos}" \
     --manifest "${MANIFEST}" --limit 2 --flow-cond robot_only \
-    --cfg-scale 5.0 --steps 40 --tia-inject off --full-traj direct --seed 42 \
+    --cfg-scale 5.0 --steps 40 --tia-inject "${TIA_INJECT}" --full-traj direct --seed 42 \
     >"${LOG_ROOT}/smoke_generate_${variant}.log" 2>&1
   [[ "$(find "${videos}" -maxdepth 1 -type f -name '*.mp4' | wc -l)" == "2" ]]
   printf '%s\n' "utc=$(date -u +%FT%TZ)" >"${marker}"
@@ -163,7 +165,7 @@ smoke_stage1() {
   cd "${FLOWWAM_ROOT}/training"
   N_GPU=1 python "${CODE_ROOT}/eveworld/flowwam_port/arm_generate_dispatch.py" \
     --out "${videos}" --manifest "${MANIFEST}" --limit 1 \
-    --flow-cond robot_only --cfg-scale 5.0 --steps 40 --tia-inject off \
+    --flow-cond robot_only --cfg-scale 5.0 --steps 40 --tia-inject "${TIA_INJECT}" \
     --full-traj direct --seed 42 >"${LOG_ROOT}/smoke_generate_stage1.log" 2>&1
   [[ "$(find "${videos}" -maxdepth 1 -type f -name '*.mp4' | wc -l)" == "1" ]]
   printf '%s\n' "utc=$(date -u +%FT%TZ)" >"${marker}"
@@ -191,7 +193,7 @@ generate_variant() {
   fi
   N_GPU="${N_GPU}" python "${CODE_ROOT}/eveworld/flowwam_port/arm_generate_dispatch.py" \
     "${ckpt_args[@]}" --out "${videos}" --manifest "${MANIFEST}" \
-    --flow-cond robot_only --cfg-scale 5.0 --steps 40 --tia-inject off \
+    --flow-cond robot_only --cfg-scale 5.0 --steps 40 --tia-inject "${TIA_INJECT}" \
     --full-traj direct --seed 42 \
     >"${LOG_ROOT}/generate_${variant}.log" 2>&1
   python "${CODE_ROOT}/benchmarks/robotwin_flowwam/audit_flowwam_variant.py" \
