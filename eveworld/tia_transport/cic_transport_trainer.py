@@ -151,7 +151,11 @@ class CICTransportJointTrainer(T4GJointTrainer):
         self.region_names = tuple(value.strip() for value in str(names).split(","))
         if len(self.region_levels) != len(self.region_names) or not self.region_levels:
             raise ValueError("region levels and names must have equal non-zero length")
-        expected_samples = int(model_config.get("t4g_expected_samples", 0))
+        expected_samples = int(
+            os.environ.get(
+                "T4G_EXPECTED_SAMPLES", model_config.get("t4g_expected_samples", 0)
+            )
+        )
         if expected_samples:
             anno_vids = set(self.annos)
             mapped_vids = set(self.idx2vid.values())

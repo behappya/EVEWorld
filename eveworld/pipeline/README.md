@@ -41,8 +41,8 @@ backbone and [GigaModels](../../giga-models/) training stack.
 | `t4g_weightmap.py`, `t4g_weightmap_precompute.py`, `t4g_weightmap_armfix.py`, `t4g_weightmap_viz.py` | Contractual spatial weight maps (object trajectory / grasp / place / should-be-empty / background) from the annotation cache, cache precompute, arm-coverage fix variant, PNG calibration. |
 | `t4g_weightmap_variants.py`, `t4g_weightmap_variants_precompute.py`, `t4g_weightmap_<variant>_config.py`, `t4g_weightmap_<variant>_launch.sh`, `t4g_weightmap_variant_matrix.sh` | The six IGR spatial-weight designs of the appendix design table as one registry plus per-variant configs/launchers/matrix entry — side-by-side options, no recommended default; see [`t4g_weightmap_variants.md`](t4g_weightmap_variants.md). |
 | `t4g_corr_loss.py`, `t4g_corr_trainer.py`, `t4g_corr_config.py`, `t4g_corr_launch.sh`, `t4g_corr_smoke.py` | TIA losses (`L_id` adjacent-frame relay at the probed block; `L_change` self-similarity-change term) with forward hooks, λ warmup, gate logic, and four-checkpoint CPU smoke. |
-| `t4g_joint_trainer.py`, `t4g_joint_config.py`, `t4g_joint_v2_config.py`, `t4g_joint_cleanv2_config.py`, `t4g_joint_launch.sh`, `t4g_joint_wmap_smoke.py`, `t4g_wmaponly_config.py` | Joint IGR + TIA trainer (inherits the corr hooks, swaps in the restoration forward), recipe variants (v2 paste-shortcut blocking, clean-v2 data, weight-map-only ablation), and weight-map wiring smoke. |
-| `t4g_apre_noaug_{config,launch,preflight}`, `t4g_cleanv2_{apre_launch,preflight}`, `t4g_cfg_repro_seed42_config.py` | Legacy A-pre recipe reproductions (augmentation off / clean-v2 / seed-42 CFG-sweep base) with preflight validators. |
+| `t4g_joint_trainer.py`, `t4g_joint_config.py`, `t4g_joint_v2_config.py`, `t4g_joint_cleanv2_config.py`, `t4g_joint_paste3_config.py`, `t4g_joint_launch.sh`, `t4g_joint_wmap_smoke.py`, `t4g_wmaponly_config.py` | Joint IGR + TIA trainer (inherits the corr hooks, swaps in the restoration forward), recipe variants (v2 paste-shortcut blocking, clean-v2 data, weight-map-only ablation), a paste-weight twin (`t4g_joint_paste3_config.py`, `t4g_w_paste=3.0` next to the historical `4.0`), and weight-map wiring smoke. |
+| `t4g_apre_noaug_{config,launch,preflight}`, `t4g_apre_noaug_b23_config.py`, `t4g_cleanv2_{apre_launch,preflight}`, `t4g_cfg_repro_seed42_config.py`, `t4g_cfg_repro_seed42_b23_config.py` | Legacy A-pre recipe reproductions (augmentation off / clean-v2 / seed-42 CFG-sweep base) with preflight validators, plus the paper-side `block23` twins of the first and last of them; the launch scripts pick the recipe with `BASE_CONFIG_MODULE=...`, and `T4G_EXPECTED_SAMPLES` gates whichever annotation set the run reads. |
 | `t4g_final_trainer.py`, `t4g_final_config.py`, `t4g_final_launch.sh` | Final combined arm: pretrained base, clean-SFT anchor + `L_id` + online self-generated restoration cases (A2) judged by the frozen ICH-D scorer; `--selftest` CPU unit test. |
 | `t4g_final_align.py`, `t4g_final_kprobe.py` (+kjob), `t4g_final_eval175_kjob.sh` | Final-arm audits: online-vs-offline restoration-target alignment, roll-length K sweep probe, and DreamGenBench generation for the checkpoint sweep. |
 | `t4g_exam.py`, `t4g_exam_v2.py`, `t4g_exam_v3.py` (+dispatchers, `t4g_exam_kjob.sh`, `kjob_eval_t4g_exam*.sh`) | MLR counting instrument: initial-frame inventory `inv0`, DUP/VANISH persistence rules; v2 adds gripper-overlap rejection and higher thresholds, v3 builds `inv0` from the conditioning frame. |
@@ -92,7 +92,24 @@ Environment variables used throughout: `EVEWORLD_ROOT` (this repo's root; kjob p
 `giga-world-0/` relative to it), `GAGI_ROOT`/`GAGI` (dataset and output root, defaulting to an
 absolute cluster path you must override), `REPO_DIR`, `CONDA_SH`/`CONDA_ENV`,
 `TRAIN_VENV`/`TRAIN_PYTHON`, plus trainer knobs such as `T4G_W_PASTE`, `T4G_REGION_LEVELS`,
-`T4G_A2_K`, and `T4G_W_LAT`/`T4G_WPIX` for non-GR1 grid sizes.
+`T4G_A2_K`, `T4G_EXPECTED_SAMPLES`, and `T4G_W_LAT`/`T4G_WPIX` for non-GR1 grid sizes.
+
+### Paper-side twins (side by side, neither is a default)
+
+Where a historical config and the paper quote different numbers, both recipes ship as separate
+modules and nothing existing was changed — pick one per run:
+
+| Twin module | Differs from | Change | How to run |
+|---|---|---|---|
+| `t4g_apre_noaug_b23_config.py` | `t4g_apre_noaug_config.py` (`block22`) | TIA block `block23` | `BASE_CONFIG_MODULE=eveworld.pipeline.t4g_apre_noaug_b23_config bash eveworld/pipeline/t4g_apre_noaug_launch.sh submit` |
+| `t4g_cfg_repro_seed42_b23_config.py` | `t4g_cfg_repro_seed42_config.py` (`block22`) | TIA block `block23` | `BASE_CONFIG_MODULE=eveworld.pipeline.t4g_cfg_repro_seed42_b23_config bash benchmarks/dreamgenbench/kjob_cfg_train_then_sweep.sh` |
+| `t4g_joint_paste3_config.py` | `t4g_joint_config.py` (`t4g_w_paste=4.0`) | `t4g_w_paste=3.0` | `BASE_CONFIG_MODULE=eveworld.pipeline.t4g_joint_paste3_config bash eveworld/pipeline/t4g_joint_launch.sh submit` |
+| `eveworld/tia_transport/cic_transport_b23_config.py` | `cic_transport_config.py` (`block22`) | `block23` on both the TIA and transport keys | `BASE_CONFIG_MODULE=eveworld.tia_transport.cic_transport_b23_config bash eveworld/pipeline/t4g_joint_launch.sh submit` (the paired campaign stays bit-exact and only registers `control`/`transport`) |
+
+`t4g_joint_cleanv2_config.py` keeps `t4g_expected_samples=91` because its `t4g_anno_nohuman_v2`
+cache really holds 91 clips (video 32 is excluded); the env var `T4G_EXPECTED_SAMPLES` overrides
+both that value and the launcher's preflight gate, so the same code runs on a 92-clip cache
+without editing the config.
 
 > **Cluster jobs.** All `kjob_*.sh`, `launch_*.sh`, and `watch_*.sh` scripts are SLURM-style
 > wrappers (`#SBATCH` headers, single-node 8-GPU payloads). Their absolute paths (data roots,

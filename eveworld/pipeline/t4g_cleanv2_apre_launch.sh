@@ -5,10 +5,13 @@ REPO_DIR="giga-world-0"
 GAGI="/data/datasets/gagi"
 PACKED="${GAGI}/gr1_finetune_data/packed_data_t4g_nohuman_v2"
 PRETRAIN="${GAGI}/giga_world_0_video_pretrain/transformer"
-OUT_ROOT="${GAGI}/eve_v2_outputs/t4g_joint_wmapA_pre_cleanv2_armfixv4_u3"
+OUT_ROOT="${OUT_ROOT:-${GAGI}/eve_v2_outputs/t4g_joint_wmapA_pre_cleanv2_armfixv4_u3}"
 RUN_NAME="${RUN_NAME:-t4g_wmapA_pre_cleanv2_armfixv4_u3_s150}"
-BASE_CONFIG_MODULE="eveworld.pipeline.t4g_joint_cleanv2_config"
+BASE_CONFIG_MODULE="${BASE_CONFIG_MODULE:-eveworld.pipeline.t4g_joint_cleanv2_config}"
 MAX_STEPS="${MAX_STEPS:-150}"
+# Sample-count gate: the nohuman_v2 subset holds 91 clips (video 32 excluded);
+# set T4G_EXPECTED_SAMPLES=<n> to gate a differently sized anno dir instead.
+EXPECTED_SAMPLES="${T4G_EXPECTED_SAMPLES:-91}"
 CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-50}"
 CHECKPOINT_TOTAL_LIMIT="${CHECKPOINT_TOTAL_LIMIT:-3}"
 PYTHON="/home/jovyan/miniconda/envs/giga_models/bin/python"
@@ -17,11 +20,11 @@ run_check() {
   [[ -f "${PACKED}/config.json" ]] || { echo "missing packed data: ${PACKED}"; exit 1; }
   [[ -f "${PRETRAIN}/diffusion_pytorch_model.safetensors" ]] || { echo "missing pretrain"; exit 1; }
   cd "${REPO_DIR}"
-  "${PYTHON}" eveworld/pipeline/t4g_cleanv2_preflight.py
+  "${PYTHON}" eveworld/pipeline/t4g_cleanv2_preflight.py --expected "${EXPECTED_SAMPLES}"
   "${PYTHON}" -m py_compile \
     eveworld/pipeline/t4g_aug_trainer.py \
     eveworld/pipeline/t4g_joint_trainer.py \
-    eveworld/pipeline/t4g_joint_cleanv2_config.py
+    "${BASE_CONFIG_MODULE//.//}.py"
 }
 
 run_submit() {
@@ -49,7 +52,8 @@ run_submit() {
       "CHECKPOINT_INTERVAL=${CHECKPOINT_INTERVAL}" \
       "CHECKPOINT_TOTAL_LIMIT=${CHECKPOINT_TOTAL_LIMIT}" \
       "BATCH_SIZE_PER_GPU=1" \
-      "GRADIENT_ACCUMULATION_STEPS=8"
+      "GRADIENT_ACCUMULATION_STEPS=8" \
+      "T4G_EXPECTED_SAMPLES=${EXPECTED_SAMPLES}"
 }
 
 case "${1:-}" in
@@ -63,6 +67,7 @@ A-pre-clean-v4-u3
   output: ${OUT_ROOT}
   train:  150 steps, checkpoints 50/100/150, effective batch 64
   loss:   L_id=0.5, background=1x, marked/paste=3x
+  samples: ${EXPECTED_SAMPLES} (T4G_EXPECTED_SAMPLES=<n> to gate another anno set)
 
 Commands:
   bash $(basename "$0") check

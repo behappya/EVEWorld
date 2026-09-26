@@ -38,7 +38,8 @@ class T4GJointTrainer(T4GCorrTrainer):
         self.region_names = tuple(x.strip() for x in str(names).split(','))
         assert len(self.region_levels) == len(self.region_names) > 0, \
             't4g_region_levels and t4g_region_names must have equal non-zero length'
-        expected_samples = int(model_config.get('t4g_expected_samples', 0))
+        expected_samples = int(os.environ.get(
+            'T4G_EXPECTED_SAMPLES', model_config.get('t4g_expected_samples', 0)))
         if expected_samples:
             anno_vids = set(self.annos)
             mapped_vids = set(self.idx2vid.values())

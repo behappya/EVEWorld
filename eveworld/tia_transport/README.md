@@ -18,8 +18,12 @@ serves the contrastive instance-correspondence objective, `L_TIA`).
   update is written back as a bounded `γ·tanh(W_out(·))` residual with `W_out`
   zero-initialized (identity before training; first frame unchanged).
 - **Appendix "TIA Layer Selection"** (`app:tia_layer_selection`, Table
-  `tab:tia_layer_probe`): the default insertion point `block22` is the block
-  picked by the offline layer-wise correspondence probe on GigaWorld-0.
+  `tab:tia_layer_probe`): `block22` is the insertion point recorded in the code
+  provenance of the paired campaign; the paper table quotes the same probe run
+  with **block 23** as its minimum-error row. Both are shipped side by side —
+  `cic_transport_config.py` keeps `block22` untouched (the campaign preflight is
+  bit-exact against it), while `cic_transport_b23_config.py` sets both
+  `t4g_id_block` and `cic_transport_after_block` to `block23` for a fresh run.
 - **Appendix "Implementation Details"** (`app:training_setup`): the shipped
   defaults — rank 64, 7×7 window (`window_radius=3`), τ=0.07, γ=0.1 — match
   `cic_transport_config.py`.
@@ -41,6 +45,7 @@ is isolated against an exactly paired control run.
 | `cic_transport_transformer.py` | `CICTransportAdapter` (local matching + zero-init residual transport, sentinel stats) and `CICTransportGigaWorld0Transformer3DModel` (registers the adapter as a forward hook after a selected block; saves/loads a `cic_transport_config.json` sidecar; preserves the training RNG so paired runs stay aligned). |
 | `cic_transport_trainer.py` | `CICTransportJointTrainer`: full EVEWorld objective (IGR + TIA losses, region weighting, probes) with the transformer as the only changed component; asserts the TIA identity block equals the transport insertion block; logs adapter sentinel stats. |
 | `cic_transport_config.py` | Paired full-training config (seed 42, 300 steps): historical EVEWorld config plus the `cic_transport_*` model keys only. |
+| `cic_transport_b23_config.py` | Side-by-side twin of the above with the insertion point at `block23` (paper table's minimum-error block) and its own `project_dir`; the campaign preflight does not cover it — launch it through [`../pipeline/t4g_joint_launch.sh`](../pipeline/t4g_joint_launch.sh) instead. |
 | `cic_transport_pipeline.py` | Inference loaders (`CICTransportGigaWorld0Pipeline`, EAG variant) that rebuild the transformer from a checkpoint via its sidecar. |
 | `test_cic_transport.py` | CPU smoke tests: zero-init identity, soft-splat motion tracking, gradient staging, RNG preservation, checkpoint round trip, activation-checkpoint wrapping. Run with `python -m eveworld.tia_transport.test_cic_transport`. |
 
@@ -48,7 +53,7 @@ is isolated against an exactly paired control run.
 
 | File | What it does |
 |---|---|
-| `cic_transport_campaign.py` | Fail-closed `preflight` / `node-preflight` / `audit` CLI for the paired seed-42 runs: protected-path guards, strict 92-sample data check, SHA-256-pinned historical runtime config, normalized runtime-drift diff, per-checkpoint weight/sidecar audit. |
+| `cic_transport_campaign.py` | Fail-closed `preflight` / `node-preflight` / `audit` CLI for the paired seed-42 runs: protected-path guards, strict 92-sample data check, SHA-256-pinned historical runtime config, normalized runtime-drift diff, per-checkpoint weight/sidecar audit. It deliberately registers only the two bit-exact variants (`control`, `transport`) — alternative insertion points run through the generic joint launcher. |
 | `cic_transport_launch.sh` / `cic_transport_kjob_train.sh` | Host-side launcher (`check` / `submit-control` / `submit-transport` / `submit-pair` / `audit`) and the 8-GPU SLURM payload, which runs node-preflight then delegates to [`../../benchmarks/dreamgenbench/kjob_train_gr1_finetune.sh`](../../benchmarks/dreamgenbench/kjob_train_gr1_finetune.sh). |
 | `cic_transport_seed6666_s400_config.py` / `cic_transport_seed6666_s400_campaign.py` / `cic_transport_seed6666_s400_launch.sh` / `cic_transport_seed6666_s400_kjob.sh` | Training-seed replication (seed 6666) extended to 400 steps, with its own preflight/audit chain and optional resume. |
 
@@ -103,6 +108,14 @@ bash eveworld/tia_transport/cic_transport_launch.sh audit           # checkpoint
 # Generation + judging (after training)
 bash eveworld/tia_transport/cic_transport_eval175_launch.sh submit  # four checkpoints, seed 004
 bash eveworld/tia_transport/cic_transport_gemini_repeats.sh         # 3 Gemini-IF repeats + audit
+
+# Alternative insertion point (paper table's block 23), outside the strict campaign:
+# the generic joint launcher prints its plan, `submit` hands it to SLURM.
+# OUT_ROOT/RUN_NAME mirror the twin config's project_dir so they stay in sync.
+BASE_CONFIG_MODULE=eveworld.tia_transport.cic_transport_b23_config \
+OUT_ROOT=/data/datasets/gagi/eve_v2_outputs/eve_cic_transport_v1/cic_transport_b23_seed42_s300 \
+RUN_NAME=cic_transport_b23_seed42_s300 \
+  bash eveworld/pipeline/t4g_joint_launch.sh submit
 ```
 
 > **Cluster caveat.** All `launch_*.sh` / `kjob_*.sh` scripts are SLURM-style
