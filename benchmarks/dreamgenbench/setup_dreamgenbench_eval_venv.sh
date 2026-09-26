@@ -2,10 +2,10 @@
 set -euo pipefail
 
 # Create an isolated Python venv for official DreamGenBench Qwen2.5-VL eval.
-# This avoids changing the existing giga_models conda environment, which is
+# This avoids changing the existing EVEWorld conda environment, which is
 # also used by VBench and GigaWorld inference.
 
-BASE_PYTHON="${BASE_PYTHON:-/home/jovyan/miniconda/envs/giga_models/bin/python}"
+BASE_PYTHON="${BASE_PYTHON:-/home/jovyan/miniconda/envs/EVEWorld/bin/python}"
 VENV_DIR="${VENV_DIR:-/data/datasets/gagi/envs/dreamgenbench_eval_venv}"
 
 if [[ ! -x "${BASE_PYTHON}" ]]; then

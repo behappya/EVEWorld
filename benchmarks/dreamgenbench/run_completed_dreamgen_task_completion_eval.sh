@@ -21,7 +21,7 @@ EVAL_ROOT="${EVAL_ROOT:-/data/datasets/gagi/gr1_dreamgen_eval}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-${EVAL_ROOT}/eval_outputs}"
 GENERATED_ROOT="${GENERATED_ROOT:-${EVAL_ROOT}/generated_side_by_side}"
 VIDEO_ROOT="${VIDEO_ROOT:-${EVAL_ROOT}/dreamgenbench_video_dirs}"
-PYTHON_BIN="${PYTHON_BIN:-/home/jovyan/miniconda/envs/giga_models/bin/python}"
+PYTHON_BIN="${PYTHON_BIN:-/home/jovyan/miniconda/envs/EVEWorld/bin/python}"
 EXPECTED_COUNT="${EXPECTED_COUNT:-92}"
 
 EVAL_ID="${EVAL_ID:-dreamgen_task_completion_existing}"

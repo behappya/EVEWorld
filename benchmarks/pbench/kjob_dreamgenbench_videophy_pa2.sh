@@ -17,7 +17,7 @@ done
 
 REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 VIDEOPHY_DIR="${VIDEOPHY_DIR:-/data/datasets/gagi/videophy}"
-VIDEOPHY_PYTHON="${VIDEOPHY_PYTHON:-/home/jovyan/miniconda/envs/giga_models/bin/python}"
+VIDEOPHY_PYTHON="${VIDEOPHY_PYTHON:-/home/jovyan/miniconda/envs/EVEWorld/bin/python}"
 VIDEO_DIR="${VIDEO_DIR:?Set VIDEO_DIR to generated-only DreamGenBench videos}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/gagi/gr1_dreamgen_eval/eval_outputs}"
 RUN_NAME="${RUN_NAME:-dreamgen_videophy_pa2_$(date +%Y%m%d_%H%M%S)}"

@@ -18,7 +18,7 @@ for arg in "$@"; do
 done
 
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-CONDA_ENV="${CONDA_ENV:-giga_models}"
+CONDA_ENV="${CONDA_ENV:-EVEWorld}"
 ADAPT_DIR="${ADAPT_DIR:-eveworld/agibot}"
 LOG_DIR=/data/datasets/gagi/wmb_adapt
 mkdir -p "${LOG_DIR}"

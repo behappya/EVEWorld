@@ -64,7 +64,7 @@ if [[ ! -f "${DATA_PATH}" ]]; then
   fi
   echo "Missing ${DATA_PATH}; preparing PBench Robotics input first." | tee -a "${SUBMIT_LOG}"
   CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-  CONDA_ENV="${CONDA_ENV:-giga_models}"
+  CONDA_ENV="${CONDA_ENV:-EVEWorld}"
   if [[ -f "${CONDA_SH}" ]]; then
     # shellcheck disable=SC1090
     source "${CONDA_SH}"

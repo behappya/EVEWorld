@@ -43,7 +43,7 @@ for arm in ['t4g_wmapA_s50','t4g_wmapA_s100','pretrain']:
     print(f'{arm}: {len(rows)} -> {fp}')
 EOF
 
-source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-giga_models}"
+source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-EVEWorld}"
 cd giga-world-0
 for arm in $ARMS; do
   echo "[chain] 判分 $arm ..."

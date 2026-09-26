@@ -91,7 +91,7 @@ def get_openai_client(base_url: str):
     try:
         from openai import OpenAI
     except ModuleNotFoundError as exc:
-        raise SystemExit("Missing Python package: openai. Install it in the giga_models conda env.") from exc
+        raise SystemExit("Missing Python package: openai. Install it in the EVEWorld conda env.") from exc
     if not hasattr(_TLS, "openai_clients"):
         _TLS.openai_clients = {}
     if base_url not in _TLS.openai_clients:

@@ -16,7 +16,7 @@ SAVE_DIR="${SAVE_DIR:-/data/datasets/gagi/giga_world_0_outputs/pbench_robot_serv
 DATA_PATH="${DATA_PATH:-/home/jovyan/gagibench/pbench/giga_input/pbench_robot_it2v.json}"
 
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-CONDA_ENV="${CONDA_ENV:-giga_models}"
+CONDA_ENV="${CONDA_ENV:-EVEWorld}"
 
 LIMIT="${LIMIT:-0}"
 NUM_INFERENCE_STEPS="${NUM_INFERENCE_STEPS:-30}"

@@ -4,7 +4,7 @@ set -euo pipefail
 
 REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-CONDA_ENV="${CONDA_ENV:-giga_models}"
+CONDA_ENV="${CONDA_ENV:-EVEWorld}"
 MANIFEST_ROOT="${MANIFEST_ROOT:-/data/datasets/gagi/eve_v2_outputs/eve_ablation_strict_v1_eval175_eval}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-/data/datasets/gagi/eve_v2_outputs/gemini_eval}"
 RUN_PREFIX="${RUN_PREFIX:-dreamgen_eve_ablation_strict_v1_seed004_qwen_protocol}"

@@ -19,7 +19,7 @@ OUT_DIR="${OUT_DIR:?OUT_DIR is required}"
 TRAIN_PYTHON="${TRAIN_PYTHON:-/data/datasets/gagi/envs/giga_world_train_venv/bin/python}"
 
 source /home/jovyan/miniconda/etc/profile.d/conda.sh
-conda activate "${CONDA_ENV:-giga_models}"
+conda activate "${CONDA_ENV:-EVEWorld}"
 export PYTHONPATH="${REPO_DIR}:${EVEWORLD_ROOT}/eveworld/pipeline:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1
 cd "${REPO_DIR}"

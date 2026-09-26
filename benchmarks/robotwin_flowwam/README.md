@@ -58,7 +58,7 @@ arguments, which it exports before running.
 Environment contract: `EVEWORLD_ROOT` points to this repository root and `GAGI_ROOT` to the
 shared data root (see [`eveworld/common/env.sh`](../../eveworld/common/env.sh) and
 [`docs/ENVIRONMENT.md`](../../docs/ENVIRONMENT.md)). The `flowwam` conda env runs
-training/generation; the `giga_models` env runs the metric stack.
+training/generation; the `EVEWorld` env runs the metric stack.
 
 Typical sequence:
 

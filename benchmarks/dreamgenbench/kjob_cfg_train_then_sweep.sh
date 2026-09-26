@@ -23,7 +23,7 @@ CFG_VALUES="${CFG_VALUES:-1.0 2.5 5.0 7.0}"
 BASE_CONFIG_MODULE="${BASE_CONFIG_MODULE:-eveworld.pipeline.t4g_cfg_repro_seed42_config}"
 
 source /home/jovyan/miniconda/etc/profile.d/conda.sh
-conda activate "${CONDA_ENV:-giga_models}"
+conda activate "${CONDA_ENV:-EVEWorld}"
 cd "$REPO_DIR"
 export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"
 

@@ -11,8 +11,8 @@
 注意: NATTEN 邻域注意力只在 CUDA Hopper/Blackwell 上可用 (见 neighborhood_attn.py),
       故冒烟模型必须用 natten_parameters=None 回退 torch 注意力, 才能在 CPU 跑。
 
-跑法 (工作机 conda giga_models 环境):
-  /home/jovyan/miniconda/envs/giga_models/bin/python t4g_probe_cpu_smoke.py
+跑法 (工作机 conda EVEWorld 环境):
+  /home/jovyan/miniconda/envs/EVEWorld/bin/python t4g_probe_cpu_smoke.py
 """
 import os
 import sys

@@ -17,7 +17,7 @@ done
 
 REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-CONDA_ENV="${CONDA_ENV:-giga_models}"
+CONDA_ENV="${CONDA_ENV:-EVEWorld}"
 MANIFEST="${MANIFEST:-/data/datasets/gagi/flowwam/igr/manifest_640.json}"
 OUT_DIR="${OUT_DIR:-/data/datasets/gagi/flowwam/igr/anno_640}"
 N_GPU="${N_GPU:-8}"

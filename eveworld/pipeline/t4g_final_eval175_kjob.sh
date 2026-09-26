@@ -25,7 +25,7 @@ MODELDIR_ROOT="${GAGI}/eve_v2_outputs/t4g_final/experiments/models"
 OUTPUT_ROOT="${OUTPUT_ROOT:-${GAGI}/eve_v2_outputs/t4g_final/eval175_seed004_ema}"
 MANIFEST_ROOT="${MANIFEST_ROOT:-${OUTPUT_ROOT}_eval}"
 
-source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-giga_models}"
+source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-EVEWorld}"
 export PYTHONPATH="${EVEWORLD_ROOT}:${GIGA_MODELS_DIR}:${REPO_DIR}:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1 TOKENIZERS_PARALLELISM=false
 export HF_HOME="${HF_HOME:-${GAGI}/.hf_home}"

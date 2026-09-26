@@ -14,7 +14,7 @@ MAX_STEPS="${MAX_STEPS:-150}"
 EXPECTED_SAMPLES="${T4G_EXPECTED_SAMPLES:-91}"
 CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-50}"
 CHECKPOINT_TOTAL_LIMIT="${CHECKPOINT_TOTAL_LIMIT:-3}"
-PYTHON="/home/jovyan/miniconda/envs/giga_models/bin/python"
+PYTHON="/home/jovyan/miniconda/envs/EVEWorld/bin/python"
 
 run_check() {
   [[ -f "${PACKED}/config.json" ]] || { echo "missing packed data: ${PACKED}"; exit 1; }

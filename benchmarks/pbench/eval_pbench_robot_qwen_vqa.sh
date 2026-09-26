@@ -14,7 +14,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-CONDA_ENV="${CONDA_ENV:-giga_models}"
+CONDA_ENV="${CONDA_ENV:-EVEWorld}"
 
 METADATA_JSONL="${METADATA_JSONL:-/home/jovyan/gagibench/pbench/giga_input/pbench_robot_it2v.metadata.jsonl}"
 VIDEO_DIR="${VIDEO_DIR:-/data/datasets/gagi/giga_world_0_outputs/pbench_robot_serving_full_20260612_145541}"
@@ -56,7 +56,7 @@ Missing Python package: openai
 
 Install it in the conda env with:
   source ~/miniconda/etc/profile.d/conda.sh
-  conda activate "${CONDA_ENV:-giga_models}"
+  conda activate "${CONDA_ENV:-EVEWorld}"
   python -m pip install openai
 
 Then rerun:

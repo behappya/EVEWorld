@@ -10,7 +10,7 @@ for arg in "$@"; do [[ "${arg}" == *=* ]] && export "${arg}"; done
 REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 TP="${TRAIN_PYTHON:-/data/datasets/gagi/envs/giga_world_train_venv/bin/python}"
 OUT_DIR="${OUT_DIR:-/data/datasets/gagi/eve_v2_outputs/selfcase/g1}"
-source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-giga_models}"
+source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-EVEWorld}"
 export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
 cd "${EVEWORLD_ROOT}/eveworld/pipeline"
 # 12 条病例量小: 单进程单卡即可, 不分片

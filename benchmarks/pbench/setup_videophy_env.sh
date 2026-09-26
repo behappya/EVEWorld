@@ -15,7 +15,7 @@ else
 fi
 
 if [[ ! -x "${VENV_DIR}/bin/python" ]]; then
-  /home/jovyan/miniconda/envs/giga_models/bin/python -m venv "${VENV_DIR}"
+  /home/jovyan/miniconda/envs/EVEWorld/bin/python -m venv "${VENV_DIR}"
 fi
 
 "${VENV_DIR}/bin/python" -m pip install --upgrade pip setuptools wheel

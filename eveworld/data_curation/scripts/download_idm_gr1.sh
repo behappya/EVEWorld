@@ -18,25 +18,25 @@ DEST="${DEST:-/data/datasets/gagi/idm_gr1_probe}"
 # 若你的网络需要镜像, 取消下一行注释(或在调用前 export):
 # export HF_ENDPOINT="${HF_ENDPOINT:-https://hf-mirror.com}"
 
-# 优先用 giga_models 环境自带的 hf CLI (其 Python 有 huggingface_hub);
+# 优先用 EVEWorld 环境自带的 hf CLI (其 Python 有 huggingface_hub);
 # 避开 ~/.local/bin/hf —— 它 shebang 指向系统 /usr/bin/python3, 无 huggingface_hub。
 HF_BIN=""
 for cand in \
   "${HF_BIN_OVERRIDE:-}" \
-  "/home/jovyan/miniconda/envs/giga_models/bin/hf" \
-  "/home/jovyan/miniconda/envs/giga_models/bin/huggingface-cli" \
+  "/home/jovyan/miniconda/envs/EVEWorld/bin/hf" \
+  "/home/jovyan/miniconda/envs/EVEWorld/bin/huggingface-cli" \
   "hf" "huggingface-cli"; do
   [[ -z "$cand" ]] && continue
   if command -v "$cand" >/dev/null 2>&1; then HF_BIN="$cand"; break; fi
 done
-# 兜底: 直接用 giga_models 的 python -m huggingface_hub 下载
-GM_PY="/home/jovyan/miniconda/envs/giga_models/bin/python"
+# 兜底: 直接用 EVEWorld 的 python -m huggingface_hub 下载
+GM_PY="/home/jovyan/miniconda/envs/EVEWorld/bin/python"
 if [[ -z "$HF_BIN" ]]; then
   if [[ -x "$GM_PY" ]] && "$GM_PY" -c "import huggingface_hub" 2>/dev/null; then
     HF_BIN="$GM_PY -m huggingface_hub.commands.huggingface_cli"
   else
-    echo "[ERR] 未找到可用 hf CLI, 且 giga_models 无 huggingface_hub。" >&2
-    echo "      修复: ~/miniconda/envs/giga_models/bin/pip install -U 'huggingface_hub[cli]'" >&2
+    echo "[ERR] 未找到可用 hf CLI, 且 EVEWorld 无 huggingface_hub。" >&2
+    echo "      修复: ~/miniconda/envs/EVEWorld/bin/pip install -U 'huggingface_hub[cli]'" >&2
     exit 1
   fi
 fi

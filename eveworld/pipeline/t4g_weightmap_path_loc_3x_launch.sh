@@ -18,7 +18,7 @@ CHECKPOINT_INTERVAL="${CHECKPOINT_INTERVAL:-50}"
 CHECKPOINT_TOTAL_LIMIT="${CHECKPOINT_TOTAL_LIMIT:-8}"
 SEED="6666"
 EXPECTED_SAMPLES=92
-PYTHON="${PYTHON:-/home/jovyan/miniconda/envs/giga_models/bin/python}"
+PYTHON="${PYTHON:-/home/jovyan/miniconda/envs/EVEWorld/bin/python}"
 
 run_check() {
   [[ -f "${PACKED}/config.json" ]] || { echo "missing packed data: ${PACKED}"; exit 1; }

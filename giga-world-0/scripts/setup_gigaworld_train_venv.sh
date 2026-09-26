@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Create a lightweight training venv that reuses the existing giga_models conda
+# Create a lightweight training venv that reuses the existing EVEWorld conda
 # env for heavy packages such as torch/natten/deepspeed, while overriding the
 # Python packages that VBench commonly downgrades.
 #
-# This keeps VBench on conda env giga_models and uses this venv only for
+# This keeps VBench on conda env EVEWorld and uses this venv only for
 # GigaWorld training/inference.
 
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-CONDA_ENV="${CONDA_ENV:-giga_models}"
+CONDA_ENV="${CONDA_ENV:-EVEWorld}"
 TRAIN_VENV="${TRAIN_VENV:-/data/datasets/gagi/envs/giga_world_train_venv}"
 PYTHONPATH_ROOT="${PYTHONPATH_ROOT:-${EVEWORLD_ROOT}:${EVEWORLD_ROOT}/giga-world-0:${EVEWORLD_ROOT}/giga-models}"
 export TRAIN_VENV

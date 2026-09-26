@@ -4,7 +4,7 @@
 set -uo pipefail
 
 source /home/jovyan/miniconda/etc/profile.d/conda.sh
-conda activate "${CONDA_ENV:-giga_models}"
+conda activate "${CONDA_ENV:-EVEWorld}"
 
 GAGI=/data/datasets/gagi
 REPO=giga-world-0

@@ -16,7 +16,7 @@ CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
 TRAIN_PYTHON="${TRAIN_PYTHON:-/data/datasets/gagi/envs/giga_world_train_venv/bin/python}"
 OUT_DIR="${OUT_DIR:-/data/datasets/gagi/eve_v2_outputs/track4gen_probe/t4g_anno}"
 NGPU="${NGPU:-8}"
-source "${CONDA_SH}"; conda activate "${CONDA_ENV:-giga_models}"
+source "${CONDA_SH}"; conda activate "${CONDA_ENV:-EVEWorld}"
 export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
 cd "${EVEWORLD_ROOT}/eveworld/pipeline"
 nvidia-smi || true

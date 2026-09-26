@@ -8,7 +8,7 @@ GigaWorld-0 偷懒案例抽帧 + 横向拼图工具（EVE Model-Laziness 可视�
 物体提前到位 / 瞬移 / 手还在空挥（终态早于必要操作）。
 
 用哪个 python 跑（有 cv2 4.11 / PIL / numpy）：
-    /home/jovyan/miniconda/envs/giga_models/bin/python extract_laziness_frames.py ...
+    /home/jovyan/miniconda/envs/EVEWorld/bin/python extract_laziness_frames.py ...
 
 三种模式：
   1) survey：均匀抽 N 帧（带帧号+秒标注）拼 survey 长图，先看整段轨迹再挑帧
