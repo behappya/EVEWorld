@@ -2,7 +2,7 @@
 
 Official code release for the paper **"EVEWorld: Physical Evolution Supervision for Embodied World Models"** (under review).
 
-![Teaser: EVEWorld vs. Standard SFT on Model Laziness](assets/teaser.png)
+![Teaser: EVEWorld vs. Standard SFT on Model Laziness](assets/teaser.svg)
 
 ## Overview
 
