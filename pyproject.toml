@@ -1,0 +1,91 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eveworld"
+version = "1.0.0"
+description = "EVEWorld: Physical Evolution Supervision for Embodied World Models"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "EVEWorld Authors" }]
+keywords = ["world-models", "embodied-ai", "video-generation", "physical-evolution"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+    "omegaconf>=2.3",
+    "einops>=0.8",
+    "pillow>=10.0",
+    "tqdm>=4.66",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+# Backbone fine-tuning (GigaWorld-0 / FlowWAM training entry points).
+train = [
+    "torch>=2.1",
+    "torchvision",
+    "diffusers>=0.30",
+    "transformers>=4.33",
+    "accelerate>=1.0",
+    "peft>=0.5",
+    "safetensors",
+    "datasets>=3.0",
+    "tensorboard",
+    "fairscale",
+]
+# Model Laziness Rate, instruction following and the benchmark harnesses.
+eval = [
+    "torch>=2.1",
+    "torchvision",
+    "opencv-python>=4.8",
+    "scipy>=1.11",
+    "scikit-image>=0.22",
+    "scikit-learn>=1.3",
+    "lpips>=0.1.4",
+    "segment-anything>=1.0",
+    "av>=12.0",
+    "decord>=0.6",
+    "imageio>=2.34",
+    "imageio-ffmpeg",
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+    "openai>=1.30",
+    "google-genai>=1.0",
+]
+dev = [
+    "pytest>=7.4",
+    "pre-commit>=3.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/behappya/EVEWorld"
+Repository = "https://github.com/behappya/EVEWorld"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["eveworld*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["src"]
+
+[tool.isort]
+profile = "black"
+line_length = 150
+
+[tool.black]
+line-length = 150
+skip-string-normalization = true
+
+[tool.flake8]
+max-line-length = 150
+extend-ignore = ["E203", "W503", "E501"]
+exclude = [".git", "__pycache__", "build", "dist", "third_party"]

@@ -1,43 +1,55 @@
-exclude: ^3rdparty/
+# Format and lint hooks for a local commit. The version floors and the settings below mirror
+# pyproject.toml, so a run of `pre-commit run --all-files` and an editor configured from
+# pyproject.toml agree with each other. Heavier checks stay out of the commit path: the test suite
+# is a manual-stage hook, run with `pre-commit run --hook-stage manual pytest`.
+
+exclude: |
+  (?x)^(
+    third_party/|
+    assets/|
+    outputs/|
+    paper/|
+    .*\.(mp4|png|svg|pdf)
+  )$
+
 repos:
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-  - repo: https://github.com/psf/black
-    rev: 23.3.0
-    hooks:
-      - id: black
-        args: ["--line-length", "150", "--skip-string-normalization"]
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
-    hooks:
-      - id: flake8
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
-      - id: requirements-txt-fixer
-      - id: double-quote-string-fixer
+      - id: check-yaml
       - id: check-merge-conflict
-      - id: fix-encoding-pragma
-        args: ["--remove"]
-#  - repo: https://github.com/codespell-project/codespell
-#    rev: v2.2.4
-#    hooks:
-#      - id: codespell
-  - repo: https://github.com/executablebooks/mdformat
-    rev: 0.7.16
+      - id: check-added-large-files
+        args: ["--maxkb=2048"]
+      - id: mixed-line-ending
+        args: ["--fix=no"]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
     hooks:
-      - id: mdformat
-        args: ["--number"]
-        additional_dependencies:
-          - mdformat-openmmlab
-          - mdformat_frontmatter
-          - linkify-it-py
-  - repo: https://github.com/PyCQA/docformatter
-    rev: 06907d0
+      - id: isort
+        args: ["--profile", "black", "--line-length", "150"]
+
+  - repo: https://github.com/psf/black
+    rev: 24.4.2
     hooks:
-      - id: docformatter
-        args: ["--in-place", "--wrap-descriptions", "150"]
+      - id: black
+        args: ["--line-length", "150", "--skip-string-normalization"]
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.1.0
+    hooks:
+      - id: flake8
+        args: ["--max-line-length", "150", "--extend-ignore", "E203,W503,E501"]
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        args: ["tests/"]
+        pass_filenames: false
+        always_run: true
+        stages: [manual]

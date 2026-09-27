@@ -1,0 +1,51 @@
+# Environment for the evaluation suite: Model Laziness Rate, the
+# instruction-following judges and the per-benchmark harnesses.
+#
+#   conda env create -f envs/evaluation.yaml
+#   conda activate eveworld-eval
+#   pip install -e .
+#
+# The MLR detector additionally needs GroundingDINO and SAM2, which are not on
+# PyPI; both are installed from source in scripts/setup/check_environment.py's
+# instructions (see docs/evaluation.md).
+name: eveworld-eval
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11
+  - libgl
+  - libglib
+  - git-lfs
+  - pip
+  - pip:
+      - torch==2.11.0
+      - torchvision==0.26.0
+      - transformers==4.33.2
+      - numpy==1.26.4
+      - scipy==1.17.1
+      - scikit-image==0.26.0
+      - scikit-learn==1.9.0
+      - scikit-video==1.1.11
+      - opencv-python==4.11.0.86
+      - av==17.1.0
+      - decord==0.6.0
+      - torchcodec==0.14.0
+      - pillow==12.3.0
+      - imageio==2.37.3
+      - imageio-ffmpeg==0.6.0
+      - lpips==0.1.4
+      - segment-anything==1.0
+      - datasets==3.6.0
+      - pandas==3.0.3
+      - matplotlib==3.11.0
+      - tqdm==4.68.3
+      - openai==2.44.0
+      - google-genai==2.10.0
+      - omegaconf==2.3.1
+      - pyyaml==6.0.3
+      - jsonlines==4.0.0
+      - rich==15.0.0
+      - regex==2026.5.9
+      - sentencepiece==0.2.1
+      - ftfy==6.3.1
