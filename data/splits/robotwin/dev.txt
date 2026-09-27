@@ -1,0 +1,59 @@
+# RoboTwin checkpoint-screening dev split.
+#
+# The episode-45 slice of the held-out range: 50 tasks x episode 45 = 50 rows,
+# one row per task. This slice is disjoint from the 200 remaining held-out rows
+# (episodes 46-49), which form the confirmation set, and disjoint from the
+# training pool (episodes 0-44); it is used only to screen checkpoints, while
+# the reported numbers use all 250 rows of heldout.txt.
+# scripts/prepare/prepare_robotwin.py regenerates the file from a data root.
+
+task_adjust_bottle_episode_45
+task_beat_block_hammer_episode_45
+task_blocks_ranking_rgb_episode_45
+task_blocks_ranking_size_episode_45
+task_click_alarmclock_episode_45
+task_click_bell_episode_45
+task_dump_bin_bigbin_episode_45
+task_grab_roller_episode_45
+task_handover_block_episode_45
+task_hanging_mug_episode_45
+task_lift_pot_episode_45
+task_move_can_pot_episode_45
+task_move_pillbottle_pad_episode_45
+task_move_playingcard_away_episode_45
+task_move_stapler_pad_episode_45
+task_open_laptop_episode_45
+task_open_microwave_episode_45
+task_pick_diverse_bottles_episode_45
+task_pick_dual_bottles_episode_45
+task_pick_apple_mark_episode_45
+task_place_a2b_left_episode_45
+task_place_a2b_right_episode_45
+task_place_bread_basket_episode_45
+task_place_bread_skillet_episode_45
+task_place_burger_fries_episode_45
+task_place_can_basket_episode_45
+task_place_cans_plasticbox_episode_45
+task_place_container_plate_episode_45
+task_place_dual_shoes_episode_45
+task_place_empty_cup_episode_45
+task_place_fan_episode_45
+task_place_mouse_pad_episode_45
+task_place_object_basket_episode_45
+task_place_object_scale_episode_45
+task_place_object_stand_episode_45
+task_place_phone_stand_episode_45
+task_place_shoe_episode_45
+task_press_stapler_episode_45
+task_put_bottles_dustbin_episode_45
+task_put_object_cabinet_episode_45
+task_rotate_qrcode_episode_45
+task_scan_object_episode_45
+task_shake_bottle_episode_45
+task_shake_bottle_horizontally_episode_45
+task_stack_blocks_three_episode_45
+task_stack_blocks_two_episode_45
+task_stack_bowls_three_episode_45
+task_stack_bowls_two_episode_45
+task_stamp_seal_episode_45
+task_turn_switch_episode_45

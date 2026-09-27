@@ -1,0 +1,30 @@
+{
+  "config": "configs/eval/ewmbench.yaml",
+  "name": "eval_ewmbench",
+  "protocol": "ewmbench_table4_v1",
+  "command": "'python scripts/evaluate/eval_ewmbench.py' --config configs/eval/ewmbench.yaml --pred-dir /tmp/eval_smoke/ewmbench/eveworld_dataset --scores /tmp/eval_smoke/ewmbench --limit 2",
+  "pred_dir": "/tmp/eval_smoke/ewmbench/eveworld_dataset",
+  "scores_csv": "/tmp/eval_smoke/ewmbench/eveworld_dataset/final_results.csv",
+  "model": "eveworld",
+  "records": 2,
+  "scores": {
+    "motion": 1.9665,
+    "semantics": 2.359,
+    "dyn": 0.535,
+    "hsr": 0.805,
+    "ndtw": 0.6265,
+    "scene": 0.77,
+    "overall": 5.0955,
+    "bleu": 0.405,
+    "clip": 0.7155,
+    "diversity": 0.331,
+    "logic": 0.9075,
+    "psnr": 21.25,
+    "ssim": 0.808,
+    "model": "eveworld",
+    "rows": 2,
+    "clips": 1,
+    "tasks": 1,
+    "trials": 2
+  }
+}

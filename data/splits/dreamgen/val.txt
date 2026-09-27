@@ -1,0 +1,19 @@
+# DreamGen / GR1 fine-tuning split - held-out validation clips.
+#
+# 12 clips held out of the 92-clip post-training set. They are used for
+# checkpoint selection and protocol development and are excluded from the
+# reported DreamGenBench numbers, which come from test.txt. One 5-digit clip
+# stem per line; scripts/prepare/prepare_dreamgen.py regenerates the file.
+
+00093
+00094
+00095
+00096
+00097
+00098
+00099
+00100
+00101
+00102
+00103
+00104

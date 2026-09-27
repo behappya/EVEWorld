@@ -1,0 +1,42 @@
+Template note: the judge runner reads this file, fills the `requirement`, `question` and `answer`
+slots, and then reads the verdict object described under "Final answer". Any other template that keeps
+those three slots and produces the same object can be used instead of this one.
+
+You are reviewing one generated video against one instruction for a household manipulation benchmark.
+The video is supplied to you as a short sequence of decoded frames, in temporal order. Judge the video
+only: never score the instruction itself, and never assume an action happened because the text says so.
+
+  Instruction: {question}
+  Requirement: {requirement}
+  Response: {answer}
+
+Read the instruction once, then answer one question at a time:
+
+  A. Which object does the instruction single out, and is that object visible in the frames?
+  B. Where is it at the start, where is it at the end, and does that match the places the instruction
+     names?
+  C. Does its appearance (colour, material, shape) agree with the words of the instruction?
+  D. Does the number of manipulated instances match?
+  E. Is the action the instruction names the action that the frames actually show?
+  F. Does the result arrive through that action, rather than through a cut, a teleport or a frozen
+     object that never moves?
+
+Weigh the answers into a single score with this rubric. The weights add up to 100.
+
+  | Criterion          | Weight | Full credit when                                            |
+  |--------------------|--------|-------------------------------------------------------------|
+  | object presence    | 25     | the named object is visible and is the right instance       |
+  | spatial relation   | 20     | it ends where the instruction says it should                |
+  | attribute          | 10     | colour, material and shape agree with the instruction       |
+  | count              | 15     | the number of instances matches the instruction             |
+  | action             | 20     | the instruction's action is the action shown                |
+  | no shortcut        | 10     | the result is reached by acting, not by a cut or a freeze   |
+
+Award full, half or no weight on each line. Do not award the no-shortcut weight to a clip whose object
+never leaves its starting position. A clip whose target object is never visible scores 0 overall.
+
+Final answer. Close with a single JSON object on its own, and put the reasoning in the reason field as
+one sentence:
+{"score": <number 0-100, rounded to an integer>, "verdict": "pass" when the score is 60 or above and
+"fail" otherwise, "categories": {"object_presence": <0-2>, "spatial_relation": <0-2>, "attribute":
+<0-2>, "count": <0-2>, "action": <0-2>, "no_shortcut": <0-2>}, "reason": "<one sentence>"}

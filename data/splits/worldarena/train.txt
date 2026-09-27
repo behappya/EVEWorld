@@ -1,0 +1,24 @@
+# WorldArena 1.0 protocol calibration manifest.
+#
+# WorldArena 1.0 is an evaluation-only suite: it carries no training corpus, so
+# this file selects the 16 requests that were used to freeze the detector
+# thresholds and the occlusion rule before the final evaluation (see
+# configs/eval/mlr/worldarena.yaml). The remaining requests are evaluated with
+# that frozen protocol and are never trained on.
+
+fixed_scene_task_episode32
+fixed_scene_task_episode95
+fixed_scene_task_episode158
+fixed_scene_task_episode221
+fixed_scene_task_episode284
+fixed_scene_task_episode347
+fixed_scene_task_episode410
+fixed_scene_task_episode473
+fixed_scene_task_episode536
+fixed_scene_task_episode599
+fixed_scene_task_episode662
+fixed_scene_task_episode725
+fixed_scene_task_episode788
+fixed_scene_task_episode851
+fixed_scene_task_episode914
+fixed_scene_task_episode977

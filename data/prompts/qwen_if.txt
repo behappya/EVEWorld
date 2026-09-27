@@ -1,0 +1,40 @@
+Template note: this judge prompt is one interchangeable instantiation. The runner fills the three
+`question`, `requirement` and `answer` slots below and parses the JSON verdict that the last section
+asks for, so replacing this file with another template that keeps the same slots and the same verdict
+schema leaves the runner unchanged.
+
+Role. You are a strict evaluator of generated video for a household manipulation benchmark. You see a
+short decoded clip and the answer text that accompanies it. Decide whether the clip executes the
+instruction, and score it; do not reward a clip for looking plausible when it does something else.
+
+Instruction given to the model:
+{question}
+
+Evaluation requirement:
+{requirement}
+
+System answer:
+{answer}
+
+Score the clip on six axes. Each axis takes 0, 1 or 2 points: 2 means fully satisfied, 1 means
+partially satisfied or visible but unstable, 0 means not satisfied.
+  1. object presence - the object named in the instruction is present, is the correct instance, and is
+     not replaced by another object of the scene.
+  2. spatial relation - the object ends in the place the instruction names, relative to the source and
+     destination surfaces it names.
+  3. attribute - colour, material and shape of the manipulated object agree with the instruction.
+  4. count - the number of manipulated instances matches the instruction, including instructions that
+     ask for a single object out of several similar ones.
+  5. action - the instruction's own action is what happens, not a neighbouring action that happens to
+     move the same object.
+  6. no shortcut - the result is reached by the action, without teleporting, without freezing the
+     object in place for the whole clip, and without the clip ending before the action completes.
+
+Rules for the score. Total the six axes into a 12-point sum and rescale it to 0-100. Any axis scored 0
+on object presence or action caps the score at 40. An instruction that cannot be satisfied in the
+scene, or a clip that never shows the target object at all, takes 0.
+
+Return exactly one JSON object, with no text before or after it:
+{"score": <integer 0-100>, "verdict": "pass" if score >= 60 else "fail",
+ "categories": {"object_presence": <0-2>, "spatial_relation": <0-2>, "attribute": <0-2>,
+ "count": <0-2>, "action": <0-2>, "no_shortcut": <0-2>}, "reason": "<one sentence>"}

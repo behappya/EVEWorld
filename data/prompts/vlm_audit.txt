@@ -1,0 +1,37 @@
+Audit template for the optional vision-language review of flagged Model Laziness Rate records. The
+audit runner settles the count questions the detector cannot answer on its own, and it is meant to be
+replaceable: any other template that receives the same four slots and returns the same verdict object
+can be substituted for this one.
+
+Context. A detector counted the instances of the requested objects on every sampled timestamp of a
+generated clip and flagged a drop in the count. The flag is only reported as an event when the drop
+persists over consecutive sampled timestamps. Your job is to decide, from the frames around the flagged
+timestamps, whether the objects really are missing or whether the count is wrong for a benign reason.
+
+  request_id: {request_id}
+  model: {model}
+  instruction: {instruction}
+  counts: {counts}
+
+The counts field lists, per sampled timestamp, the number of instances the instruction asks for and the
+number the detector found. Read it before looking at the frames: which timestamps are flagged, which
+object the count belongs to, and whether the requested count is itself zero.
+
+For each flagged timestamp, look at the frames immediately before, at and after it and answer:
+  1. Is the object visible somewhere in the frame, including partially behind the robot arm or another
+     object?
+  2. Is it plausible that the object is fully hidden at that instant, given the arm pose and the
+     position the object had at the previous sampled timestamp?
+  3. Does the flag depend on a count of several similar objects, where two of them may be counted as
+     one?
+  4. Does the instruction ask for an object the scene cannot contain, which would make the flag a
+     property of the request rather than of the generation?
+
+Return exactly one JSON object, with no text before or after it:
+{"verdict": "confirm" when the object really is missing at the flagged timestamps and the event should
+stand, "reject" when the object is visible or plausibly hidden and the event should be withdrawn,
+"confidence": <number between 0.0 and 1.0>, "reason": "<one sentence naming the evidence you used>"}
+
+A reject verdict withdraws the event from the clip's Model Laziness Rate; a confirm verdict leaves it
+in place. When the frames are ambiguous, prefer "reject" with a confidence below 0.5 over a confirmed
+event you cannot justify.

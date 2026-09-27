@@ -1,0 +1,884 @@
+{
+  "00105": {
+    "prompt": "Push the remote control along the top shelf towards the robot.",
+    "target": "remote control",
+    "source": "top_shelf",
+    "destination": null,
+    "eligible": false
+  },
+  "00106": {
+    "prompt": "Lift the milk carton off the tray and put it in the drawer.",
+    "target": "milk carton",
+    "source": "tray",
+    "destination": "drawer",
+    "eligible": true
+  },
+  "00107": {
+    "prompt": "Shake the green apple while it stays above the stove.",
+    "target": "green apple",
+    "source": "stove",
+    "destination": null,
+    "eligible": false
+  },
+  "00108": {
+    "prompt": "Hold the silver fork above the trash bin and wait for the gripper.",
+    "target": "silver fork",
+    "source": "trash_bin",
+    "destination": null,
+    "eligible": false
+  },
+  "00109": {
+    "prompt": "Lift the red pepper off the table and hold it steady.",
+    "target": "red pepper",
+    "source": "table",
+    "destination": null,
+    "eligible": false
+  },
+  "00110": {
+    "prompt": "Move the metal can from the counter into the microwave.",
+    "target": "metal can",
+    "source": "counter",
+    "destination": "microwave",
+    "eligible": true
+  },
+  "00111": {
+    "prompt": "Lift the coffee cup off the wooden shelf and hold it steady.",
+    "target": "coffee cup",
+    "source": "wooden_shelf",
+    "destination": null,
+    "eligible": false
+  },
+  "00112": {
+    "prompt": "Pick up the green bottle on the blue tray and place it on the kitchen island.",
+    "target": "green bottle",
+    "source": "blue_tray",
+    "destination": "kitchen_island",
+    "eligible": true
+  },
+  "00113": {
+    "prompt": "Keep the frying pan steady in front of the camera.",
+    "target": "frying pan",
+    "source": null,
+    "destination": null,
+    "eligible": false
+  },
+  "00114": {
+    "prompt": "Push the yellow bowl along the dish rack towards the robot.",
+    "target": "yellow bowl",
+    "source": "dish_rack",
+    "destination": null,
+    "eligible": false
+  },
+  "00115": {
+    "prompt": "Shake the green bottle while it stays above the desk.",
+    "target": "green bottle",
+    "source": "desk",
+    "destination": null,
+    "eligible": false
+  },
+  "00116": {
+    "prompt": "Lift the green pepper off the top shelf and put it in the drawer.",
+    "target": "green pepper",
+    "source": "top_shelf",
+    "destination": "drawer",
+    "eligible": true
+  },
+  "00117": {
+    "prompt": "Lift the black mug off the sink and hold it steady.",
+    "target": "black mug",
+    "source": "sink",
+    "destination": null,
+    "eligible": false
+  },
+  "00118": {
+    "prompt": "Relocate the pink sponge from the top shelf to the shelf.",
+    "target": "pink sponge",
+    "source": "top_shelf",
+    "destination": "shelf",
+    "eligible": true
+  },
+  "00119": {
+    "prompt": "Relocate the red block from the work bench to the side table.",
+    "target": "red block",
+    "source": "work_bench",
+    "destination": "side_table",
+    "eligible": true
+  },
+  "00120": {
+    "prompt": "Lift the wooden spatula off the cabinet and hold it steady.",
+    "target": "wooden spatula",
+    "source": "cabinet",
+    "destination": null,
+    "eligible": false
+  },
+  "00121": {
+    "prompt": "Take the orange ball from the fridge and put it on the desk.",
+    "target": "orange ball",
+    "source": "fridge",
+    "destination": "desk",
+    "eligible": true
+  },
+  "00122": {
+    "prompt": "Take the silver fork from the drying rack and put it on the side table.",
+    "target": "silver fork",
+    "source": "drying_rack",
+    "destination": "side_table",
+    "eligible": true
+  },
+  "00123": {
+    "prompt": "Lift the blue mug off the microwave and put it in the dish rack.",
+    "target": "blue mug",
+    "source": "microwave",
+    "destination": "dish_rack",
+    "eligible": true
+  },
+  "00124": {
+    "prompt": "Transfer the brown mug from the cutting board onto the work bench.",
+    "target": "brown mug",
+    "source": "cutting_board",
+    "destination": "work_bench",
+    "eligible": true
+  },
+  "00125": {
+    "prompt": "Push the toothbrush along the work bench towards the robot.",
+    "target": "toothbrush",
+    "source": "work_bench",
+    "destination": null,
+    "eligible": false
+  },
+  "00126": {
+    "prompt": "Push the small bowl along the drawer towards the robot.",
+    "target": "small bowl",
+    "source": "drawer",
+    "destination": null,
+    "eligible": false
+  },
+  "00127": {
+    "prompt": "Pick up the black cable on the stove and place it on the desk.",
+    "target": "black cable",
+    "source": "stove",
+    "destination": "desk",
+    "eligible": true
+  },
+  "00128": {
+    "prompt": "Take the black phone from the trash bin and put it on the shelf.",
+    "target": "black phone",
+    "source": "trash_bin",
+    "destination": "shelf",
+    "eligible": true
+  },
+  "00129": {
+    "prompt": "Relocate the blue plate from the wooden shelf to the desk.",
+    "target": "blue plate",
+    "source": "wooden_shelf",
+    "destination": "desk",
+    "eligible": true
+  },
+  "00130": {
+    "prompt": "Shake the plastic fork while it stays above the side table.",
+    "target": "plastic fork",
+    "source": "side_table",
+    "destination": null,
+    "eligible": false
+  },
+  "00131": {
+    "prompt": "Pick up the cereal box on the top shelf and place it on the shelf.",
+    "target": "cereal box",
+    "source": "top_shelf",
+    "destination": "shelf",
+    "eligible": true
+  },
+  "00132": {
+    "prompt": "Lift the soap bar off the shelf and put it in the dish rack.",
+    "target": "soap bar",
+    "source": "shelf",
+    "destination": "dish_rack",
+    "eligible": true
+  },
+  "00133": {
+    "prompt": "Shake the milk carton while it stays above the tray.",
+    "target": "milk carton",
+    "source": "tray",
+    "destination": null,
+    "eligible": false
+  },
+  "00134": {
+    "prompt": "Lift the gray bowl off the rack and put it in the dish rack.",
+    "target": "gray bowl",
+    "source": "rack",
+    "destination": "dish_rack",
+    "eligible": true
+  },
+  "00135": {
+    "prompt": "Shake the ceramic plate while it stays above the shelf.",
+    "target": "ceramic plate",
+    "source": "shelf",
+    "destination": null,
+    "eligible": false
+  },
+  "00136": {
+    "prompt": "Transfer the yellow bowl from the sink onto the rack.",
+    "target": "yellow bowl",
+    "source": "sink",
+    "destination": "rack",
+    "eligible": true
+  },
+  "00137": {
+    "prompt": "Shake the gray bowl while it stays above the microwave.",
+    "target": "gray bowl",
+    "source": "microwave",
+    "destination": null,
+    "eligible": false
+  },
+  "00138": {
+    "prompt": "Take the wooden block from the desk and put it on the wooden shelf.",
+    "target": "wooden block",
+    "source": "desk",
+    "destination": "wooden_shelf",
+    "eligible": true
+  },
+  "00139": {
+    "prompt": "Relocate the cloth towel from the microwave to the work bench.",
+    "target": "cloth towel",
+    "source": "microwave",
+    "destination": "work_bench",
+    "eligible": true
+  },
+  "00140": {
+    "prompt": "Push the plastic bottle along the stove towards the robot.",
+    "target": "plastic bottle",
+    "source": "stove",
+    "destination": null,
+    "eligible": false
+  },
+  "00141": {
+    "prompt": "Relocate the yellow sponge from the table to the shelf.",
+    "target": "yellow sponge",
+    "source": "table",
+    "destination": "shelf",
+    "eligible": true
+  },
+  "00142": {
+    "prompt": "Transfer the tape roll from the dish rack onto the top shelf.",
+    "target": "tape roll",
+    "source": "dish_rack",
+    "destination": "top_shelf",
+    "eligible": true
+  },
+  "00143": {
+    "prompt": "Push the green mug along the rack towards the robot.",
+    "target": "green mug",
+    "source": "rack",
+    "destination": null,
+    "eligible": false
+  },
+  "00144": {
+    "prompt": "Pick up the coffee cup on the work bench and place it on the side table.",
+    "target": "coffee cup",
+    "source": "work_bench",
+    "destination": "side_table",
+    "eligible": true
+  },
+  "00145": {
+    "prompt": "Hold the pink sponge above the cutting board and wait for the gripper.",
+    "target": "pink sponge",
+    "source": "cutting_board",
+    "destination": null,
+    "eligible": false
+  },
+  "00146": {
+    "prompt": "Hold the brown mug above the blue tray and wait for the gripper.",
+    "target": "brown mug",
+    "source": "blue_tray",
+    "destination": null,
+    "eligible": false
+  },
+  "00147": {
+    "prompt": "Transfer the plastic lid from the basket onto the shelf.",
+    "target": "plastic lid",
+    "source": "basket",
+    "destination": "shelf",
+    "eligible": true
+  },
+  "00148": {
+    "prompt": "Lift the silver spoon off the cart and hold it steady.",
+    "target": "silver spoon",
+    "source": "cart",
+    "destination": null,
+    "eligible": false
+  },
+  "00149": {
+    "prompt": "Lift the yellow banana off the stove and put it in the drawer.",
+    "target": "yellow banana",
+    "source": "stove",
+    "destination": "drawer",
+    "eligible": true
+  },
+  "00150": {
+    "prompt": "Transfer the white towel from the lower shelf onto the cutting board.",
+    "target": "white towel",
+    "source": "lower_shelf",
+    "destination": "cutting_board",
+    "eligible": true
+  },
+  "00151": {
+    "prompt": "Lift the tape roll off the trash bin and hold it steady.",
+    "target": "tape roll",
+    "source": "trash_bin",
+    "destination": null,
+    "eligible": false
+  },
+  "00152": {
+    "prompt": "Move the plastic bottle from the kitchen island into the microwave.",
+    "target": "plastic bottle",
+    "source": "kitchen_island",
+    "destination": "microwave",
+    "eligible": true
+  },
+  "00153": {
+    "prompt": "Relocate the aluminum tray from the coffee table to the counter.",
+    "target": "aluminum tray",
+    "source": "coffee_table",
+    "destination": "counter",
+    "eligible": true
+  },
+  "00154": {
+    "prompt": "Lift the pink cup off the side table and put it in the drawer.",
+    "target": "pink cup",
+    "source": "side_table",
+    "destination": "drawer",
+    "eligible": true
+  },
+  "00155": {
+    "prompt": "Push the metal can along the dish rack towards the robot.",
+    "target": "metal can",
+    "source": "dish_rack",
+    "destination": null,
+    "eligible": false
+  },
+  "00156": {
+    "prompt": "Lift the empty bottle off the drying rack and hold it steady.",
+    "target": "empty bottle",
+    "source": "drying_rack",
+    "destination": null,
+    "eligible": false
+  },
+  "00157": {
+    "prompt": "Shake the black phone while it stays above the rack.",
+    "target": "black phone",
+    "source": "rack",
+    "destination": null,
+    "eligible": false
+  },
+  "00158": {
+    "prompt": "Pick up the gray mug on the wooden shelf and place it on the desk.",
+    "target": "gray mug",
+    "source": "wooden_shelf",
+    "destination": "desk",
+    "eligible": true
+  },
+  "00159": {
+    "prompt": "Move the kitchen knife from the trash bin into the microwave.",
+    "target": "kitchen knife",
+    "source": "trash_bin",
+    "destination": "microwave",
+    "eligible": true
+  },
+  "00160": {
+    "prompt": "Transfer the yellow cup from the drawer onto the coffee table.",
+    "target": "yellow cup",
+    "source": "drawer",
+    "destination": "coffee_table",
+    "eligible": true
+  },
+  "00161": {
+    "prompt": "Relocate the hand towel from the rack to the cutting board.",
+    "target": "hand towel",
+    "source": "rack",
+    "destination": "cutting_board",
+    "eligible": true
+  },
+  "00162": {
+    "prompt": "Push the aluminum tray along the shelf towards the robot.",
+    "target": "aluminum tray",
+    "source": "shelf",
+    "destination": null,
+    "eligible": false
+  },
+  "00163": {
+    "prompt": "Move the blue notebook from the cabinet into the blue tray.",
+    "target": "blue notebook",
+    "source": "cabinet",
+    "destination": "blue_tray",
+    "eligible": true
+  },
+  "00164": {
+    "prompt": "Move the glass jar from the drawer into the blue tray.",
+    "target": "glass jar",
+    "source": "drawer",
+    "destination": "blue_tray",
+    "eligible": true
+  },
+  "00165": {
+    "prompt": "Lift the toy car off the kitchen island and hold it steady.",
+    "target": "toy car",
+    "source": "kitchen_island",
+    "destination": null,
+    "eligible": false
+  },
+  "00166": {
+    "prompt": "Push the red can along the basket towards the robot.",
+    "target": "red can",
+    "source": "basket",
+    "destination": null,
+    "eligible": false
+  },
+  "00167": {
+    "prompt": "Move the paper cup from the sink into the blue tray.",
+    "target": "paper cup",
+    "source": "sink",
+    "destination": "blue_tray",
+    "eligible": true
+  },
+  "00168": {
+    "prompt": "Transfer the wooden spatula from the counter onto the stove.",
+    "target": "wooden spatula",
+    "source": "counter",
+    "destination": "stove",
+    "eligible": true
+  },
+  "00169": {
+    "prompt": "Lift the small bowl off the blue tray and put it in the dish rack.",
+    "target": "small bowl",
+    "source": "blue_tray",
+    "destination": "dish_rack",
+    "eligible": true
+  },
+  "00170": {
+    "prompt": "Pick up the green mug on the side table and place it on the top shelf.",
+    "target": "green mug",
+    "source": "side_table",
+    "destination": "top_shelf",
+    "eligible": true
+  },
+  "00171": {
+    "prompt": "Wait until the plastic bottle stops moving in the scene.",
+    "target": "plastic bottle",
+    "source": null,
+    "destination": null,
+    "eligible": false
+  },
+  "00172": {
+    "prompt": "Hold the blue mug above the cart and wait for the gripper.",
+    "target": "blue mug",
+    "source": "cart",
+    "destination": null,
+    "eligible": false
+  },
+  "00173": {
+    "prompt": "Hold position and do not move the blue plate.",
+    "target": "blue plate",
+    "source": null,
+    "destination": null,
+    "eligible": false
+  },
+  "00174": {
+    "prompt": "Pick up the red apple on the tray and place it on the stove.",
+    "target": "red apple",
+    "source": "tray",
+    "destination": "stove",
+    "eligible": true
+  },
+  "00175": {
+    "prompt": "Hold the yellow banana above the counter and wait for the gripper.",
+    "target": "yellow banana",
+    "source": "counter",
+    "destination": null,
+    "eligible": false
+  },
+  "00176": {
+    "prompt": "Lift the blue pen off the fridge and hold it steady.",
+    "target": "blue pen",
+    "source": "fridge",
+    "destination": null,
+    "eligible": false
+  },
+  "00177": {
+    "prompt": "Take the water bottle from the dish rack and put it on the top shelf.",
+    "target": "water bottle",
+    "source": "dish_rack",
+    "destination": "top_shelf",
+    "eligible": true
+  },
+  "00178": {
+    "prompt": "Pick up the blue pen on the rack and place it on the cutting board.",
+    "target": "blue pen",
+    "source": "rack",
+    "destination": "cutting_board",
+    "eligible": true
+  },
+  "00179": {
+    "prompt": "Transfer the red can from the fridge onto the desk.",
+    "target": "red can",
+    "source": "fridge",
+    "destination": "desk",
+    "eligible": true
+  },
+  "00180": {
+    "prompt": "Hold the wooden block above the cabinet and wait for the gripper.",
+    "target": "wooden block",
+    "source": "cabinet",
+    "destination": null,
+    "eligible": false
+  },
+  "00181": {
+    "prompt": "Push the white towel along the tray towards the robot.",
+    "target": "white towel",
+    "source": "tray",
+    "destination": null,
+    "eligible": false
+  },
+  "00182": {
+    "prompt": "Move the green apple from the lower shelf into the microwave.",
+    "target": "green apple",
+    "source": "lower_shelf",
+    "destination": "microwave",
+    "eligible": true
+  },
+  "00183": {
+    "prompt": "Shake the soap bar while it stays above the top shelf.",
+    "target": "soap bar",
+    "source": "top_shelf",
+    "destination": null,
+    "eligible": false
+  },
+  "00184": {
+    "prompt": "Hold the blue notebook above the fridge and wait for the gripper.",
+    "target": "blue notebook",
+    "source": "fridge",
+    "destination": null,
+    "eligible": false
+  },
+  "00185": {
+    "prompt": "Shake the paper cup while it stays above the basket.",
+    "target": "paper cup",
+    "source": "basket",
+    "destination": null,
+    "eligible": false
+  },
+  "00186": {
+    "prompt": "Wait until the aluminum tray stops moving in the scene.",
+    "target": "aluminum tray",
+    "source": null,
+    "destination": null,
+    "eligible": false
+  },
+  "00187": {
+    "prompt": "Keep the pink cup steady in front of the camera.",
+    "target": "pink cup",
+    "source": null,
+    "destination": null,
+    "eligible": false
+  },
+  "00188": {
+    "prompt": "Take the white cup from the sink and put it on the rack.",
+    "target": "white cup",
+    "source": "sink",
+    "destination": "rack",
+    "eligible": true
+  },
+  "00189": {
+    "prompt": "Pick up the white lid on the microwave and place it on the work bench.",
+    "target": "white lid",
+    "source": "microwave",
+    "destination": "work_bench",
+    "eligible": true
+  },
+  "00190": {
+    "prompt": "Relocate the silver spoon from the shelf to the table.",
+    "target": "silver spoon",
+    "source": "shelf",
+    "destination": "table",
+    "eligible": true
+  },
+  "00191": {
+    "prompt": "Shake the red cup while it stays above the drawer.",
+    "target": "red cup",
+    "source": "drawer",
+    "destination": null,
+    "eligible": false
+  },
+  "00192": {
+    "prompt": "Transfer the steel wrench from the drying rack onto the side table.",
+    "target": "steel wrench",
+    "source": "drying_rack",
+    "destination": "side_table",
+    "eligible": true
+  },
+  "00193": {
+    "prompt": "Lift the remote control off the cart and put it in the dish rack.",
+    "target": "remote control",
+    "source": "cart",
+    "destination": "dish_rack",
+    "eligible": true
+  },
+  "00194": {
+    "prompt": "Push the white lid along the desk towards the robot.",
+    "target": "white lid",
+    "source": "desk",
+    "destination": null,
+    "eligible": false
+  },
+  "00195": {
+    "prompt": "Pick up the white plate on the shelf and place it on the table.",
+    "target": "white plate",
+    "source": "shelf",
+    "destination": "table",
+    "eligible": true
+  },
+  "00196": {
+    "prompt": "Pick up the black mug on the coffee table and place it on the counter.",
+    "target": "black mug",
+    "source": "coffee_table",
+    "destination": "counter",
+    "eligible": true
+  },
+  "00197": {
+    "prompt": "Hold the orange ball above the wooden shelf and wait for the gripper.",
+    "target": "orange ball",
+    "source": "wooden_shelf",
+    "destination": null,
+    "eligible": false
+  },
+  "00198": {
+    "prompt": "Take the toy car from the basket and put it on the shelf.",
+    "target": "toy car",
+    "source": "basket",
+    "destination": "shelf",
+    "eligible": true
+  },
+  "00199": {
+    "prompt": "Push the red apple along the microwave towards the robot.",
+    "target": "red apple",
+    "source": "microwave",
+    "destination": null,
+    "eligible": false
+  },
+  "00200": {
+    "prompt": "Hold the cooking pot above the drying rack and wait for the gripper.",
+    "target": "cooking pot",
+    "source": "drying_rack",
+    "destination": null,
+    "eligible": false
+  },
+  "00201": {
+    "prompt": "Hold the white cup above the coffee table and wait for the gripper.",
+    "target": "white cup",
+    "source": "coffee_table",
+    "destination": null,
+    "eligible": false
+  },
+  "00202": {
+    "prompt": "Lift the plastic lid off the coffee table and hold it steady.",
+    "target": "plastic lid",
+    "source": "coffee_table",
+    "destination": null,
+    "eligible": false
+  },
+  "00203": {
+    "prompt": "Shake the hand towel while it stays above the lower shelf.",
+    "target": "hand towel",
+    "source": "lower_shelf",
+    "destination": null,
+    "eligible": false
+  },
+  "00204": {
+    "prompt": "Push the pink cup along the lower shelf towards the robot.",
+    "target": "pink cup",
+    "source": "lower_shelf",
+    "destination": null,
+    "eligible": false
+  },
+  "00205": {
+    "prompt": "Lift the blue towel off the table and put it in the drawer.",
+    "target": "blue towel",
+    "source": "table",
+    "destination": "drawer",
+    "eligible": true
+  },
+  "00206": {
+    "prompt": "Push the yellow sponge along the side table towards the robot.",
+    "target": "yellow sponge",
+    "source": "side_table",
+    "destination": null,
+    "eligible": false
+  },
+  "00207": {
+    "prompt": "Lift the frying pan off the counter and hold it steady.",
+    "target": "frying pan",
+    "source": "counter",
+    "destination": null,
+    "eligible": false
+  },
+  "00208": {
+    "prompt": "Transfer the screwdriver from the kitchen island onto the side table.",
+    "target": "screwdriver",
+    "source": "kitchen_island",
+    "destination": "side_table",
+    "eligible": true
+  },
+  "00209": {
+    "prompt": "Hold the steel wrench above the kitchen island and wait for the gripper.",
+    "target": "steel wrench",
+    "source": "kitchen_island",
+    "destination": null,
+    "eligible": false
+  },
+  "00210": {
+    "prompt": "Lift the green pepper off the blue tray and hold it steady.",
+    "target": "green pepper",
+    "source": "blue_tray",
+    "destination": null,
+    "eligible": false
+  },
+  "00211": {
+    "prompt": "Move the cooking pot from the dish rack into the microwave.",
+    "target": "cooking pot",
+    "source": "dish_rack",
+    "destination": "microwave",
+    "eligible": true
+  },
+  "00212": {
+    "prompt": "Wait until the empty bottle stops moving in the scene.",
+    "target": "empty bottle",
+    "source": null,
+    "destination": null,
+    "eligible": false
+  },
+  "00213": {
+    "prompt": "Take the empty bottle from the kitchen island and put it on the side table.",
+    "target": "empty bottle",
+    "source": "kitchen_island",
+    "destination": "side_table",
+    "eligible": true
+  },
+  "00214": {
+    "prompt": "Move the plastic fork from the fridge into the blue tray.",
+    "target": "plastic fork",
+    "source": "fridge",
+    "destination": "blue_tray",
+    "eligible": true
+  },
+  "00215": {
+    "prompt": "Lift the ceramic plate off the work bench and put it in the drawer.",
+    "target": "ceramic plate",
+    "source": "work_bench",
+    "destination": "drawer",
+    "eligible": true
+  },
+  "00216": {
+    "prompt": "Lift the white plate off the cutting board and hold it steady.",
+    "target": "white plate",
+    "source": "cutting_board",
+    "destination": null,
+    "eligible": false
+  },
+  "00217": {
+    "prompt": "Relocate the brown box from the tray to the stove.",
+    "target": "brown box",
+    "source": "tray",
+    "destination": "stove",
+    "eligible": true
+  },
+  "00218": {
+    "prompt": "Move the wooden spoon from the cutting board into the blue tray.",
+    "target": "wooden spoon",
+    "source": "cutting_board",
+    "destination": "blue_tray",
+    "eligible": true
+  },
+  "00219": {
+    "prompt": "Transfer the red cup from the desk onto the wooden shelf.",
+    "target": "red cup",
+    "source": "desk",
+    "destination": "wooden_shelf",
+    "eligible": true
+  },
+  "00220": {
+    "prompt": "Hold the brown box above the table and wait for the gripper.",
+    "target": "brown box",
+    "source": "table",
+    "destination": null,
+    "eligible": false
+  },
+  "00221": {
+    "prompt": "Relocate the toothbrush from the cart to the lower shelf.",
+    "target": "toothbrush",
+    "source": "cart",
+    "destination": "lower_shelf",
+    "eligible": true
+  },
+  "00222": {
+    "prompt": "Shake the gray mug while it stays above the dish rack.",
+    "target": "gray mug",
+    "source": "dish_rack",
+    "destination": null,
+    "eligible": false
+  },
+  "00223": {
+    "prompt": "Hold position and do not move the pink sponge.",
+    "target": "pink sponge",
+    "source": null,
+    "destination": null,
+    "eligible": false
+  },
+  "00224": {
+    "prompt": "Hold position and do not move the remote control.",
+    "target": "remote control",
+    "source": null,
+    "destination": null,
+    "eligible": false
+  },
+  "00225": {
+    "prompt": "Keep the wooden spoon steady in front of the camera.",
+    "target": "wooden spoon",
+    "source": null,
+    "destination": null,
+    "eligible": false
+  },
+  "00226": {
+    "prompt": "Lift the cereal box off the blue tray and hold it steady.",
+    "target": "cereal box",
+    "source": "blue_tray",
+    "destination": null,
+    "eligible": false
+  },
+  "00227": {
+    "prompt": "Take the frying pan from the drawer and put it on the coffee table.",
+    "target": "frying pan",
+    "source": "drawer",
+    "destination": "coffee_table",
+    "eligible": true
+  },
+  "00228": {
+    "prompt": "Shake the blue towel while it stays above the work bench.",
+    "target": "blue towel",
+    "source": "work_bench",
+    "destination": null,
+    "eligible": false
+  },
+  "00229": {
+    "prompt": "Take the red pepper from the cabinet and put it on the table.",
+    "target": "red pepper",
+    "source": "cabinet",
+    "destination": "table",
+    "eligible": true
+  },
+  "00230": {
+    "prompt": "Hold the black cable above the sink and wait for the gripper.",
+    "target": "black cable",
+    "source": "sink",
+    "destination": null,
+    "eligible": false
+  }
+}

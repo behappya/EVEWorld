@@ -1,0 +1,5002 @@
+{
+  "fixed_scene_task_episode1": {
+    "prompt": "Advance the robot base until the fridge is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode2": {
+    "prompt": "Drive the robot base towards the stove.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode3": {
+    "prompt": "Hand the blue mug from the left gripper to the right one.",
+    "target": "blue mug",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode4": {
+    "prompt": "Wait until the stove is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode5": {
+    "prompt": "Hand the gray mug from the left gripper to the right one.",
+    "target": "gray mug",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode6": {
+    "prompt": "Move everything from the counter to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode7": {
+    "prompt": "Rotate the robot base to face the dish rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode8": {
+    "prompt": "Turn the robot base towards the shelf and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode9": {
+    "prompt": "Slide the wooden spoon to the right edge of the dish rack.",
+    "target": "wooden spoon",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode10": {
+    "prompt": "Hand the small bowl from the left gripper to the right one.",
+    "target": "small bowl",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode11": {
+    "prompt": "Rearrange the tools on the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode12": {
+    "prompt": "Rotate the robot base to face the sink.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode13": {
+    "prompt": "Keep the camera pointed at the counter.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode14": {
+    "prompt": "Tidy up the kitchen island.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode15": {
+    "prompt": "Slide the red block to the right edge of the sink.",
+    "target": "red block",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode16": {
+    "prompt": "Move everything from the cutting board to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode17": {
+    "prompt": "Move everything from the wooden shelf to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode18": {
+    "prompt": "Sort the containers that sit on the cart by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode19": {
+    "prompt": "Wait until the shelf is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode20": {
+    "prompt": "Shift the robot base along the blue tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode21": {
+    "prompt": "Inspect the side table before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode22": {
+    "prompt": "Put the silver fork down on the cabinet.",
+    "target": "silver fork",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode23": {
+    "prompt": "Clear the desk and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode24": {
+    "prompt": "Do not touch anything on the desk.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode25": {
+    "prompt": "Rearrange the tools on the work bench.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode26": {
+    "prompt": "Move everything from the counter to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode27": {
+    "prompt": "Move the robot base to the other side of the coffee table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode28": {
+    "prompt": "Shift the robot base along the stove.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode29": {
+    "prompt": "Rotate the robot base to face the coffee table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode30": {
+    "prompt": "Clear the work bench and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode31": {
+    "prompt": "Advance the robot base until the microwave is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode32": {
+    "prompt": "Rotate the robot base to face the microwave.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode33": {
+    "prompt": "Slide the cloth towel to the right edge of the side table.",
+    "target": "cloth towel",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode34": {
+    "prompt": "Push the objects on the drying rack towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode35": {
+    "prompt": "Put the plastic lid down on the lower shelf.",
+    "target": "plastic lid",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode36": {
+    "prompt": "Move the robot base to the other side of the cart.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode37": {
+    "prompt": "Rearrange the tools on the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode38": {
+    "prompt": "Back the robot base away from the kitchen island.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode39": {
+    "prompt": "Move everything from the trash bin to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode40": {
+    "prompt": "Tidy up the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode41": {
+    "prompt": "Arrange the objects on the drawer into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode42": {
+    "prompt": "Lift the black phone above the wooden shelf and hold it there.",
+    "target": "black phone",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode43": {
+    "prompt": "Turn the robot base towards the kitchen island and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode44": {
+    "prompt": "Move everything from the shelf to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode45": {
+    "prompt": "Move everything from the top shelf to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode46": {
+    "prompt": "Rearrange the tools on the cutting board.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode47": {
+    "prompt": "Move everything from the drying rack to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode48": {
+    "prompt": "Hand the cloth towel from the left gripper to the right one.",
+    "target": "cloth towel",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode49": {
+    "prompt": "Stack the bowls that are on the kitchen island.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode50": {
+    "prompt": "Clear the dish rack and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode51": {
+    "prompt": "Move everything from the wooden shelf to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode52": {
+    "prompt": "Place the yellow cup next to the fridge.",
+    "target": "yellow cup",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode53": {
+    "prompt": "Place the plastic lid next to the blue tray.",
+    "target": "plastic lid",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode54": {
+    "prompt": "Clear the drying rack and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode55": {
+    "prompt": "Move everything from the drying rack to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode56": {
+    "prompt": "Inspect the blue tray before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode57": {
+    "prompt": "Line up the cups along the edge of the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode58": {
+    "prompt": "Advance the robot base until the basket is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode59": {
+    "prompt": "Put the blue pen down on the stove.",
+    "target": "blue pen",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode60": {
+    "prompt": "Shift the robot base along the desk.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode61": {
+    "prompt": "Clear the trash bin and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode62": {
+    "prompt": "Tidy up the wooden shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode63": {
+    "prompt": "Hand the red block from the left gripper to the right one.",
+    "target": "red block",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode64": {
+    "prompt": "Let the scene on the rack settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode65": {
+    "prompt": "Move everything from the kitchen island to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode66": {
+    "prompt": "Clear the shelf and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode67": {
+    "prompt": "Move the white plate into the microwave.",
+    "target": "white plate",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode68": {
+    "prompt": "Slide the green pepper to the right edge of the side table.",
+    "target": "green pepper",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode69": {
+    "prompt": "Group the small parts next to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode70": {
+    "prompt": "Move the red block into the sink.",
+    "target": "red block",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode71": {
+    "prompt": "Pair the objects on the microwave and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode72": {
+    "prompt": "Move everything from the coffee table to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode73": {
+    "prompt": "Inspect the shelf before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode74": {
+    "prompt": "Line up the cups along the edge of the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode75": {
+    "prompt": "Move the robot base to the other side of the dish rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode76": {
+    "prompt": "Watch the white plate until it comes to rest.",
+    "target": "white plate",
+    "mover": null
+  },
+  "fixed_scene_task_episode77": {
+    "prompt": "Drive the robot base towards the trash bin.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode78": {
+    "prompt": "Watch the metal can until it comes to rest.",
+    "target": "metal can",
+    "mover": null
+  },
+  "fixed_scene_task_episode79": {
+    "prompt": "Rotate the robot base to face the counter.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode80": {
+    "prompt": "Back the robot base away from the cabinet.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode81": {
+    "prompt": "Clear the counter and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode82": {
+    "prompt": "Arrange the objects on the work bench into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode83": {
+    "prompt": "Tidy up the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode84": {
+    "prompt": "Slide the blue mug to the right edge of the cart.",
+    "target": "blue mug",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode85": {
+    "prompt": "Advance the robot base until the trash bin is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode86": {
+    "prompt": "Observe the wooden shelf before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode87": {
+    "prompt": "Rearrange the boxes on the cutting board.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode88": {
+    "prompt": "Leave the wooden shelf as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode89": {
+    "prompt": "Move everything from the drawer to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode90": {
+    "prompt": "Move everything from the table to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode91": {
+    "prompt": "Clear the cabinet and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode92": {
+    "prompt": "Keep the camera pointed at the fridge.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode93": {
+    "prompt": "Watch the screwdriver until it comes to rest.",
+    "target": "screwdriver",
+    "mover": null
+  },
+  "fixed_scene_task_episode94": {
+    "prompt": "Move everything from the dish rack to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode95": {
+    "prompt": "Clear the fridge and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode96": {
+    "prompt": "Rearrange the tools on the coffee table.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode97": {
+    "prompt": "Turn the robot base towards the dish rack and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode98": {
+    "prompt": "Rotate the robot base to face the blue tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode99": {
+    "prompt": "Arrange the objects on the cabinet into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode100": {
+    "prompt": "Move everything from the work bench to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode101": {
+    "prompt": "Clear the stove and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode102": {
+    "prompt": "Shift the robot base along the kitchen island.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode103": {
+    "prompt": "Advance the robot base until the cutting board is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode104": {
+    "prompt": "Rearrange the tools on the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode105": {
+    "prompt": "Drive the robot base towards the work bench.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode106": {
+    "prompt": "Do not touch anything on the drying rack.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode107": {
+    "prompt": "Advance the robot base until the rack is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode108": {
+    "prompt": "Clear the drying rack and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode109": {
+    "prompt": "Arrange the objects on the blue tray into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode110": {
+    "prompt": "Clear the counter and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode111": {
+    "prompt": "Slide the wooden spoon to the right edge of the table.",
+    "target": "wooden spoon",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode112": {
+    "prompt": "Shift the robot base along the drawer.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode113": {
+    "prompt": "Line up the cups along the edge of the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode114": {
+    "prompt": "Move the robot base forward by 3 step.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode115": {
+    "prompt": "Move everything from the cabinet to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode116": {
+    "prompt": "Move the tape roll into the fridge.",
+    "target": "tape roll",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode117": {
+    "prompt": "Rotate the robot base to face the drawer.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode118": {
+    "prompt": "Rearrange the bottles on the stove.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode119": {
+    "prompt": "Drive the robot base towards the cabinet.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode120": {
+    "prompt": "Do not touch anything on the stove.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode121": {
+    "prompt": "Clear the coffee table and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode122": {
+    "prompt": "Move everything from the blue tray to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode123": {
+    "prompt": "Put the aluminum tray down on the drawer.",
+    "target": "aluminum tray",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode124": {
+    "prompt": "Rearrange the plates on the shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode125": {
+    "prompt": "Observe the trash bin before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode126": {
+    "prompt": "Move the robot base to the other side of the microwave.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode127": {
+    "prompt": "Line up the cups along the edge of the rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode128": {
+    "prompt": "Clear the drying rack and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode129": {
+    "prompt": "Inspect the coffee table before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode130": {
+    "prompt": "Pick up the blue pen and place it on the microwave.",
+    "target": "blue pen",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode131": {
+    "prompt": "Move the robot base to the other side of the drying rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode132": {
+    "prompt": "Keep the camera pointed at the trash bin.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode133": {
+    "prompt": "Collect the scattered parts into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode134": {
+    "prompt": "Do not touch anything on the tray.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode135": {
+    "prompt": "Move everything from the cabinet to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode136": {
+    "prompt": "Back the robot base away from the blue tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode137": {
+    "prompt": "Sort the containers that sit on the work bench by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode138": {
+    "prompt": "Move everything from the drying rack to the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode139": {
+    "prompt": "Slide the blue pen to the right edge of the side table.",
+    "target": "blue pen",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode140": {
+    "prompt": "Rotate the kitchen knife so that its handle faces up.",
+    "target": "kitchen knife",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode141": {
+    "prompt": "Advance the robot base until the table is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode142": {
+    "prompt": "Rotate the yellow cup so that its handle faces up.",
+    "target": "yellow cup",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode143": {
+    "prompt": "Pick up the silver fork and place it on the wooden shelf.",
+    "target": "silver fork",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode144": {
+    "prompt": "Clear the tray and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode145": {
+    "prompt": "Collect the scattered parts into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode146": {
+    "prompt": "Do not touch anything on the sink.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode147": {
+    "prompt": "Clear the fridge and put everything into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode148": {
+    "prompt": "Pair the objects on the sink and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode149": {
+    "prompt": "Rotate the robot base to face the cutting board.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode150": {
+    "prompt": "Back the robot base away from the coffee table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode151": {
+    "prompt": "Pick up the remote control and place it on the table.",
+    "target": "remote control",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode152": {
+    "prompt": "Wait for the gray mug to stop moving.",
+    "target": "gray mug",
+    "mover": null
+  },
+  "fixed_scene_task_episode153": {
+    "prompt": "Move everything from the tray to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode154": {
+    "prompt": "Put the ceramic plate down on the stove.",
+    "target": "ceramic plate",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode155": {
+    "prompt": "Arrange the objects on the microwave into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode156": {
+    "prompt": "Rotate the yellow banana so that its handle faces up.",
+    "target": "yellow banana",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode157": {
+    "prompt": "Rearrange the boxes on the top shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode158": {
+    "prompt": "Move the red pepper into the trash bin.",
+    "target": "red pepper",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode159": {
+    "prompt": "Rotate the toy car so that its handle faces up.",
+    "target": "toy car",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode160": {
+    "prompt": "Clear the blue tray and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode161": {
+    "prompt": "Move the robot base forward by 2 step.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode162": {
+    "prompt": "Rearrange the cups on the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode163": {
+    "prompt": "Rearrange the cups on the stove.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode164": {
+    "prompt": "Keep the camera pointed at the top shelf.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode165": {
+    "prompt": "Put the glass jar down on the drying rack.",
+    "target": "glass jar",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode166": {
+    "prompt": "Turn the robot base towards the wooden shelf and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode167": {
+    "prompt": "Move everything from the drawer to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode168": {
+    "prompt": "Move everything from the sink to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode169": {
+    "prompt": "Keep the metal can inside the frame until the scene settles.",
+    "target": "metal can",
+    "mover": null
+  },
+  "fixed_scene_task_episode170": {
+    "prompt": "Rearrange the bottles on the cutting board.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode171": {
+    "prompt": "Clear the lower shelf and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode172": {
+    "prompt": "Push the objects on the basket towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode173": {
+    "prompt": "Move everything from the cutting board to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode174": {
+    "prompt": "Advance the robot base until the lower shelf is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode175": {
+    "prompt": "Let the scene on the coffee table settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode176": {
+    "prompt": "Pair the objects on the desk and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode177": {
+    "prompt": "Move everything from the stove to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode178": {
+    "prompt": "Watch the tape roll until it comes to rest.",
+    "target": "tape roll",
+    "mover": null
+  },
+  "fixed_scene_task_episode179": {
+    "prompt": "Pair the objects on the cabinet and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode180": {
+    "prompt": "Move everything from the blue tray to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode181": {
+    "prompt": "Move everything from the cutting board to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode182": {
+    "prompt": "Move everything from the drying rack to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode183": {
+    "prompt": "Wait for the red cup to stop moving.",
+    "target": "red cup",
+    "mover": null
+  },
+  "fixed_scene_task_episode184": {
+    "prompt": "Put the plastic lid down on the cart.",
+    "target": "plastic lid",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode185": {
+    "prompt": "Slide the blue pen to the right edge of the work bench.",
+    "target": "blue pen",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode186": {
+    "prompt": "Clear the kitchen island and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode187": {
+    "prompt": "Inspect the rack before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode188": {
+    "prompt": "Place the ceramic plate next to the blue tray.",
+    "target": "ceramic plate",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode189": {
+    "prompt": "Let the scene on the cart settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode190": {
+    "prompt": "Pick up the pink sponge and place it on the drawer.",
+    "target": "pink sponge",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode191": {
+    "prompt": "Clear the side table and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode192": {
+    "prompt": "Move everything from the cutting board to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode193": {
+    "prompt": "Do not touch anything on the microwave.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode194": {
+    "prompt": "Move everything from the drawer to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode195": {
+    "prompt": "Inspect the cart before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode196": {
+    "prompt": "Keep the camera pointed at the wooden shelf.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode197": {
+    "prompt": "Let the scene on the lower shelf settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode198": {
+    "prompt": "Shift the robot base along the coffee table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode199": {
+    "prompt": "Let the scene on the drawer settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode200": {
+    "prompt": "Line up the cups along the edge of the counter.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode201": {
+    "prompt": "Move everything from the stove to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode202": {
+    "prompt": "Advance the robot base until the side table is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode203": {
+    "prompt": "Clear the lower shelf and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode204": {
+    "prompt": "Clear the drawer and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode205": {
+    "prompt": "Clear the fridge and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode206": {
+    "prompt": "Clear the sink and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode207": {
+    "prompt": "Push the objects on the blue tray towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode208": {
+    "prompt": "Rotate the robot base to face the tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode209": {
+    "prompt": "Clear the kitchen island and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode210": {
+    "prompt": "Move everything from the tray to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode211": {
+    "prompt": "Clear the drawer and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode212": {
+    "prompt": "Rearrange the tools on the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode213": {
+    "prompt": "Hand the screwdriver from the left gripper to the right one.",
+    "target": "screwdriver",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode214": {
+    "prompt": "Move everything from the desk to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode215": {
+    "prompt": "Pick up the blue mug and place it on the basket.",
+    "target": "blue mug",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode216": {
+    "prompt": "Shift the robot base along the sink.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode217": {
+    "prompt": "Let the scene on the desk settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode218": {
+    "prompt": "Clear the shelf and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode219": {
+    "prompt": "Slide the glass jar to the right edge of the drawer.",
+    "target": "glass jar",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode220": {
+    "prompt": "Slide the kitchen knife to the right edge of the counter.",
+    "target": "kitchen knife",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode221": {
+    "prompt": "Move everything from the lower shelf to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode222": {
+    "prompt": "Turn the robot base towards the cabinet and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode223": {
+    "prompt": "Clear the tray and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode224": {
+    "prompt": "Observe the counter before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode225": {
+    "prompt": "Move the robot base to the other side of the tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode226": {
+    "prompt": "Clear the fridge and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode227": {
+    "prompt": "Move the robot base to the other side of the sink.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode228": {
+    "prompt": "Move the robot base backwards by 1 steps.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode229": {
+    "prompt": "Collect the scattered parts into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode230": {
+    "prompt": "Move the screwdriver into the fridge.",
+    "target": "screwdriver",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode231": {
+    "prompt": "Observe the dish rack before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode232": {
+    "prompt": "Move everything from the wooden shelf to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode233": {
+    "prompt": "Move everything from the rack to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode234": {
+    "prompt": "Put the plastic bottle down on the coffee table.",
+    "target": "plastic bottle",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode235": {
+    "prompt": "Clear the stove and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode236": {
+    "prompt": "Let the scene settle before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode237": {
+    "prompt": "Clear the work bench and put everything into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode238": {
+    "prompt": "Rearrange the cups on the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode239": {
+    "prompt": "Wait until the cutting board is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode240": {
+    "prompt": "Sort the containers that sit on the rack by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode241": {
+    "prompt": "Slide the red block to the right edge of the drawer.",
+    "target": "red block",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode242": {
+    "prompt": "Clear the stove and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode243": {
+    "prompt": "Keep the camera pointed at the coffee table.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode244": {
+    "prompt": "Clear the shelf and put everything into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode245": {
+    "prompt": "Pick up the aluminum tray and place it on the kitchen island.",
+    "target": "aluminum tray",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode246": {
+    "prompt": "Move everything from the microwave to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode247": {
+    "prompt": "Rearrange the tools on the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode248": {
+    "prompt": "Lift the paper cup above the blue tray and hold it there.",
+    "target": "paper cup",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode249": {
+    "prompt": "Shift the robot base along the rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode250": {
+    "prompt": "Drive the robot base towards the side table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode251": {
+    "prompt": "Move everything from the kitchen island to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode252": {
+    "prompt": "Leave the counter as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode253": {
+    "prompt": "Tidy up the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode254": {
+    "prompt": "Watch the red block until it comes to rest.",
+    "target": "red block",
+    "mover": null
+  },
+  "fixed_scene_task_episode255": {
+    "prompt": "Advance the robot base until the dish rack is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode256": {
+    "prompt": "Back the robot base away from the lower shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode257": {
+    "prompt": "Clear the stove and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode258": {
+    "prompt": "Shift the robot base along the fridge.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode259": {
+    "prompt": "Push the objects on the top shelf towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode260": {
+    "prompt": "Rearrange the boxes on the side table.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode261": {
+    "prompt": "Do not touch anything on the fridge.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode262": {
+    "prompt": "Move everything from the drying rack to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode263": {
+    "prompt": "Hand the ceramic plate from the left gripper to the right one.",
+    "target": "ceramic plate",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode264": {
+    "prompt": "Let the scene on the fridge settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode265": {
+    "prompt": "Clear the basket and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode266": {
+    "prompt": "Rotate the cloth towel so that its handle faces up.",
+    "target": "cloth towel",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode267": {
+    "prompt": "Inspect the drawer before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode268": {
+    "prompt": "Move everything from the rack to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode269": {
+    "prompt": "Move everything from the blue tray to the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode270": {
+    "prompt": "Let the scene on the top shelf settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode271": {
+    "prompt": "Clear the microwave and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode272": {
+    "prompt": "Line up the cups along the edge of the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode273": {
+    "prompt": "Observe the work bench before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode274": {
+    "prompt": "Move the robot base to the other side of the blue tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode275": {
+    "prompt": "Rearrange the bottles on the top shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode276": {
+    "prompt": "Back the robot base away from the tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode277": {
+    "prompt": "Clear the top shelf and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode278": {
+    "prompt": "Arrange the objects on the kitchen island into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode279": {
+    "prompt": "Let the scene on the microwave settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode280": {
+    "prompt": "Rearrange the boxes on the stove.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode281": {
+    "prompt": "Turn the robot base towards the lower shelf and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode282": {
+    "prompt": "Move everything from the wooden shelf to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode283": {
+    "prompt": "Wait until the counter is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode284": {
+    "prompt": "Clear the wooden shelf and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode285": {
+    "prompt": "Observe the lower shelf before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode286": {
+    "prompt": "Move the red block into the microwave.",
+    "target": "red block",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode287": {
+    "prompt": "Sort the containers that sit on the dish rack by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode288": {
+    "prompt": "Turn the robot base towards the sink and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode289": {
+    "prompt": "Back the robot base away from the counter.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode290": {
+    "prompt": "Move everything from the blue tray to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode291": {
+    "prompt": "Place the aluminum tray next to the fridge.",
+    "target": "aluminum tray",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode292": {
+    "prompt": "Shift the robot base along the cutting board.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode293": {
+    "prompt": "Tidy up the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode294": {
+    "prompt": "Hand the silver fork from the left gripper to the right one.",
+    "target": "silver fork",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode295": {
+    "prompt": "Clear the sink and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode296": {
+    "prompt": "Sort the containers that sit on the counter by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode297": {
+    "prompt": "Collect the scattered parts into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode298": {
+    "prompt": "Let the scene on the drying rack settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode299": {
+    "prompt": "Observe the top shelf before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode300": {
+    "prompt": "Clear the rack and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode301": {
+    "prompt": "Do not touch anything on the table.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode302": {
+    "prompt": "Move everything from the top shelf to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode303": {
+    "prompt": "Drive the robot base towards the wooden shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode304": {
+    "prompt": "Clear the tray and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode305": {
+    "prompt": "Sort the containers that sit on the desk by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode306": {
+    "prompt": "Push the objects on the table towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode307": {
+    "prompt": "Rearrange the boxes on the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode308": {
+    "prompt": "Arrange the objects on the tray into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode309": {
+    "prompt": "Line up the cups along the edge of the top shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode310": {
+    "prompt": "Tidy up the coffee table.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode311": {
+    "prompt": "Lift the metal can above the trash bin and hold it there.",
+    "target": "metal can",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode312": {
+    "prompt": "Place the metal can next to the tray.",
+    "target": "metal can",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode313": {
+    "prompt": "Slide the plastic lid to the right edge of the desk.",
+    "target": "plastic lid",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode314": {
+    "prompt": "Group the small parts next to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode315": {
+    "prompt": "Move everything from the sink to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode316": {
+    "prompt": "Move everything from the cabinet to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode317": {
+    "prompt": "Move everything from the dish rack to the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode318": {
+    "prompt": "Clear the side table and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode319": {
+    "prompt": "Wait until the microwave is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode320": {
+    "prompt": "Rearrange the plates on the table.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode321": {
+    "prompt": "Rearrange the bottles on the kitchen island.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode322": {
+    "prompt": "Move everything from the blue tray to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode323": {
+    "prompt": "Move the robot base to the other side of the stove.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode324": {
+    "prompt": "Repeat the last action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode325": {
+    "prompt": "Drive the robot base towards the lower shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode326": {
+    "prompt": "Move everything from the shelf to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode327": {
+    "prompt": "Move everything from the work bench to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode328": {
+    "prompt": "Move everything from the drawer to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode329": {
+    "prompt": "Pick up the red cup and place it on the lower shelf.",
+    "target": "red cup",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode330": {
+    "prompt": "Hand the white plate from the left gripper to the right one.",
+    "target": "white plate",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode331": {
+    "prompt": "Move everything from the fridge to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode332": {
+    "prompt": "Wait until the rack is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode333": {
+    "prompt": "Move everything from the desk to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode334": {
+    "prompt": "Clear the cart and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode335": {
+    "prompt": "Wait until the wooden shelf is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode336": {
+    "prompt": "Rearrange the plates on the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode337": {
+    "prompt": "Observe the desk before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode338": {
+    "prompt": "Clear the side table and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode339": {
+    "prompt": "Move everything from the stove to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode340": {
+    "prompt": "Move the black phone into the cart.",
+    "target": "black phone",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode341": {
+    "prompt": "Move everything from the work bench to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode342": {
+    "prompt": "Clear the top shelf and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode343": {
+    "prompt": "Move everything from the drawer to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode344": {
+    "prompt": "Drive the robot base towards the cart.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode345": {
+    "prompt": "Wait until the cart is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode346": {
+    "prompt": "Clear the work bench and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode347": {
+    "prompt": "Wait for the small bowl to stop moving.",
+    "target": "small bowl",
+    "mover": null
+  },
+  "fixed_scene_task_episode348": {
+    "prompt": "Move everything from the work bench to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode349": {
+    "prompt": "Drive the robot base towards the kitchen island.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode350": {
+    "prompt": "Shift the robot base along the dish rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode351": {
+    "prompt": "Slide the black phone to the right edge of the drying rack.",
+    "target": "black phone",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode352": {
+    "prompt": "Move the green mug into the drawer.",
+    "target": "green mug",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode353": {
+    "prompt": "Rotate the robot base to face the lower shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode354": {
+    "prompt": "Move everything from the cabinet to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode355": {
+    "prompt": "Clear the desk and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode356": {
+    "prompt": "Let the scene on the cutting board settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode357": {
+    "prompt": "Move everything from the cart to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode358": {
+    "prompt": "Clear the cutting board and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode359": {
+    "prompt": "Put the red block down on the trash bin.",
+    "target": "red block",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode360": {
+    "prompt": "Clear the coffee table and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode361": {
+    "prompt": "Shift the robot base along the counter.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode362": {
+    "prompt": "Drive the robot base towards the counter.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode363": {
+    "prompt": "Move the robot base to the other side of the drawer.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode364": {
+    "prompt": "Place the toy car next to the drying rack.",
+    "target": "toy car",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode365": {
+    "prompt": "Clear the drawer and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode366": {
+    "prompt": "Shift the robot base along the cabinet.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode367": {
+    "prompt": "Rearrange the boxes on the rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode368": {
+    "prompt": "Move everything from the desk to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode369": {
+    "prompt": "Clear the blue tray and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode370": {
+    "prompt": "Move everything from the desk to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode371": {
+    "prompt": "Let the scene on the basket settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode372": {
+    "prompt": "Leave the coffee table as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode373": {
+    "prompt": "Move everything from the trash bin to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode374": {
+    "prompt": "Lift the red block above the desk and hold it there.",
+    "target": "red block",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode375": {
+    "prompt": "Move everything from the stove to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode376": {
+    "prompt": "Wait for the white towel to stop moving.",
+    "target": "white towel",
+    "mover": null
+  },
+  "fixed_scene_task_episode377": {
+    "prompt": "Leave the tray as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode378": {
+    "prompt": "Leave the blue tray as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode379": {
+    "prompt": "Wait until the top shelf is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode380": {
+    "prompt": "Drive the robot base towards the fridge.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode381": {
+    "prompt": "Back the robot base away from the basket.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode382": {
+    "prompt": "Clear the blue tray and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode383": {
+    "prompt": "Rotate the robot base to face the top shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode384": {
+    "prompt": "Move everything from the work bench to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode385": {
+    "prompt": "Rearrange the boxes on the work bench.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode386": {
+    "prompt": "Move everything from the blue tray to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode387": {
+    "prompt": "Hand the coffee cup from the left gripper to the right one.",
+    "target": "coffee cup",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode388": {
+    "prompt": "Lift the wooden spoon above the basket and hold it there.",
+    "target": "wooden spoon",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode389": {
+    "prompt": "Arrange the objects on the stove into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode390": {
+    "prompt": "Back the robot base away from the wooden shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode391": {
+    "prompt": "Clear the lower shelf and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode392": {
+    "prompt": "Leave the rack as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode393": {
+    "prompt": "Move the yellow banana into the microwave.",
+    "target": "yellow banana",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode394": {
+    "prompt": "Move everything from the shelf to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode395": {
+    "prompt": "Put the paper cup down on the dish rack.",
+    "target": "paper cup",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode396": {
+    "prompt": "Do not touch anything on the shelf.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode397": {
+    "prompt": "Observe the basket before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode398": {
+    "prompt": "Inspect the wooden shelf before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode399": {
+    "prompt": "Pick up the red cup and place it on the tray.",
+    "target": "red cup",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode400": {
+    "prompt": "Clear the cutting board and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode401": {
+    "prompt": "Hand the pink sponge from the left gripper to the right one.",
+    "target": "pink sponge",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode402": {
+    "prompt": "Observe the sink before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode403": {
+    "prompt": "Rearrange the bottles on the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode404": {
+    "prompt": "Turn the robot base towards the stove and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode405": {
+    "prompt": "Clear the basket and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode406": {
+    "prompt": "Line up the cups along the edge of the stove.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode407": {
+    "prompt": "Move the toy car into the blue tray.",
+    "target": "toy car",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode408": {
+    "prompt": "Wait until the work bench is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode409": {
+    "prompt": "Move everything from the table to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode410": {
+    "prompt": "Clear the desk and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode411": {
+    "prompt": "Move everything from the top shelf to the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode412": {
+    "prompt": "Move the robot base to the other side of the cutting board.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode413": {
+    "prompt": "Put the kitchen knife down on the counter.",
+    "target": "kitchen knife",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode414": {
+    "prompt": "Put the red apple down on the top shelf.",
+    "target": "red apple",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode415": {
+    "prompt": "Rotate the robot base 45 degrees to the right.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode416": {
+    "prompt": "Move everything from the cutting board to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode417": {
+    "prompt": "Shift the robot base along the trash bin.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode418": {
+    "prompt": "Move everything from the work bench to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode419": {
+    "prompt": "Advance the robot base until the drawer is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode420": {
+    "prompt": "Move everything from the coffee table to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode421": {
+    "prompt": "Move everything from the wooden shelf to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode422": {
+    "prompt": "Watch the glass jar until it comes to rest.",
+    "target": "glass jar",
+    "mover": null
+  },
+  "fixed_scene_task_episode423": {
+    "prompt": "Put the coffee cup down on the table.",
+    "target": "coffee cup",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode424": {
+    "prompt": "Advance the robot base until the blue tray is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode425": {
+    "prompt": "Move everything from the sink to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode426": {
+    "prompt": "Clear the shelf and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode427": {
+    "prompt": "Sort the containers that sit on the stove by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode428": {
+    "prompt": "Move everything from the side table to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode429": {
+    "prompt": "Observe the side table before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode430": {
+    "prompt": "Shift the robot base along the lower shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode431": {
+    "prompt": "Keep the red apple inside the frame until the scene settles.",
+    "target": "red apple",
+    "mover": null
+  },
+  "fixed_scene_task_episode432": {
+    "prompt": "Push the objects on the fridge towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode433": {
+    "prompt": "Do not touch anything on the cutting board.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode434": {
+    "prompt": "Observe the cutting board before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode435": {
+    "prompt": "Slide the plastic bottle to the right edge of the desk.",
+    "target": "plastic bottle",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode436": {
+    "prompt": "Shift the robot base along the wooden shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode437": {
+    "prompt": "Keep the camera pointed at the cart.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode438": {
+    "prompt": "Let the scene on the sink settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode439": {
+    "prompt": "Clear the cabinet and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode440": {
+    "prompt": "Rearrange the plates on the desk.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode441": {
+    "prompt": "Wait for the red apple to stop moving.",
+    "target": "red apple",
+    "mover": null
+  },
+  "fixed_scene_task_episode442": {
+    "prompt": "Sort the containers that sit on the drying rack by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode443": {
+    "prompt": "Keep the camera pointed at the dish rack.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode444": {
+    "prompt": "Group the small parts next to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode445": {
+    "prompt": "Turn the robot base towards the side table and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode446": {
+    "prompt": "Let the scene on the cabinet settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode447": {
+    "prompt": "Move everything from the kitchen island to the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode448": {
+    "prompt": "Clear the trash bin and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode449": {
+    "prompt": "Rearrange the cups on the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode450": {
+    "prompt": "Clear the stove and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode451": {
+    "prompt": "Rearrange the plates on the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode452": {
+    "prompt": "Move everything from the counter to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode453": {
+    "prompt": "Pair the objects on the basket and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode454": {
+    "prompt": "Wait until the tray is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode455": {
+    "prompt": "Move everything from the top shelf to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode456": {
+    "prompt": "Move everything from the shelf to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode457": {
+    "prompt": "Lift the remote control above the dish rack and hold it there.",
+    "target": "remote control",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode458": {
+    "prompt": "Rotate the pink sponge so that its handle faces up.",
+    "target": "pink sponge",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode459": {
+    "prompt": "Rearrange the cups on the top shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode460": {
+    "prompt": "Rearrange the bottles on the shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode461": {
+    "prompt": "Turn the robot base towards the drawer and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode462": {
+    "prompt": "Move the robot base to the other side of the kitchen island.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode463": {
+    "prompt": "Hand the tape roll from the left gripper to the right one.",
+    "target": "tape roll",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode464": {
+    "prompt": "Clear the coffee table and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode465": {
+    "prompt": "Clear the blue tray and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode466": {
+    "prompt": "Stack the bowls that are on the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode467": {
+    "prompt": "Clear the sink and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode468": {
+    "prompt": "Slide the metal can to the right edge of the blue tray.",
+    "target": "metal can",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode469": {
+    "prompt": "Clear the counter and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode470": {
+    "prompt": "Push the objects on the rack towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode471": {
+    "prompt": "Inspect the table before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode472": {
+    "prompt": "Do not disturb the coffee cup.",
+    "target": "coffee cup",
+    "mover": null
+  },
+  "fixed_scene_task_episode473": {
+    "prompt": "Move the aluminum tray into the blue tray.",
+    "target": "aluminum tray",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode474": {
+    "prompt": "Do not touch anything on the top shelf.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode475": {
+    "prompt": "Move everything from the coffee table to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode476": {
+    "prompt": "Clear the table and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode477": {
+    "prompt": "Shift the robot base along the work bench.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode478": {
+    "prompt": "Place the red apple next to the drying rack.",
+    "target": "red apple",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode479": {
+    "prompt": "Rotate the robot base 45 degrees to the left.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode480": {
+    "prompt": "Arrange the objects on the rack into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode481": {
+    "prompt": "Clear the tray and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode482": {
+    "prompt": "Clear the sink and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode483": {
+    "prompt": "Clear the dish rack and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode484": {
+    "prompt": "Move the robot base forward by 3 steps.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode485": {
+    "prompt": "Put the silver fork down on the drawer.",
+    "target": "silver fork",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode486": {
+    "prompt": "Lift the red cup above the sink and hold it there.",
+    "target": "red cup",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode487": {
+    "prompt": "Move the red pepper into the basket.",
+    "target": "red pepper",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode488": {
+    "prompt": "Move everything from the lower shelf to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode489": {
+    "prompt": "Rearrange the boxes on the lower shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode490": {
+    "prompt": "Clear the desk and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode491": {
+    "prompt": "Do not disturb the glass jar.",
+    "target": "glass jar",
+    "mover": null
+  },
+  "fixed_scene_task_episode492": {
+    "prompt": "Move the robot base to the other side of the counter.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode493": {
+    "prompt": "Slide the small bowl to the right edge of the shelf.",
+    "target": "small bowl",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode494": {
+    "prompt": "Move everything from the kitchen island to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode495": {
+    "prompt": "Move everything from the coffee table to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode496": {
+    "prompt": "Keep the camera pointed at the side table.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode497": {
+    "prompt": "Back the robot base away from the fridge.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode498": {
+    "prompt": "Move everything from the cabinet to the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode499": {
+    "prompt": "Lift the cloth towel above the counter and hold it there.",
+    "target": "cloth towel",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode500": {
+    "prompt": "Move everything from the side table to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode501": {
+    "prompt": "Pair the objects on the shelf and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode502": {
+    "prompt": "Rotate the robot base to face the trash bin.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode503": {
+    "prompt": "Move everything from the coffee table to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode504": {
+    "prompt": "Move everything from the work bench to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode505": {
+    "prompt": "Clear the microwave and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode506": {
+    "prompt": "Stack the bowls that are on the cutting board.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode507": {
+    "prompt": "Pick up the small bowl and place it on the table.",
+    "target": "small bowl",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode508": {
+    "prompt": "Rotate the robot base to face the stove.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode509": {
+    "prompt": "Wait for the red block to stop moving.",
+    "target": "red block",
+    "mover": null
+  },
+  "fixed_scene_task_episode510": {
+    "prompt": "Rearrange the cups on the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode511": {
+    "prompt": "Move everything from the shelf to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode512": {
+    "prompt": "Rearrange the bottles on the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode513": {
+    "prompt": "Pick up the remote control and place it on the sink.",
+    "target": "remote control",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode514": {
+    "prompt": "Lift the hand towel above the wooden shelf and hold it there.",
+    "target": "hand towel",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode515": {
+    "prompt": "Rotate the robot base to face the side table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode516": {
+    "prompt": "Line up the cups along the edge of the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode517": {
+    "prompt": "Inspect the stove before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode518": {
+    "prompt": "Back the robot base away from the drawer.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode519": {
+    "prompt": "Clear the lower shelf and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode520": {
+    "prompt": "Place the blue mug next to the basket.",
+    "target": "blue mug",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode521": {
+    "prompt": "Move everything from the dish rack to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode522": {
+    "prompt": "Clear the desk and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode523": {
+    "prompt": "Rearrange the plates on the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode524": {
+    "prompt": "Shift the robot base along the tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode525": {
+    "prompt": "Back the robot base away from the cart.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode526": {
+    "prompt": "Wait until the kitchen island is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode527": {
+    "prompt": "Pair the objects on the cutting board and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode528": {
+    "prompt": "Clear the lower shelf and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode529": {
+    "prompt": "Clear the trash bin and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode530": {
+    "prompt": "Hand the wooden spoon from the left gripper to the right one.",
+    "target": "wooden spoon",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode531": {
+    "prompt": "Turn the robot base to the right.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode532": {
+    "prompt": "Put the pink sponge down on the tray.",
+    "target": "pink sponge",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode533": {
+    "prompt": "Watch the yellow banana until it comes to rest.",
+    "target": "yellow banana",
+    "mover": null
+  },
+  "fixed_scene_task_episode534": {
+    "prompt": "Hand the green apple from the left gripper to the right one.",
+    "target": "green apple",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode535": {
+    "prompt": "Rotate the robot base to face the desk.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode536": {
+    "prompt": "Move everything from the dish rack to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode537": {
+    "prompt": "Rotate the silver fork so that its handle faces up.",
+    "target": "silver fork",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode538": {
+    "prompt": "Clear the coffee table and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode539": {
+    "prompt": "Observe the stove before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode540": {
+    "prompt": "Keep the camera pointed at the microwave.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode541": {
+    "prompt": "Move everything from the top shelf to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode542": {
+    "prompt": "Rotate the glass jar so that its handle faces up.",
+    "target": "glass jar",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode543": {
+    "prompt": "Wait until the desk is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode544": {
+    "prompt": "Rearrange the bottles on the work bench.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode545": {
+    "prompt": "Pick up whichever object looks out of place.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode546": {
+    "prompt": "Move the robot base to the other side of the desk.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode547": {
+    "prompt": "Move everything from the cabinet to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode548": {
+    "prompt": "Move everything from the wooden shelf to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode549": {
+    "prompt": "Clear the drying rack and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode550": {
+    "prompt": "Move the robot base forward by 2 steps.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode551": {
+    "prompt": "Drive the robot base towards the drying rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode552": {
+    "prompt": "Drive the robot base towards the cutting board.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode553": {
+    "prompt": "Keep the white plate inside the frame until the scene settles.",
+    "target": "white plate",
+    "mover": null
+  },
+  "fixed_scene_task_episode554": {
+    "prompt": "Rearrange the plates on the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode555": {
+    "prompt": "Do not disturb the empty bottle.",
+    "target": "empty bottle",
+    "mover": null
+  },
+  "fixed_scene_task_episode556": {
+    "prompt": "Rearrange the boxes on the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode557": {
+    "prompt": "Leave the top shelf as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode558": {
+    "prompt": "Rearrange the plates on the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode559": {
+    "prompt": "Lift the hand towel above the stove and hold it there.",
+    "target": "hand towel",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode560": {
+    "prompt": "Rearrange the plates on the cutting board.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode561": {
+    "prompt": "Move everything from the drawer to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode562": {
+    "prompt": "Leave the trash bin as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode563": {
+    "prompt": "Back the robot base away from the cutting board.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode564": {
+    "prompt": "Tidy up the side table.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode565": {
+    "prompt": "Leave the cutting board as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode566": {
+    "prompt": "Move the red cup into the microwave.",
+    "target": "red cup",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode567": {
+    "prompt": "Lift the silver fork above the lower shelf and hold it there.",
+    "target": "silver fork",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode568": {
+    "prompt": "Keep the camera pointed at the lower shelf.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode569": {
+    "prompt": "Slide the pink sponge to the right edge of the rack.",
+    "target": "pink sponge",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode570": {
+    "prompt": "Pick up the brown box and place it on the wooden shelf.",
+    "target": "brown box",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode571": {
+    "prompt": "Rotate the robot base to face the work bench.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode572": {
+    "prompt": "Clear the counter and put everything into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode573": {
+    "prompt": "Put the white towel down on the rack.",
+    "target": "white towel",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode574": {
+    "prompt": "Drive the robot base towards the microwave.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode575": {
+    "prompt": "Clear the coffee table and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode576": {
+    "prompt": "Rotate the orange ball so that its handle faces up.",
+    "target": "orange ball",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode577": {
+    "prompt": "Move everything from the tray to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode578": {
+    "prompt": "Shift the robot base along the microwave.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode579": {
+    "prompt": "Put the tape roll down on the stove.",
+    "target": "tape roll",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode580": {
+    "prompt": "Drive the robot base towards the sink.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode581": {
+    "prompt": "Observe the drying rack before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode582": {
+    "prompt": "Turn the robot base towards the tray and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode583": {
+    "prompt": "Keep the aluminum tray inside the frame until the scene settles.",
+    "target": "aluminum tray",
+    "mover": null
+  },
+  "fixed_scene_task_episode584": {
+    "prompt": "Move everything from the lower shelf to the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode585": {
+    "prompt": "Back the robot base away from the work bench.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode586": {
+    "prompt": "Rotate the coffee cup so that its handle faces up.",
+    "target": "coffee cup",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode587": {
+    "prompt": "Move everything from the basket to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode588": {
+    "prompt": "Advance the robot base until the cart is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode589": {
+    "prompt": "Slide the wooden block to the right edge of the stove.",
+    "target": "wooden block",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode590": {
+    "prompt": "Pair the objects on the table and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode591": {
+    "prompt": "Let the scene on the trash bin settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode592": {
+    "prompt": "Rearrange the cups on the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode593": {
+    "prompt": "Turn the robot base towards the microwave and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode594": {
+    "prompt": "Rotate the robot base to face the drying rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode595": {
+    "prompt": "Inspect the trash bin before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode596": {
+    "prompt": "Keep the camera pointed at the drying rack.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode597": {
+    "prompt": "Place the remote control next to the cart.",
+    "target": "remote control",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode598": {
+    "prompt": "Observe the table before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode599": {
+    "prompt": "Clear the work bench and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode600": {
+    "prompt": "Follow the previous instruction again.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode601": {
+    "prompt": "Move everything from the shelf to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode602": {
+    "prompt": "Leave the sink as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode603": {
+    "prompt": "Shift the robot base along the cart.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode604": {
+    "prompt": "Move everything from the basket to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode605": {
+    "prompt": "Pick up the plastic lid and place it on the counter.",
+    "target": "plastic lid",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode606": {
+    "prompt": "Move everything from the microwave to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode607": {
+    "prompt": "Back the robot base away from the trash bin.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode608": {
+    "prompt": "Inspect the sink before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode609": {
+    "prompt": "Clear the cutting board and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode610": {
+    "prompt": "Move everything from the blue tray to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode611": {
+    "prompt": "Move everything from the cabinet to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode612": {
+    "prompt": "Rearrange the boxes on the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode613": {
+    "prompt": "Slide the aluminum tray to the right edge of the stove.",
+    "target": "aluminum tray",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode614": {
+    "prompt": "Place the small bowl next to the blue tray.",
+    "target": "small bowl",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode615": {
+    "prompt": "Clear the counter and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode616": {
+    "prompt": "Move everything from the rack to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode617": {
+    "prompt": "Advance the robot base until the sink is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode618": {
+    "prompt": "Clear the sink and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode619": {
+    "prompt": "Inspect the cutting board before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode620": {
+    "prompt": "Clear the microwave and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode621": {
+    "prompt": "Move everything from the wooden shelf to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode622": {
+    "prompt": "Drive the robot base towards the top shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode623": {
+    "prompt": "Move everything from the dish rack to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode624": {
+    "prompt": "Do not touch anything on the drawer.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode625": {
+    "prompt": "Move the robot base backwards by 1 step.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode626": {
+    "prompt": "Back the robot base away from the table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode627": {
+    "prompt": "Move the robot base to the other side of the shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode628": {
+    "prompt": "Do not touch anything on the wooden shelf.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode629": {
+    "prompt": "Move everything from the cabinet to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode630": {
+    "prompt": "Pair the objects on the lower shelf and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode631": {
+    "prompt": "Move everything from the table to the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode632": {
+    "prompt": "Arrange the objects on the cart into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode633": {
+    "prompt": "Clear the basket and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode634": {
+    "prompt": "Keep the camera pointed at the desk.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode635": {
+    "prompt": "Leave the side table as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode636": {
+    "prompt": "Move everything from the tray to the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode637": {
+    "prompt": "Clear the lower shelf and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode638": {
+    "prompt": "Back the robot base away from the desk.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode639": {
+    "prompt": "Rotate the green pepper so that its handle faces up.",
+    "target": "green pepper",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode640": {
+    "prompt": "Move everything from the work bench to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode641": {
+    "prompt": "Advance the robot base until the stove is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode642": {
+    "prompt": "Move everything from the table to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode643": {
+    "prompt": "Keep the camera pointed at the stove.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode644": {
+    "prompt": "Clear the cabinet and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode645": {
+    "prompt": "Move the white towel into the drying rack.",
+    "target": "white towel",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode646": {
+    "prompt": "Move the robot base backwards by 2 steps.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode647": {
+    "prompt": "Move everything from the top shelf to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode648": {
+    "prompt": "Move everything from the cutting board to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode649": {
+    "prompt": "Rearrange the cups on the kitchen island.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode650": {
+    "prompt": "Do not touch anything on the blue tray.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode651": {
+    "prompt": "Move the robot base forward by 1 step.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode652": {
+    "prompt": "Wait for the ceramic plate to stop moving.",
+    "target": "ceramic plate",
+    "mover": null
+  },
+  "fixed_scene_task_episode653": {
+    "prompt": "Hand the yellow banana from the left gripper to the right one.",
+    "target": "yellow banana",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode654": {
+    "prompt": "Clear the basket and put everything into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode655": {
+    "prompt": "Arrange the objects on the sink into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode656": {
+    "prompt": "Line up the cups along the edge of the lower shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode657": {
+    "prompt": "Pick up the white plate and place it on the stove.",
+    "target": "white plate",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode658": {
+    "prompt": "Clear the wooden shelf and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode659": {
+    "prompt": "Line up the cups along the edge of the shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode660": {
+    "prompt": "Move the robot base to the other side of the table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode661": {
+    "prompt": "Rearrange the bottles on the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode662": {
+    "prompt": "Move the robot base to the other side of the side table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode663": {
+    "prompt": "Observe the rack before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode664": {
+    "prompt": "Clear the wooden shelf and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode665": {
+    "prompt": "Wait until the dish rack is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode666": {
+    "prompt": "Leave the microwave as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode667": {
+    "prompt": "Lift the ceramic plate above the table and hold it there.",
+    "target": "ceramic plate",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode668": {
+    "prompt": "Pick up the yellow banana and place it on the lower shelf.",
+    "target": "yellow banana",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode669": {
+    "prompt": "Rotate the robot base to face the rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode670": {
+    "prompt": "Lift the hand towel above the rack and hold it there.",
+    "target": "hand towel",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode671": {
+    "prompt": "Watch the plastic bottle until it comes to rest.",
+    "target": "plastic bottle",
+    "mover": null
+  },
+  "fixed_scene_task_episode672": {
+    "prompt": "Stack the bowls that are on the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode673": {
+    "prompt": "Clear the desk and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode674": {
+    "prompt": "Clear the table and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode675": {
+    "prompt": "Advance the robot base until the desk is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode676": {
+    "prompt": "Advance the robot base until the cabinet is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode677": {
+    "prompt": "Move the robot base backwards by 3 step.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode678": {
+    "prompt": "Leave the basket as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode679": {
+    "prompt": "Clear the sink and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode680": {
+    "prompt": "Place the blue notebook next to the fridge.",
+    "target": "blue notebook",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode681": {
+    "prompt": "Rearrange the plates on the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode682": {
+    "prompt": "Move everything from the sink to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode683": {
+    "prompt": "Rearrange the boxes on the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode684": {
+    "prompt": "Rearrange the bottles on the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode685": {
+    "prompt": "Collect the scattered parts into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode686": {
+    "prompt": "Back the robot base away from the stove.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode687": {
+    "prompt": "Turn the robot base to the left.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode688": {
+    "prompt": "Turn the robot base towards the blue tray and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode689": {
+    "prompt": "Inspect the work bench before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode690": {
+    "prompt": "Rearrange the boxes on the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode691": {
+    "prompt": "Back the robot base away from the top shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode692": {
+    "prompt": "Turn the robot base towards the table and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode693": {
+    "prompt": "Clear the lower shelf and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode694": {
+    "prompt": "Stack the bowls that are on the wooden shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode695": {
+    "prompt": "Move everything from the sink to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode696": {
+    "prompt": "Put the steel wrench down on the drying rack.",
+    "target": "steel wrench",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode697": {
+    "prompt": "Move everything from the dish rack to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode698": {
+    "prompt": "Shift the robot base along the shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode699": {
+    "prompt": "Clear the tray and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode700": {
+    "prompt": "Clear the stove and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode701": {
+    "prompt": "Rotate the robot base 90 degrees to the right.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode702": {
+    "prompt": "Back the robot base away from the drying rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode703": {
+    "prompt": "Inspect the top shelf before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode704": {
+    "prompt": "Tidy up the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode705": {
+    "prompt": "Clear the table and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode706": {
+    "prompt": "Advance the robot base until the shelf is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode707": {
+    "prompt": "Drive the robot base towards the desk.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode708": {
+    "prompt": "Sort the containers that sit on the shelf by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode709": {
+    "prompt": "Move everything from the tray to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode710": {
+    "prompt": "Turn the robot base towards the work bench and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode711": {
+    "prompt": "Leave the stove as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode712": {
+    "prompt": "Rearrange the boxes on the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode713": {
+    "prompt": "Rearrange the plates on the wooden shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode714": {
+    "prompt": "Watch the remote control until it comes to rest.",
+    "target": "remote control",
+    "mover": null
+  },
+  "fixed_scene_task_episode715": {
+    "prompt": "Move everything from the cart to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode716": {
+    "prompt": "Move everything from the kitchen island to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode717": {
+    "prompt": "Clear the microwave and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode718": {
+    "prompt": "Group the small parts next to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode719": {
+    "prompt": "Lift the paper cup above the shelf and hold it there.",
+    "target": "paper cup",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode720": {
+    "prompt": "Rearrange the bottles on the table.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode721": {
+    "prompt": "Move everything from the basket to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode722": {
+    "prompt": "Observe the blue tray before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode723": {
+    "prompt": "Observe the cart before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode724": {
+    "prompt": "Move everything from the work bench to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode725": {
+    "prompt": "Move the robot base to the other side of the basket.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode726": {
+    "prompt": "Hand the red pepper from the left gripper to the right one.",
+    "target": "red pepper",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode727": {
+    "prompt": "Clear the rack and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode728": {
+    "prompt": "Advance the robot base until the work bench is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode729": {
+    "prompt": "Leave everything as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode730": {
+    "prompt": "Turn the robot base towards the cart and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode731": {
+    "prompt": "Put the white plate down on the cabinet.",
+    "target": "white plate",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode732": {
+    "prompt": "Move everything from the dish rack to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode733": {
+    "prompt": "Do not touch anything on the basket.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode734": {
+    "prompt": "Push the objects on the kitchen island towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode735": {
+    "prompt": "Clear the dish rack and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode736": {
+    "prompt": "Keep the camera view stable.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode737": {
+    "prompt": "Clear the kitchen island and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode738": {
+    "prompt": "Keep the camera pointed at the shelf.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode739": {
+    "prompt": "Do not disturb the red block.",
+    "target": "red block",
+    "mover": null
+  },
+  "fixed_scene_task_episode740": {
+    "prompt": "Let the scene on the shelf settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode741": {
+    "prompt": "Move everything from the cart to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode742": {
+    "prompt": "Slide the green apple to the right edge of the shelf.",
+    "target": "green apple",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode743": {
+    "prompt": "Place the green apple next to the tray.",
+    "target": "green apple",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode744": {
+    "prompt": "Keep the hand towel inside the frame until the scene settles.",
+    "target": "hand towel",
+    "mover": null
+  },
+  "fixed_scene_task_episode745": {
+    "prompt": "Inspect the basket before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode746": {
+    "prompt": "Move everything from the table to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode747": {
+    "prompt": "Sort the containers that sit on the table by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode748": {
+    "prompt": "Move everything from the side table to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode749": {
+    "prompt": "Stack the bowls that are on the work bench.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode750": {
+    "prompt": "Place the hand towel next to the drying rack.",
+    "target": "hand towel",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode751": {
+    "prompt": "Hand the red apple from the left gripper to the right one.",
+    "target": "red apple",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode752": {
+    "prompt": "Rearrange the bottles on the wooden shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode753": {
+    "prompt": "Slide the coffee cup to the right edge of the fridge.",
+    "target": "coffee cup",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode754": {
+    "prompt": "Rearrange the tools on the stove.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode755": {
+    "prompt": "Clear the rack and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode756": {
+    "prompt": "Clear the counter and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode757": {
+    "prompt": "Advance the robot base until the coffee table is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode758": {
+    "prompt": "Lift the steel wrench above the cutting board and hold it there.",
+    "target": "steel wrench",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode759": {
+    "prompt": "Observe the workspace.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode760": {
+    "prompt": "Move the robot base to the other side of the lower shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode761": {
+    "prompt": "Collect the scattered parts into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode762": {
+    "prompt": "Keep the camera pointed at the blue tray.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode763": {
+    "prompt": "Move everything from the side table to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode764": {
+    "prompt": "Clear the top shelf and put everything into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode765": {
+    "prompt": "Move everything from the counter to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode766": {
+    "prompt": "Rearrange the tools on the wooden shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode767": {
+    "prompt": "Shift the robot base along the table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode768": {
+    "prompt": "Advance the robot base until the wooden shelf is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode769": {
+    "prompt": "Drive the robot base towards the shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode770": {
+    "prompt": "Inspect the drying rack before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode771": {
+    "prompt": "Shift the robot base along the top shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode772": {
+    "prompt": "Line up the cups along the edge of the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode773": {
+    "prompt": "Move everything from the wooden shelf to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode774": {
+    "prompt": "Rearrange the cups on the counter.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode775": {
+    "prompt": "Hand the green pepper from the left gripper to the right one.",
+    "target": "green pepper",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode776": {
+    "prompt": "Push the objects on the cutting board towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode777": {
+    "prompt": "Slide the wooden block to the right edge of the coffee table.",
+    "target": "wooden block",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode778": {
+    "prompt": "Clear the table and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode779": {
+    "prompt": "Rotate the steel wrench so that its handle faces up.",
+    "target": "steel wrench",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode780": {
+    "prompt": "Move everything from the side table to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode781": {
+    "prompt": "Move everything from the stove to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode782": {
+    "prompt": "Tidy up the rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode783": {
+    "prompt": "Observe the microwave before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode784": {
+    "prompt": "Advance the robot base until the top shelf is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode785": {
+    "prompt": "Clear the drying rack and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode786": {
+    "prompt": "Pick up the tape roll and place it on the tray.",
+    "target": "tape roll",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode787": {
+    "prompt": "Pick up the red apple and place it on the drying rack.",
+    "target": "red apple",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode788": {
+    "prompt": "Lift the hand towel above the cabinet and hold it there.",
+    "target": "hand towel",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode789": {
+    "prompt": "Move everything from the counter to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode790": {
+    "prompt": "Pair the objects on the dish rack and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode791": {
+    "prompt": "Move the robot base to the other side of the top shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode792": {
+    "prompt": "Back the robot base away from the shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode793": {
+    "prompt": "Clear the counter and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode794": {
+    "prompt": "Push the objects on the dish rack towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode795": {
+    "prompt": "Place the silver fork next to the microwave.",
+    "target": "silver fork",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode796": {
+    "prompt": "Leave the lower shelf as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode797": {
+    "prompt": "Turn the robot base towards the basket and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode798": {
+    "prompt": "Clear the work bench and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode799": {
+    "prompt": "Clear the kitchen island and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode800": {
+    "prompt": "Do not disturb the cloth towel.",
+    "target": "cloth towel",
+    "mover": null
+  },
+  "fixed_scene_task_episode801": {
+    "prompt": "Put the yellow banana down on the shelf.",
+    "target": "yellow banana",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode802": {
+    "prompt": "Sort the containers that sit on the fridge by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode803": {
+    "prompt": "Clear the counter and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode804": {
+    "prompt": "Rearrange the bottles on the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode805": {
+    "prompt": "Wait for the yellow cup to stop moving.",
+    "target": "yellow cup",
+    "mover": null
+  },
+  "fixed_scene_task_episode806": {
+    "prompt": "Keep the plastic lid inside the frame until the scene settles.",
+    "target": "plastic lid",
+    "mover": null
+  },
+  "fixed_scene_task_episode807": {
+    "prompt": "Move everything from the table to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode808": {
+    "prompt": "Move everything from the stove to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode809": {
+    "prompt": "Move everything from the drying rack to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode810": {
+    "prompt": "Move everything from the trash bin to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode811": {
+    "prompt": "Clear the shelf and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode812": {
+    "prompt": "Back the robot base away from the microwave.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode813": {
+    "prompt": "Place the toy car next to the basket.",
+    "target": "toy car",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode814": {
+    "prompt": "Rotate the robot base to face the cart.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode815": {
+    "prompt": "Arrange the objects on the top shelf into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode816": {
+    "prompt": "Put the red block down on the side table.",
+    "target": "red block",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode817": {
+    "prompt": "Keep the orange ball inside the frame until the scene settles.",
+    "target": "orange ball",
+    "mover": null
+  },
+  "fixed_scene_task_episode818": {
+    "prompt": "Back the robot base away from the dish rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode819": {
+    "prompt": "Move everything from the stove to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode820": {
+    "prompt": "Clear the side table and put everything into the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode821": {
+    "prompt": "Pair the objects on the side table and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode822": {
+    "prompt": "Inspect the kitchen island before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode823": {
+    "prompt": "Hand the wooden block from the left gripper to the right one.",
+    "target": "wooden block",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode824": {
+    "prompt": "Place the coffee cup next to the tray.",
+    "target": "coffee cup",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode825": {
+    "prompt": "Pair the objects on the tray and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode826": {
+    "prompt": "Rearrange the boxes on the desk.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode827": {
+    "prompt": "Observe the drawer before acting.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode828": {
+    "prompt": "Clear the table and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode829": {
+    "prompt": "Clear the dish rack and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode830": {
+    "prompt": "Clear the kitchen island and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode831": {
+    "prompt": "Group the small parts next to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode832": {
+    "prompt": "Move everything from the basket to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode833": {
+    "prompt": "Rearrange the tools on the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode834": {
+    "prompt": "Move everything from the dish rack to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode835": {
+    "prompt": "Clear the lower shelf and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode836": {
+    "prompt": "Rotate the robot base to face the basket.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode837": {
+    "prompt": "Clear the cart and put everything into the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode838": {
+    "prompt": "Let the scene on the kitchen island settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode839": {
+    "prompt": "Wait for the hand towel to stop moving.",
+    "target": "hand towel",
+    "mover": null
+  },
+  "fixed_scene_task_episode840": {
+    "prompt": "Drive the robot base towards the blue tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode841": {
+    "prompt": "Push the objects on the microwave towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode842": {
+    "prompt": "Move the robot base forward by 1 steps.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode843": {
+    "prompt": "Turn the robot base towards the cutting board and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode844": {
+    "prompt": "Move everything from the coffee table to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode845": {
+    "prompt": "Advance the robot base until the drying rack is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode846": {
+    "prompt": "Drive the robot base towards the coffee table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode847": {
+    "prompt": "Let the scene on the counter settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode848": {
+    "prompt": "Put the empty bottle down on the drying rack.",
+    "target": "empty bottle",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode849": {
+    "prompt": "Back the robot base away from the side table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode850": {
+    "prompt": "Move the robot base to the other side of the rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode851": {
+    "prompt": "Turn the robot base towards the counter and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode852": {
+    "prompt": "Do not touch anything on the kitchen island.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode853": {
+    "prompt": "Move everything from the cabinet to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode854": {
+    "prompt": "Hand the brown box from the left gripper to the right one.",
+    "target": "brown box",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode855": {
+    "prompt": "Hand the aluminum tray from the left gripper to the right one.",
+    "target": "aluminum tray",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode856": {
+    "prompt": "Move everything from the cabinet to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode857": {
+    "prompt": "Hand the toy car from the left gripper to the right one.",
+    "target": "toy car",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode858": {
+    "prompt": "Move everything from the rack to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode859": {
+    "prompt": "Shift the robot base along the basket.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode860": {
+    "prompt": "Rearrange the tools on the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode861": {
+    "prompt": "Put the glass jar down on the table.",
+    "target": "glass jar",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode862": {
+    "prompt": "Wait until the trash bin is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode863": {
+    "prompt": "Sort the containers that sit on the blue tray by size.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode864": {
+    "prompt": "Keep the camera pointed at the sink.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode865": {
+    "prompt": "Drive the robot base towards the basket.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode866": {
+    "prompt": "Turn the robot base towards the coffee table and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode867": {
+    "prompt": "Pick up the red cup and place it on the side table.",
+    "target": "red cup",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode868": {
+    "prompt": "Inspect the counter before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode869": {
+    "prompt": "Slide the screwdriver to the right edge of the blue tray.",
+    "target": "screwdriver",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode870": {
+    "prompt": "Move everything from the fridge to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode871": {
+    "prompt": "Rearrange the bottles on the side table.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode872": {
+    "prompt": "Move everything from the basket to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode873": {
+    "prompt": "Clear the top shelf and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode874": {
+    "prompt": "Clear the microwave and put everything into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode875": {
+    "prompt": "Inspect the desk before choosing an action.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode876": {
+    "prompt": "Watch the aluminum tray until it comes to rest.",
+    "target": "aluminum tray",
+    "mover": null
+  },
+  "fixed_scene_task_episode877": {
+    "prompt": "Tidy up the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode878": {
+    "prompt": "Clear the blue tray and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode879": {
+    "prompt": "Hand the remote control from the left gripper to the right one.",
+    "target": "remote control",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode880": {
+    "prompt": "Push the objects on the trash bin towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode881": {
+    "prompt": "Rearrange the tools on the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode882": {
+    "prompt": "Move everything from the cutting board to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode883": {
+    "prompt": "Nothing needs to be moved in this episode.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode884": {
+    "prompt": "Move everything from the dish rack to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode885": {
+    "prompt": "Move everything from the microwave to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode886": {
+    "prompt": "Let the scene on the wooden shelf settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode887": {
+    "prompt": "Move everything from the coffee table to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode888": {
+    "prompt": "Keep the camera pointed at the basket.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode889": {
+    "prompt": "Clear the rack and put everything into the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode890": {
+    "prompt": "Rotate the red block so that its handle faces up.",
+    "target": "red block",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode891": {
+    "prompt": "Wait until the fridge is clear.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode892": {
+    "prompt": "Move the red apple into the drying rack.",
+    "target": "red apple",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode893": {
+    "prompt": "Keep the camera pointed at the tray.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode894": {
+    "prompt": "Move everything from the stove to the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode895": {
+    "prompt": "Rearrange the plates on the sink.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode896": {
+    "prompt": "Clear the counter and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode897": {
+    "prompt": "Rearrange the boxes on the counter.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode898": {
+    "prompt": "Clear the microwave and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode899": {
+    "prompt": "Lift the ceramic plate above the microwave and hold it there.",
+    "target": "ceramic plate",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode900": {
+    "prompt": "Move the robot base to the other side of the fridge.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode901": {
+    "prompt": "Rotate the robot base 90 degrees to the left.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode902": {
+    "prompt": "Hand the orange ball from the left gripper to the right one.",
+    "target": "orange ball",
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode903": {
+    "prompt": "Do not touch anything on the coffee table.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode904": {
+    "prompt": "Rearrange the plates on the lower shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode905": {
+    "prompt": "Wait for the toy car to stop moving.",
+    "target": "toy car",
+    "mover": null
+  },
+  "fixed_scene_task_episode906": {
+    "prompt": "Rotate the robot base to face the wooden shelf.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode907": {
+    "prompt": "Rearrange the bottles on the rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode908": {
+    "prompt": "Clear the side table and put everything into the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode909": {
+    "prompt": "Clear the wooden shelf and put everything into the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode910": {
+    "prompt": "Drive the robot base towards the drawer.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode911": {
+    "prompt": "Move everything from the table to the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode912": {
+    "prompt": "Lift the empty bottle above the trash bin and hold it there.",
+    "target": "empty bottle",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode913": {
+    "prompt": "Advance the robot base until the kitchen island is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode914": {
+    "prompt": "Watch the kitchen knife until it comes to rest.",
+    "target": "kitchen knife",
+    "mover": null
+  },
+  "fixed_scene_task_episode915": {
+    "prompt": "Do not disturb the remote control.",
+    "target": "remote control",
+    "mover": null
+  },
+  "fixed_scene_task_episode916": {
+    "prompt": "Turn the robot base towards the trash bin and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode917": {
+    "prompt": "Group the small parts next to the blue tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode918": {
+    "prompt": "Clear the desk and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode919": {
+    "prompt": "Pick up the kitchen knife and place it on the dish rack.",
+    "target": "kitchen knife",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode920": {
+    "prompt": "Clear the work bench and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode921": {
+    "prompt": "Drive the robot base towards the table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode922": {
+    "prompt": "Watch the paper cup until it comes to rest.",
+    "target": "paper cup",
+    "mover": null
+  },
+  "fixed_scene_task_episode923": {
+    "prompt": "Clear the wooden shelf and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode924": {
+    "prompt": "Tidy up the top shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode925": {
+    "prompt": "Keep the camera pointed at the cabinet.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode926": {
+    "prompt": "Advance the robot base until the tray is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode927": {
+    "prompt": "Drive the robot base towards the tray.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode928": {
+    "prompt": "Slide the screwdriver to the right edge of the side table.",
+    "target": "screwdriver",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode929": {
+    "prompt": "Keep the green mug inside the frame until the scene settles.",
+    "target": "green mug",
+    "mover": null
+  },
+  "fixed_scene_task_episode930": {
+    "prompt": "Do not touch anything on the cart.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode931": {
+    "prompt": "Keep the camera pointed at the cutting board.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode932": {
+    "prompt": "Arrange the objects on the side table into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode933": {
+    "prompt": "Clear the desk and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode934": {
+    "prompt": "Move everything from the drying rack to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode935": {
+    "prompt": "Clear the side table and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode936": {
+    "prompt": "Rearrange the plates on the side table.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode937": {
+    "prompt": "Open the drawer, take out the towel, and close it again.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode938": {
+    "prompt": "Leave the desk as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode939": {
+    "prompt": "Move everything from the lower shelf to the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode940": {
+    "prompt": "Move everything from the lower shelf to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode941": {
+    "prompt": "Clear the cart and put everything into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode942": {
+    "prompt": "Do not touch anything on the cabinet.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode943": {
+    "prompt": "Move the robot base backwards by 3 steps.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode944": {
+    "prompt": "Rotate the robot base to face the cabinet.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode945": {
+    "prompt": "Rotate the robot base 30 degrees to the left.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode946": {
+    "prompt": "Clear the coffee table and put everything into the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode947": {
+    "prompt": "Turn the robot base towards the rack and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode948": {
+    "prompt": "Clear the side table and put everything into the microwave.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode949": {
+    "prompt": "Pair the objects on the stove and place them side by side.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode950": {
+    "prompt": "Arrange the objects on the desk into a row.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode951": {
+    "prompt": "Collect the scattered parts into the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode952": {
+    "prompt": "Line up the cups along the edge of the cutting board.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode953": {
+    "prompt": "Move the robot base backwards by 2 step.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode954": {
+    "prompt": "Clear the desk and put everything into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode955": {
+    "prompt": "Rearrange the tools on the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode956": {
+    "prompt": "Move everything from the top shelf to the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode957": {
+    "prompt": "Clear the desk and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode958": {
+    "prompt": "Tidy up the work bench.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode959": {
+    "prompt": "Stack the bowls that are on the shelf.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode960": {
+    "prompt": "Move everything from the lower shelf to the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode961": {
+    "prompt": "Wait for the glass jar to stop moving.",
+    "target": "glass jar",
+    "mover": null
+  },
+  "fixed_scene_task_episode962": {
+    "prompt": "Move the robot base to the other side of the trash bin.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode963": {
+    "prompt": "Line up the cups along the edge of the kitchen island.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode964": {
+    "prompt": "Lift the kitchen knife above the dish rack and hold it there.",
+    "target": "kitchen knife",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode965": {
+    "prompt": "Turn the robot base towards the desk and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode966": {
+    "prompt": "Move everything from the lower shelf to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode967": {
+    "prompt": "Advance the robot base until the counter is within reach.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode968": {
+    "prompt": "Move everything from the shelf to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode969": {
+    "prompt": "Turn the robot base towards the top shelf and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode970": {
+    "prompt": "Lift the wooden spoon above the microwave and hold it there.",
+    "target": "wooden spoon",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode971": {
+    "prompt": "Drive the robot base towards the rack.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode972": {
+    "prompt": "Clear the cabinet and put everything into the tray.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode973": {
+    "prompt": "Leave the cabinet as it is.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode974": {
+    "prompt": "Clear the wooden shelf and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode975": {
+    "prompt": "Move everything from the drawer to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode976": {
+    "prompt": "Tidy up the drawer.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode977": {
+    "prompt": "Clear the table and put everything into the drying rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode978": {
+    "prompt": "Place the empty bottle next to the drying rack.",
+    "target": "empty bottle",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode979": {
+    "prompt": "Move everything from the stove to the trash bin.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode980": {
+    "prompt": "Move the robot base to the other side of the work bench.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode981": {
+    "prompt": "Turn the robot base towards the drying rack and stop.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode982": {
+    "prompt": "Place the wooden spoon next to the dish rack.",
+    "target": "wooden spoon",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode983": {
+    "prompt": "Slide the coffee cup to the right edge of the basket.",
+    "target": "coffee cup",
+    "mover": "left_gripper"
+  },
+  "fixed_scene_task_episode984": {
+    "prompt": "Rearrange the cups on the coffee table.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode985": {
+    "prompt": "Clear the microwave and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode986": {
+    "prompt": "Keep the toy car inside the frame until the scene settles.",
+    "target": "toy car",
+    "mover": null
+  },
+  "fixed_scene_task_episode987": {
+    "prompt": "Lift the green apple above the top shelf and hold it there.",
+    "target": "green apple",
+    "mover": "right_gripper"
+  },
+  "fixed_scene_task_episode988": {
+    "prompt": "Let the scene on the table settle.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode989": {
+    "prompt": "Move everything from the sink to the fridge.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode990": {
+    "prompt": "Rearrange the plates on the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode991": {
+    "prompt": "Watch the wooden spoon until it comes to rest.",
+    "target": "wooden spoon",
+    "mover": null
+  },
+  "fixed_scene_task_episode992": {
+    "prompt": "Shift the robot base along the side table.",
+    "target": null,
+    "mover": "robot_base"
+  },
+  "fixed_scene_task_episode993": {
+    "prompt": "Clear the cutting board and put everything into the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode994": {
+    "prompt": "Move everything from the tray to the cart.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode995": {
+    "prompt": "Do not touch anything on the counter.",
+    "target": null,
+    "mover": null
+  },
+  "fixed_scene_task_episode996": {
+    "prompt": "Push the objects on the lower shelf towards the middle.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode997": {
+    "prompt": "Watch the yellow cup until it comes to rest.",
+    "target": "yellow cup",
+    "mover": null
+  },
+  "fixed_scene_task_episode998": {
+    "prompt": "Move everything from the fridge to the dish rack.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode999": {
+    "prompt": "Move everything from the trash bin to the basket.",
+    "target": null,
+    "mover": "both_grippers"
+  },
+  "fixed_scene_task_episode1000": {
+    "prompt": "Clear the side table and put everything into the cabinet.",
+    "target": null,
+    "mover": "both_grippers"
+  }
+}
