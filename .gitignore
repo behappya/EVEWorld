@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
-*.egg-info/
 .venv/
 venv/
 env/
@@ -12,6 +11,12 @@ env/
 .ruff_cache/
 .ipynb_checkpoints/
 .DS_Store
+
+# --- Build / packaging ---
+build/
+dist/
+*.egg-info/
+.eggs/
 
 # --- Model weights & tensors ---
 *.pth
@@ -48,11 +53,10 @@ env/
 *.tgz
 *.zip
 *.7z
-outputs/
-checkpoints/
-experiments/
+/outputs/
+/checkpoints/*
+!/checkpoints/README.md
 _tmp/
-data/
 
 # --- Media (selectively re-allowed in assets/ via a nested .gitignore) ---
 *.png
@@ -66,7 +70,19 @@ data/
 *.pdf
 
 # --- Paper source (kept local while under review, never published) ---
-paper/
+/paper/
+
+# --- Third-party backbones: clone them next to this checkout, never vendor them ---
+#   https://github.com/open-gigaai/giga-world-0   -> third_party/giga-world-0
+#   FlowWAM (see third_party/README.md)           -> third_party/FlowWAM
+/giga-models/
+/giga-world-0/
+/third_party/giga-world-0/
+/third_party/FlowWAM/
+
+# --- Pre-restructure layout, superseded by src/eveworld and scripts ---
+/eveworld/
+/benchmarks/
 
 # --- LaTeX build artifacts ---
 *.aux
@@ -79,6 +95,7 @@ paper/
 *.xdv
 *.synctex.gz
 missfont.log
+texput.*
 
 # --- Secrets must never be committed ---
 .env

@@ -1,2 +1,0 @@
-from .giga_world_0_trainer import GigaWorld0Trainer
-from .giga_world_0_transforms import GigaWorld0Transform
