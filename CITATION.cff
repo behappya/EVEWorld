@@ -7,5 +7,15 @@ abstract: >-
   restores clean videos from duplicate-corrupted inputs, Temporal Instance
   Alignment (TIA) enforces local cross-frame target correspondence, and the
   Model Laziness Rate (MLR) measures persistent target-count violations.
+authors:
+  - name: "The EVEWorld Authors"
 type: software
 license: Apache-2.0
+version: "1.0.0"
+repository-code: "https://github.com/behappya/EVEWorld"
+keywords:
+  - world models
+  - video generation
+  - embodied AI
+  - robot manipulation
+  - physical evolution
