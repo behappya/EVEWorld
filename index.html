@@ -31,6 +31,7 @@
       <a href="#qualitative">Qualitative</a>
       <a href="#generalization">Generalization</a>
       <a href="#results">Results</a>
+      <a href="#analysis">Analysis</a>
       <a href="#citation">Citation</a>
     </nav>
     <div class="header-end">
@@ -105,7 +106,7 @@
 
     <div class="hero-metrics">
       <div class="hm"><b>1.59%</b><span>MLR on DreamGenBench<br>vs 11.11% Standard SFT</span></div>
-      <div class="hm"><b>&minus;85.7%</b><span>relative reduction<br>in Model Laziness</span></div>
+      <div class="hm"><b>&minus;85.7%</b><span>MLR vs Standard SFT<br>(&minus;87.5% vs GigaWorld-0)</span></div>
       <div class="hm"><b>80.16</b><span>Qwen-IF<br>vs 73.81 Standard SFT</span></div>
       <div class="hm"><b>60.85</b><span>Gemini-IF<br>vs 53.57 Standard SFT</span></div>
       <div class="hm"><b>2B</b><span>embodied video backbone<br>GigaWorld-0 Video-Pretrain</span></div>
@@ -122,7 +123,7 @@
     <h2 class="band-title">From <i>&ldquo;Is the frame plausible?&rdquo;</i> to <i>&ldquo;Does the target survive the rollout?&rdquo;</i></h2>
 
     <div class="abstract-card reveal">
-      <p>Video world models have emerged as a promising approach to simulating environment dynamics for embodied intelligence. However, existing models are prone to <b>Model Laziness</b>: they focus on visual fidelity at the expense of physical reasoning and lack process-level supervision over the temporal dynamics of manipulated objects. In this work, we propose <b>EVEWorld</b>, an evolution-supervision framework that preserves the target instance over time. First, we propose <b>Instance-Guided Restoration (IGR)</b>, which preserves target-instance existence over time. Second, we introduce <b>Temporal Instance Alignment (TIA)</b>, which aligns the target across adjacent frames to preserve its identity and temporal continuity. We further introduce the <b>Model Laziness Rate (MLR)</b>, a metric that measures target-instance count violations over time. Extensive experiments on DreamGenBench, EWMBench, and PBench demonstrate that EVEWorld consistently mitigates Model Laziness and improves process fidelity and task performance, ranking <b>6th in JEPA Similarity</b> and <b>17th overall</b> on the final WorldArena 2.0 Track 1 leaderboard. Relative to Standard SFT, EVEWorld reduces MLR by <b>85.7%</b> &mdash; from 11.11% to 1.59% &mdash; while improving instruction following under both Qwen-IF (73.81 &rarr; 80.16) and Gemini-IF (53.57 &rarr; 60.85).</p>
+      <p>Video world models have emerged as a promising approach to simulating environment dynamics for embodied intelligence. However, existing models are prone to <b>Model Laziness</b>: they focus on visual fidelity at the expense of physical reasoning and lack process-level supervision over the temporal dynamics of manipulated objects. In this work, we propose <b>EVEWorld</b>, an evolution-supervision framework that preserves the target instance over time. First, we propose <b>Instance-Guided Restoration (IGR)</b>, which preserves target-instance existence over time. Second, we introduce <b>Temporal Instance Alignment (TIA)</b>, which aligns the target across adjacent frames to preserve its identity and temporal continuity. We further introduce the <b>Model Laziness Rate (MLR)</b>, a metric that measures target-instance count violations over time. Extensive experiments on DreamGenBench, EWMBench, and PBench demonstrate that EVEWorld consistently mitigates Model Laziness and improves process fidelity and task performance, ranking <b>6th in JEPA Similarity</b> and <b>17th overall</b> on the final WorldArena 2.0 Track 1 leaderboard. Relative to Standard SFT, EVEWorld reduces MLR by <b>85.7%</b> &mdash; from 11.11% to 1.59% &mdash; while improving instruction following under both Qwen-IF (73.81 &rarr; 80.16) and Gemini-IF (53.57 &rarr; 60.85). Measured against the strongest baseline, GigaWorld-0, the same metric falls <b>87.5%</b>, from 12.70% to 1.59%.</p>
     </div>
 
     <div class="pipeline">
@@ -336,7 +337,7 @@
   <div class="lp-inner wide">
     <div class="eyebrow"><span class="e-no">05</span><span class="e-label">Qualitative Comparison</span><span class="e-rule"></span></div>
     <h2 class="band-title">The same instruction, four supervisors</h2>
-    <p class="band-lede">Every clip below is a rollout of the <b>same backbone</b>, the <b>same instruction</b> and the <b>same start frame</b> &mdash; only the supervision changes. <b>GigaWorld-0</b> is the pre-trained video backbone, <b>Standard SFT</b> is the conventional fine-tune, <b>IGR only</b> adds instance-guided restoration without temporal alignment, and <b>EVEWorld</b> combines both supervisors. Hover (or tap) any tile to play it. Each tile shows the <b>generated rollout</b>; the conditioning frame is identical across the four arms of a task and is therefore shown once rather than repeated in every tile.</p>
+    <p class="band-lede">Every clip below is a rollout of the <b>same backbone</b>, the <b>same instruction</b> and the <b>same start frame</b> &mdash; only the supervision changes. <b>GigaWorld-0</b> is the pre-trained video backbone, <b>Standard SFT</b> is the conventional fine-tune, <b>IGR only</b> adds instance-guided restoration without temporal alignment, and <b>EVEWorld</b> combines both supervisors. Hover (or tap) any tile to play it. Each tile shows the <b>generated rollout</b>; the conditioning frame is identical across the arms of a task and is therefore shown once rather than repeated in every tile. Most cards carry all four arms &mdash; where the source sheet has no <b>IGR only</b> render, or that render is byte-identical to another arm, the card shows the remaining tiles and says so.</p>
 
     <div class="arm-legend">
       <span class="arm-chip eve"><i></i><b>EVEWorld</b>&nbsp;&mdash; IGR + TIA</span>
@@ -346,9 +347,9 @@
     </div>
 
     <div class="explorer-filter" role="group" aria-label="Filter qualitative comparisons by task outcome">
-      <span class="filter-pill active" data-suite="all">All tasks (8)</span>
-      <span class="filter-pill" data-suite="success">Task success (6)</span>
-      <span class="filter-pill" data-suite="failure-prone">Failure-prone (2)</span>
+      <span class="filter-pill active" data-suite="all">All tasks (11)</span>
+      <span class="filter-pill" data-suite="success">Task success (8)</span>
+      <span class="filter-pill" data-suite="failure-prone">Failure-prone (3)</span>
     </div>
 
     <div class="demo-grid three">
@@ -380,15 +381,15 @@
       </div>
 
       <div class="demo-card reveal" data-suite="success">
-        <div class="demo-tiles">
+        <div class="demo-tiles trio">
           <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/035-yes/eve.mp4" poster="assets/site/videos/posters/035-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
           <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/035-yes/sft.mp4" poster="assets/site/videos/posters/035-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/035-yes/igt.mp4" poster="assets/site/videos/posters/035-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
           <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/035-yes/pre.mp4" poster="assets/site/videos/posters/035-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
         </div>
         <div class="demo-body">
           <div class="demo-task">Use the right hand to pick up purple grapes from center of table to lower white plastic tray.</div>
           <div class="demo-meta"><span class="suite-tag">GR1 &middot; 035-yes</span><span class="demo-outcome ok">Task success</span></div>
+          <div class="demo-note">In the source sheet the IGR tile is byte-identical to the GigaWorld-0 tile, so it is not shown twice.</div>
         </div>
       </div>
 
@@ -432,28 +433,67 @@
       </div>
 
       <div class="demo-card reveal" data-suite="success">
-        <div class="demo-tiles">
+        <div class="demo-tiles trio">
           <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/hlg-yes/eve.mp4" poster="assets/site/videos/posters/hlg-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
           <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/hlg-yes/sft.mp4" poster="assets/site/videos/posters/hlg-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/hlg-yes/igt.mp4" poster="assets/site/videos/posters/hlg-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
           <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/hlg-yes/pre.mp4" poster="assets/site/videos/posters/hlg-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
         </div>
         <div class="demo-body">
           <div class="demo-task">Use the left hand to pick up dragonfruit from pink plate to teal plate.</div>
           <div class="demo-meta"><span class="suite-tag">GR1 &middot; hlg-yes</span><span class="demo-outcome ok">Task success</span></div>
+          <div class="demo-note">In the source sheet the IGR tile is byte-identical to the EVEWorld tile, so it is not shown twice.</div>
         </div>
       </div>
 
       <div class="demo-card reveal" data-suite="success">
-        <div class="demo-tiles">
+        <div class="demo-tiles trio">
           <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/016-yes/eve.mp4" poster="assets/site/videos/posters/016-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
           <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/016-yes/sft.mp4" poster="assets/site/videos/posters/016-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/016-yes/igt.mp4" poster="assets/site/videos/posters/016-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
           <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/016-yes/pre.mp4" poster="assets/site/videos/posters/016-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
         </div>
         <div class="demo-body">
           <div class="demo-task">Use the right hand to pick up red tomato from upper black tray of plastic shelf to inside of brown paper bag.</div>
           <div class="demo-meta"><span class="suite-tag">GR1 &middot; 016-yes</span><span class="demo-outcome ok">Task success</span></div>
+          <div class="demo-note">In the source sheet the IGR tile is byte-identical to the Standard SFT tile, so it is not shown twice.</div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="success">
+        <div class="demo-tiles trio">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/012-yes/eve.mp4" poster="assets/site/videos/posters/012-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/012-yes/sft.mp4" poster="assets/site/videos/posters/012-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/012-yes/pre.mp4" poster="assets/site/videos/posters/012-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the right hand to pick up green grapes from black tray at the center of the table to white circular mat at the right side of the table.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; 012-yes</span><span class="demo-outcome ok">Task success</span></div>
+          <div class="demo-note">The source sheet carries no IGR tile for this task.</div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="success">
+        <div class="demo-tiles trio">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/033-yes/eve.mp4" poster="assets/site/videos/posters/033-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/033-yes/sft.mp4" poster="assets/site/videos/posters/033-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/033-yes/pre.mp4" poster="assets/site/videos/posters/033-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the right hand to pick up tall red glass from center of tan table to center of bright blue plate.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; 033-yes</span><span class="demo-outcome ok">Task success</span></div>
+          <div class="demo-note">The source sheet carries no IGR tile for this task.</div>
+        </div>
+      </div>
+
+      <div class="demo-card reveal" data-suite="failure-prone">
+        <div class="demo-tiles trio">
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/fire-no/eve.mp4" poster="assets/site/videos/posters/fire-no-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/fire-no/sft.mp4" poster="assets/site/videos/posters/fire-no-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/fire-no/pre.mp4" poster="assets/site/videos/posters/fire-no-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <div class="demo-body">
+          <div class="demo-task">Use the right hand to pick up long reach lighter to light the candle.</div>
+          <div class="demo-meta"><span class="suite-tag">GR1 &middot; fire-no</span><span class="demo-outcome bad">Failure-prone</span></div>
+          <div class="demo-note">The source sheet carries no IGR tile for this task.</div>
         </div>
       </div>
 
@@ -461,7 +501,7 @@
 
     <div class="ref-strip">
       <h3>Where these clips come from</h3>
-      <p>All 32 tiles are GR1 tabletop manipulation rollouts produced under identical instructions and initial conditions, taken from our internal evaluation sheets. The <span class="mono">-yes</span> / <span class="mono">-no</span> suffixes are carried over verbatim from the source directory names and are shown for traceability only; the videos themselves are unedited model outputs. Each source clip is a single wide frame holding the frozen conditioning still on the left and the generated rollout on the right, split at exactly 50%; these tiles crop to the generated rollout, because that still is identical across the four arms of a task. The <b>GigaWorld-0</b> column is the pre-trained backbone without any task fine-tuning, and <b>IGR only</b> isolates the restoration supervisor from the temporal-alignment supervisor.</p>
+      <p>All 38 tiles across the 11 tasks are GR1 tabletop manipulation rollouts produced under identical instructions and initial conditions, taken from our internal evaluation sheets. The <span class="mono">-yes</span> / <span class="mono">-no</span> suffixes are carried over verbatim from the source directory names and are shown for traceability only; the videos themselves are unedited model outputs. Most source clips are a single wide frame holding the frozen conditioning still on the left and the generated rollout on the right, split at exactly 50%; those tiles crop to the generated rollout, because that still is identical across the arms of a task. Where the sheet already supplies the rollout on its own, the full frame is shown. The <b>GigaWorld-0</b> column is the pre-trained backbone without any task fine-tuning, and <b>IGR only</b> isolates the restoration supervisor from the temporal-alignment supervisor.</p>
     </div>
   </div>
 </section>
@@ -478,15 +518,35 @@
         <div class="finding-head"><span class="f-no">1</span>
           <h3>WorldArena 1.0, zero-shot</h3>
         </div>
-        <p>Evaluated without any protocol-specific tuning, EVEWorld raises the local overall score from <b>53.95</b> to <b>56.76</b> over Standard SFT (<span class="pos">+5.21%</span>) while cutting MLR from <b>27.39</b> to <b>13.38</b> (<span class="pos">&minus;51.15%</span>). MLR is evaluated on the common set of <b>157 eligible prompts</b>.</p>
+        <p>Evaluated without any protocol-specific tuning, EVEWorld raises the overall score from <b>53.95</b> to <b>56.76</b> over Standard SFT (<span class="pos">+5.21%</span>) while cutting MLR from <b>27.39</b> to <b>13.38</b> (<span class="pos">&minus;51.15%</span>). MLR is evaluated on the common set of <b>157 eligible prompts</b>. The lead sits where it should: <b>Dynamic Degree 48.49 &rarr; 62.90</b> and <b>Flow 7.82 &rarr; 10.98</b>, at a small cost in appearance (Image Quality 60.71 &rarr; 59.82). A low MLR on its own is not the goal &mdash; the weakest baseline posts the lowest MLR of the table 2.55, but also the lowest Dynamic Degree 20.71, which is why MLR has to be read jointly with Dynamic Degree and Flow.</p>
         <div class="table-card">
-          <p class="t-caption">WorldArena 1.0 &mdash; zero-shot transfer. Bold denotes the best result among GigaWorld-based models.</p>
+          <p class="t-caption">WorldArena 1.0 &mdash; zero-shot transfer on the <b>157 shared eligible prompts</b>. Bold marks the best result among the GigaWorld-based models (bottom group); general I2V baselines are not bolded. IQ: Image Quality; AQ: Aesthetic Quality; DD: Dynamic Degree; MS: Motion Smoothness; SC: Subject Consistency; BC: Background Consistency; PC: Photometric Consistency.</p>
           <table class="data tight">
-            <thead><tr><th>Method</th><th>Overall &uarr;</th><th>MLR (%) &darr;</th></tr></thead>
+            <thead>
+              <tr>
+                <th rowspan="2">Method</th>
+                <th colspan="2">Appearance</th>
+                <th colspan="3">Motion</th>
+                <th colspan="3">Consistency</th>
+                <th colspan="2">Main metrics</th>
+              </tr>
+              <tr>
+                <th>IQ &uarr;</th><th>AQ &uarr;</th>
+                <th>DD &uarr;</th><th>Flow &uarr;</th><th>MS &uarr;</th>
+                <th>SC &uarr;</th><th>BC &uarr;</th><th>PC &uarr;</th>
+                <th>Overall &uarr;</th><th>MLR (%) &darr;</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td>GigaWorld-0</td><td>53.18</td><td>27.39</td></tr>
-              <tr><td>Standard SFT</td><td>53.95</td><td>27.39</td></tr>
-              <tr><td>EVEWorld</td><td class="best">56.76</td><td class="best">13.38</td></tr>
+              <tr class="group-row"><td colspan="11">General I2V models (zero-shot)</td></tr>
+              <tr><td>CogVideoX</td><td>24.51</td><td>34.80</td><td>20.71</td><td>7.24</td><td>50.78</td><td>54.96</td><td>66.35</td><td>10.20</td><td>33.69</td><td>2.55</td></tr>
+              <tr><td>Wan-TI2V</td><td>33.48</td><td>37.90</td><td>33.00</td><td>11.38</td><td>61.86</td><td>68.88</td><td>77.17</td><td>18.19</td><td>42.73</td><td>17.20</td></tr>
+              <tr><td>Wan-A14B</td><td>51.93</td><td>43.37</td><td>42.29</td><td>8.04</td><td>64.13</td><td>67.69</td><td>75.37</td><td>33.61</td><td>48.30</td><td>29.94</td></tr>
+              <tr><td>Cosmos</td><td>57.88</td><td>38.83</td><td>50.46</td><td>16.69</td><td>71.61</td><td>64.14</td><td>73.71</td><td>21.42</td><td>49.34</td><td>8.28</td></tr>
+              <tr class="group-row"><td colspan="11">GigaWorld-based models</td></tr>
+              <tr><td>GigaWorld-0</td><td>58.53</td><td class="best">38.79</td><td>44.36</td><td>7.74</td><td>61.67</td><td>77.90</td><td>88.13</td><td class="best">48.32</td><td>53.18</td><td>27.39</td></tr>
+              <tr><td>Standard SFT</td><td class="best">60.71</td><td>38.36</td><td>48.49</td><td>7.82</td><td>64.04</td><td class="best">79.34</td><td>88.67</td><td>44.17</td><td>53.95</td><td>27.39</td></tr>
+              <tr><td>EVEWorld</td><td>59.82</td><td>37.35</td><td class="best">62.90</td><td class="best">10.98</td><td class="best">67.82</td><td>78.72</td><td class="best">88.91</td><td>47.58</td><td class="best">56.76</td><td class="best">13.38</td></tr>
             </tbody>
           </table>
         </div>
@@ -535,11 +595,29 @@
 
     <div class="ref-strip">
       <h3>WorldArena 2.0 reference rollouts &mdash; external baselines</h3>
-      <p>On the final <b>WorldArena 2.0 Track 1</b> leaderboard our entry ranks <b>6th in JEPA Similarity</b> and <b>17th overall</b>. These clips are <b>not</b> produced by EVEWorld. They are rollouts from the WorldArena 2.0 evaluation harness, where our entry is scored alongside externally submitted systems, and we include them only as visual reference for the protocol. Each tile is a 2&times;2 montage of four systems on one prompt; the quadrant-to-system mapping is defined by the harness, so the tiles are labelled by prompt ID only and no individual system is identified here.</p>
+      <p>On the final <b>WorldArena 2.0 Track 1</b> leaderboard our entry ranks <b>6th in JEPA Similarity</b> and <b>17th overall</b>. The 13 clips below are <b>not</b> produced by EVEWorld. They are rollouts from the WorldArena 2.0 evaluation harness, where our entry is scored alongside externally submitted systems, and we include them only as visual reference for the protocol. Each tile is a 2&times;2 montage of four systems on one prompt; the quadrant-to-system mapping is defined by the harness, so the tiles are labelled by prompt ID only and no individual system is identified here.</p>
       <div class="ref-grid">
         <div class="demo-card reveal">
           <div class="demo-tiles single montage">
             <div class="demo-tile" data-video><video src="assets/site/videos/wa/425/combined.mp4" poster="assets/site/videos/posters/wa-425.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 425</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/451/combined.mp4" poster="assets/site/videos/posters/wa-451.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 451</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/544/combined.mp4" poster="assets/site/videos/posters/wa-544.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 544</span></div>
           </div>
           <div class="demo-body">
             <div class="demo-task">Four-system reference montage</div>
@@ -557,7 +635,79 @@
         </div>
         <div class="demo-card reveal">
           <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/602/combined.mp4" poster="assets/site/videos/posters/wa-602.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 602</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
             <div class="demo-tile" data-video><video src="assets/site/videos/wa/637/combined.mp4" poster="assets/site/videos/posters/wa-637.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 637</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/650/combined.mp4" poster="assets/site/videos/posters/wa-650.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 650</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/655/combined.mp4" poster="assets/site/videos/posters/wa-655.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 655</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/761/combined.mp4" poster="assets/site/videos/posters/wa-761.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 761</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/777/combined.mp4" poster="assets/site/videos/posters/wa-777.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 777</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/841/combined.mp4" poster="assets/site/videos/posters/wa-841.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 841</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/909/combined.mp4" poster="assets/site/videos/posters/wa-909.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 909</span></div>
+          </div>
+          <div class="demo-body">
+            <div class="demo-task">Four-system reference montage</div>
+            <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
+          </div>
+        </div>
+        <div class="demo-card reveal">
+          <div class="demo-tiles single montage">
+            <div class="demo-tile" data-video><video src="assets/site/videos/wa/936/combined.mp4" poster="assets/site/videos/posters/wa-936.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 936</span></div>
           </div>
           <div class="demo-body">
             <div class="demo-task">Four-system reference montage</div>
@@ -733,15 +883,19 @@
         </table>
       </div>
       <div class="table-card reveal">
-        <p class="t-caption">Failure-mode comparison against methods that target related behaviors. &Delta;MLR: negative is better; &Delta;IF: positive is better.</p>
+        <p class="t-caption">Failure-mode comparison against methods that target related behaviors. Each route is scored against its own matched control; for EVEWorld the control is Standard SFT. Dyn. / Train / Test / Causal / Repair denote explicit dynamics modeling, training-time intervention, test-time intervention, causal generation, and learned repair. &Delta;MLR: negative is better; &Delta;Gemini-IF: positive is better.</p>
         <table class="data tight">
-          <thead><tr><th>Method</th><th>&Delta;MLR &darr;</th><th>&Delta;IF &uarr;</th></tr></thead>
+          <thead>
+            <tr><th rowspan="2">Route</th><th colspan="5">Design elements</th><th colspan="2">Relative change</th></tr>
+            <tr><th>Dyn.</th><th>Train</th><th>Test</th><th>Causal</th><th>Repair</th><th>&Delta;MLR &darr;</th><th>&Delta;IF &uarr;</th></tr>
+          </thead>
           <tbody>
-            <tr><td>PhysicsLatent</td><td class="pos">&minus;7.0</td><td class="neg">&minus;11.9</td></tr>
-            <tr><td>EAG</td><td class="neg">+150.0</td><td class="pos">+10.0</td></tr>
-            <tr><td>LAD-LoRA</td><td>0.0</td><td class="neg">&minus;6.1</td></tr>
-            <tr><td>Causal Frontier</td><td class="neg">+35.4</td><td class="neg">&minus;53.8</td></tr>
-            <tr><td>ICH-D</td><td class="neg">+16.6</td><td class="neg">&minus;30.6</td></tr>
+            <tr><td>PhysicsLatent</td><td>&#10003;</td><td>&#10003;</td><td>&middot;</td><td>&middot;</td><td>&middot;</td><td class="pos">&minus;7.0</td><td class="neg">&minus;11.9</td></tr>
+            <tr><td>EAG sampling guidance</td><td>&#10003;</td><td>&middot;</td><td>&#10003;</td><td>&middot;</td><td>&middot;</td><td class="neg">+150.0</td><td class="pos">+10.0</td></tr>
+            <tr><td>LAD-LoRA</td><td>&#10003;</td><td>&#10003;</td><td>&middot;</td><td>&middot;</td><td>&middot;</td><td>0.0</td><td class="neg">&minus;6.1</td></tr>
+            <tr><td>Causal Frontier</td><td>&middot;</td><td>&#10003;</td><td>&middot;</td><td>&#10003;</td><td>&middot;</td><td class="neg">+35.4</td><td class="neg">&minus;53.8</td></tr>
+            <tr><td>ICH-D</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&middot;</td><td>&#10003;</td><td class="neg">+16.6</td><td class="neg">&minus;30.6</td></tr>
+            <tr><td>EVEWorld (ours)</td><td>&#10003;</td><td>&#10003;</td><td>&middot;</td><td>&middot;</td><td>&#10003;</td><td class="pos"><b>&minus;85.7</b></td><td class="pos"><b>+13.6</b></td></tr>
           </tbody>
         </table>
       </div>
@@ -778,6 +932,20 @@
       </table>
     </div>
 
+    <div class="table-card reveal">
+      <p class="t-caption">Cross-trial robustness on PBench Robot. Each SFT<sub>250</sub>&ndash;EVEWorld pair uses the same inference seed and the three trials use different seeds under otherwise identical settings; scores are the overall PBench Robot score judged by Gemini-3.8-Flash. EVEWorld wins all six paired trials, so the gain is not an artifact of a single lucky seed.</p>
+      <table class="data tight">
+        <thead>
+          <tr><th rowspan="2">Horizon</th><th colspan="3">Trial 1</th><th colspan="3">Trial 2</th><th colspan="3">Trial 3</th><th rowspan="2">Mean &Delta; &uarr;</th></tr>
+          <tr><th>SFT<sub>250</sub></th><th>EVEWorld</th><th>&Delta;</th><th>SFT<sub>250</sub></th><th>EVEWorld</th><th>&Delta;</th><th>SFT<sub>250</sub></th><th>EVEWorld</th><th>&Delta;</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>3.8 s</td><td>57.37</td><td class="best">59.27</td><td class="pos">+1.90</td><td>53.40</td><td class="best">55.07</td><td class="pos">+1.67</td><td>59.57</td><td class="best">60.61</td><td class="pos">+1.04</td><td class="best">+1.54</td></tr>
+          <tr><td>5.8 s</td><td>59.42</td><td class="best">60.02</td><td class="pos">+0.60</td><td>60.36</td><td class="best">63.02</td><td class="pos">+2.66</td><td>60.79</td><td class="best">62.21</td><td class="pos">+1.42</td><td class="best">+1.56</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="findings" style="margin-top:26px">
       <div class="finding reveal">
         <div class="finding-head"><span class="f-no">3</span><h3>Both supervisors are needed</h3></div>
@@ -795,10 +963,171 @@
   </div>
 </section>
 
-<!-- ================= 08 CITATION ================= -->
+<!-- ================= 08 ANALYSIS ================= -->
+<section class="band" id="analysis">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">08</span><span class="e-label">Analysis &amp; Robustness</span><span class="e-rule"></span></div>
+    <h2 class="band-title">Headline numbers, stress-tested</h2>
+    <p class="band-lede">The tables above are point estimates under a single configuration. This section collects the appendix evidence that they are not artifacts of a threshold, a seed, a judge repeat, or a weighting choice: confidence intervals on a shared eligible set, detector and rule calibration, judge and inference-seed variance, and the design ablations behind <b>IGR</b> and <b>TIA</b>.</p>
+
+    <div class="find-pair">
+      <div class="table-card reveal">
+        <p class="t-caption"><b>Cross-model MLR, with confidence intervals.</b> DreamGenBench, 63 shared detector-eligible items. Coverage is the fraction of prompts the detector can score; the shared set is what makes the models comparable.</p>
+        <table class="data tight">
+          <thead><tr><th>Model</th><th>Events / elig.</th><th>MLR (%) &darr;</th><th>95% Wilson CI</th><th>Coverage (%)</th></tr></thead>
+          <tbody>
+            <tr class="group-row"><td colspan="5">GigaWorld-based models</td></tr>
+            <tr><td>GigaWorld-0 (pretrained)</td><td>8 / 63</td><td>12.70</td><td>[6.58, 23.11]</td><td>50.00</td></tr>
+            <tr><td>Official GR1 fine-tune</td><td>5 / 63</td><td>7.94</td><td>[3.44, 17.27]</td><td>50.00</td></tr>
+            <tr><td>Standard SFT</td><td>7 / 63</td><td>11.11</td><td>[5.49, 21.20]</td><td>50.00</td></tr>
+            <tr><td>EVEWorld</td><td class="best">1 / 63</td><td class="best">1.59</td><td class="best">[0.28, 8.46]</td><td>50.00</td></tr>
+            <tr class="group-row"><td colspan="5">General video models</td></tr>
+            <tr><td>Wan2.2-TI2V-5B</td><td>11 / 63</td><td>17.46</td><td>[10.04, 28.62]</td><td>50.00</td></tr>
+            <tr><td>Wan2.2-I2V-A14B</td><td>7 / 63</td><td>11.11</td><td>[5.49, 21.20]</td><td>50.00</td></tr>
+            <tr><td>CogVideoX1.5-5B-I2V</td><td>18 / 63</td><td>28.57</td><td>[18.90, 40.70]</td><td>50.00</td></tr>
+            <tr><td>Cosmos-Predict2-2B</td><td>9 / 63</td><td>14.29</td><td>[7.70, 24.97]</td><td>50.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-card reveal">
+        <p class="t-caption"><b>Cross-domain MLR, with confidence intervals.</b> WorldArena 1.0, the same 157 shared detector-eligible videos for every model. Coverage is 19.22% throughout; the two baselines coincide at 27.39% while violating on different videos.</p>
+        <table class="data tight">
+          <thead><tr><th>Model</th><th>Events / elig.</th><th>MLR (%) &darr;</th><th>95% Wilson CI</th><th>Coverage (%)</th></tr></thead>
+          <tbody>
+            <tr><td>GigaWorld-0 (pretrained)</td><td>43 / 157</td><td>27.39</td><td>[21.02, 34.84]</td><td>19.22</td></tr>
+            <tr><td>Standard SFT</td><td>43 / 157</td><td>27.39</td><td>[21.02, 34.84]</td><td>19.22</td></tr>
+            <tr><td>EVEWorld</td><td class="best">21 / 157</td><td class="best">13.38</td><td class="best">[8.92, 19.58]</td><td>19.22</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-card reveal">
+      <p class="t-caption"><b>Sensitivity of MLR to the occlusion-overlap threshold and the persistence requirement.</b> Each cell is events / 63 (MLR in %); every setting uses the same eligible set. The main setting (&tau;<sub>occ</sub> = 0.15, k = 2) is highlighted. EVEWorld sits below Standard SFT in all twelve configurations, with relative reductions between 70.0% and 88.9%.</p>
+      <table class="data tight">
+        <thead>
+          <tr><th rowspan="2">&tau;<sub>occ</sub></th><th colspan="3">Standard SFT</th><th colspan="3">EVEWorld</th></tr>
+          <tr><th>k = 1</th><th>k = 2</th><th>k = 3</th><th>k = 1</th><th>k = 2</th><th>k = 3</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0.10</td><td>11 / 63 (17.46)</td><td>5 / 63 (7.94)</td><td>4 / 63 (6.35)</td><td>2 / 63 (3.17)</td><td>1 / 63 (1.59)</td><td>1 / 63 (1.59)</td></tr>
+          <tr><td>0.15</td><td>14 / 63 (22.22)</td><td class="best">7 / 63 (11.11)</td><td>5 / 63 (7.94)</td><td>3 / 63 (4.76)</td><td class="best">1 / 63 (1.59)</td><td>1 / 63 (1.59)</td></tr>
+          <tr><td>0.20</td><td>17 / 63 (26.98)</td><td>9 / 63 (14.29)</td><td>6 / 63 (9.52)</td><td>3 / 63 (4.76)</td><td>1 / 63 (1.59)</td><td>1 / 63 (1.59)</td></tr>
+          <tr><td>0.25</td><td>20 / 63 (31.75)</td><td>10 / 63 (15.87)</td><td>7 / 63 (11.11)</td><td>4 / 63 (6.35)</td><td>3 / 63 (4.76)</td><td>1 / 63 (1.59)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="find-pair">
+      <div class="table-card reveal">
+        <p class="t-caption"><b>Detector calibration.</b> Detector v1 is the raw count-deviation rate before spatial merging, occlusion-aware under-count handling, and temporal persistence; peak dev. is the mean maximum raw count deviation max<sub>t</sub> |N<sub>t</sub> &minus; N<sub>0</sub>|. The final protocol is deliberately more conservative than its raw component on every checkpoint.</p>
+        <table class="data tight">
+          <thead><tr><th>Model / config.</th><th>Detector v1 (%)</th><th>MLR (%) &darr;</th><th>Events / elig.</th><th>Peak dev.</th></tr></thead>
+          <tbody>
+            <tr><td>GigaWorld-0 (pretrained)</td><td>62.1</td><td>12.70</td><td>8 / 63</td><td>0.23</td></tr>
+            <tr><td>Official GR1 fine-tune</td><td>68.8</td><td>7.94</td><td>5 / 63</td><td>0.14</td></tr>
+            <tr><td>Standard SFT</td><td>63.2</td><td>11.11</td><td>7 / 63</td><td>0.27</td></tr>
+            <tr><td>EVEWorld (step 100)</td><td>70.4</td><td>4.76</td><td>3 / 63</td><td>0.17</td></tr>
+            <tr><td>EVEWorld (seed 6666, step 250)</td><td>66.7</td><td>3.17</td><td>2 / 63</td><td>0.15</td></tr>
+            <tr><td>EVEWorld (u3, step 300)</td><td>68.0</td><td>3.17</td><td>2 / 63</td><td>0.03</td></tr>
+            <tr><td>EVEWorld (step 250, main)</td><td class="best">70.4</td><td class="best">1.59</td><td class="best">1 / 63</td><td class="best">0.11</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-card reveal">
+        <p class="t-caption"><b>TIA layer selection.</b> The probe swept blocks 8&ndash;26 on each backbone and picked the layer whose adjacent-frame target matching is most reliable; block 23 is selected for GigaWorld-0 / DreamGen and for AgiBot, block 12 for FlowWAM. EPE is the mean endpoint error in token cells; reliability is defined per domain (object&ndash;background separation for DreamGen, static-feature stability for AgiBot, moving-pair top-1 hit rate for FlowWAM). TIA runs with a 64-d projection, 7&times;7 windows, temperature &tau; = 0.07 and residual scale &gamma; = 0.1.</p>
+        <table class="data tight">
+          <thead><tr><th>Setting</th><th>Selected block</th><th>EPE &darr;</th><th>Reliab. &uarr;</th></tr></thead>
+          <tbody>
+            <tr><td>GigaWorld-0 / DreamGen</td><td class="best">23</td><td class="best">0.55</td><td class="best">&minus;0.10</td></tr>
+            <tr><td>AgiBot</td><td class="best">23</td><td class="best">5.72</td><td>0.76</td></tr>
+            <tr><td>FlowWAM</td><td class="best">12</td><td class="best">3.42</td><td class="best">0.182</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-card reveal">
+      <p class="t-caption"><b>Spatial-weight design for IGR.</b> We vary both the support of the restoration supervision and its relative weight. &ldquo;Legacy&rdquo; is the original five-level map; the other variants use binary weighting. Coverage is the fraction of spatiotemporal latent locations that receive an emphasized weight. The development MLR / IF columns compare candidates under a shared internal protocol and are not directly comparable to the main results; the simpler binary 3&times; map (<b>Interaction-3x</b>) was adopted.</p>
+      <table class="data tight">
+        <thead>
+          <tr><th rowspan="2">Design</th><th colspan="3">Spatial support</th><th colspan="2">Relative weight</th><th rowspan="2">Coverage (median)</th><th rowspan="2">MLR &darr;</th><th rowspan="2">IF &uarr;</th></tr>
+          <tr><th>Path / loc.</th><th>Arm / grip.</th><th>Paste</th><th>Base</th><th>Emph.</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Legacy multi-level</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>0.5</td><td>2/3/4/6</td><td>0.2679</td><td>2.18</td><td>60.31</td></tr>
+          <tr><td>Binary-3</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>1</td><td>3</td><td>0.2685</td><td>2.21</td><td>60.26</td></tr>
+          <tr><td>Path+Loc-2x</td><td>&#10003;</td><td>&middot;</td><td>&#10003;</td><td>1</td><td>2</td><td>0.2380</td><td>3.34</td><td>59.82</td></tr>
+          <tr><td>Path+Loc-3x</td><td>&#10003;</td><td>&middot;</td><td>&#10003;</td><td>1</td><td>3</td><td>0.2147</td><td>3.08</td><td>59.96</td></tr>
+          <tr><td>Interaction-2x</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>1</td><td>2</td><td>0.5361</td><td>2.06</td><td>60.42</td></tr>
+          <tr><td>Interaction-3x</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>1</td><td>3</td><td class="best">0.5361</td><td class="best">1.94</td><td class="best">60.57</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="find-pair">
+      <div class="table-card reveal">
+        <p class="t-caption"><b>Robustness of duplicate removal across corruption strengths.</b> Retention is the fraction of injected duplicate area the reconstruction preserves; directional cosine measures how far the residual error is aligned with the injected duplicate. Before and after are the Standard SFT checkpoint and the model after 50 IGR fine-tuning steps.</p>
+        <table class="data tight">
+          <thead><tr><th>Opacity &alpha;</th><th>&sigma;</th><th>Ret. before &darr;</th><th>Ret. after &darr;</th><th>Rel. reduction (%) &uarr;</th><th>Dir. cos. before / after</th></tr></thead>
+          <tbody>
+            <tr><td>0.5</td><td>0.3</td><td>0.992</td><td>0.421</td><td>57.5</td><td>0.983 / 0.627</td></tr>
+            <tr><td>0.5</td><td>0.8</td><td>0.955</td><td>0.325</td><td>66.0</td><td>0.950 / 0.378</td></tr>
+            <tr><td>0.5</td><td>1.5</td><td>0.922</td><td>0.275</td><td>70.2</td><td>0.907 / 0.263</td></tr>
+            <tr><td>1.0</td><td>0.3</td><td>0.986</td><td>0.419</td><td>57.5</td><td>0.993 / 0.695</td></tr>
+            <tr><td>1.0</td><td>0.8</td><td>0.968</td><td>0.268</td><td>72.3</td><td>0.980 / 0.406</td></tr>
+            <tr><td>1.0</td><td>1.5</td><td>0.935</td><td class="best">0.229</td><td class="best">75.5</td><td>0.961 / 0.295</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-card reveal">
+        <p class="t-caption"><b>Gemini-IF judge variance.</b> The same generated videos are judged repeatedly; the ordering between models is unchanged across repeats, and EVEWorld has the smallest spread of the four GigaWorld-based entries.</p>
+        <table class="data tight">
+          <thead><tr><th>Model</th><th>Repeats</th><th>Overall &uarr;</th><th>Env</th><th>Object</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>GigaWorld-0</td><td>6</td><td>60.19 &plusmn; 2.90</td><td>54.60</td><td>54.33</td><td>69.86</td></tr>
+            <tr><td>Official GR1 fine-tune</td><td>2</td><td>63.10 &plusmn; 6.17</td><td>55.17</td><td>46.00</td><td>86.17</td></tr>
+            <tr><td>Standard SFT</td><td>6</td><td>53.57 &plusmn; 2.92</td><td>51.72</td><td>42.00</td><td>67.02</td></tr>
+            <tr><td>EVEWorld</td><td class="best">6</td><td class="best">60.85 &plusmn; 1.79</td><td class="best">72.41</td><td class="best">50.33</td><td>64.89</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="find-pair">
+      <div class="table-card reveal">
+        <p class="t-caption"><b>Matched inference seeds.</b> Standard SFT and EVEWorld run under the same seeds and the same judge budget, so the advantage is not a favourable draw. Under the FlowWAM transfer protocol, five complete generations from one checkpoint differ by at most 0.68 Local-11 points (57.28 &plusmn; 0.28).</p>
+        <table class="data tight">
+          <thead><tr><th>Seed</th><th>Judge repeats</th><th>Standard SFT (%)</th><th>EVEWorld (%)</th><th>&Delta; (pp)</th></tr></thead>
+          <tbody>
+            <tr><td>004</td><td>6</td><td>53.57 &plusmn; 2.92</td><td>60.85 &plusmn; 1.79</td><td class="pos">+7.28</td></tr>
+            <tr><td>061</td><td>3</td><td>57.41 &plusmn; 2.79</td><td>58.73 &plusmn; 1.37</td><td class="pos">+1.32</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-card reveal">
+        <p class="t-caption"><b>Long-horizon process evaluation across models</b> (Qwen-based judge, 92 matched prompts). Severity measures shortcut severity; the last two columns are the fractions of generations containing any shortcut or a missing stage. Every model degrades as the horizon doubles, and the frozen baseline degrades fastest.</p>
+        <table class="data tight">
+          <thead><tr><th>Model / horizon</th><th>Severity &darr;</th><th>Any shortcut &darr;</th><th>Missing stage &darr;</th><th>n</th></tr></thead>
+          <tbody>
+            <tr><td>GigaWorld-0 SFT, 3.8 s</td><td>0.94</td><td>0.32</td><td>0.30</td><td>92</td></tr>
+            <tr><td>GigaWorld-0 SFT, 7.8 s</td><td>1.79</td><td>0.63</td><td>0.60</td><td>92</td></tr>
+            <tr><td>GigaWorld-0 pretrained, 3.8 s</td><td>1.17</td><td>0.39</td><td>0.38</td><td>92</td></tr>
+            <tr><td>GigaWorld-0 pretrained, 7.8 s</td><td>1.97</td><td>0.67</td><td>0.66</td><td>92</td></tr>
+            <tr><td>Wan2.2-TI2V-5B, 3.8 s</td><td class="best">2.30</td><td class="best">0.82</td><td class="best">0.72</td><td>92</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="band-lede" style="margin-top:26px"><b>Sampling configuration.</b> The main checkpoint is step 250 at CFG weight <span class="mono">w&nbsp;=&nbsp;7.0</span>. Among the cells of the 4&times;6 step &times; guidance grid that reach the lowest MLR of 1.59%, this one also has the highest Gemini-IF (60.85); dropping guidance (<span class="mono">w&nbsp;=&nbsp;1.0</span>) at the same checkpoint leaves 28.98 Gemini-IF / 9.52 MLR, so the reported scores are not an artifact of guidance-free sampling.</p>
+  </div>
+</section>
+
+<!-- ================= 09 CITATION ================= -->
 <section class="band alt" id="citation">
   <div class="lp-inner">
-    <div class="eyebrow"><span class="e-no">08</span><span class="e-label">Citation</span><span class="e-rule"></span></div>
+    <div class="eyebrow"><span class="e-no">09</span><span class="e-label">Citation</span><span class="e-rule"></span></div>
     <h2 class="band-title">Cite this work</h2>
     <p class="band-lede">The paper is under double-blind review, so this entry is anonymized. It will be updated with the final author list and the arXiv identifier once the review process closes.</p>
 

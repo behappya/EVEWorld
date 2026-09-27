@@ -228,7 +228,7 @@
       pills.forEach(function (p) { p.classList.remove("active"); });
       pill.classList.add("active");
       var suite = pill.getAttribute("data-suite");
-      document.querySelectorAll(".demo-card").forEach(function (card) {
+      document.querySelectorAll(".demo-grid .demo-card").forEach(function (card) {
         var showIt = suite === "all" || card.getAttribute("data-suite") === suite;
         card.classList.toggle("hidden", !showIt);
       });
