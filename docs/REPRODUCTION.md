@@ -9,7 +9,7 @@ site-specific paths. See `docs/ENVIRONMENT.md` for the software stack and
 ## 0. Setup
 
 ```bash
-conda env create -f environment.yml && conda activate EVEWorld
+conda env create -f environment.yml && conda activate eveworld
 pip install -e ./giga-models
 export EVEWORLD_ROOT=$(pwd)
 export GAGI_ROOT=/path/to/your/data

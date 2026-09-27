@@ -2,7 +2,7 @@
 # P0-probe 第二步: 判分探针产物并与 Round-0 池同 prompt 同 seed 直接对比。
 # 用法: bash p0_probe_score.sh <TAG>
 set -eu
-source /home/jovyan/miniconda/etc/profile.d/conda.sh && conda activate "${CONDA_ENV:-EVEWorld}"
+source /home/jovyan/miniconda/etc/profile.d/conda.sh && conda activate "${CONDA_ENV:-eveworld}"
 REPO=giga-world-0
 TAG="${1:?TAG}"
 ROOT=/data/datasets/gagi/eve_v2_outputs/probe/${TAG}

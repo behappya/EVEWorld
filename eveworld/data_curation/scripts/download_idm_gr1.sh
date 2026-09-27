@@ -23,20 +23,20 @@ DEST="${DEST:-/data/datasets/gagi/idm_gr1_probe}"
 HF_BIN=""
 for cand in \
   "${HF_BIN_OVERRIDE:-}" \
-  "/home/jovyan/miniconda/envs/EVEWorld/bin/hf" \
-  "/home/jovyan/miniconda/envs/EVEWorld/bin/huggingface-cli" \
+  "/home/jovyan/miniconda/envs/eveworld/bin/hf" \
+  "/home/jovyan/miniconda/envs/eveworld/bin/huggingface-cli" \
   "hf" "huggingface-cli"; do
   [[ -z "$cand" ]] && continue
   if command -v "$cand" >/dev/null 2>&1; then HF_BIN="$cand"; break; fi
 done
 # 兜底: 直接用 EVEWorld 的 python -m huggingface_hub 下载
-GM_PY="/home/jovyan/miniconda/envs/EVEWorld/bin/python"
+GM_PY="/home/jovyan/miniconda/envs/eveworld/bin/python"
 if [[ -z "$HF_BIN" ]]; then
   if [[ -x "$GM_PY" ]] && "$GM_PY" -c "import huggingface_hub" 2>/dev/null; then
     HF_BIN="$GM_PY -m huggingface_hub.commands.huggingface_cli"
   else
     echo "[ERR] 未找到可用 hf CLI, 且 EVEWorld 无 huggingface_hub。" >&2
-    echo "      修复: ~/miniconda/envs/EVEWorld/bin/pip install -U 'huggingface_hub[cli]'" >&2
+    echo "      修复: ~/miniconda/envs/eveworld/bin/pip install -U 'huggingface_hub[cli]'" >&2
     exit 1
   fi
 fi

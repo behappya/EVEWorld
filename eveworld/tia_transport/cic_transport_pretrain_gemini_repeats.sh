@@ -3,7 +3,7 @@ set -euo pipefail
 
 REPO_DIR="giga-world-0"
 CONDA_SH="/home/jovyan/miniconda/etc/profile.d/conda.sh"
-CONDA_ENV="${CONDA_ENV:-EVEWorld}"
+CONDA_ENV="${CONDA_ENV:-eveworld}"
 ROOT="/data/datasets/gagi/eve_v2_outputs/eve_cic_transport_v1"
 GEN_ROOT="${ROOT}/eval175_seed004_pretrain_raw_s000"
 MANIFEST_ROOT="${ROOT}/eval175_seed004_pretrain_raw_s000_eval"

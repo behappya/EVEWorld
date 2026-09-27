@@ -6,7 +6,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 GAGI="/data/datasets/gagi"
 WMAP_ROOT="${T4G_WMAP_ROOT:-${GAGI}/eve_v2_outputs/track4gen_probe}"
-PYTHON="${PYTHON:-/home/jovyan/miniconda/envs/EVEWorld/bin/python}"
+PYTHON="${PYTHON:-/home/jovyan/miniconda/envs/eveworld/bin/python}"
 VARIANTS=(legacy_multilevel binary_3x path_loc_2x path_loc_3x interaction_2x interaction_3x)
 
 run_check() {

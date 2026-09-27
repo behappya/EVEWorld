@@ -6,7 +6,7 @@ set -euo pipefail
 # cu130, which fails on those nodes.
 
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-CONDA_ENV="${CONDA_ENV:-EVEWorld}"
+CONDA_ENV="${CONDA_ENV:-eveworld}"
 
 PYTORCH_INDEX_URL="${PYTORCH_INDEX_URL:-https://download.pytorch.org/whl/cu128}"
 NATTEN_FIND_LINKS="${NATTEN_FIND_LINKS:-https://whl.natten.org}"

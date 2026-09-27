@@ -29,7 +29,7 @@ done
 SEEDS="${SEEDS:-42 314 777 999}"
 LAM="${LAM:-${GAGI}/eve_outputs/lam/lam_gr1.pt}"
 
-source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-EVEWorld}"
+source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-eveworld}"
 export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
 cd "${REPO_DIR}"
 

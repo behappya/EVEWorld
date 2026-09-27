@@ -5,7 +5,7 @@
 #   bash j1_score_pool.sh round0       # 判 T1 Round-0 池 (f93, 8 seed) — T1 完成后跑
 # 每个 seed 目录出 judge B (主) 与 judge A (选择用) 两份分数, 断点续跑(--resume 默认开)。
 set -eu
-source /home/jovyan/miniconda/etc/profile.d/conda.sh && conda activate "${CONDA_ENV:-EVEWorld}"
+source /home/jovyan/miniconda/etc/profile.d/conda.sh && conda activate "${CONDA_ENV:-eveworld}"
 REPO=giga-world-0
 QWEN_BASE="${QWEN_BASE:-127.0.0.1}"   # Qwen3.6-35B-A3B @ 8000, 2026-07-18 新起
 POOL="${1:-longpool}"

@@ -9,7 +9,7 @@ set -euo pipefail
 # VBench may require its own older dependency set.
 
 CONDA_SH="${CONDA_SH:-/home/jovyan/miniconda/etc/profile.d/conda.sh}"
-CONDA_ENV="${CONDA_ENV:-EVEWorld}"
+CONDA_ENV="${CONDA_ENV:-eveworld}"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 
 if [[ -f "${CONDA_SH}" ]]; then

@@ -18,7 +18,7 @@ OUTPUT_DIR="${OUTPUT_DIR:-/data/datasets/gagi/eve_v2_outputs/cfg_flowwam_mlr_v1}
 PYTHON="${PYTHON:-/data/datasets/gagi/envs/giga_world_train_venv/bin/python}"
 
 source /home/jovyan/miniconda/etc/profile.d/conda.sh
-conda activate "${CONDA_ENV:-EVEWorld}"
+conda activate "${CONDA_ENV:-eveworld}"
 cd "$REPO_DIR"
 export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1

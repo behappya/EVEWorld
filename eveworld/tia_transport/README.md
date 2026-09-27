@@ -120,7 +120,7 @@ RUN_NAME=cic_transport_b23_seed42_s300 \
 
 > **Cluster caveat.** All `launch_*.sh` / `kjob_*.sh` scripts are SLURM-style
 > wrappers for an 8-GPU node and carry cluster-specific absolute paths
-> (`${GAGI_ROOT}` layout, conda env `EVEWorld`, the training venv). Adapt
+> (`${GAGI_ROOT}` layout, conda env `eveworld`, the training venv). Adapt
 > these paths before running elsewhere. Generation payloads refuse to run on a
 > workspace host unless `ALLOW_LOCAL_RUN=1` is set.
 

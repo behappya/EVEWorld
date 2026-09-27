@@ -16,7 +16,7 @@ DATA_ROOT="${DATA_ROOT:-/data/datasets/gagi/gr1_dreamgen_eval/giga_input}"
 OUT_ROOT="${OUT_ROOT:-/data/datasets/gagi/eve_v2_outputs/cfg_grid_seed004}"
 CFG_VALUES="${CFG_VALUES:-1.0 2.5 5.0 7.0}"
 source /home/jovyan/miniconda/etc/profile.d/conda.sh
-conda activate "${CONDA_ENV:-EVEWorld}"
+conda activate "${CONDA_ENV:-eveworld}"
 cd "$REPO_DIR"
 export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"
 mkdir -p "$OUT_ROOT"

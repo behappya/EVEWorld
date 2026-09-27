@@ -43,8 +43,8 @@ On DreamGenBench, EVEWorld reduces MLR from 11.11% to 1.59% relative to Standard
 ## Installation
 
 ```bash
-conda create -n EVEWorld python=3.11.10 -y
-conda activate EVEWorld
+conda create -n eveworld python=3.11.10 -y
+conda activate eveworld
 pip install -e ./giga-models
 # plus the evaluation/training dependencies documented in docs/ENVIRONMENT.md
 ```

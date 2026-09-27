@@ -1,4 +1,4 @@
-name: EVEWorld
+name: eveworld
 channels:
   - defaults
   - conda-forge

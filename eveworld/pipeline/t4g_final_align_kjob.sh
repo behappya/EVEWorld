@@ -9,7 +9,7 @@ set -uo pipefail
 for arg in "$@"; do [[ "${arg}" == *=* ]] && export "${arg}"; done
 REPO_DIR="${REPO_DIR:-${EVEWORLD_ROOT}/giga-world-0}"
 TP="${TRAIN_PYTHON:-/data/datasets/gagi/envs/giga_world_train_venv/bin/python}"
-source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-EVEWorld}"
+source /home/jovyan/miniconda/etc/profile.d/conda.sh; conda activate "${CONDA_ENV:-eveworld}"
 export PYTHONPATH="${EVEWORLD_ROOT}:${REPO_DIR}:${EVEWORLD_ROOT}/giga-models:${PYTHONPATH:-}"; export PYTHONUNBUFFERED=1
 cd "${EVEWORLD_ROOT}/eveworld/pipeline"
 # 40 例在线 latent 回填目标 vs 离线像素金标准对账 (只载 VAE) (单卡, 整节点占位同 g1p 模式)
