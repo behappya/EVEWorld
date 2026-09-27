@@ -442,16 +442,6 @@ def filter_kwargs(function: Any, kwargs: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in kwargs.items() if key in accepted and value is not None}
 
 
-def instantiate(cls: Any, **kwargs: Any) -> Any:
-    """Instantiate ``cls`` with the keyword arguments it declares, dropping the rest."""
-    import inspect
-
-    parameters = inspect.signature(cls).parameters
-    if any(item.kind is inspect.Parameter.VAR_KEYWORD for item in parameters.values()):
-        return cls(**kwargs)
-    return cls(**{key: value for key, value in kwargs.items() if key in parameters})
-
-
 def generation_method(model: Any) -> Any:
     """Sampling callable of the model: ``inference``, or the names the integration may use."""
     for name in ("inference", "generate", "sample"):
@@ -498,20 +488,28 @@ def write_video(frames: Any, path: Path, fps: float) -> None:
         container.mux(stream.encode())
 
 
-def build_model(config: Any, device: str | None) -> Any:
-    """Load the released FlowWAM backbone the configuration names."""
-    from eveworld.integrations.flowwam import FlowWAMConfig, FlowWAMModel
-
-    model_config = FlowWAMConfig.from_config(config)
-    model = instantiate(FlowWAMModel, config=model_config, device=device)
-    if device and callable(getattr(model, "to", None)):
-        model.to(device)
-    return model_config, model
-
-
 def generate(plan: InferencePlan) -> int:
     """Generate the clips of ``plan`` and return the process exit code."""
-    model_config, model = build_model(plan.config, plan.device)
+    from eveworld.integrations.flowwam import FlowWAMConfig, FlowWAMModel
+    from eveworld.utils.config import resolve_path
+    from eveworld.utils.io import is_run_checkpoint
+
+    model_config = FlowWAMConfig.from_config(plan.config)
+    checkpoint = resolve_path(plan.checkpoint, repo_root())
+    trainer = None
+    if is_run_checkpoint(checkpoint):
+        from eveworld.integrations.flowwam import FlowWAMTrainer
+
+        trainer = FlowWAMTrainer(
+            config=plan.config, output_dir=plan.output_dir, device=plan.device
+        )
+        step = trainer.load_checkpoint(checkpoint)
+        model = trainer.model.eval()
+        print(f"model:        the run of step {step} at {checkpoint}")
+    else:
+        model = FlowWAMModel(config=model_config)
+        if plan.device:
+            model.to(plan.device)
     method = generation_method(model)
     frames = int(cfg_value(plan.config, "model.num_frames", model_config.num_frames))
     for index, request in enumerate(plan.requests, 1):
