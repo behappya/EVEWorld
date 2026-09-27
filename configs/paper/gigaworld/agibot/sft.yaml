@@ -1,0 +1,44 @@
+# Standard supervised fine-tuning baseline for the AgiBot transfer experiment
+# (paper Table 4, tab:agibot_transfer). Fine-tuned on 777 AgiBot clips with a uniform loss.
+name: agibot_sft
+seed: 42
+output_dir: outputs/${name}
+method:
+  kind: sft
+  p_dup: 0.0
+  lambda_tia: 0.0
+  warmup_steps: 0
+  sigma_low: 0.2
+  sigma_high: 0.5
+  gated: false
+  layer: 23
+  window: 7
+  temperature: 0.07
+  gamma: 0.1
+model:
+  backbone: gigaworld0
+  checkpoint: Video-Pretrain-2B
+  resolution: [640, 480]  # (width, height)
+  num_frames: 93
+  fps: 16
+  block_index: 23
+train:
+  optimizer: came8bit
+  lr: 4.32e-5
+  weight_decay: 0.01
+  batch_size: 8
+  grad_accum: 8
+  max_steps: 50
+  save_every: 50
+data:
+  root: .
+  split: data/splits/agibot/train.txt
+  metadata: data/metadata/agibot
+inference:
+  num_steps: 30
+  cfg_scale: 7.0
+eval:
+  metrics: [ewmbench]
+  tau_occ: 0.15
+  k: 2
+notes: SFT baseline on 777 AgiBot clips, 50 steps; the paper reports EWMBench Overall 3.7066.

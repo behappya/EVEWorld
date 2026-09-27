@@ -1,0 +1,19 @@
+# Instruction-following judge over Qwen, DreamGenBench protocol. The judge serves from a
+# local OpenAI-compatible endpoint, or the QWEN_BASE environment variable when set.
+name: eval_qwen_if
+seed: 42
+output_dir: outputs/${name}
+data:
+  root: .
+  prompts: data/prompts/qwen_if.txt
+eval:
+  metrics: [qwen_if]
+  model: qwen-plus
+  base_url: http://127.0.0.1:8000/v1
+  frame_count: 49
+  temperature: 0.0
+  disable_thinking: true
+  concurrency: 4
+  max_tokens: 32000
+notes: Qwen-IF judge with 49 frames per clip at temperature 0 and thinking
+  disabled; the paper reports 80.16 overall for EVEWorld on DreamGenBench.

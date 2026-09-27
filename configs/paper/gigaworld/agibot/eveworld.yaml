@@ -1,0 +1,45 @@
+# EVEWorld for the AgiBot transfer experiment (paper Table 4, tab:agibot_transfer).
+# IGR plus TIA at block 23 on the same 777 clips; EWMBench Overall 3.7525 in the paper.
+name: agibot_eveworld
+seed: 42
+output_dir: outputs/${name}
+method:
+  kind: eveworld
+  p_dup: 0.5
+  lambda_tia: 0.5
+  warmup_steps: 20
+  sigma_low: 0.2
+  sigma_high: 0.5
+  gated: true
+  layer: 23
+  window: 7
+  temperature: 0.07
+  gamma: 0.1
+model:
+  backbone: gigaworld0
+  checkpoint: Video-Pretrain-2B
+  resolution: [640, 480]  # (width, height)
+  num_frames: 93
+  fps: 16
+  block_index: 23
+train:
+  optimizer: came8bit
+  lr: 4.32e-5
+  weight_decay: 0.01
+  batch_size: 8
+  grad_accum: 8
+  max_steps: 50
+  save_every: 50
+data:
+  root: .
+  split: data/splits/agibot/train.txt
+  metadata: data/metadata/agibot
+inference:
+  num_steps: 30
+  cfg_scale: 7.0
+eval:
+  metrics: [ewmbench]
+  tau_occ: 0.15
+  k: 2
+notes: Full method on the AgiBot transfer set, 50 steps; EWMBench Motion
+  63.65, DYN 17.55, Scene 86.37 and Overall 3.7525 in the paper.

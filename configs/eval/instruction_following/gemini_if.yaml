@@ -1,0 +1,21 @@
+# Instruction-following judge over Gemini, DreamGenBench protocol. The endpoint name is
+# resolved from the DIFROST_* variables (DIFROST_GENAI_BASE_URL alongside DIFROST_API_TOKEN,
+# DIFROST_HOST and DIFROST_MODEL); there is no local default endpoint for this judge.
+name: eval_gemini_if
+seed: 42
+output_dir: outputs/${name}
+data:
+  root: .
+  prompts: data/prompts/gemini_if.txt
+eval:
+  metrics: [gemini_if]
+  model: gemini-2.5-flash
+  env_endpoint: DIFROST_GENAI_BASE_URL
+  frame_count: 49
+  temperature: 0.0
+  disable_thinking: true
+  concurrency: 4
+  max_tokens: 32000
+notes: Gemini-IF judge with 49 frames per clip; the paper reports 60.85
+  overall for EVEWorld, 60.19 for the GigaWorld-0 backbone and 5.56 to
+  24.60 for the cross-model baselines.

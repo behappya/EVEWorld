@@ -1,0 +1,50 @@
+# Ablation: TIA loss warm-up (paper app:tia_details).
+# lambda_TIA is warmed up linearly from 0 to 0.5 over the first 20 steps on GigaWorld-0;
+# 0 in the value list corresponds to switching the warm-up off altogether.
+name: ablate_tia_warmup
+seed: 42
+output_dir: outputs/${name}
+method:
+  kind: eveworld
+  p_dup: 0.5
+  lambda_tia: 0.5
+  warmup_steps: 20
+  sigma_low: 0.2
+  sigma_high: 0.5
+  gated: true
+  layer: 23
+  window: 7
+  temperature: 0.07
+  gamma: 0.1
+model:
+  backbone: gigaworld0
+  checkpoint: Video-Pretrain-2B
+  resolution: [768, 480]  # (width, height)
+  num_frames: 93
+  fps: 16
+  block_index: 23
+train:
+  optimizer: came8bit
+  lr: 4.32e-5
+  weight_decay: 0.01
+  batch_size: 8
+  grad_accum: 8
+  max_steps: 250
+  save_every: 50
+data:
+  root: .
+  split: data/splits/dreamgen/train.txt  # the 92 post-training clips; val.txt selects the checkpoint
+  metadata: data/metadata/dreamgenbench
+inference:
+  num_steps: 30
+  cfg_scale: 7.0
+eval:
+  metrics: [mlr, qwen_if, gemini_if]
+  tau_occ: 0.15
+  k: 2
+ablation:
+  axis: tia_warmup
+  artifact: app:tia_details
+  select: method.warmup_steps
+  values: [0, 10, 20, 50]
+notes: Warm-up length sweep for the TIA loss weight around the paper value of 20 steps.

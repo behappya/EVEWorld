@@ -1,0 +1,52 @@
+# Ablation: spatial weight-map design for IGR (paper tab:weightmap_design).
+# Binary 3x, the design adopted in the paper: relative weight 3.0 on the disturbed
+# interaction region R_v4 union R_paste and 1.0 elsewhere, normalized to unit mean.
+name: ablate_wmap_binary3x
+seed: 42
+output_dir: outputs/${name}
+method:
+  kind: igr
+  p_dup: 0.5
+  lambda_tia: 0.0
+  warmup_steps: 0
+  sigma_low: 0.2
+  sigma_high: 0.5
+  gated: false
+  layer: 23
+  window: 7
+  temperature: 0.07
+  gamma: 0.1
+  weight_map: binary_3x
+model:
+  backbone: gigaworld0
+  checkpoint: Video-Pretrain-2B
+  resolution: [768, 480]  # (width, height)
+  num_frames: 93
+  fps: 16
+  block_index: 23
+train:
+  optimizer: came8bit
+  lr: 4.32e-5
+  weight_decay: 0.01
+  batch_size: 8
+  grad_accum: 8
+  max_steps: 250
+  save_every: 50
+data:
+  root: .
+  split: data/splits/dreamgen/train.txt  # the 92 post-training clips; val.txt selects the checkpoint
+  metadata: data/metadata/dreamgenbench
+inference:
+  num_steps: 30
+  cfg_scale: 7.0
+eval:
+  metrics: [mlr, qwen_if, gemini_if]
+  tau_occ: 0.15
+  k: 2
+ablation:
+  axis: weight_map
+  artifact: tab:weightmap_design
+  select: method.weight_map
+  values: [1.0, 3.0]
+notes: Default IGR weight map; the legacy multi-level and binary 3x designs
+  perform comparably in development, so the simpler binary design is kept.

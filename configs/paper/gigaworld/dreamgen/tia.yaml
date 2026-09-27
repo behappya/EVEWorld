@@ -1,0 +1,46 @@
+# TIA-only arm of the component ablation on DreamGenBench (paper Table 6).
+# Transport-based instance adaptation at block 23, the layer selected by the offline
+# correspondence probe; lambda warms up linearly from 0 to 0.5 over the first 20 steps and is
+# gated to sigma in [0.2, 0.5]. No IGR corruption.
+name: dreamgen_tia
+seed: 42
+output_dir: outputs/${name}
+method:
+  kind: tia
+  p_dup: 0.0
+  lambda_tia: 0.5
+  warmup_steps: 20
+  sigma_low: 0.2
+  sigma_high: 0.5
+  gated: true
+  layer: 23
+  window: 7
+  temperature: 0.07
+  gamma: 0.1
+model:
+  backbone: gigaworld0
+  checkpoint: Video-Pretrain-2B
+  resolution: [768, 480]  # (width, height)
+  num_frames: 93
+  fps: 16
+  block_index: 23
+train:
+  optimizer: came8bit
+  lr: 4.32e-5
+  weight_decay: 0.01
+  batch_size: 8
+  grad_accum: 8
+  max_steps: 250
+  save_every: 50
+data:
+  root: .
+  split: data/splits/dreamgen/train.txt  # the 92 post-training clips; val.txt selects the checkpoint
+  metadata: data/metadata/dreamgenbench
+inference:
+  num_steps: 30
+  cfg_scale: 7.0
+eval:
+  metrics: [mlr, qwen_if, gemini_if]
+  tau_occ: 0.15
+  k: 2
+notes: TIA-only arm, 250 steps; the paper reports 7.94 MLR and 55.29 Gemini-IF overall.

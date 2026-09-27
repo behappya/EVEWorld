@@ -1,0 +1,15 @@
+# PBench physical-commonsense evaluation over the sequence-length scaling sweep
+# (tab:pbench_horizon): robot-length tiers at 61, 93, 157, 253, 317, 413 and 477 frames,
+# 16 FPS, 174 videos per tier, scored against 913 question-answer pairs.
+name: eval_pbench
+seed: 42
+output_dir: outputs/${name}
+data:  # mount point of the upstream nvidia/PBench dataset; nothing is prepared here
+  root: .
+  split: data/splits/pbench/eval.txt  # the 174 clips of one tier
+  metadata: data/metadata/pbench  # the 913 question-answer pairs
+eval:
+  metrics: [pbench]
+notes: Horizon tiers 61/93/157/253/317/413/477 frames at 16 FPS
+  (3.8/5.8/9.8/15.8/19.8/25.8/29.8 s), 174 videos per tier, 913
+  physical-commonsense questions.

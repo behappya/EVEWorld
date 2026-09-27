@@ -1,0 +1,57 @@
+# Ablation: classifier-free guidance grid, the experiment behind Figure 4 (fig:cfg) and
+# tab:cfg_main. Six training steps x four guidance weights, generated at seed 4 for the 126
+# DreamGenBench request ids with 30 denoising steps; Gemini-IF rises with CFG while MLR does
+# not fall monotonically, which motivates explicit supervision instead of guidance tuning.
+name: ablate_cfg_grid
+seed: 42
+output_dir: outputs/${name}
+method:
+  kind: eveworld
+  p_dup: 0.5
+  lambda_tia: 0.5
+  warmup_steps: 20
+  sigma_low: 0.2
+  sigma_high: 0.5
+  gated: true
+  layer: 23
+  window: 7
+  temperature: 0.07
+  gamma: 0.1
+model:
+  backbone: gigaworld0
+  checkpoint: Video-Pretrain-2B
+  resolution: [768, 480]  # (width, height)
+  num_frames: 93
+  fps: 16
+  block_index: 23
+train:
+  optimizer: came8bit
+  lr: 4.32e-5
+  weight_decay: 0.01
+  batch_size: 8
+  grad_accum: 8
+  max_steps: 300
+  save_every: 50
+data:
+  root: .
+  split: data/splits/dreamgen/train.txt  # the 92 post-training clips; val.txt selects the checkpoint
+  metadata: data/metadata/dreamgenbench
+inference:
+  num_steps: 30
+  cfg_scale: 7.0
+eval:
+  metrics: [mlr, gemini_if]
+  tau_occ: 0.15
+  k: 2
+ablation:
+  axis: cfg_grid
+  artifact: fig:cfg
+  select: inference.cfg_scale
+  train_steps: [50, 100, 150, 200, 250, 300]
+  cfg_values: [1.0, 2.5, 5.0, 7.0]
+  generation_seed: 4
+  inference_steps: 30
+  request_ids: 126
+  output_layout: "<out_root>/step_%03d/cfg_<tag>/generated_only/<request_id>.mp4"
+notes: Guidance sweep over training steps and CFG weights with the tag pattern
+  cfg_<value with the decimal point replaced by p>.

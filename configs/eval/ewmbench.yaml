@@ -1,0 +1,19 @@
+# EWMBench evaluation on the AgiBot transfer set (paper Table 4, tab:agibot_transfer).
+# Scores are read from the eval_layout tree produced by generation:
+# eval_layout/<model>_dataset/<task>/<episode>/<1|2|3>/video/frame_%05d.jpg, where the three
+# repeats correspond to generation seeds 42, 43 and 44.
+name: eval_ewmbench
+seed: 42
+output_dir: outputs/${name}
+data:
+  root: .
+  split: data/splits/agibot/train.txt
+  metadata: data/metadata/agibot
+eval:
+  metrics: [motion, semantics, dyn, hsr, ndtw, scene, overall]
+  agibot_root: data/agibot  # source AgiBot clips; GAGI_ROOT in the environment when set elsewhere
+  layout: eval_layout
+notes: EWMBench over 777 AgiBot clips; the paper reports SFT 61.51 Motion /
+  2.2477 Semantics / 14.88 DYN / 24.35 HSR / 22.28 nDTW / 84.38 Scene /
+  3.7066 Overall against EVEWorld 63.65 / 2.2524 / 17.55 / 24.12 / 21.97 /
+  86.37 / 3.7525.

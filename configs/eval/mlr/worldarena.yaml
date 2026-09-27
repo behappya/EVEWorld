@@ -1,0 +1,22 @@
+# MLR protocol for WorldArena 1.0, identical to the DreamGenBench protocol except for the
+# data paths. WorldArena has 1,000 prompts and 157 clips in the eligible set (coverage 19.22%).
+name: eval_mlr_worldarena
+seed: 42
+output_dir: outputs/${name}
+data:
+  root: .
+  split: data/splits/worldarena/eval.txt
+  metadata: data/metadata/worldarena
+eval:
+  metrics: [mlr]
+  tau_occ: 0.15  # occlusion ratio above which a missing instance is exempt at that timestamp
+  k: 2  # consecutive sampled timestamps required to record a deviation event
+  sample_count: 24
+  sample_mode: round
+  object_box_threshold: 0.35
+  robot_box_threshold: 0.15
+  min_center_distance: 60.0
+  gripper_overlap_threshold: 0.35
+  robot_prompt: "robot gripper"
+notes: Frozen WorldArena MLR protocol used for the cross-domain comparison;
+  the paper reports 27.39 for SFT and 13.38 for EVEWorld.

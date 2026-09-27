@@ -1,0 +1,21 @@
+# RoboTwin evaluation protocol: MLR plus the reconstruction metrics of paper Table 5
+# (tab:flowwam_transfer). Generation uses --flow-cond robot_only --cfg-scale 5.0 --steps 40
+# --tia-inject off --full-traj direct --seed 42 over the 250 held-out videos.
+name: eval_mlr_robotwin
+seed: 42
+output_dir: outputs/${name}
+data:
+  root: .
+  split: data/splits/robotwin/heldout.txt
+  metadata: data/metadata/robotwin
+eval:
+  metrics: [mlr, psnr, ssim, lpips, flow_epe]
+  flow_cond: robot_only
+  seed: 42
+  cfg_scale: 5.0
+  num_steps: 40
+  sample_count: 24
+  # tau_occ and k are not repeated here: both keep the frozen values of the WorldArena
+  # protocol in configs/eval/mlr/worldarena.yaml (tau_occ 0.15, k 2).
+notes: RoboTwin MLR, PSNR, SSIM, LPIPS and flow-EPE; paper values run from
+  FlowWAM 52.05 MLR / 12.218 PSNR to EVEWorld 35.21 MLR / 12.765 PSNR.
