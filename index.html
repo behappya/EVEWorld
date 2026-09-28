@@ -14,6 +14,17 @@
   <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="css/style.css?v=4">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='4' fill='%230071e3'/><path d='M6.5 4.5l5.5 3.5-5.5 3.5z' fill='white'/></svg>">
+  <link rel="canonical" href="https://behappya.github.io/EVEWorld/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EVEWorld — Physical Evolution Supervision for Embodied World Models">
+  <meta property="og:description" content="Process-level evolution supervision for physically consistent target evolution in embodied world models.">
+  <meta property="og:url" content="https://behappya.github.io/EVEWorld/">
+  <meta property="og:image" content="https://behappya.github.io/EVEWorld/assets/site/social/eveworld-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EVEWorld — Physical Evolution Supervision for Embodied World Models">
+  <meta name="twitter:description" content="Process-level evolution supervision for physically consistent target evolution in embodied world models.">
+  <meta name="twitter:image" content="https://behappya.github.io/EVEWorld/assets/site/social/eveworld-preview.jpg">
+  <meta name="theme-color" content="#ffffff">
 </head>
 <body>
 
@@ -35,7 +46,7 @@
       <a href="#citation">Citation</a>
     </nav>
     <div class="header-end">
-      <a class="hbtn" href="{{CODE_URL}}" aria-disabled="true">
+      <a class="hbtn" href="https://github.com/behappya/EVEWorld">
         <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
         Code
       </a>
@@ -82,16 +93,8 @@
     <p class="hero-tag"><b>Physical Evolution Supervision</b> for Embodied World Models</p>
     <p class="hero-value">Process-level supervision for physically consistent target evolution.<span>IGR promotes target-instance consistency, TIA promotes cross-frame consistency, and MLR quantifies persistent target-instance violations.</span></p>
 
-    <div class="hero-authors">
-      <p class="hero-author-names">{{REAL AUTHORS}}</p>
-      <p class="hero-affil">{{AFFILIATIONS}}</p>
-    </div>
-
     <div class="hero-cta">
-      <a class="btn primary" href="{{PAPER_URL}}" aria-disabled="true">
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5.5L9.5 0H4zm5 1.5L13.5 6H9V1.5zM4.5 8h7v1.2h-7V8zm0 2.8h7V12h-7v-1.2z"/></svg>
-        Paper</a>
-      <a class="btn" href="{{CODE_URL}}" aria-disabled="true">
+      <a class="btn primary" href="https://github.com/behappya/EVEWorld">
         <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
         Code</a>
       <a class="btn ghost" href="#qualitative">
@@ -132,19 +135,19 @@
         <div class="mcard-head"><span class="mcard-tag igt">INSTANCE CONSISTENCY</span></div>
         <h3>Instance-Guided Restoration</h3>
         <p class="mcard-lead">Restoration supervision for target-instance consistency.</p>
-        <p>Restore clean demonstrations from count-perturbed inputs, with stronger supervision on restoration-related regions.</p>
+        <p>Restores clean demonstrations from count-perturbed inputs, with stronger supervision on restoration-related regions.</p>
       </div>
       <div class="mcard reveal">
         <div class="mcard-head"><span class="mcard-tag eve">CROSS-FRAME CONSISTENCY</span></div>
         <h3>Temporal Instance Alignment</h3>
         <p class="mcard-lead">Temporal alignment for cross-frame target consistency.</p>
-        <p>Align target representations across adjacent frames through local matching and cross-frame feature transport.</p>
+        <p>Aligns target representations across adjacent frames through local matching and cross-frame feature transport.</p>
       </div>
       <div class="mcard reveal">
         <div class="mcard-head"><span class="mcard-tag neutral">EVALUATION</span></div>
         <h3>Model Laziness Rate</h3>
         <p class="mcard-lead">Rollout-level diagnosis of persistent target-instance violations.</p>
-        <p>Anchor evaluation to the conditioning observation and combine temporal persistence with occlusion-aware under-count handling.</p>
+        <p>Anchors evaluation to the conditioning observation and combines temporal persistence with occlusion-aware under-count handling.</p>
       </div>
     </div>
 
@@ -168,7 +171,7 @@
         <h3>Model Laziness</h3>
         <div class="fail-formula">N<sub>t</sub> &ne; N<sub>0</sub></div>
         <p>The target-instance count deviates from the conditioning state without support from the task, producing unsupported duplication or disappearance during the rollout.</p>
-        <p class="fail-cue">ML = &#120140;[ &exist;t &isin; {1, &hellip;, T} : N<sub>t</sub> &ne; N<sub>0</sub> ] &mdash; a departure at any sampled timestamp <span class="mono">t</span>.</p>
+        <p class="fail-cue">ML = &#120793;[ &exist;t &isin; {1, &hellip;, T} : N<sub>t</sub> &ne; N<sub>0</sub> ] &mdash; A Model Laziness event occurs when the target-instance count deviates from its initial value at any point in the generated rollout.</p>
         <details class="acc-item">
           <summary>Unsupported duplication <span class="mono">N<sub>t</sub> &gt; N<sub>0</sub></span></summary>
           <p>An additional target instance emerges during the rollout, violating consistency with the initial target state.</p>
@@ -335,14 +338,14 @@
 
     <div class="metrics">
       <div class="metric reveal">
-        <div class="m-name"><span class="m-abbr">&#120027;<sub>+</sub></span><span class="m-full">Eligible set</span></div>
-        <div class="formula">&#120027;<sub>+</sub>  =  { x &isin; &#120027; : N<sub>0</sub>(x) &gt; 0 }</div>
+        <div class="m-name"><span class="m-abbr">&#119967;<sub>+</sub></span><span class="m-full">Eligible set</span></div>
+        <div class="formula">&#119967;<sub>+</sub>  =  { x &isin; &#119967; : N<sub>0</sub>(x) &gt; 0 }</div>
         <p>Only rollouts whose target is detected in the conditioning observation enter the denominator, so every model is evaluated on the same detector-eligible set.</p>
       </div>
 
       <div class="metric reveal">
         <div class="m-name"><span class="m-abbr">MLR</span><span class="m-full">Model Laziness Rate</span></div>
-        <div class="formula wrap">MLR  =  100 / |&#120027;<sub>+</sub>| &nbsp;&middot;&nbsp; &sum;<sub>x&isin;&#120027;<sub>+</sub></sub> &#120140;[ &exist;t : N&#771;<sub>t</sub>(x) &ne; N<sub>0</sub>(x) &and; N&#771;<sub>t+1</sub>(x) &ne; N<sub>0</sub>(x) ]</div>
+        <div class="formula wrap">MLR  =  100 / |&#119967;<sub>+</sub>| &nbsp;&middot;&nbsp; &sum;<sub>x&isin;&#119967;<sub>+</sub></sub> &#120793;[ &exist;t : N&#771;<sub>t</sub>(x) &ne; N<sub>0</sub>(x) &and; N&#771;<sub>t+1</sub>(x) &ne; N<sub>0</sub>(x) ]</div>
         <p>Computed per eligible video and reported as a percentage; lower is better. The adjusted count <span class="mono">N&#771;<sub>t</sub></span> is the raw GroundingDINO count after robot-supported occlusions are discounted.</p>
       </div>
     </div>
@@ -376,7 +379,7 @@
       <span class="arm-chip eve"><i></i><b>EVEWorld</b>&nbsp;&mdash; IGR + TIA</span>
       <span class="arm-chip sft"><i></i><b>Standard SFT</b>&nbsp;&mdash; Conventional fine-tuning</span>
       <span class="arm-chip igt"><i></i><b>IGR only</b>&nbsp;&mdash; Instance restoration only</span>
-      <span class="arm-chip pre"><i></i><b>GigaWorld-0</b>&nbsp;&mdash; pre-trained backbone</span>
+      <span class="arm-chip pre"><i></i><b>GigaWorld-0</b>&nbsp;&mdash; pretrained backbone</span>
       <button class="toggle-btn" id="preToggle" type="button" aria-pressed="false">Show pretrained baseline</button>
     </div>
     <p class="arm-note">Every tile is a generated rollout of the same backbone under the same instruction and start frame; the conditioning still is identical across the arms of a task and is not repeated inside each tile. Click a tile to play it.</p>
@@ -385,15 +388,15 @@
 
       <div class="demo-card featured">
         <div class="demo-tiles">
-          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/036-no/sft.mp4" poster="assets/site/videos/posters/036-no-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/036-no/igt.mp4" poster="assets/site/videos/posters/036-no-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
-          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/036-no/eve.mp4" poster="assets/site/videos/posters/036-no-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/036-no/pre.mp4" poster="assets/site/videos/posters/036-no-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/011-yes/sft.mp4" poster="assets/site/videos/posters/011-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/011-yes/igt.mp4" poster="assets/site/videos/posters/011-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/011-yes/eve.mp4" poster="assets/site/videos/posters/011-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/011-yes/pre.mp4" poster="assets/site/videos/posters/011-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
         </div>
         <div class="demo-body">
-          <div class="demo-task">Use the right hand to pick up green apple from top tier of wooden shelf to bottom tier of wooden shelf.</div>
+          <div class="demo-task">Use the left hand to pick up blue clock from bottom wooden shelf to center of teal plate.</div>
           <ul class="demo-obs">
-            <li><b>Borderline case.</b> The target remains in the gripper throughout the sampled window, so the informative signal is its identity and shape rather than the final placement.</li>
+            <li><b>What to compare.</b> Whether the clock keeps a single instance and a stable shape across the four arms as the hand transfers it to the teal plate.</li>
           </ul>
           <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
         </div>
@@ -401,15 +404,15 @@
 
       <div class="demo-card featured">
         <div class="demo-tiles">
-          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/037-no/sft.mp4" poster="assets/site/videos/posters/037-no-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/037-no/igt.mp4" poster="assets/site/videos/posters/037-no-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
-          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/037-no/eve.mp4" poster="assets/site/videos/posters/037-no-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/037-no/pre.mp4" poster="assets/site/videos/posters/037-no-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/034-yes/sft.mp4" poster="assets/site/videos/posters/034-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/034-yes/igt.mp4" poster="assets/site/videos/posters/034-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/034-yes/eve.mp4" poster="assets/site/videos/posters/034-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/034-yes/pre.mp4" poster="assets/site/videos/posters/034-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
         </div>
         <div class="demo-body">
-          <div class="demo-task">Use the right hand to pick up red apple from pink plate to teal plate.</div>
+          <div class="demo-task">Use the left hand to pick up clear blue glass from blue plate to teal plate.</div>
           <ul class="demo-obs">
-            <li><b>Residual failure case.</b> In the EVEWorld rollout the target drifts out of the workspace region near the end of the interaction &mdash; long-horizon drift is not fully removed by the current supervision.</li>
+            <li><b>What to compare.</b> Whether the cup keeps its instance state and cross-frame identity across the four arms during the move between plates.</li>
           </ul>
           <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
         </div>
@@ -425,9 +428,7 @@
         <div class="demo-body">
           <div class="demo-task">Use the right hand to pick up the bread slice from the toaster and place it on the blue plate.</div>
           <ul class="demo-obs">
-            <li><b>Standard SFT</b> exhibits duplication, drift, or deformation during the interaction.</li>
-            <li><b>IGR only</b> exhibits duplication, drift, or deformation in the same comparison.</li>
-            <li><b>EVEWorld</b> preserves its identity and appearance across matched interaction stages.</li>
+            <li><b>What to compare.</b> Whether the bread slice keeps a single instance and a consistent appearance across the four arms through the transfer to the blue plate.</li>
           </ul>
           <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
         </div>
@@ -442,26 +443,16 @@
 
           <div class="demo-card">
             <div class="demo-tiles">
-              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/011-yes/sft.mp4" poster="assets/site/videos/posters/011-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-              <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/011-yes/igt.mp4" poster="assets/site/videos/posters/011-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
-              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/011-yes/eve.mp4" poster="assets/site/videos/posters/011-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/011-yes/pre.mp4" poster="assets/site/videos/posters/011-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/036-no/sft.mp4" poster="assets/site/videos/posters/036-no-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+              <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/036-no/igt.mp4" poster="assets/site/videos/posters/036-no-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/036-no/eve.mp4" poster="assets/site/videos/posters/036-no-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/036-no/pre.mp4" poster="assets/site/videos/posters/036-no-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
             </div>
             <div class="demo-body">
-              <div class="demo-task">Use the left hand to pick up blue clock from bottom wooden shelf to center of teal plate.</div>
-              <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-            </div>
-          </div>
-
-          <div class="demo-card">
-            <div class="demo-tiles">
-              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/034-yes/sft.mp4" poster="assets/site/videos/posters/034-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-              <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/034-yes/igt.mp4" poster="assets/site/videos/posters/034-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
-              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/034-yes/eve.mp4" poster="assets/site/videos/posters/034-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/034-yes/pre.mp4" poster="assets/site/videos/posters/034-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">Use the left hand to pick up clear blue glass from blue plate to teal plate.</div>
+              <div class="demo-task">Use the right hand to pick up green apple from top tier of wooden shelf to bottom tier of wooden shelf.</div>
+              <ul class="demo-obs">
+                <li><b>What to compare.</b> Whether the manipulated target preserves its instance state and cross-frame identity across the four arms.</li>
+              </ul>
               <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
             </div>
           </div>
@@ -545,8 +536,7 @@
     <details class="acc">
       <summary>Clip provenance and source notes</summary>
       <div class="acc-body">
-        <p>All 38 tiles across the 11 tasks are GR1 tabletop manipulation rollouts produced under identical instructions and initial conditions, taken from our internal evaluation sheets. The <span class="mono">-yes</span> / <span class="mono">-no</span> suffixes are carried over verbatim from the source directory names and are shown for traceability only; the videos themselves are unedited model outputs. Most source clips are a single wide frame holding the frozen conditioning still on the left and the generated rollout on the right, split at exactly 50%; those tiles crop to the generated rollout, because that still is identical across the arms of a task. Where the sheet already supplies the rollout on its own, the full frame is shown. The <b>GigaWorld-0</b> column is the pre-trained backbone without any task fine-tuning, and <b>IGR only</b> isolates the restoration supervisor from the temporal-alignment supervisor.</p>
-        <p>A tile is omitted only when the source sheet has no such tile or when it is byte-identical to another arm: for 035-yes the IGR tile is byte-identical to the <b>GigaWorld-0</b> tile, for hlg-yes it is byte-identical to the <b>EVEWorld</b> tile, and for 016-yes it is byte-identical to the <b>Standard SFT</b> tile. The source sheet carries no IGR tile for 012-yes, 033-yes, and fire-no, so those cards show three arms.</p>
+        <p class="arm-note">Qualitative clips are unedited model rollouts generated under matched instructions and initial conditions. A model arm is omitted only when the corresponding rendering is unavailable; all displayed comparisons preserve the source evaluation setting.</p>
       </div>
     </details>
 
@@ -688,132 +678,7 @@
       <p class="wa-strip-note">Official leaderboard result of the FlowWAM-based EVEWorld submission reported in the paper.</p>
     </div>
 
-    <details class="acc">
-      <summary>Evaluation protocol reference</summary>
-      <div class="acc-body">
-        <h3>WorldArena 2.0 reference rollouts &mdash; external baselines</h3>
-        <p>On the final <b>WorldArena 2.0 Track 1</b> leaderboard our entry ranks <b>6th in JEPA Similarity</b> and <b>17th overall</b>. The 13 clips below are <b>not</b> produced by EVEWorld. They are rollouts from the WorldArena 2.0 evaluation harness, where our entry is scored alongside externally submitted systems, and we include them only as visual reference for the protocol. Each tile is a 2&times;2 montage of four systems on one prompt; the quadrant-to-system mapping is defined by the harness, so the tiles are labelled by prompt ID only and no individual system is identified here.</p>
-        <div class="ref-grid">
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/425/combined.mp4" poster="assets/site/videos/posters/wa-425.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 425</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/451/combined.mp4" poster="assets/site/videos/posters/wa-451.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 451</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/544/combined.mp4" poster="assets/site/videos/posters/wa-544.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 544</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/570/combined.mp4" poster="assets/site/videos/posters/wa-570.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 570</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/602/combined.mp4" poster="assets/site/videos/posters/wa-602.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 602</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/637/combined.mp4" poster="assets/site/videos/posters/wa-637.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 637</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/650/combined.mp4" poster="assets/site/videos/posters/wa-650.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 650</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/655/combined.mp4" poster="assets/site/videos/posters/wa-655.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 655</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/761/combined.mp4" poster="assets/site/videos/posters/wa-761.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 761</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/777/combined.mp4" poster="assets/site/videos/posters/wa-777.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 777</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/841/combined.mp4" poster="assets/site/videos/posters/wa-841.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 841</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/909/combined.mp4" poster="assets/site/videos/posters/wa-909.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 909</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-          <div class="demo-card">
-            <div class="demo-tiles single montage">
-              <div class="demo-tile" data-video><video src="assets/site/videos/wa/936/combined.mp4" poster="assets/site/videos/posters/wa-936.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Prompt 936</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">External comparison montage &mdash; not EVEWorld-only output</div>
-              <div class="demo-meta"><span class="suite-tag">WorldArena 2.0</span><span>external baselines</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </details>
+    <p class="arm-note">WorldArena 2.0 Track 1 evaluates full rollouts on the official leaderboard; our submitted entry reaches EWMScore-P 70.17, ranking 6th in JEPA Similarity and 17th overall. The protocol reference montages from the public leaderboard, which are external baseline material and not EVEWorld outputs, are collected on the <a href="protocol.html">protocol reference page</a>.</p>
   </div>
 </section>
 
@@ -922,7 +787,7 @@
         <p>Against Standard SFT, MLR drops from <b>11.11%</b> to <b>1.59%</b> &mdash; a <span class="pos">85.7% relative reduction</span> &mdash; while Qwen-IF rises 73.81 &rarr; <b>80.16</b> and Gemini-IF rises 53.57 &rarr; <b>60.85</b>. The reduction is not obtained at the expense of instruction following; both move in the preferred direction.</p>
       </div>
       <div class="finding reveal">
-        <div class="finding-head"><span class="f-no">2</span><h3>The gain spans the generalization splits</h3></div>
+        <div class="finding-head"><span class="f-no">2</span><h3>Fine-grained instruction following across generalization splits</h3></div>
         <p>Relative to Standard SFT, Qwen-IF improves on all three splits &mdash; Environment, Object, and Behavior &mdash; with the largest gain on Behavior (<b>68.09</b> &rarr; <b>76.60</b>), while Gemini-IF improves notably on Environment (<b>51.72</b> &rarr; <b>72.41</b>) and Object (<b>42.00</b> &rarr; <b>50.33</b>). One column moves the other way: <b>Gemini-IF on Behavior falls from 67.02 to 64.89</b>, which we report as-is.</p>
       </div>
       <div class="finding reveal">
@@ -1037,9 +902,19 @@
         <h3>Limitations of EVEWorld</h3>
         <p>The current supervision is local and pairwise and does not explicitly model long-horizon state dependencies or complex multi-object interactions.</p>
       </div>
+      <div class="scope-card reveal">
+        <h3>Residual long-horizon drift</h3>
+        <div class="demo-tiles" style="margin-top:12px">
+          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/037-no/sft.mp4" poster="assets/site/videos/posters/037-no-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
+          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/037-no/igt.mp4" poster="assets/site/videos/posters/037-no-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
+          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/037-no/eve.mp4" poster="assets/site/videos/posters/037-no-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
+          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/037-no/pre.mp4" poster="assets/site/videos/posters/037-no-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
+        </div>
+        <p>A residual failure mode remains in long-horizon rollouts: the target can drift outside the workspace late in the interaction. This is consistent with the local, pairwise scope of the current supervision.</p>
+      </div>
     </div>
 
-    <p class="t-note"><b>Sampling configuration.</b> The main checkpoint is step 250 at CFG weight <span class="mono">w&nbsp;=&nbsp;7.0</span>. Among the cells of the 4&times;6 step &times; guidance grid that reach the lowest MLR of 1.59%, this one also has the highest Gemini-IF (60.85); dropping guidance (<span class="mono">w&nbsp;=&nbsp;1.0</span>) at the same checkpoint leaves 28.98 Gemini-IF / 9.52 MLR, so the reported scores are not an artifact of guidance-free sampling.</p>
+    <p class="t-note"><b>Sampling configuration.</b> The main result uses the step-250 checkpoint with CFG weight <span class="mono">w&nbsp;=&nbsp;7.0</span>. Across the evaluated training-step &times; guidance grid, Gemini-IF generally increases with stronger guidance, whereas MLR varies non-monotonically. We therefore report the joint configuration that attains MLR 1.59% with Gemini-IF 60.85 rather than interpreting CFG as a monotonic control for consistency.</p>
 
     <details class="acc">
       <summary>More analysis</summary>
@@ -1262,15 +1137,19 @@
     <p class="band-lede">Everything needed to read about, run, and cite this work.</p>
 
     <div class="cite-links">
-      <a class="hbtn" href="{{PAPER_URL}}" aria-disabled="true">Paper</a>
-      <a class="hbtn" href="{{SUPPLEMENT_URL}}" aria-disabled="true">Supplement</a>
-      <a class="hbtn" href="{{CODE_URL}}" aria-disabled="true">Code</a>
+      <a class="hbtn" href="https://github.com/behappya/EVEWorld">Code</a>
       <a class="hbtn ghost" href="#qualitative">Qualitative examples</a>
     </div>
 
     <div class="bibtex-box reveal">
       <button class="copy-btn" id="copyBibtex" type="button">Copy BibTeX</button>
-      <pre id="bibtex">{{BIBTEX}}</pre>
+      <pre id="bibtex">@software{eveworld2026,
+  title  = "{EVEWorld}: Physical Evolution Supervision for Embodied World Models",
+  author = "{Anonymous Author(s)}",
+  year   = {2026},
+  url    = "{https://behappya.github.io/EVEWorld/}",
+  note   = "Code and project page released for anonymous review."
+}</pre>
     </div>
   </div>
 </section>
@@ -1282,7 +1161,7 @@
   <div class="lp-inner">
     <p class="foot-title">EVEWorld &mdash; Physical Evolution Supervision for Embodied World Models</p>
     <p>Project page for research communication. Evaluation settings and model variants are labeled in the corresponding sections.</p>
-    <p class="foot-links"><a href="{{PAPER_URL}}" aria-disabled="true">Paper</a> &middot; <a href="{{SUPPLEMENT_URL}}" aria-disabled="true">Supplement</a> &middot; <a href="{{CODE_URL}}" aria-disabled="true">Code</a> &middot; <a href="#citation">Citation</a></p>
+    <p class="foot-links"><a href="#abstract">Overview</a> &middot; <a href="#qualitative">Qualitative</a> &middot; <a href="#citation">Citation</a></p>
     <p>Hero background videos are WorldArena 2.0 rollouts from the submitted entry; qualitative sections label the compared checkpoints explicitly.</p>
   </div>
 </footer>
