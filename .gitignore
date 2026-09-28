@@ -54,6 +54,7 @@ dist/
 *.zip
 *.7z
 /outputs/
+/results/
 /checkpoints/*
 !/checkpoints/README.md
 _tmp/

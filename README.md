@@ -29,13 +29,42 @@ Visual plausibility does not guarantee physically consistent target evolution. I
 
 Quantitative and qualitative results are available on the [project page](https://behappya.github.io/EVEWorld/) and in the paper.
 
+## 🏆 WorldArena 2.0 Leaderboard
+
+Our FlowWAM-based EVEWorld submission, **Supervision_WM**, achieves an
+**EWMScore-P of 70.17** on **WorldArena 2.0 Track 1 — Simulator Video Quality**,
+ranking **6th in JEPA Similarity** and **17th overall**.
+
+<p align="center">
+  <a href="https://huggingface.co/spaces/WorldArena/WorldArena2.0">
+    <img
+      src="assets/worldarena2_track1_leaderboard.png"
+      width="95%"
+      alt="WorldArena 2.0 Track 1 leaderboard showing Supervision_WM at EWMScore-P 70.17 and rank 17 overall">
+  </a>
+</p>
+
+<p align="center">
+  <strong>70.17 EWMScore-P</strong>
+  &nbsp;·&nbsp;
+  <strong>6th in JEPA Similarity</strong>
+  &nbsp;·&nbsp;
+  <strong>17th overall</strong>
+</p>
+
+<p align="center">
+  <a href="https://huggingface.co/spaces/WorldArena/WorldArena2.0">
+    <strong>View the official WorldArena 2.0 leaderboard ↗</strong>
+  </a>
+</p>
+
 ## What is released
 
 - [x] IGR training pipeline
 - [x] TIA alignment module
 - [x] MLR evaluation protocol
 - [x] DreamGen / WorldArena / EWMBench / RoboTwin evaluation entry points
-- [x] paper-table reproduction scripts
+- [x] paper-protocol reproduction entry points
 - [x] the item-level evaluation-row schema in [`docs/item_level.md`](docs/item_level.md)
 - [x] environment and third-party-backbone setup scripts
 - [x] the project page and its qualitative media (served from the `gh-pages` branch)
