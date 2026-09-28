@@ -57,6 +57,8 @@ dist/
 /checkpoints/*
 !/checkpoints/README.md
 _tmp/
+# Evaluators write run aggregates beside the rows under results/item_level/; both stay out.
+/results/item_level/**/*.json
 
 # --- Media (selectively re-allowed in assets/ via a nested .gitignore) ---
 *.png
