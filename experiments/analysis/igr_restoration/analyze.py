@@ -223,10 +223,7 @@ def _fmt(value: float, digits: int = 4) -> str:
     return f"{value:.{digits}f}"
 
 
-HEADER = (
-    "| Region | Cells | Cover % | Weight | Perturbation | MAE | Restore | Retention"
-    " | Dir. cos. | Error share |"
-)
+HEADER = "| Region | Cells | Cover % | Weight | Perturbation | MAE | Restore | Retention" " | Dir. cos. | Error share |"
 SEPARATOR = "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|"
 
 
@@ -258,10 +255,7 @@ def _region_table(
     total_cells = int(labels.size)
     error = np.abs(pred - target)
     masks = {int(value): labels == value for value in np.unique(labels)}
-    weighted_error = {
-        value: float(np.count_nonzero(mask)) * float(error[mask].mean())
-        for value, mask in masks.items()
-    }
+    weighted_error = {value: float(np.count_nonzero(mask)) * float(error[mask].mean()) for value, mask in masks.items()}
     all_error = sum(weighted_error.values())
     restore_readings: dict[int, float] = {}
     lines = [HEADER, SEPARATOR]

@@ -62,10 +62,7 @@ def _table(tiers: Sequence[int], fps: float) -> str:
     lines = ["| Frames | Seconds | (frames - 1) % 4 | Latent frames |"]
     lines.append("|---:|---:|---:|---:|")
     for frames in tiers:
-        lines.append(
-            f"| {frames} | {seconds(frames, fps):.1f} "
-            f"| {(frames - 1) % TEMPORAL_STRIDE} | {latent_frames(frames)} |"
-        )
+        lines.append(f"| {frames} | {seconds(frames, fps):.1f} " f"| {(frames - 1) % TEMPORAL_STRIDE} | {latent_frames(frames)} |")
     return "\n".join(lines)
 
 

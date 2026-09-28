@@ -65,9 +65,7 @@ def psnr_clip(pred: np.ndarray, target: np.ndarray, *, data_range: float = 255.0
     total = min(len(pred_frames), len(target_frames))
     if total == 0:
         raise ValueError("cannot compare empty clips")
-    values = [
-        _frame_psnr(pred_frames[i], target_frames[i], data_range) for i in range(total)
-    ]
+    values = [_frame_psnr(pred_frames[i], target_frames[i], data_range) for i in range(total)]
     return float(np.mean(values))
 
 
@@ -155,9 +153,7 @@ def lpips_clip(
     def to_tensor(frames: np.ndarray) -> "torch.Tensor":
         batch = np.stack([frames[i] for i in ids])
         tensor = torch.from_numpy(np.ascontiguousarray(batch)).permute(0, 3, 1, 2).float()
-        tensor = functional.interpolate(
-            tensor, size=_LPIPS_SIZE, mode="bilinear", align_corners=False
-        )
+        tensor = functional.interpolate(tensor, size=_LPIPS_SIZE, mode="bilinear", align_corners=False)
         return tensor.to(resolved) / 127.5 - 1.0
 
     with torch.no_grad():

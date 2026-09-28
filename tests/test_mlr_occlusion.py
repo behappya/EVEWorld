@@ -10,12 +10,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from eveworld.evaluation.mlr.occlusion import (
-    adjust_counts,
-    is_occluded,
-    occlusion_ratio,
-    occlusion_table,
-)
+from eveworld.evaluation.mlr.occlusion import adjust_counts, is_occluded, occlusion_ratio, occlusion_table
 
 TAU_OCC = 0.15
 

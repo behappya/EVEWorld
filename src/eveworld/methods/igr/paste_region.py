@@ -129,9 +129,7 @@ def occupancy_ratio(box: np.ndarray, occupancy_map: np.ndarray) -> float:
     return float(np.clip(values.mean(), 0.0, 1.0))
 
 
-def inscribed_boxes(
-    box: np.ndarray, size: tuple[int, int] | None = None, *, stride: int = STRIDE
-) -> np.ndarray:
+def inscribed_boxes(box: np.ndarray, size: tuple[int, int] | None = None, *, stride: int = STRIDE) -> np.ndarray:
     """Enumerate the windows of `size` that fit inside `box` on the stride lattice.
 
     Anchors start at the top-left corner of the container and advance by `stride`, and
@@ -210,11 +208,7 @@ def candidate_regions(
         frame = np.asarray([0.0, 0.0, float(width), float(height)], dtype=np.float64)
         candidates = inscribed_boxes(frame, size=window, stride=stride)
     rows = _box_rows(candidates)
-    kept = [
-        row
-        for row in rows
-        if box_iou(row, target) <= 0.0 and not overlaps_any(row, occupied_boxes, 0.0)
-    ]
+    kept = [row for row in rows if box_iou(row, target) <= 0.0 and not overlaps_any(row, occupied_boxes, 0.0)]
     return _stack(kept)
 
 
@@ -346,8 +340,7 @@ def blend_patch(
     covered = stop - start
     if not single and stacked.shape[0] != covered:
         raise ValueError(
-            f"Patch holds {stacked.shape[0]} frames but the range covers {covered}; "
-            "pass a single (h, w, 3) patch to reuse it for every frame"
+            f"Patch holds {stacked.shape[0]} frames but the range covers {covered}; " "pass a single (h, w, 3) patch to reuse it for every frame"
         )
     for offset, index in enumerate(range(start, stop)):
         source = stacked if single else stacked[offset]
@@ -380,9 +373,7 @@ def paste_box_region(frame: np.ndarray, region: np.ndarray, patch: np.ndarray) -
     if source.ndim != 3:
         raise ValueError(f"Expected a (h, w, 3) patch, got {source.shape}")
     if source.shape[-1] != image.shape[-1]:
-        raise ValueError(
-            f"Patch has {source.shape[-1]} channels but the frame has {image.shape[-1]}"
-        )
+        raise ValueError(f"Patch has {source.shape[-1]} channels but the frame has {image.shape[-1]}")
     window = _box_slices(region, image.shape[:2])
     if window is None:
         return image
@@ -519,9 +510,7 @@ def _resize_rgb(image: np.ndarray, size: tuple[int, int]) -> np.ndarray:
         resized = Image.fromarray(np.ascontiguousarray(array)).resize((width, height), Image.NEAREST)
         return np.asarray(resized)
     except ImportError as exc:
-        raise ImportError(
-            "Resizing a patch needs either 'opencv-python' or 'pillow' to be installed"
-        ) from exc
+        raise ImportError("Resizing a patch needs either 'opencv-python' or 'pillow' to be installed") from exc
 
 
 def _cast_like(values: np.ndarray, dtype: np.dtype) -> np.ndarray:
@@ -529,7 +518,5 @@ def _cast_like(values: np.ndarray, dtype: np.dtype) -> np.ndarray:
     target = np.dtype(dtype)
     if target.kind in "iu":
         info = np.iinfo(target)
-        return np.clip(np.rint(np.asarray(values, dtype=np.float64)), info.min, info.max).astype(
-            target
-        )
+        return np.clip(np.rint(np.asarray(values, dtype=np.float64)), info.min, info.max).astype(target)
     return np.asarray(values, dtype=target)

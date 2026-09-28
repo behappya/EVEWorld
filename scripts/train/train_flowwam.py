@@ -64,10 +64,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     run.add_argument(
         "--config",
         default=os.environ.get("EVEWORLD_CONFIG"),
-        help=(
-            "training configuration, e.g. configs/paper/flowwam/robotwin/eveworld.yaml "
-            "(default: $EVEWORLD_CONFIG)"
-        ),
+        help=("training configuration, e.g. configs/paper/flowwam/robotwin/eveworld.yaml " "(default: $EVEWORLD_CONFIG)"),
     )
     run.add_argument("--steps", type=int, help="override train.max_steps of the configuration")
     run.add_argument("--seed", type=int, help="override seed of the configuration")
@@ -219,10 +216,7 @@ def print_plan(plan: RunPlan) -> None:
         f"sigma {cfg_value(config, 'method.sigma_low')}-{cfg_value(config, 'method.sigma_high')}, "
         f"{gated}"
     )
-    print(
-        f"optimizer:    {cfg_value(config, 'train.optimizer', '-')}, lr {lr:g}, "
-        f"weight decay {weight_decay:g}"
-    )
+    print(f"optimizer:    {cfg_value(config, 'train.optimizer', '-')}, lr {lr:g}, " f"weight decay {weight_decay:g}")
     adaptation = "" if lora_rank is None else f", LoRA rank {int(lora_rank)}"
     print(
         f"schedule:     {plan.steps} steps, batch {batch} x {accum} accumulation = "
@@ -329,10 +323,7 @@ def smoke_step(plan: RunPlan) -> None:
     total, stats = objective(restoration, transport, step=step, sigma=sigma)
     total.backward()
     grad = float(prediction.grad.abs().mean()) if prediction.grad is not None else 0.0
-    print(
-        f"smoke:        synthetic step {step} on a 1x4x3x{latent}x{latent} latent, "
-        f"grid {latent}x{latent}"
-    )
+    print(f"smoke:        synthetic step {step} on a 1x4x3x{latent}x{latent} latent, " f"grid {latent}x{latent}")
     print(
         f"smoke:        igr {stats['igr']:.4f}, tia {stats['tia']:.4f}, "
         f"total {stats['total']:.4f}, lambda_tia {stats['lambda_tia']:.4f}, "
@@ -360,7 +351,6 @@ def report_geometry(plan: RunPlan) -> None:
 def train(plan: RunPlan) -> int:
     """Run the training described by ``plan``."""
     import eveworld.integrations.flowwam as integration
-
     from eveworld.utils.config import resolve_path
     from eveworld.utils.seed import set_seed
 

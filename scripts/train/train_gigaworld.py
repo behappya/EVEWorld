@@ -62,10 +62,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     run.add_argument(
         "--config",
         default=os.environ.get("EVEWORLD_CONFIG"),
-        help=(
-            "training configuration, e.g. configs/paper/gigaworld/dreamgen/eveworld.yaml "
-            "(default: $EVEWORLD_CONFIG)"
-        ),
+        help=("training configuration, e.g. configs/paper/gigaworld/dreamgen/eveworld.yaml " "(default: $EVEWORLD_CONFIG)"),
     )
     run.add_argument("--steps", type=int, help="override train.max_steps of the configuration")
     run.add_argument("--seed", type=int, help="override seed of the configuration")
@@ -216,14 +213,8 @@ def print_plan(plan: RunPlan) -> None:
         f"sigma {cfg_value(config, 'method.sigma_low')}-{cfg_value(config, 'method.sigma_high')}, "
         f"{gated}"
     )
-    print(
-        f"optimizer:    {cfg_value(config, 'train.optimizer', '-')}, lr {lr:g}, "
-        f"weight decay {weight_decay:g}"
-    )
-    print(
-        f"schedule:     {plan.steps} steps, batch {batch} x {accum} accumulation = "
-        f"{batch * accum} clips, checkpoint every {save_every}"
-    )
+    print(f"optimizer:    {cfg_value(config, 'train.optimizer', '-')}, lr {lr:g}, " f"weight decay {weight_decay:g}")
+    print(f"schedule:     {plan.steps} steps, batch {batch} x {accum} accumulation = " f"{batch * accum} clips, checkpoint every {save_every}")
     print(
         f"model:        {cfg_value(config, 'model.backbone', '-')} / {checkpoint}, "
         f"{int(resolution[0])}x{int(resolution[1])}, "
@@ -325,10 +316,7 @@ def smoke_step(plan: RunPlan) -> None:
     total, stats = objective(restoration, transport, step=step, sigma=sigma)
     total.backward()
     grad = float(prediction.grad.abs().mean()) if prediction.grad is not None else 0.0
-    print(
-        f"smoke:        synthetic step {step} on a 1x4x3x{latent}x{latent} latent, "
-        f"grid {latent}x{latent}"
-    )
+    print(f"smoke:        synthetic step {step} on a 1x4x3x{latent}x{latent} latent, " f"grid {latent}x{latent}")
     print(
         f"smoke:        igr {stats['igr']:.4f}, tia {stats['tia']:.4f}, "
         f"total {stats['total']:.4f}, lambda_tia {stats['lambda_tia']:.4f}, "
@@ -356,7 +344,6 @@ def report_geometry(plan: RunPlan) -> None:
 def train(plan: RunPlan) -> int:
     """Run the training described by ``plan``."""
     import eveworld.integrations.gigaworld as integration
-
     from eveworld.utils.config import resolve_path
     from eveworld.utils.seed import set_seed
 
@@ -365,9 +352,7 @@ def train(plan: RunPlan) -> int:
     set_seed(plan.seed)
     write_run_files(plan)
     model_config = integration.GigaWorldConfig.from_config(plan.config)
-    dataset_cls = (
-        integration.AgiBotDataset if model_config.variant == "agibot" else integration.DreamGenDataset
-    )
+    dataset_cls = integration.AgiBotDataset if model_config.variant == "agibot" else integration.DreamGenDataset
     dataset = instantiate(
         dataset_cls,
         config=plan.config,

@@ -104,9 +104,7 @@ def _text(record: Mapping[str, Any], keys: Sequence[str]) -> str:
 def _discrete_levels(array: np.ndarray, levels: Sequence[float], tolerance: float = VALUE_TOLERANCE) -> bool:
     """Whether every value of ``array`` is one of ``levels`` within ``tolerance``."""
     values = np.unique(np.asarray(array, dtype=np.float64))
-    return all(
-        any(abs(float(value) - float(level)) <= tolerance for level in levels) for value in values
-    )
+    return all(any(abs(float(value) - float(level)) <= tolerance for level in levels) for value in values)
 
 
 class _ClipDataset(Dataset):
@@ -178,11 +176,7 @@ class _ClipDataset(Dataset):
     @staticmethod
     def _read_split(path: Path) -> list[str]:
         """Clip ids of a split file, skipping blank lines and ``#`` headers."""
-        ids = [
-            line.strip()
-            for line in path.read_text(encoding="utf-8").splitlines()
-            if line.strip() and not line.lstrip().startswith("#")
-        ]
+        ids = [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip() and not line.lstrip().startswith("#")]
         if not ids:
             raise ValueError(f"split file {path} holds no clip id")
         return ids

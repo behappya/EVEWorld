@@ -75,18 +75,14 @@ class Track:
         scores = np.asarray(self.scores, dtype=np.float32).reshape(-1)
         if scores.size != boxes.shape[0]:
             raise ValueError(
-                f"Track holds {boxes.shape[0]} boxes but {scores.size} scores; pass one score "
-                "per frame, 0.0 for the frames without a detection"
+                f"Track holds {boxes.shape[0]} boxes but {scores.size} scores; pass one score " "per frame, 0.0 for the frames without a detection"
             )
         self.scores = scores
         if self.masks is None:
             return
         masks = np.asarray(self.masks) != 0
         if masks.ndim < 3 or masks.shape[0] != boxes.shape[0]:
-            raise ValueError(
-                f"Expected (T, H, W) masks matching the {boxes.shape[0]} frames, got "
-                f"{masks.shape}"
-            )
+            raise ValueError(f"Expected (T, H, W) masks matching the {boxes.shape[0]} frames, got " f"{masks.shape}")
         self.masks = masks
 
     def __len__(self) -> int:
@@ -308,9 +304,7 @@ def interaction_box(track: Track, frame: int, *, margin: float = 4.0) -> np.ndar
     return grown.astype(np.float32)
 
 
-def _detections_of(
-    frame: Sequence["Detection"], wanted: set[str] | None
-) -> tuple[np.ndarray, np.ndarray, list[str]]:
+def _detections_of(frame: Sequence["Detection"], wanted: set[str] | None) -> tuple[np.ndarray, np.ndarray, list[str]]:
     """Boxes, scores and labels of the usable detections of one frame."""
     boxes: list[np.ndarray] = []
     scores: list[float] = []
@@ -345,12 +339,7 @@ def _associate(
     count = len(open_tracks)
     if count == 0:
         return np.zeros((0,), dtype=np.int64)
-    previous = np.stack(
-        [
-            track.last_box if track.last_box is not None else _MISSING_BOX
-            for track in open_tracks
-        ]
-    )
+    previous = np.stack([track.last_box if track.last_box is not None else _MISSING_BOX for track in open_tracks])
     if boxes.shape[0] == 0:
         return np.full((count,), -1, dtype=np.int64)
     raw = np.asarray(associate_boxes(previous, boxes, iou_threshold)).reshape(-1)

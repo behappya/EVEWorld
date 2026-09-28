@@ -105,10 +105,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     run.add_argument(
         "--config",
         default=os.environ.get("EVEWORLD_CONFIG"),
-        help=(
-            "evaluation configuration, e.g. configs/eval/mlr/dreamgen.yaml "
-            "(default: $EVEWORLD_CONFIG)"
-        ),
+        help=("evaluation configuration, e.g. configs/eval/mlr/dreamgen.yaml " "(default: $EVEWORLD_CONFIG)"),
     )
     run.add_argument(
         "--pred-dir",
@@ -202,11 +199,7 @@ def select_clips(pred_dir: Path, limit: int | None) -> list[Path]:
     if not pred_dir.is_dir():
         return []
     clips = sorted(
-        (
-            path
-            for path in pred_dir.iterdir()
-            if path.is_file() and path.suffix.lower() in VIDEO_SUFFIXES
-        ),
+        (path for path in pred_dir.iterdir() if path.is_file() and path.suffix.lower() in VIDEO_SUFFIXES),
         key=lambda path: path.name,
     )
     return clips if limit is None else clips[: int(limit)]
@@ -318,9 +311,7 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
     root = repo_root()
     config = load_config(config_path, [])
     pred_dir = resolve_pred_dir(args.pred_dir, config, root)
-    metadata = resolve_path(
-        args.metadata or str(cfg_value(config, "data.metadata", "data/metadata")), root
-    )
+    metadata = resolve_path(args.metadata or str(cfg_value(config, "data.metadata", "data/metadata")), root)
     device = args.device or str(cfg_value(config, "eval.device", "cuda"))
     protocol = protocol_metadata(protocol_settings(config, args, device), None)
     if pred_dir.name == GENERATED_SUBDIR:
@@ -334,9 +325,7 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
         rows = output.with_suffix(ROWS_SUFFIX)
     else:
         rows = None
-    command = " ".join(
-        shlex.quote(part) for part in ("python", "scripts/evaluate/eval_mlr.py", *argv)
-    )
+    command = " ".join(shlex.quote(part) for part in ("python", "scripts/evaluate/eval_mlr.py", *argv))
     return EvalPlan(
         config_path=config_path,
         config=config,
@@ -378,10 +367,7 @@ def print_plan(plan: EvalPlan) -> None:
     print(f"pred dir:     {plan.pred_dir}{found}")
     print(f"model:        {plan.model}")
     print(f"metadata:     {plan.metadata}")
-    print(
-        f"entries:      {len(plan.entries)} clips, "
-        f"{sum(1 for entry in plan.entries.values() if prompt_eligible(entry))} prompt-eligible"
-    )
+    print(f"entries:      {len(plan.entries)} clips, " f"{sum(1 for entry in plan.entries.values() if prompt_eligible(entry))} prompt-eligible")
     print(f"benchmark:    {benchmark_line(plan.benchmark)}")
     limit = "" if plan.limit is None else f", limit {plan.limit}"
     print(f"clips:        {len(plan.clips)} selected{limit}")
@@ -394,10 +380,7 @@ def print_plan(plan: EvalPlan) -> None:
         f"detector:     Grounding-DINO on {protocol['device']}, object topk "
         f"{int(protocol['object_prompt_topk'])} at box {float(protocol['object_box_threshold']):g}"
     )
-    print(
-        f"tracker:      SAM2 {protocol['sam2_model_config']} at "
-        f"{protocol['sam2_checkpoint'] or '$SAM2_CHECKPOINT'}"
-    )
+    print(f"tracker:      SAM2 {protocol['sam2_model_config']} at " f"{protocol['sam2_checkpoint'] or '$SAM2_CHECKPOINT'}")
     print(f"output:       {plan.output or 'standard output'}")
     print(f"rows:         {plan.rows or 'none'}")
     print(f"dry run:      {'yes' if plan.dry_run else 'no'}")
@@ -509,24 +492,14 @@ def score_clip(
     import numpy as np
 
     from eveworld.data.transforms.video import load_video
-    from eveworld.evaluation.mlr import (
-        adjust_counts,
-        align_timestamps,
-        clip_mlr,
-        detect_events,
-        merge_track_masks,
-    )
+    from eveworld.evaluation.mlr import adjust_counts, align_timestamps, clip_mlr, detect_events, merge_track_masks
     from eveworld.evaluation.mlr.occlusion import exempt_targets
 
     protocol = plan.protocol
     frames = load_video(path)
-    indices = align_timestamps(
-        int(frames.shape[0]), int(protocol["frame_count"]), str(protocol["sample_mode"])
-    )
+    indices = align_timestamps(int(frames.shape[0]), int(protocol["frame_count"]), str(protocol["sample_mode"]))
     sampled = frames[indices]
-    counts = counter.counts(
-        sampled, target, box_threshold=float(protocol["object_box_threshold"])
-    )
+    counts = counter.counts(sampled, target, box_threshold=float(protocol["object_box_threshold"]))
     counts_list = [int(value) for value in counts]
     reference = int(counts[0]) if counts.size else 0
     if reference <= 0:
@@ -561,14 +534,10 @@ def score_clip(
         robot_masks = merge_track_masks(tracker.track(frames, robot_boxes).masks, indices)
         robot_mask = robot_masks.any(axis=1)
     else:
-        robot_mask = np.zeros(
-            (indices.size, int(frames.shape[1]), int(frames.shape[2])), dtype=bool
-        )
+        robot_mask = np.zeros((indices.size, int(frames.shape[1]), int(frames.shape[2])), dtype=bool)
     exempt = exempt_targets(target_masks, robot_mask, tau_occ=float(protocol["tau_occ"]))
     adjusted = adjust_counts(counts, exempt, reference)
-    events = detect_events(
-        adjusted != reference, exemptions=adjusted != counts, k=int(protocol["persistence_samples"])
-    )
+    events = detect_events(adjusted != reference, exemptions=adjusted != counts, k=int(protocol["persistence_samples"]))
     flags = [bool(value) for value in events]
     return row_of(
         plan,
@@ -606,9 +575,7 @@ def score_clips(plan: EvalPlan, counter: Any, tracker: Any) -> list[dict[str, An
         try:
             rows.append(score_clip(plan, path, target, counter, tracker))
         except (OSError, ValueError, RuntimeError) as error:
-            rows.append(
-                row_of(plan, path, target=target, error=f"{type(error).__name__}: {error}")
-            )
+            rows.append(row_of(plan, path, target=target, error=f"{type(error).__name__}: {error}"))
     return rows
 
 

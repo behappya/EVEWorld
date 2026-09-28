@@ -74,9 +74,7 @@ class JointConfig:
         if self.warmup_steps < 0:
             raise ValueError(f"warmup_steps must not be negative, got {self.warmup_steps}")
         if self.sigma_low > self.sigma_high:
-            raise ValueError(
-                f"sigma_low must not exceed sigma_high, got {self.sigma_low} and {self.sigma_high}"
-            )
+            raise ValueError(f"sigma_low must not exceed sigma_high, got {self.sigma_low} and {self.sigma_high}")
 
     @classmethod
     def from_mapping(cls, mapping: Any) -> JointConfig:

@@ -40,9 +40,7 @@ HISTORY_SIGMA = 1e-4
 
 if torch is not None:
 
-    def frontier_weights(
-        t: int, num_frames: int, block_size: int = BLOCK_SIZE
-    ) -> "torch.Tensor":
+    def frontier_weights(t: int, num_frames: int, block_size: int = BLOCK_SIZE) -> "torch.Tensor":
         """Weight map ``(num_frames,)`` of the active block that starts at ``t``.
 
         The block spans ``[t, min(t + block_size, num_frames))``; the committed
@@ -172,9 +170,7 @@ class FrontierLoss(_ModuleBase):
             raise ValueError(f"clean latents must be (B, C, T, h, w), got {tuple(clean.shape)}")
         blocks = self.frontier_slices(clean.shape[2])
         if not 0 <= frontier_index < len(blocks):
-            raise ValueError(
-                f"frontier_index must index one of {len(blocks)} frontiers, got {frontier_index}"
-            )
+            raise ValueError(f"frontier_index must index one of {len(blocks)} frontiers, got {frontier_index}")
         start, stop = blocks[int(frontier_index)]
         batch, channels = clean.shape[:2]
         history = clean[:, :, :start, :, :].detach()
@@ -190,9 +186,7 @@ class FrontierLoss(_ModuleBase):
         scaled_active = noisy_active / torch.sqrt(sigma_tensor.square() + self.sigma_data**2)
         model_input = torch.cat([history, scaled_active], dim=2)
         target = torch.cat([history, active], dim=2)
-        condition_mask = torch.zeros(
-            (batch, 1, stop, 1, 1), device=clean.device, dtype=clean.dtype
-        )
+        condition_mask = torch.zeros((batch, 1, stop, 1, 1), device=clean.device, dtype=clean.dtype)
         condition_mask[:, :, :start] = 1.0
         model_input = torch.cat([model_input, condition_mask.expand_as(model_input[:, :1])], dim=1)
         return model_input, target, condition_mask
@@ -216,9 +210,7 @@ class FrontierLoss(_ModuleBase):
         if torch is None:  # pragma: no cover - only reachable without torch
             raise RuntimeError("FrontierLoss.forward requires torch")
         if denoised.shape != target.shape:
-            raise ValueError(
-                f"denoised {tuple(denoised.shape)} and target {tuple(target.shape)} differ in shape"
-            )
+            raise ValueError(f"denoised {tuple(denoised.shape)} and target {tuple(target.shape)} differ in shape")
         batch = denoised.shape[0]
         sigma_tensor = torch.as_tensor(sigma, device=denoised.device, dtype=denoised.dtype)
         if sigma_tensor.ndim == 0:
@@ -230,9 +222,7 @@ class FrontierLoss(_ModuleBase):
         sigma_view = sigma_tensor.reshape((batch,) + (1,) * (denoised.ndim - 1))
         weight = (sigma_view.square() + self.sigma_data**2) / (sigma_view * self.sigma_data).square()
         if condition_mask is None:
-            active = torch.ones(
-                (batch, 1, denoised.shape[2], 1, 1), device=denoised.device, dtype=denoised.dtype
-            )
+            active = torch.ones((batch, 1, denoised.shape[2], 1, 1), device=denoised.device, dtype=denoised.dtype)
         else:
             if condition_mask.shape[0] != batch:
                 raise ValueError("condition_mask must cover the batch dimension")
@@ -272,8 +262,10 @@ def main(argv: "list[str] | None" = None) -> int:
     if not blocks:
         print(f"clip of {args.frames} frames leaves no active block", file=sys.stderr)
         return 1
-    print(f"clip: {args.frames} latent frames, block size {args.block_size}, condition latents "
-          f"{loss.condition_latents}, history sigma {loss.history_sigma}")
+    print(
+        f"clip: {args.frames} latent frames, block size {args.block_size}, condition latents "
+        f"{loss.condition_latents}, history sigma {loss.history_sigma}"
+    )
     print(f"{'frontier':>8}  {'active block':>14}  {'tokens':>6}  {'loss':>10}")
     indices = [args.frontier] if args.frontier is not None else list(range(len(blocks)))
     if args.demo:
@@ -288,9 +280,7 @@ def main(argv: "list[str] | None" = None) -> int:
         score = float("nan")
         if args.demo:
             torch.manual_seed(args.seed + index)
-            model_input, target, condition_mask = loss.prepare_input(
-                clean, args.sigma, index
-            )
+            model_input, target, condition_mask = loss.prepare_input(clean, args.sigma, index)
             stage = (index + 1) / len(blocks)
             prediction_error = 0.05 * stage * torch.randn_like(target)
             denoised = target + prediction_error

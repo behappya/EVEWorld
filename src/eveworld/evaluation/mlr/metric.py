@@ -55,9 +55,7 @@ def _clip_eligible(eligible: Any, size: int) -> np.ndarray:
         return np.full(size, bool(eligible), dtype=bool)
     mask = _as_bool(eligible)
     if mask.shape != (size,):
-        raise ValueError(
-            f"eligible mask of shape {mask.shape} does not match {size} timestamps"
-        )
+        raise ValueError(f"eligible mask of shape {mask.shape} does not match {size} timestamps")
     return mask
 
 
@@ -104,9 +102,7 @@ def missing_rate(rates: Iterable[Any], eligible: Sequence[bool] | None = None) -
     if eligible is not None:
         mask = _as_bool(eligible).reshape(-1)
         if mask.size != len(values):
-            raise ValueError(
-                f"eligible mask of size {mask.size} does not match {len(values)} clips"
-            )
+            raise ValueError(f"eligible mask of size {mask.size} does not match {len(values)} clips")
 
     total = 0.0
     contributing = 0
@@ -132,9 +128,7 @@ def missing_rate(rates: Iterable[Any], eligible: Sequence[bool] | None = None) -
     return (total / contributing, contributing)
 
 
-def wilson_interval(
-    events: int | Sequence[bool] | np.ndarray, count: int, z: float = WILSON_Z
-) -> tuple[float, float]:
+def wilson_interval(events: int | Sequence[bool] | np.ndarray, count: int, z: float = WILSON_Z) -> tuple[float, float]:
     """Return the Wilson score interval of a proportion in percent.
 
     ``events`` is either the number of clips that saw an event or a boolean
@@ -155,7 +149,7 @@ def wilson_interval(
     z2 = float(z) ** 2
     denominator = 1.0 + z2 / total
     centre = (p_hat + z2 / (2.0 * total)) / denominator
-    margin = float(z) * math.sqrt(p_hat * (1.0 - p_hat) / total + z2 / (4.0 * total ** 2)) / denominator
+    margin = float(z) * math.sqrt(p_hat * (1.0 - p_hat) / total + z2 / (4.0 * total**2)) / denominator
     low = max(0.0, centre - margin)
     high = min(1.0, centre + margin)
     return (100.0 * low, 100.0 * high)
@@ -168,7 +162,7 @@ def _mcnemar_tail(a: int, b: int) -> float:
         return 1.0
     tail = min(a, b)
     cumulative = sum(math.comb(total, k) for k in range(tail + 1))
-    return min(1.0, 2.0 * cumulative / float(2 ** total))
+    return min(1.0, 2.0 * cumulative / float(2**total))
 
 
 def exact_mcnemar(a: int, b: int) -> float:
@@ -210,9 +204,7 @@ def common_eligible(per_model: Mapping[str, Sequence[bool]] | Iterable[Sequence[
     for mask in masks[1:]:
         other = _as_bool(mask).reshape(-1)
         if other.size != result.size:
-            raise ValueError(
-                f"eligibility mask of size {other.size} does not match {result.size} clips"
-            )
+            raise ValueError(f"eligibility mask of size {other.size} does not match {result.size} clips")
         result &= other
     return result
 

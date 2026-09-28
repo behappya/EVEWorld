@@ -382,25 +382,21 @@ def prepare(args: argparse.Namespace, data_root: Path, output_dir: Path) -> int:
     names, unknown = ordered_tasks(tasks)
     heldout = select_rows(tasks, names, HELDOUT_EPISODES)
     dev = select_rows(tasks, names, (DEV_EPISODE,))
-    training_pool = sum(
-        1 for task in names for number in tasks[task] if number < DEV_EPISODE
-    )
+    training_pool = sum(1 for task in names for number in tasks[task] if number < DEV_EPISODE)
     if args.limit is not None:
         heldout = heldout[: args.limit]
         dev = dev[: args.limit]
     if args.limit is None:
         if unknown:
             print(
-                f"error: the data root holds {len(unknown)} task directories outside the recipe: "
-                f"{unknown[:5]}",
+                f"error: the data root holds {len(unknown)} task directories outside the recipe: " f"{unknown[:5]}",
                 file=sys.stderr,
             )
             return 1
         if len(names) != TASK_COUNT:
             missing = [task for task in TASK_ORDER if task not in tasks]
             print(
-                f"error: found {len(names)} tasks below the data root, the recipe uses {TASK_COUNT}: "
-                f"missing {missing[:5]}",
+                f"error: found {len(names)} tasks below the data root, the recipe uses {TASK_COUNT}: " f"missing {missing[:5]}",
                 file=sys.stderr,
             )
             return 1
@@ -414,8 +410,7 @@ def prepare(args: argparse.Namespace, data_root: Path, output_dir: Path) -> int:
             return 1
         if len(dev) != DEV_COUNT:
             print(
-                f"error: found {len(dev)} dev episodes, the recipe uses {DEV_COUNT} (episode "
-                f"{DEV_EPISODE} of {TASK_COUNT} tasks)",
+                f"error: found {len(dev)} dev episodes, the recipe uses {DEV_COUNT} (episode " f"{DEV_EPISODE} of {TASK_COUNT} tasks)",
                 file=sys.stderr,
             )
             return 1
@@ -427,8 +422,7 @@ def prepare(args: argparse.Namespace, data_root: Path, output_dir: Path) -> int:
     print(f"data root:    {data_root}")
     print(f"output dir:   {output_dir}")
     print(f"tasks:        {len(names)} of {TASK_COUNT} in the recipe")
-    print(f"heldout:      {len(heldout)} rows ({HELDOUT_COUNT} in the recipe, episodes "
-          f"{HELDOUT_EPISODES[0]}-{HELDOUT_EPISODES[-1]})")
+    print(f"heldout:      {len(heldout)} rows ({HELDOUT_COUNT} in the recipe, episodes " f"{HELDOUT_EPISODES[0]}-{HELDOUT_EPISODES[-1]})")
     print(f"dev:          {len(dev)} rows ({DEV_COUNT} in the recipe, episode {DEV_EPISODE})")
     print(f"training:     {training_pool} episodes of episodes 0-{DEV_EPISODE - 1} (not written)")
     print(f"timestamps:   {len(sample_timestamps())} per clip on a {N_LAT}x{H_LAT}x{W_LAT} latent grid")

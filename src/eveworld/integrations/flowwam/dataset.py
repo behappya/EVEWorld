@@ -124,9 +124,7 @@ def _text(record: Mapping[str, Any], keys: Sequence[str]) -> str:
 def _discrete_levels(array: np.ndarray, levels: Sequence[float], tolerance: float = VALUE_TOLERANCE) -> bool:
     """Whether every value of ``array`` is one of ``levels`` within ``tolerance``."""
     values = np.unique(np.asarray(array, dtype=np.float64))
-    return all(
-        any(abs(float(value) - float(level)) <= tolerance for level in levels) for value in values
-    )
+    return all(any(abs(float(value) - float(level)) <= tolerance for level in levels) for value in values)
 
 
 class RoboTwinDataset(Dataset):
@@ -199,8 +197,7 @@ class RoboTwinDataset(Dataset):
         metadata = _resolve(metadata_dir if metadata_dir is not None else self.default_metadata)
         if not metadata.is_dir():
             logger.warning(
-                "%s metadata directory not found: %s; the items fall back to the flat weight "
-                "map and get no TIA annotation",
+                "%s metadata directory not found: %s; the items fall back to the flat weight " "map and get no TIA annotation",
                 self.corpus,
                 metadata,
             )
@@ -222,11 +219,7 @@ class RoboTwinDataset(Dataset):
     @staticmethod
     def _read_split(path: Path) -> list[str]:
         """Episode ids of a split file, skipping blank lines and ``#`` headers."""
-        ids = [
-            line.strip()
-            for line in path.read_text(encoding="utf-8").splitlines()
-            if line.strip() and not line.lstrip().startswith("#")
-        ]
+        ids = [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip() and not line.lstrip().startswith("#")]
         if not ids:
             raise ValueError(f"split file {path} holds no episode id")
         return ids
@@ -260,11 +253,7 @@ class RoboTwinDataset(Dataset):
             number = int(match.group("number"))
             if task not in lowest or number < lowest[task]:
                 lowest[task] = number
-        ids = [
-            f"task_{task}_episode_{number}"
-            for task, limit in lowest.items()
-            for number in range(limit)
-        ]
+        ids = [f"task_{task}_episode_{number}" for task, limit in lowest.items() for number in range(limit)]
         if not ids:
             raise ValueError(
                 "the split file derives no training episode: every task it lists holds out its "
@@ -434,9 +423,7 @@ class RoboTwinDataset(Dataset):
                     return candidate
                 tried.append(candidate)
             if parsed is not None:
-                for candidate in self._collection_candidates(
-                    root, parsed.group("task"), parsed.group("number")
-                ):
+                for candidate in self._collection_candidates(root, parsed.group("task"), parsed.group("number")):
                     if candidate.is_file():
                         return candidate
                     tried.append(candidate)

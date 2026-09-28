@@ -7,15 +7,7 @@ while each judge stays reachable under its own module name.
 """
 
 from . import gemini_if, qwen_if
-from .qwen_if import (
-    DEFAULT_MODEL,
-    PROMPT_PATH,
-    QwenIFJudge,
-    build_judge_prompt,
-    parse_verdict,
-    score_records,
-    summarize,
-)
+from .qwen_if import DEFAULT_MODEL, PROMPT_PATH, QwenIFJudge, build_judge_prompt, parse_verdict, score_records, summarize
 
 __all__ = [
     "DEFAULT_MODEL",

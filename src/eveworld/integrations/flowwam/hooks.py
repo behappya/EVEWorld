@@ -44,17 +44,9 @@ import torch.nn as nn
 
 from eveworld.integrations.flowwam.model import CELL_SIZE, DEFAULT_LORA_RANK, TEMPORAL_STRIDE
 from eveworld.integrations.gigaworld.dataset import DEFAULT_SEED
-from eveworld.integrations.gigaworld.hooks import (
-    BLOCK_CONTAINERS,
-    IGRCollator,
-    IGRTransform,
-    TIAHook,
-    _as_grid,
-    _layer_index,
-    _resolve_block,
-    mix_batches,
-)
+from eveworld.integrations.gigaworld.hooks import BLOCK_CONTAINERS, IGRCollator, IGRTransform, TIAHook, _as_grid, _layer_index, _resolve_block
 from eveworld.integrations.gigaworld.hooks import build_igr_transform as _build_igr_transform
+from eveworld.integrations.gigaworld.hooks import mix_batches
 from eveworld.methods.igr.corruption import P_DUPLICATE
 from eveworld.methods.igr.paste_region import STRIDE
 from eveworld.methods.tia.adapter import TIAAdapter, TIAConfig, _module_hidden_size, build_adapter
@@ -133,9 +125,7 @@ def inject_lora(
     try:
         from peft import LoraConfig, inject_adapter_in_model
     except ImportError as error:
-        raise RuntimeError(
-            "LoRA fine-tuning needs the peft package; install it with `pip install peft`"
-        ) from error
+        raise RuntimeError("LoRA fine-tuning needs the peft package; install it with `pip install peft`") from error
     rank = int(rank)
     if rank < 1:
         raise ValueError(f"rank must be positive, got {rank}")
@@ -265,8 +255,7 @@ def register_tia(
         hidden = _hidden_size(state=state, block=block, denoiser=denoiser)
         if hidden is None:
             raise ValueError(
-                f"cannot determine the hidden size of block {path}; pass an adapter, a "
-                "state_dict or a model exposing `dim`/`hidden_size`"
+                f"cannot determine the hidden size of block {path}; pass an adapter, a " "state_dict or a model exposing `dim`/`hidden_size`"
             )
         config = TIAConfig(
             dim=_rank(rank, state),
@@ -276,13 +265,10 @@ def register_tia(
             layer=index,
         )
         adapter = build_adapter(hidden, config)
-        logger.info(
-            "Built a TIA adapter of rank %d for the %d channels of %s", adapter.dim, hidden, path
-        )
+        logger.info("Built a TIA adapter of rank %d for the %d channels of %s", adapter.dim, hidden, path)
     if state:
         _load_state(adapter, state)
-    hook = FlowWAMTIAHook(adapter, layer_index=index, grid=token_grid, temperature=temperature,
-                          window=window)
+    hook = FlowWAMTIAHook(adapter, layer_index=index, grid=token_grid, temperature=temperature, window=window)
     registration = {
         "adapter": adapter,
         "hook": hook,
@@ -319,9 +305,7 @@ def tia_state_dict(model: Any) -> dict[str, torch.Tensor]:
     adapter = registration.get("adapter")
     if not isinstance(adapter, nn.Module):
         return {}
-    return {
-        f"{_STATE_PREFIX}{key}": value.detach() for key, value in adapter.state_dict().items()
-    }
+    return {f"{_STATE_PREFIX}{key}": value.detach() for key, value in adapter.state_dict().items()}
 
 
 @contextlib.contextmanager
@@ -352,8 +336,7 @@ def tia_injection(model: Any, enabled: bool = True) -> Iterator[FlowWAMTIAHook |
         return
     if not isinstance(hook, FlowWAMTIAHook):
         logger.warning(
-            "tia_injection is enabled but no TIA adapter is registered on the model; call "
-            "register_tia first. The pass runs without the adapter."
+            "tia_injection is enabled but no TIA adapter is registered on the model; call " "register_tia first. The pass runs without the adapter."
         )
         yield None
         return

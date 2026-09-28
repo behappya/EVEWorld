@@ -78,8 +78,7 @@ def _import_mlr() -> tuple[Callable[..., Any], ...]:
         from eveworld.evaluation.mlr import adjust_counts, aggregate, detect_events
     except ImportError as exc:
         raise SystemExit(
-            f"the eveworld package is required for the MLR rule ({exc}); "
-            "install it with 'pip install -e .' or run with PYTHONPATH=src"
+            f"the eveworld package is required for the MLR rule ({exc}); " "install it with 'pip install -e .' or run with PYTHONPATH=src"
         ) from exc
     return adjust_counts, aggregate, detect_events
 
@@ -131,9 +130,7 @@ def load_clip(path: Path) -> dict[str, Any]:
     }
 
 
-def sweep_grid(
-    directory: Path, tau_occ: float, order: int, api: Sequence[Callable[..., Any]]
-) -> dict[str, Any]:
+def sweep_grid(directory: Path, tau_occ: float, order: int, api: Sequence[Callable[..., Any]]) -> dict[str, Any]:
     """Rebuild every per-clip event trace of one grid cell and aggregate them."""
     adjust_counts, aggregate, detect_events = api
     paths = sorted(directory.glob("*.json"))
@@ -180,10 +177,7 @@ def _reduction(cell: Mapping[str, Any], baseline: Mapping[str, Any]) -> float | 
 def _report(cells: Sequence[dict[str, Any]], baselines: Mapping[tuple[float, int], dict[str, Any]]) -> str:
     lines = ["# MLR sensitivity", ""]
     if baselines:
-        lines.append(
-            "| tau_occ | k | Baseline events / eligible | Baseline MLR (%) "
-            "| Events / eligible | MLR (%) | Rel. reduction (%) |"
-        )
+        lines.append("| tau_occ | k | Baseline events / eligible | Baseline MLR (%) " "| Events / eligible | MLR (%) | Rel. reduction (%) |")
         lines.append("|---:|---:|---:|---:|---:|---:|---:|")
         for cell in cells:
             baseline = baselines.get((cell["tau_occ"], cell["k"]))
@@ -204,10 +198,7 @@ def _report(cells: Sequence[dict[str, Any]], baselines: Mapping[tuple[float, int
         lines.append("| tau_occ | k | Events / eligible | MLR (%) |")
         lines.append("|---:|---:|---:|---:|")
         for cell in cells:
-            lines.append(
-                f"| {_pct(cell['tau_occ'])} | {cell['k']} "
-                f"| {cell['events']} / {cell['num_eligible']} | {_pct(cell['event_share'])} |"
-            )
+            lines.append(f"| {_pct(cell['tau_occ'])} | {cell['k']} " f"| {cell['events']} / {cell['num_eligible']} | {_pct(cell['event_share'])} |")
     lines.append("")
     lines.append("Mean per-clip event share, one weight per clip:")
     lines.append("")
@@ -217,10 +208,7 @@ def _report(cells: Sequence[dict[str, Any]], baselines: Mapping[tuple[float, int
         for cell in cells:
             baseline = baselines.get((cell["tau_occ"], cell["k"]))
             base_text = _pct(baseline["mean_clip_rate"]) if baseline is not None else "n/a"
-            lines.append(
-                f"| {_pct(cell['tau_occ'])} | {cell['k']} | {base_text} "
-                f"| {_pct(cell['mean_clip_rate'])} |"
-            )
+            lines.append(f"| {_pct(cell['tau_occ'])} | {cell['k']} | {base_text} " f"| {_pct(cell['mean_clip_rate'])} |")
     else:
         lines.append("| tau_occ | k | Mean clip rate (%) |")
         lines.append("|---:|---:|---:|")
@@ -230,14 +218,9 @@ def _report(cells: Sequence[dict[str, Any]], baselines: Mapping[tuple[float, int
     taus = sorted({cell["tau_occ"] for cell in cells})
     orders = sorted({cell["k"] for cell in cells})
     eligible_counts = sorted({cell["num_eligible"] for cell in cells})
+    lines.append(f"grids: {len(cells)}; tau_occ in [{', '.join(_pct(tau) for tau in taus)}]; " f"k in [{', '.join(str(order) for order in orders)}]")
     lines.append(
-        f"grids: {len(cells)}; tau_occ in [{', '.join(_pct(tau) for tau in taus)}]; "
-        f"k in [{', '.join(str(order) for order in orders)}]"
-    )
-    lines.append(
-        "eligible clips per cell: "
-        + (", ".join(str(count) for count in eligible_counts) if len(eligible_counts) > 1
-           else str(eligible_counts[0]))
+        "eligible clips per cell: " + (", ".join(str(count) for count in eligible_counts) if len(eligible_counts) > 1 else str(eligible_counts[0]))
     )
     errors = sorted({error for cell in cells for error in cell["errors"]})
     lines.append("clip errors: " + (str(len(errors)) + " distinct" if errors else "none"))

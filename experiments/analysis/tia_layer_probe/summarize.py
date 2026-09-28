@@ -153,26 +153,17 @@ def _table(domain: str, records: dict[int, dict[str, Any]], block_range: Sequenc
         lines.append(text)
     absent = missing_blocks(records, block_range)
     lines.append("")
-    lines.append(
-        f"winner inside blocks {low}-{high}: "
-        + (f"**{min(candidates, key=candidates.get)}** (EPE {_fmt(best)})" if candidates else "n/a")
-    )
-    lines.append(
-        "missing blocks in range: " + (", ".join(str(block) for block in absent) if absent else "none")
-    )
+    lines.append(f"winner inside blocks {low}-{high}: " + (f"**{min(candidates, key=candidates.get)}** (EPE {_fmt(best)})" if candidates else "n/a"))
+    lines.append("missing blocks in range: " + (", ".join(str(block) for block in absent) if absent else "none"))
     lines.append("")
     return lines
 
 
-def _selection(
-    domains: Sequence[tuple[str, dict[int, dict[str, Any]]]], block_range: Sequence[int]
-) -> list[str]:
+def _selection(domains: Sequence[tuple[str, dict[int, dict[str, Any]]]], block_range: Sequence[int]) -> list[str]:
     low, high = int(block_range[0]), int(block_range[1])
     lines = ["## Selection", "", "| Domain | Winner | EPE | Next best | EPE |", "|---|---:|---:|---:|---:|"]
     for domain, records in domains:
-        ranked = sorted(
-            ((row["epe"], block) for block, row in records.items() if low <= block <= high)
-        )
+        ranked = sorted(((row["epe"], block) for block, row in records.items() if low <= block <= high))
         if not ranked:
             lines.append(f"| {domain} | n/a | n/a | n/a | n/a |")
             continue
@@ -199,11 +190,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.domains:
         names = list(args.domains)
     else:
-        names = sorted(
-            entry.name
-            for entry in root.iterdir()
-            if entry.is_dir() and any(entry.glob("block*.json"))
-        )
+        names = sorted(entry.name for entry in root.iterdir() if entry.is_dir() and any(entry.glob("block*.json")))
     if not names:
         raise SystemExit(f"{root}: no domain subdirectories with block*.json files")
     domains = []

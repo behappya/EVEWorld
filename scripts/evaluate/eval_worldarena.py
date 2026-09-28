@@ -173,9 +173,7 @@ def model_dirs(source: Path, model: str | None) -> list[tuple[str, Path]]:
     if metric_files(metric_dir(source)):
         metrics_dir = metric_dir(source)
         return [(model_name(metrics_dir, source), metrics_dir)]
-    names = sorted(
-        child.name for child in source.iterdir() if child.is_dir() and metric_files(metric_dir(child))
-    )
+    names = sorted(child.name for child in source.iterdir() if child.is_dir() and metric_files(metric_dir(child)))
     return [(name, metric_dir(source / name)) for name in names]
 
 
@@ -273,9 +271,7 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
         limit=args.limit,
         output=output,
         rows=rows,
-        command=" ".join(
-            shlex.quote(part) for part in ("python", "scripts/evaluate/eval_worldarena.py", *argv)
-        ),
+        command=" ".join(shlex.quote(part) for part in ("python", "scripts/evaluate/eval_worldarena.py", *argv)),
         dry_run=bool(args.dry_run),
     )
 

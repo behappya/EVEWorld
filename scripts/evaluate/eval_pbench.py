@@ -214,9 +214,7 @@ def is_pbench_record(record: Any) -> bool:
         return False
     if isinstance(record.get("qa_pairs"), list):
         return True
-    return "question" in record and any(
-        key in record for key in ("gold_answer", "answer", "pred_answer")
-    )
+    return "question" in record and any(key in record for key in ("gold_answer", "answer", "pred_answer"))
 
 
 def looks_like_pbench(path: Path) -> bool:
@@ -284,8 +282,7 @@ def tier_label(tier: Tier) -> str:
 
 def sort_tiers(tiers: Sequence[Tier]) -> list[Tier]:
     """Tiers in frame order, with the tiers of an unknown frame count last."""
-    return sorted(tiers, key=lambda tier: (tier.frames if tier.frames is not None else UNSORTED,
-                                           tier.directory.name))
+    return sorted(tiers, key=lambda tier: (tier.frames if tier.frames is not None else UNSORTED, tier.directory.name))
 
 
 def resolve_tiers(sweep: Path, scores_name: str | None) -> tuple[list[Tier], list[Path]]:
@@ -387,9 +384,7 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
         limit=args.limit,
         output=output,
         rows=rows,
-        command=" ".join(
-            shlex.quote(part) for part in ("python", "scripts/evaluate/eval_pbench.py", *argv)
-        ),
+        command=" ".join(shlex.quote(part) for part in ("python", "scripts/evaluate/eval_pbench.py", *argv)),
         dry_run=bool(args.dry_run),
     )
 
@@ -433,11 +428,7 @@ def mean_block(scored: Mapping[str, Any], frames: Sequence[int]) -> dict[str, An
     present = [frame for frame in frames if str(frame) in scored]
     block: dict[str, Any] = {"tiers": present}
     for metric in METRICS:
-        values = [
-            float(scored[str(frame)]["scores"][metric])
-            for frame in present
-            if scored[str(frame)]["scores"].get(metric) is not None
-        ]
+        values = [float(scored[str(frame)]["scores"][metric]) for frame in present if scored[str(frame)]["scores"].get(metric) is not None]
         block[metric] = round(sum(values) / len(values), 2) if values else None
     return block
 
@@ -448,10 +439,7 @@ def run_evaluation(plan: EvalPlan) -> tuple[dict[str, Any], list[dict[str, Any]]
 
     if not any(tier.score is not None for tier in plan.tiers):
         first = plan.searched[0] if plan.searched else plan.sweep
-        raise FileNotFoundError(
-            f"no PBench score file found; looked at {len(plan.searched)} locations "
-            f"starting from {first}"
-        )
+        raise FileNotFoundError(f"no PBench score file found; looked at {len(plan.searched)} locations " f"starting from {first}")
     scored: dict[str, Any] = {}
     rows: list[dict[str, Any]] = []
     for tier in plan.tiers:
@@ -483,11 +471,7 @@ def run_evaluation(plan: EvalPlan) -> tuple[dict[str, Any], list[dict[str, Any]]
         "weighting": plan.weighting,
         "records": len(rows),
         "tiers": scored,
-        "missing_tiers": [
-            {"frames": tier.frames, "dir": str(tier.directory)}
-            for tier in plan.tiers
-            if tier.score is None
-        ],
+        "missing_tiers": [{"frames": tier.frames, "dir": str(tier.directory)} for tier in plan.tiers if tier.score is None],
         "means": {
             "five_shortest": mean_block(scored, REPORTED_TIERS),
             "three_longest": mean_block(scored, LONG_TIERS),

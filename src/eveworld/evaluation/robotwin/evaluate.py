@@ -56,8 +56,16 @@ DEFAULT_OUTPUT = Path("aggregate/table5.json")
 PROTOCOL = "robotwin_table5_v1"
 VIDEO_SUFFIXES = (".mp4", ".mov", ".mkv", ".webm", ".avi")
 _CSV_HEADER = (
-    "Variant", "IGR", "TIA", "PSNR", "SSIM", "LPIPS", "Flow-EPE",
-    "MLR (%)", "MLR events", "MLR eligible",
+    "Variant",
+    "IGR",
+    "TIA",
+    "PSNR",
+    "SSIM",
+    "LPIPS",
+    "Flow-EPE",
+    "MLR (%)",
+    "MLR events",
+    "MLR eligible",
 )
 
 
@@ -204,8 +212,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if not args.pair:
         print(
-            "error: at least one --pair NAME=PRED_DIR:TARGET_DIR is required; NAME is one of "
-            + ", ".join(variant["name"] for variant in VARIANTS),
+            "error: at least one --pair NAME=PRED_DIR:TARGET_DIR is required; NAME is one of " + ", ".join(variant["name"] for variant in VARIANTS),
             file=sys.stderr,
         )
         return 2

@@ -188,9 +188,7 @@ class TIAHook:
         if self._handle is not None:
             raise RuntimeError("the TIA hook is already attached")
         if self.adapter is not None and getattr(self.adapter, "hook_handle", None) is not None:
-            raise RuntimeError(
-                "the TIA adapter is already attached to a block; call remove_adapter first"
-            )
+            raise RuntimeError("the TIA adapter is already attached to a block; call remove_adapter first")
         self._handle = module.register_forward_hook(self)
         if self.adapter is not None:
             self.adapter.hook_handle = self._handle
@@ -246,9 +244,7 @@ class TIAHook:
                 _check_flat(tensor, self.grid[0] * self.grid[1])
             self.targets = tensor[None]
             return
-        raise ValueError(
-            f"expected a (B, T, 2) cell annotation or its flat form, got {tuple(tensor.shape)}"
-        )
+        raise ValueError(f"expected a (B, T, 2) cell annotation or its flat form, got {tuple(tensor.shape)}")
 
     def reset(self) -> None:
         """Forget the features and losses seen so far; the targets stay set."""
@@ -877,10 +873,7 @@ def _latent_weight_map(
     rows, columns = int(grid[0]), int(grid[1])
     boxes = np.asarray(track.boxes, dtype=np.float64) / float(cell_size)
     finite = np.isfinite(boxes).all(axis=1)
-    paste = [
-        np.asarray(event.paste_box, dtype=np.float64).reshape(1, 4) / float(cell_size)
-        for event in events
-    ]
+    paste = [np.asarray(event.paste_box, dtype=np.float64).reshape(1, 4) / float(cell_size) for event in events]
     layers: list[np.ndarray] = []
     for latent in range(latent_frames(int(num_frames), int(temporal_stride))):
         start = latent * int(temporal_stride)
@@ -927,9 +920,7 @@ def _as_grid(grid: Sequence[int] | None) -> tuple[int, int] | None:
 def _check_flat(tensor: torch.Tensor, limit: int) -> None:
     """Raise if a flat target index does not fit into a grid of ``limit`` tokens."""
     if tensor.numel() and int(tensor.max()) >= int(limit):
-        raise ValueError(
-            f"flat target {int(tensor.max())} is outside the {int(limit)} tokens of the grid"
-        )
+        raise ValueError(f"flat target {int(tensor.max())} is outside the {int(limit)} tokens of the grid")
 
 
 def _takes_rng(transform: Any) -> bool:
@@ -1025,9 +1016,7 @@ def _resolve_block(model: Any, index: int) -> tuple[str, nn.Module]:
         node = getattr(model, scope, None)
         if node is None or node is model:
             continue
-        containers.extend(
-            (f"{scope}.{name}", container) for name, container in _containers(node)
-        )
+        containers.extend((f"{scope}.{name}", container) for name, container in _containers(node))
     for path, container in containers:
         block = _container_block(container, index, path, notes)
         if block is None:
@@ -1049,9 +1038,7 @@ def _resolve_block(model: Any, index: int) -> tuple[str, nn.Module]:
                 if tail[1] in (str(index), f"block{index}"):
                     return name, module
     if not containers and not notes:
-        raise TypeError(
-            f"no block container among {BLOCK_CONTAINERS} found on {type(model).__name__}"
-        )
+        raise TypeError(f"no block container among {BLOCK_CONTAINERS} found on {type(model).__name__}")
     detail = "; ".join(notes) if notes else f"no container held block {index}"
     raise ValueError(f"block {index} not found on {type(model).__name__}: {detail}")
 

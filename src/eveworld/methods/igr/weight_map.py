@@ -70,9 +70,7 @@ def normalize_unit_mean(weight_map: np.ndarray) -> np.ndarray:
     return array / mean
 
 
-def stamp_regions(
-    shape: tuple[int, int], regions: Iterable[Any], *, value: float = 1.0
-) -> np.ndarray:
+def stamp_regions(shape: tuple[int, int], regions: Iterable[Any], *, value: float = 1.0) -> np.ndarray:
     """Rasterize `regions` onto a zero canvas, writing `value` under their union.
 
     Args:

@@ -53,14 +53,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 from eveworld.integrations.flowwam.dataset import DEFAULT_SEED, collate_fn
-from eveworld.integrations.flowwam.hooks import (
-    IGRCollator,
-    _registration,
-    build_igr_transform,
-    inject_lora,
-    register_tia,
-    tia_injection,
-)
+from eveworld.integrations.flowwam.hooks import IGRCollator, _registration, build_igr_transform, inject_lora, register_tia, tia_injection
 from eveworld.integrations.flowwam.model import (
     CELL_SIZE,
     LATENT_CHANNELS,
@@ -153,10 +146,7 @@ def build_optimizer(
     """
     values = [parameter for parameter in parameters if parameter.requires_grad]
     if not values:
-        raise ValueError(
-            "no trainable parameter to optimise; build the model and the adapter before "
-            "calling build_optimizer"
-        )
+        raise ValueError("no trainable parameter to optimise; build the model and the adapter before " "calling build_optimizer")
     normalized = str(kind).strip().lower().replace("-", "").replace("_", "")
     if normalized in {value.replace("-", "").replace("_", "") for value in CAME_KINDS}:
         optimiser = _came_optimizer(values, lr=lr, weight_decay=weight_decay, betas=betas)
@@ -187,9 +177,7 @@ def _came_optimizer(
     if not callable(builder):
         builder = getattr(came_pytorch, "CAME", None)
     if not callable(builder):
-        logger.warning(
-            "came_pytorch exposes neither CAME8bit nor CAME; falling back to AdamW"
-        )
+        logger.warning("came_pytorch exposes neither CAME8bit nor CAME; falling back to AdamW")
         return None
     candidates: list[dict[str, Any]] = [
         {"lr": float(lr), "weight_decay": float(weight_decay), "betas": tuple(betas)},
@@ -319,9 +307,7 @@ class FlowWAMTrainer:
         self.config = _as_config(config)
         self.dataset = dataset
         self.output_dir = Path(str(output_dir)).expanduser()
-        self.device = torch.device(
-            device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
-        )
+        self.device = torch.device(device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu"))
         self.resume = None if resume is None else Path(str(resume)).expanduser()
         self.optimizer_kind = str(optimizer_kind)
         self.lr = float(lr)
@@ -358,22 +344,10 @@ class FlowWAMTrainer:
             }
         )
         defaults = TIAConfig()
-        self.layer_index = int(
-            layer_index
-            if layer_index is not None
-            else cfg_get(config, "method.layer", None) or self.config.block_index
-        )
-        self.window = int(
-            window if window is not None else cfg_get(config, "method.window", None) or defaults.window
-        )
-        self.temperature = float(
-            temperature
-            if temperature is not None
-            else cfg_get(config, "method.temperature", None) or defaults.temperature
-        )
-        self.gamma = float(
-            gamma if gamma is not None else cfg_get(config, "method.gamma", None) or defaults.gamma
-        )
+        self.layer_index = int(layer_index if layer_index is not None else cfg_get(config, "method.layer", None) or self.config.block_index)
+        self.window = int(window if window is not None else cfg_get(config, "method.window", None) or defaults.window)
+        self.temperature = float(temperature if temperature is not None else cfg_get(config, "method.temperature", None) or defaults.temperature)
+        self.gamma = float(gamma if gamma is not None else cfg_get(config, "method.gamma", None) or defaults.gamma)
         if self.layer_index < 0:
             raise ValueError(f"layer_index must be non-negative, got {self.layer_index}")
         if self.window < 1 or self.window % 2 == 0:
@@ -415,8 +389,7 @@ class FlowWAMTrainer:
         set_seed(self.seed)
         if self.dataset is None:
             raise ValueError(
-                "FlowWAMTrainer.train() needs a dataset; pass one to the constructor, or use "
-                "dry_run() to step the loop on synthetic clips"
+                "FlowWAMTrainer.train() needs a dataset; pass one to the constructor, or use " "dry_run() to step the loop on synthetic clips"
             )
         self._prepare()
         if self.resume is not None:
@@ -482,8 +455,7 @@ class FlowWAMTrainer:
             num_frames=int(num_frames) if num_frames is not None else SMOKE_FRAMES,
         )
         logger.warning(
-            "dry run: %d step(s) at the smoke geometry %dx%d with %d frames, not the %dx%d "
-            "with %d frames of the run",
+            "dry run: %d step(s) at the smoke geometry %dx%d with %d frames, not the %dx%d " "with %d frames of the run",
             count,
             smoke.width,
             smoke.height,
@@ -513,11 +485,7 @@ class FlowWAMTrainer:
                 self.optimizer = None
                 self._loaders_cache = None
             self._prepare(stand_in=allow_stand_in, config=smoke)
-            batch = (
-                self._synthetic_batch(smoke)
-                if self._stand_in or self.dataset is None
-                else next(self._stream())
-            )
+            batch = self._synthetic_batch(smoke) if self._stand_in or self.dataset is None else next(self._stream())
             losses = [self._step(_constant_stream(batch)) for _ in range(count)]
             parameters = self._parameters()
             summary = {
@@ -626,8 +594,7 @@ class FlowWAMTrainer:
             unexpected = list(getattr(report, "unexpected_keys", []))
             if missing or unexpected:
                 logger.warning(
-                    "checkpoint %s does not match the model exactly: %d missing and %d "
-                    "unexpected keys",
+                    "checkpoint %s does not match the model exactly: %d missing and %d " "unexpected keys",
                     target,
                     len(missing),
                     len(unexpected),
@@ -690,9 +657,7 @@ class FlowWAMTrainer:
                 logger.warning("latest.json points at %s, which is not there", recorded)
         if directory.is_dir():
             return _latest_checkpoint(directory)
-        raise FileNotFoundError(
-            f"no checkpoint to resume from: {latest} is missing and {directory} does not exist"
-        )
+        raise FileNotFoundError(f"no checkpoint to resume from: {latest} is missing and {directory} does not exist")
 
     def _prepare(self, *, stand_in: bool = False, config: Any = None) -> None:
         """Build the model, the LoRA adapters, the transport hook and the optimiser once."""
@@ -716,9 +681,7 @@ class FlowWAMTrainer:
                         if "lora" not in name.lower():
                             parameter.requires_grad_(False)
                 except (RuntimeError, ValueError) as error:
-                    logger.warning(
-                        "LoRA injection failed (%s); the run continues without adapters", error
-                    )
+                    logger.warning("LoRA injection failed (%s); the run continues without adapters", error)
         if self.adapter is None:
             self.adapter = self._build_adapter()
             mover = getattr(self.adapter, "to", None)
@@ -749,8 +712,7 @@ class FlowWAMTrainer:
             return
         except (ImportError, OSError, RuntimeError, FileNotFoundError) as error:
             logger.warning(
-                "the released FlowWAM backbone is not available (%s); the dry run continues "
-                "on the stand-in model at %dx%d with %d frames",
+                "the released FlowWAM backbone is not available (%s); the dry run continues " "on the stand-in model at %dx%d with %d frames",
                 error,
                 config.width,
                 config.height,
@@ -801,8 +763,7 @@ class FlowWAMTrainer:
         registration = _registration(self.model)
         if registration is None:
             raise RuntimeError(
-                f"no TIA registration was left on {type(self.model).__name__}; the hook of "
-                "block {self.layer_index} cannot be resolved"
+                f"no TIA registration was left on {type(self.model).__name__}; the hook of " "block {self.layer_index} cannot be resolved"
             )
         return registration["hook"]
 
@@ -847,10 +808,7 @@ class FlowWAMTrainer:
         if self._loaders_cache is not None:
             return self._loaders_cache
         if self.dataset is None:
-            raise ValueError(
-                "no dataset to stream from; pass one to the constructor, or use dry_run() to "
-                "step the loop on synthetic clips"
-            )
+            raise ValueError("no dataset to stream from; pass one to the constructor, or use dry_run() to " "step the loop on synthetic clips")
         collator = self.collator
         if collator is None:
             transform = self.transform
@@ -885,10 +843,7 @@ class FlowWAMTrainer:
     def _stream(self) -> Iterator[dict[str, Any]]:
         """Endless stream of mixed clean and disturbed batches, one per step."""
         clean, disturbed = self._loaders()
-        return (
-            mix_batches(clean_batch, igr_batch, p_dup=self.method.p_dup, rng=self.rng)
-            for clean_batch, igr_batch in zip(clean, disturbed)
-        )
+        return (mix_batches(clean_batch, igr_batch, p_dup=self.method.p_dup, rng=self.rng) for clean_batch, igr_batch in zip(clean, disturbed))
 
     def _step(self, stream: Iterator[Mapping[str, Any]]) -> dict[str, Any]:
         """One optimisation step: accumulate `grad_accum` micro-batches and update."""
@@ -935,9 +890,7 @@ class FlowWAMTrainer:
         else:
             with tia_injection(self.model):
                 output = self.model.forward(batch, generator=self.generator)
-        igr = self.model.igr_loss(
-            output["pred"], output["target"], output["weight_map"], output["sigma"]
-        )
+        igr = self.model.igr_loss(output["pred"], output["target"], output["weight_map"], output["sigma"])
         tia = self.hook.loss_tensor if int(self.hook.calls) != calls else None
         total, stats = self.objective(igr, tia, step=int(self.step), sigma=output["sigma"])
         (total / float(self.grad_accum)).backward()
@@ -1019,11 +972,7 @@ def _constant_stream(batch: Mapping[str, Any]) -> Iterator[Mapping[str, Any]]:
 
 def _mean_of(losses: Sequence[Mapping[str, Any]], key: str) -> float:
     """Mean of a numeric key over the steps of a dry run, `nan` when it was never set."""
-    values = [
-        float(entry[key])
-        for entry in losses
-        if isinstance(entry.get(key), (int, float)) and not isinstance(entry.get(key), bool)
-    ]
+    values = [float(entry[key]) for entry in losses if isinstance(entry.get(key), (int, float)) and not isinstance(entry.get(key), bool)]
     if not values:
         return float("nan")
     return float(sum(values) / len(values))
@@ -1048,11 +997,7 @@ def _mean_stats(entries: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         if key == "step":
             stats[key] = int(values[-1])
             continue
-        numbers = [
-            float(value)
-            for value in values
-            if isinstance(value, (int, float)) and not isinstance(value, bool)
-        ]
+        numbers = [float(value) for value in values if isinstance(value, (int, float)) and not isinstance(value, bool)]
         presented = [value for value in values if value is not None]
         if numbers and len(numbers) == len(presented):
             stats[key] = float(sum(numbers) / len(numbers))
@@ -1091,9 +1036,7 @@ class _StandInFlowDenoiser(nn.Module):
         self.channels = int(channels)
         hidden = int(channels) * int(patch) ** 2
         self.hidden_size = hidden
-        self.blocks = nn.ModuleDict(
-            {f"block{index}": _StandInFlowBlock(hidden) for index in range(int(blocks))}
-        )
+        self.blocks = nn.ModuleDict({f"block{index}": _StandInFlowBlock(hidden) for index in range(int(blocks))})
         self.projection = nn.Linear(hidden, hidden)
 
     def forward(
@@ -1237,9 +1180,7 @@ class _StandInFlowModel(nn.Module):
         generator: torch.Generator | None = None,
     ) -> torch.Tensor:
         """Draw the shifted-linear noise level of a batch, as the release trains with it."""
-        return FlowWAMModel.sample_sigma(
-            self, batch_size, device=device, dtype=dtype, generator=generator
-        )
+        return FlowWAMModel.sample_sigma(self, batch_size, device=device, dtype=dtype, generator=generator)
 
     def igr_loss(
         self,
@@ -1270,18 +1211,12 @@ class _StandInFlowModel(nn.Module):
         source_video = _first_value(batch, ("corrected", "video_corrected", "igr_video"))
         source = target if source_video is None else _as_rank5(self.encode_video(source_video))
         batch_size = int(target.shape[0])
-        sigma = self.sample_sigma(
-            batch_size, device=target.device, dtype=torch.float32, generator=generator
-        )
+        sigma = self.sample_sigma(batch_size, device=target.device, dtype=torch.float32, generator=generator)
         level = _batch_sigma(sigma).to(device=target.device, dtype=target.dtype)
-        noise = _randn(
-            target.shape, generator=generator, device=target.device, dtype=target.dtype
-        )
+        noise = _randn(target.shape, generator=generator, device=target.device, dtype=target.dtype)
         noisy = _pin_first_frame((1.0 - level) * source + level * noise, source)
         if context is None:
-            context = self.encode_text(
-                _batch_captions(batch, batch_size), positive=True, device=target.device
-            )
+            context = self.encode_text(_batch_captions(batch, batch_size), positive=True, device=target.device)
         timestep = sigma.reshape(-1) * 1000.0
         velocity = self.denoiser(noisy, timestep=timestep, context=context)
         return {

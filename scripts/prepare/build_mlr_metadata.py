@@ -98,13 +98,9 @@ TARGET_FRAMES = (
 # both arms, or nothing is manipulated at all.
 ROBOT_BASE_RE = re.compile(r"^(?:Advance|Back|Drive|Shift|Turn|Move|Rotate) the robot base\b")
 NO_ARM_RE = re.compile(
-    r"^(?:Keep|Wait|Do not|Let|Observe|Inspect|Leave|Watch|Repeat|Follow|Nothing|Open)\b"
-    r"|^(?:Pick|Take|Grab) (?:up )?(?:whichever|whatever|any)\b"
+    r"^(?:Keep|Wait|Do not|Let|Observe|Inspect|Leave|Watch|Repeat|Follow|Nothing|Open)\b" r"|^(?:Pick|Take|Grab) (?:up )?(?:whichever|whatever|any)\b"
 )
-TWO_HAND_RE = re.compile(
-    r"^(?:Hand|Clear|Rearrange|Tidy|Arrange|Line|Push|Pair|Sort|Stack|Collect|Group)\b"
-    r"|^Move everything\b"
-)
+TWO_HAND_RE = re.compile(r"^(?:Hand|Clear|Rearrange|Tidy|Arrange|Line|Push|Pair|Sort|Stack|Collect|Group)\b" r"|^Move everything\b")
 TRAIN_HEADER = (
     "# WorldArena 1.0 protocol calibration manifest.",
     "#",
@@ -198,9 +194,7 @@ def manifest_path(root: Path) -> Path:
     found = sorted(path for path in root.rglob("*") if path.is_file() and path.name in SUMMARY_NAMES)
     if found:
         return found[0]
-    raise FileNotFoundError(
-        f"no WorldArena manifest below {root}: expected one of {', '.join(SUMMARY_NAMES)}"
-    )
+    raise FileNotFoundError(f"no WorldArena manifest below {root}: expected one of {', '.join(SUMMARY_NAMES)}")
 
 
 def load_requests(path: Path) -> list[Any]:
@@ -345,29 +339,25 @@ def prepare(args: argparse.Namespace, data_root: Path, output_dir: Path) -> int:
     if args.limit is None:
         if len(requests) != REQUEST_COUNT:
             print(
-                f"error: the manifest holds {len(requests)} requests, the protocol uses "
-                f"{REQUEST_COUNT}: {manifest}",
+                f"error: the manifest holds {len(requests)} requests, the protocol uses " f"{REQUEST_COUNT}: {manifest}",
                 file=sys.stderr,
             )
             return 1
         if eligibility["num_eligible"] != ELIGIBLE_COUNT:
             print(
-                f"error: parsed {eligibility['num_eligible']} eligible requests, the protocol "
-                f"publishes {ELIGIBLE_COUNT}",
+                f"error: parsed {eligibility['num_eligible']} eligible requests, the protocol " f"publishes {ELIGIBLE_COUNT}",
                 file=sys.stderr,
             )
             return 1
         if eligibility["num_resolved"] != RESOLVED_COUNT:
             print(
-                f"error: parsed {eligibility['num_resolved']} requests with a manipulator, the "
-                f"protocol publishes {RESOLVED_COUNT}",
+                f"error: parsed {eligibility['num_resolved']} requests with a manipulator, the " f"protocol publishes {RESOLVED_COUNT}",
                 file=sys.stderr,
             )
             return 1
         if len(train) != CALIBRATION_COUNT:
             print(
-                f"error: the calibration slice holds {len(train)} requests, the protocol uses "
-                f"{CALIBRATION_COUNT}",
+                f"error: the calibration slice holds {len(train)} requests, the protocol uses " f"{CALIBRATION_COUNT}",
                 file=sys.stderr,
             )
             return 1
@@ -379,14 +369,13 @@ def prepare(args: argparse.Namespace, data_root: Path, output_dir: Path) -> int:
     print(f"manifest:     {manifest} ({len(requests)} requests)")
     print(f"output dir:   {output_dir}")
     print(f"targets:      {targets} requests name a manipulated object, {len(records) - targets} do not")
-    print(f"movers:       {BOTH_GRIPPERS} {movers[BOTH_GRIPPERS]}, {ROBOT_BASE} {movers[ROBOT_BASE]}, "
-          f"none {movers[None]}")
-    print(f"unresolved:   {unresolved} requests act with a single arm the instruction does not name, "
-          f"recorded as {DEFAULT_MOVER}")
-    print(f"eligible:     {eligibility['num_eligible']} of {eligibility['num_resolved']} requests "
-          f"with a manipulator (coverage {eligibility['coverage']:.2f}%)")
-    print(f"calibration:  {len(train)} requests, every {CALIBRATION_STRIDE}rd manifest row from "
-          f"row {CALIBRATION_OFFSET + 1}")
+    print(f"movers:       {BOTH_GRIPPERS} {movers[BOTH_GRIPPERS]}, {ROBOT_BASE} {movers[ROBOT_BASE]}, " f"none {movers[None]}")
+    print(f"unresolved:   {unresolved} requests act with a single arm the instruction does not name, " f"recorded as {DEFAULT_MOVER}")
+    print(
+        f"eligible:     {eligibility['num_eligible']} of {eligibility['num_resolved']} requests "
+        f"with a manipulator (coverage {eligibility['coverage']:.2f}%)"
+    )
+    print(f"calibration:  {len(train)} requests, every {CALIBRATION_STRIDE}rd manifest row from " f"row {CALIBRATION_OFFSET + 1}")
 
     metadata = output_dir / "metadata" / "worldarena"
     splits = output_dir / "splits" / "worldarena"
@@ -398,8 +387,7 @@ def prepare(args: argparse.Namespace, data_root: Path, output_dir: Path) -> int:
     if args.dry_run:
         print("dry run: no file written")
         return 0
-    print(f"wrote {metadata}/parsed_targets.json, {metadata}/eligible_ids.json, "
-          f"{splits}/train.txt and {splits}/eval.txt")
+    print(f"wrote {metadata}/parsed_targets.json, {metadata}/eligible_ids.json, " f"{splits}/train.txt and {splits}/eval.txt")
     return 0
 
 

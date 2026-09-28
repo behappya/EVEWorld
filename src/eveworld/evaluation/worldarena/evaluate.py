@@ -92,13 +92,8 @@ def load_scores(path: str | Path, model: str | None = None) -> dict[str, Any]:
         rows, counts = _read_directory(directory, name)
         records.extend(rows)
         coverage[name] = counts
-    videos = {
-        name: len({row["request_id"] for row in records if _model_of(row) == name})
-        for name in coverage
-    }
-    logger.debug(
-        "read %d WorldArena clips over %d models from %s", len(records), len(coverage), source
-    )
+    videos = {name: len({row["request_id"] for row in records if _model_of(row) == name}) for name in coverage}
+    logger.debug("read %d WorldArena clips over %d models from %s", len(records), len(coverage), source)
     return {
         "path": str(source),
         "models": sorted(coverage),
@@ -155,9 +150,7 @@ def main(argv: list[str] | None = None) -> int:
         prog="eveworld.evaluation.worldarena.evaluate",
         description="Summarize WorldArena core-8 metric files into the paper's Table 3 columns.",
     )
-    parser.add_argument(
-        "--input", type=Path, required=True, help="evaluation root, metric directory or metric file"
-    )
+    parser.add_argument("--input", type=Path, required=True, help="evaluation root, metric directory or metric file")
     parser.add_argument("--model", default=None, help="model directory under the evaluation root")
     parser.add_argument("--output", type=Path, default=None, help="summary JSON to write")
     parser.add_argument("--rows", type=Path, default=None, help="per-clip records to write as JSONL")
@@ -199,9 +192,7 @@ def _result_dirs(source: Path, model: str | None) -> list[tuple[str, Path]]:
     if _holds_metrics(source):
         metrics_dir = _metric_dir(source)
         return [(_model_name(metrics_dir, source), metrics_dir)]
-    names = sorted(
-        child.name for child in source.iterdir() if child.is_dir() and _holds_metrics(child)
-    )
+    names = sorted(child.name for child in source.iterdir() if child.is_dir() and _holds_metrics(child))
     if not names:
         raise FileNotFoundError(f"no WorldArena metric files under {source}")
     return [(name, _metric_dir(source / name)) for name in names]
@@ -291,9 +282,7 @@ def _table(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     summary["overall"] = round(sum(covered) / len(covered), 4) if covered else None
     summary["rows"] = len(rows)
     summary["videos"] = len({str(row.get("request_id") or "") for row in rows})
-    summary["coverage"] = {
-        metric: sum(1 for row in rows if _is_number(row.get(metric))) for metric in CORE_METRICS
-    }
+    summary["coverage"] = {metric: sum(1 for row in rows if _is_number(row.get(metric))) for metric in CORE_METRICS}
     return summary
 
 

@@ -40,7 +40,7 @@ import re
 import statistics
 import sys
 from pathlib import Path
-from typing import Any, Sequence
+from typing import Sequence
 
 __all__ = ["main", "load_seed", "step_name", "summarise"]
 
@@ -133,10 +133,7 @@ def _table(steps: Sequence[int], rows: Sequence[tuple[int, str, list[float]]]) -
             lines.append(f"| {step} | {metric} | 0 | n/a | n/a | n/a |")
             continue
         mean, deviation, half_width = summarise(values)
-        lines.append(
-            f"| {step} | {metric} | {len(values)} | {_fmt(mean)} "
-            f"| {_fmt(deviation)} | {_fmt(half_width)} |"
-        )
+        lines.append(f"| {step} | {metric} | {len(values)} | {_fmt(mean)} " f"| {_fmt(deviation)} | {_fmt(half_width)} |")
     return "\n".join(lines)
 
 

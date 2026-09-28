@@ -67,8 +67,10 @@ def _streaks(active: np.ndarray) -> np.ndarray:
 
 
 def detect_events(
-    deviations: Sequence[Any] | np.ndarray, exemptions: Sequence[Any] | np.ndarray | None = None,
-    *, k: int = 2,
+    deviations: Sequence[Any] | np.ndarray,
+    exemptions: Sequence[Any] | np.ndarray | None = None,
+    *,
+    k: int = 2,
 ) -> np.ndarray:
     """Vectorised persistence filter.
 
@@ -152,11 +154,7 @@ class PersistenceTracker:
             :class:`PersistenceResult` with the ``(T,)`` event, deviation and streak arrays.
         """
         active = _effective(deviations, exemptions)
-        skip = (
-            np.zeros(active.shape, dtype=bool)
-            if exemptions is None
-            else np.asarray(exemptions, dtype=bool)
-        )
+        skip = np.zeros(active.shape, dtype=bool) if exemptions is None else np.asarray(exemptions, dtype=bool)
         self.reset()
         for position, value in enumerate(np.asarray(deviations, dtype=bool)):
             self.update(bool(value), exempt=bool(skip[position]))

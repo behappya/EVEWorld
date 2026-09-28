@@ -138,9 +138,7 @@ def aggregate(rows: Sequence[Mapping[str, Any]], *, weighting: str = "sample") -
     items = [_score_row(row) if "is_correct" not in row else dict(row) for row in rows]
     by_sample = _group_by_sample(items)
 
-    summary: dict[str, Any] = {
-        metric: _metric_accuracy(by_sample, metric, weighting) for metric in METRICS
-    }
+    summary: dict[str, Any] = {metric: _metric_accuracy(by_sample, metric, weighting) for metric in METRICS}
     summary["weighting"] = weighting
     summary["samples"] = len(by_sample)
     summary["questions"] = len(items)

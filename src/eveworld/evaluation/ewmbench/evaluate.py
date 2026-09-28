@@ -92,9 +92,7 @@ def load_scores(path: str | Path, model: str | None = None) -> dict[str, Any]:
     """
     source = Path(path)
     if not source.is_file():
-        raise FileNotFoundError(
-            f"no EWMBench result CSV at {source}; run the official EWMBench toolkit first"
-        )
+        raise FileNotFoundError(f"no EWMBench result CSV at {source}; run the official EWMBench toolkit first")
 
     lines: list[list[str]] = []
     with source.open("r", newline="", encoding="utf-8-sig") as handle:

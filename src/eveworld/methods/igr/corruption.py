@@ -22,24 +22,9 @@ from typing import TYPE_CHECKING, Any, Sequence
 import numpy as np
 from numpy.lib.stride_tricks import sliding_window_view
 
-from eveworld.methods.igr.paste_region import (
-    STRIDE,
-    _as_rng,
-    _box_slices,
-    blend_patch,
-    paste_box_region,
-    select_paste_region,
-)
-from eveworld.methods.igr.trajectory import (
-    Track,
-    interaction_box,
-    most_reliable_frame,
-)
-from eveworld.methods.igr.weight_map import (
-    BACKGROUND,
-    build_weight_map,
-    support_mask,
-)
+from eveworld.methods.igr.paste_region import STRIDE, _as_rng, _box_slices, blend_patch, paste_box_region, select_paste_region
+from eveworld.methods.igr.trajectory import Track, interaction_box, most_reliable_frame
+from eveworld.methods.igr.weight_map import BACKGROUND, build_weight_map, support_mask
 
 if TYPE_CHECKING:
     from eveworld.data.parsers.instruction_parser import ParsedInstruction
@@ -299,11 +284,7 @@ def interaction_region(track: Track, event: IGREvent, shape: Sequence[int]) -> n
         np.asarray(event.target_box, dtype=np.float64),
         np.asarray(event.paste_box, dtype=np.float64),
     ]
-    usable = [
-        box
-        for box in candidates
-        if np.asarray(box).reshape(-1).size == 4 and np.isfinite(np.asarray(box)).all()
-    ]
+    usable = [box for box in candidates if np.asarray(box).reshape(-1).size == 4 and np.isfinite(np.asarray(box)).all()]
     if not usable:
         return np.asarray([0.0, 0.0, float(width), float(height)], dtype=np.float32)
     stack = np.stack([np.asarray(box, dtype=np.float64).reshape(4) for box in usable])
@@ -394,13 +375,7 @@ def build_sample(
         disturbed, event = insert_duplicate(clip, track, region)
     else:
         disturbed, event = relocate_instance(clip, track, region)
-    details["candidate_count"] = int(
-        np.asarray(
-            _admissible(
-                source_box, obstacle, clip.shape[1:3], occupancy_map, stride
-            )
-        ).shape[0]
-    )
+    details["candidate_count"] = int(np.asarray(_admissible(source_box, obstacle, clip.shape[1:3], occupancy_map, stride)).shape[0])
     details.update(
         {
             "kind": event.kind,
@@ -430,9 +405,7 @@ def _admissible(
     """Admissible regions for the metadata count of :func:`build_sample`."""
     from eveworld.methods.igr.paste_region import admissible_regions
 
-    return admissible_regions(
-        target_box, occupied, shape, occupancy_map=occupancy_map, stride=stride
-    )
+    return admissible_regions(target_box, occupied, shape, occupancy_map=occupancy_map, stride=stride)
 
 
 def _trajectory_boxes(track: Track) -> np.ndarray:
@@ -500,14 +473,10 @@ def _median_patch(frame: np.ndarray, box: np.ndarray, kernel: int) -> np.ndarray
         return None
     kernel_y = _odd(side, patch.shape[0])
     kernel_x = _odd(side, patch.shape[1])
-    padded = np.pad(
-        patch, ((kernel_y // 2, kernel_y // 2), (kernel_x // 2, kernel_x // 2), (0, 0)), mode="edge"
-    )
+    padded = np.pad(patch, ((kernel_y // 2, kernel_y // 2), (kernel_x // 2, kernel_x // 2), (0, 0)), mode="edge")
     view = sliding_window_view(padded, (kernel_y, kernel_x, 1), axis=(0, 1, 2))
     filtered = np.median(view, axis=(-3, -2, -1))
-    return filtered[
-        rows.start - top : rows.stop - top, columns.start - left : columns.stop - left
-    ].astype(frame.dtype)
+    return filtered[rows.start - top : rows.stop - top, columns.start - left : columns.stop - left].astype(frame.dtype)
 
 
 def _odd(side: int, available: int) -> int:
@@ -538,9 +507,7 @@ def _paste_box(region: np.ndarray, shape: Sequence[int]) -> np.ndarray:
     x0, x1 = max(0, min(x0, width)), max(0, min(x1, width))
     y0, y1 = max(0, min(y0, height)), max(0, min(y1, height))
     if x1 <= x0 or y1 <= y0:
-        raise ValueError(
-            f"Paste region {box.tolist()} is empty once rounded and clipped to {(height, width)}"
-        )
+        raise ValueError(f"Paste region {box.tolist()} is empty once rounded and clipped to {(height, width)}")
     return np.asarray([x0, y0, x1, y1], dtype=np.float32)
 
 

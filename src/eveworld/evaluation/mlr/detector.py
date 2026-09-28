@@ -557,9 +557,7 @@ class InstanceCounter:
         """Count the independent instances of ``prompt`` on a single frame."""
         object_topk = self.object_topk if topk is None else int(topk)
         obj_dets = self.detect(frame, prompt, topk=object_topk, box_threshold=box_threshold)[0]
-        robot_dets = self.detect(
-            frame, self.robot_prompt, topk=self.robot_topk, box_threshold=self.robot_box_threshold
-        )[0]
+        robot_dets = self.detect(frame, self.robot_prompt, topk=self.robot_topk, box_threshold=self.robot_box_threshold)[0]
         return count_valid_instances(
             obj_dets,
             robot_dets,
@@ -579,9 +577,7 @@ class InstanceCounter:
             ``(T,)`` int64 counts, one per input frame.
         """
         obj_dets = self.detect(frames, prompt, box_threshold=box_threshold)
-        robot_dets = self.detect(
-            frames, self.robot_prompt, topk=self.robot_topk, box_threshold=self.robot_box_threshold
-        )
+        robot_dets = self.detect(frames, self.robot_prompt, topk=self.robot_topk, box_threshold=self.robot_box_threshold)
         if len(robot_dets) == 1 and len(obj_dets) > 1:
             robot_dets = robot_dets * len(obj_dets)
         counts = [

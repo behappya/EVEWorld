@@ -95,8 +95,7 @@ _TRAILING_PARTICLE_RE = re.compile(r"\s+(?:" + "|".join(_PARTICLES) + r")$")
 _DIRECTIONAL_RE = re.compile(r"\s+(?:" + "|".join(_DIRECTIONAL_ADVERBS) + r")\s+.*$")
 _DETERMINER_RE = re.compile(r"^(?:" + "|".join(_DETERMINERS) + r")\s+")
 _WAIT_RE = re.compile(
-    r"^(?:until|till|for)\s+(?P<object>.+?)"
-    r"(?:\s+(?:(?:to\s+)?(?:stops?|ceases?|settles?|comes?|remains?|reaches?)|is|are)\b.*)?$"
+    r"^(?:until|till|for)\s+(?P<object>.+?)" r"(?:\s+(?:(?:to\s+)?(?:stops?|ceases?|settles?|comes?|remains?|reaches?)|is|are)\b.*)?$"
 )
 _PUNCTUATION = " \t\r\n.,;:!?\"'"
 
@@ -268,9 +267,7 @@ def _normalize_body(body: str) -> str:
         text = stripped
 
 
-def _find_marker(
-    body: str, markers: frozenset[str] | None = None
-) -> tuple[str, str | None, str]:
+def _find_marker(body: str, markers: frozenset[str] | None = None) -> tuple[str, str | None, str]:
     """Split `body` at its first spatial marker into `(head, marker, tail)`.
 
     Without a marker the whole body is the head and the marker is `None`. `markers`

@@ -160,10 +160,7 @@ class GigaWorldConfig:
     def __post_init__(self) -> None:
         self.variant = str(self.variant).strip().lower()
         if self.variant not in _VARIANT_PRESETS:
-            raise ValueError(
-                f"Unknown GigaWorld-0 variant {self.variant!r}; expected one of "
-                f"{sorted(_VARIANT_PRESETS)}"
-            )
+            raise ValueError(f"Unknown GigaWorld-0 variant {self.variant!r}; expected one of " f"{sorted(_VARIANT_PRESETS)}")
         for name, value in _VARIANT_PRESETS[self.variant].items():
             if getattr(self, name) is None:
                 setattr(self, name, value)
@@ -560,9 +557,7 @@ class GigaWorldModel:
         size = int(batch_size)
         if size < 1:
             raise ValueError(f"batch_size must be positive, got {batch_size}")
-        noise = torch.randn(
-            size, generator=generator, device=device or self.device, dtype=torch.float32
-        )
+        noise = torch.randn(size, generator=generator, device=device or self.device, dtype=torch.float32)
         levels = torch.exp(EDM_P_MEAN + EDM_P_STD * noise)
         return levels.to(dtype=dtype or self.dtype)
 
@@ -619,9 +614,7 @@ class GigaWorldModel:
             )
             return sampled[0] if unbatched else sampled
         levels = _sigma_like(sigma, tensor.shape[0], tensor.device)
-        estimate = self._denoise_at(
-            tensor, context, levels, cfg_scale=float(cfg_scale), negative_context=negative_context, fps=rate
-        )
+        estimate = self._denoise_at(tensor, context, levels, cfg_scale=float(cfg_scale), negative_context=negative_context, fps=rate)
         return estimate[0] if unbatched else estimate
 
     def forward(
@@ -683,9 +676,7 @@ class GigaWorldModel:
             "noise": noise,
         }
 
-    def igr_loss(
-        self, pred: Any, target: Any, weight_map: Any, sigma: Any, *, sigma_data: float = SIGMA_DATA
-    ) -> torch.Tensor:
+    def igr_loss(self, pred: Any, target: Any, weight_map: Any, sigma: Any, *, sigma_data: float = SIGMA_DATA) -> torch.Tensor:
         """The `L_IGR` restoration term of `eq:pipeline` for one batch.
 
         The weight map lives on the `16 px` cell grid of the annotations while the latent
@@ -765,11 +756,7 @@ class GigaWorldModel:
         )
         accepted = _signature_names(callable_)
         free = "**kwargs" in accepted
-        kwargs = {
-            name: value
-            for name, value in wants
-            if value is not None and (free or name in accepted)
-        }
+        kwargs = {name: value for name, value in wants if value is not None and (free or name in accepted)}
         logger.info("sampling %d frames in %d steps at cfg %.1f", frames, steps, scale)
         output = callable_(**kwargs)
         return _as_frames(output)
@@ -828,9 +815,7 @@ class GigaWorldModel:
         c_out = coefficient["c_out"].view(-1, 1, 1, 1, 1)
         return c_skip * latents + c_out * raw
 
-    def _call_denoiser(
-        self, latents: torch.Tensor, levels: torch.Tensor, context: Any, *, fps: float | None
-    ) -> torch.Tensor:
+    def _call_denoiser(self, latents: torch.Tensor, levels: torch.Tensor, context: Any, *, fps: float | None) -> torch.Tensor:
         """Call the denoiser with the argument names of its own signature.
 
         Raises:
@@ -880,9 +865,7 @@ class GigaWorldModel:
             output = encoder(list(texts))
         return _first_tensor(output)
 
-    def _encode_with_text_encoder(
-        self, texts: Sequence[str], negatives: Sequence[str] | None
-    ) -> tuple[torch.Tensor, torch.Tensor | None]:
+    def _encode_with_text_encoder(self, texts: Sequence[str], negatives: Sequence[str] | None) -> tuple[torch.Tensor, torch.Tensor | None]:
         """Encode prompts with the pipeline's own text encoder and tokenizer."""
         encoder = self._optional("text_encoder", self._text_encoder)
         tokenizer = self._optional("tokenizer", self._tokenizer)
@@ -958,9 +941,7 @@ def _infer_variant(cfg: Any) -> str:
     declared = cfg_get(cfg, "model.variant")
     if declared is not None:
         return str(declared)
-    haystack = " ".join(
-        str(cfg_get(cfg, key, "") or "") for key in ("name", "data.split", "data.metadata", "output_dir")
-    ).lower()
+    haystack = " ".join(str(cfg_get(cfg, key, "") or "") for key in ("name", "data.split", "data.metadata", "output_dir")).lower()
     return "agibot" if "agibot" in haystack else "dreamgen"
 
 
@@ -981,9 +962,7 @@ def _as_config(config: Any = None, **overrides: Any) -> GigaWorldConfig:
         else:
             base = GigaWorldConfig(**{str(key): value for key, value in config.items()})
     else:
-        raise TypeError(
-            f"config must be a GigaWorldConfig, a mapping or None, got {type(config).__name__}"
-        )
+        raise TypeError(f"config must be a GigaWorldConfig, a mapping or None, got {type(config).__name__}")
     return replace(base, **overrides) if overrides else base
 
 
@@ -998,10 +977,7 @@ def _as_resolution(value: Any) -> tuple[int, int]:
     if width <= 0 or height <= 0:
         raise ValueError(f"resolution must be positive, got {(width, height)}")
     if width % CELL_SIZE or height % CELL_SIZE:
-        raise ValueError(
-            f"resolution {(width, height)} must be a multiple of the {CELL_SIZE} px cell size "
-            "of the backbone token grid"
-        )
+        raise ValueError(f"resolution {(width, height)} must be a multiple of the {CELL_SIZE} px cell size " "of the backbone token grid")
     return width, height
 
 
@@ -1083,9 +1059,7 @@ def _as_video_batch(video: Any) -> torch.Tensor:
     elif tensor.ndim == 5 and tensor.shape[-1] == 3:
         tensor = tensor.permute(0, 4, 1, 2, 3)
     if tensor.ndim != 5 or tensor.shape[1] != 3:
-        raise ValueError(
-            f"Expected (T, H, W, 3) frames, a (C, T, H, W) clip or a batch, got {tuple(tensor.shape)}"
-        )
+        raise ValueError(f"Expected (T, H, W, 3) frames, a (C, T, H, W) clip or a batch, got {tuple(tensor.shape)}")
     return _to_unit_range(tensor)
 
 
@@ -1117,9 +1091,7 @@ def _encode_clip(vae: Any, clip: torch.Tensor) -> torch.Tensor:
     """
     encoder = getattr(vae, "encode", None) or getattr(vae, "encode_", None)
     if not callable(encoder):
-        raise RuntimeError(
-            "the video VAE exposes neither encode() nor encode_(); pass vae=... to GigaWorldModel"
-        )
+        raise RuntimeError("the video VAE exposes neither encode() nor encode_(); pass vae=... to GigaWorldModel")
     with torch.no_grad():
         try:
             output = encoder(clip[None], return_dict=False)
@@ -1174,9 +1146,7 @@ def _as_frames(output: Any) -> np.ndarray:
     return np.round(array * 255.0).astype(np.uint8).transpose(1, 2, 3, 0)
 
 
-def _encode_with_tokenizer(
-    encoder: Any, tokenizer: Any, texts: Sequence[str], device: torch.device
-) -> torch.Tensor:
+def _encode_with_tokenizer(encoder: Any, tokenizer: Any, texts: Sequence[str], device: torch.device) -> torch.Tensor:
     """Encode prompts with a tokenizer and a text encoder."""
     accepted = _signature_names(tokenizer)
     kwargs: dict[str, Any] = {"return_tensors": "pt"}
@@ -1201,9 +1171,7 @@ def _generator_callable(pipeline: Any) -> Any:
             return candidate
     if callable(pipeline):
         return pipeline
-    raise RuntimeError(
-        f"the GigaWorld-0 pipeline exposes no sampling callable; it carries {_public_names(pipeline)}"
-    )
+    raise RuntimeError(f"the GigaWorld-0 pipeline exposes no sampling callable; it carries {_public_names(pipeline)}")
 
 
 def _signature_names(function: Any) -> frozenset[str]:
@@ -1242,15 +1210,11 @@ def _preconditioning(levels: torch.Tensor, dtype: torch.dtype) -> dict[str, torc
     }
 
 
-def _edm_schedule(
-    num_steps: int, *, sigma_min: float = 0.002, sigma_max: float = 80.0, rho: float = 7.0
-) -> torch.Tensor:
+def _edm_schedule(num_steps: int, *, sigma_min: float = 0.002, sigma_max: float = 80.0, rho: float = 7.0) -> torch.Tensor:
     """EDM noise schedule, `num_steps + 1` levels from `sigma_max` down to zero."""
     steps = torch.arange(int(num_steps), dtype=torch.float64)
     ramp = steps / max(int(num_steps) - 1, 1)
-    levels = (
-        sigma_max ** (1.0 / rho) + ramp * (sigma_min ** (1.0 / rho) - sigma_max ** (1.0 / rho))
-    ) ** rho
+    levels = (sigma_max ** (1.0 / rho) + ramp * (sigma_min ** (1.0 / rho) - sigma_max ** (1.0 / rho))) ** rho
     return torch.cat((levels, torch.zeros(1, dtype=torch.float64))).to(torch.float32)
 
 

@@ -11,7 +11,7 @@ import os
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Sequence
+from typing import Any
 
 import numpy as np
 
@@ -73,9 +73,7 @@ class TrackResult:
         }
 
 
-def associate_boxes(
-    previous: np.ndarray, current: np.ndarray, iou_threshold: float = 0.5
-) -> np.ndarray:
+def associate_boxes(previous: np.ndarray, current: np.ndarray, iou_threshold: float = 0.5) -> np.ndarray:
     """Match boxes of two consecutive frames by greedy IoU maximisation.
 
     Candidate pairs are visited from the highest IoU down, ties broken by box order, and every box is
@@ -135,10 +133,7 @@ class Sam2Tracker:
     ) -> None:
         resolved = str(checkpoint) if checkpoint else os.environ.get(CHECKPOINT_ENV_VAR)
         if not resolved:
-            raise RuntimeError(
-                "A SAM2 checkpoint is required; pass it explicitly or set the "
-                f"{CHECKPOINT_ENV_VAR} environment variable."
-            )
+            raise RuntimeError("A SAM2 checkpoint is required; pass it explicitly or set the " f"{CHECKPOINT_ENV_VAR} environment variable.")
         if not Path(resolved).is_file():
             raise FileNotFoundError(f"SAM2 checkpoint {resolved!r} is not an existing file")
 
@@ -226,12 +221,8 @@ def _iou_matrix(previous: np.ndarray, current: np.ndarray) -> np.ndarray:
     right = np.minimum(previous[:, None, 2], current[None, :, 2])
     bottom = np.minimum(previous[:, None, 3], current[None, :, 3])
     intersection = np.clip(right - left, 0.0, None) * np.clip(bottom - top, 0.0, None)
-    previous_area = np.clip(previous[:, 2] - previous[:, 0], 0.0, None) * np.clip(
-        previous[:, 3] - previous[:, 1], 0.0, None
-    )
-    current_area = np.clip(current[:, 2] - current[:, 0], 0.0, None) * np.clip(
-        current[:, 3] - current[:, 1], 0.0, None
-    )
+    previous_area = np.clip(previous[:, 2] - previous[:, 0], 0.0, None) * np.clip(previous[:, 3] - previous[:, 1], 0.0, None)
+    current_area = np.clip(current[:, 2] - current[:, 0], 0.0, None) * np.clip(current[:, 3] - current[:, 1], 0.0, None)
     union = previous_area[:, None] + current_area[None, :] - intersection
     return np.where(union > 0.0, intersection / np.where(union > 0.0, union, 1.0), 0.0)
 
@@ -390,9 +381,7 @@ def _as_uint8_frames(frames: Any) -> np.ndarray:
     if array.ndim == 3:
         array = array[None]
     if array.ndim != 4:
-        raise ValueError(
-            f"expected frames shaped (T, H, W, 3), (H, W, 3) or (C, T, H, W), got {array.shape}"
-        )
+        raise ValueError(f"expected frames shaped (T, H, W, 3), (H, W, 3) or (C, T, H, W), got {array.shape}")
     if array.shape[-1] != 3:
         array = np.transpose(array, (1, 2, 3, 0))
     if array.shape[-1] != 3:

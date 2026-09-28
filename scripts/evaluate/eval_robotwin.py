@@ -235,9 +235,7 @@ def load_entries(metadata: Path) -> dict[str, Any]:
         if not candidate.is_file():
             continue
         document = read_json(candidate)
-        if isinstance(document, dict) and any(
-            isinstance(entry, dict) for entry in document.values()
-        ):
+        if isinstance(document, dict) and any(isinstance(entry, dict) for entry in document.values()):
             return {str(key): entry for key, entry in document.items()}
     return {}
 
@@ -330,15 +328,9 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
     protocol: dict[str, Any] = {
         "protocol": PROTOCOL,
         "metrics": list(metric_names(args, config)),
-        "ssim_samples": int(
-            args.ssim_samples
-            if args.ssim_samples is not None
-            else cfg_value(config, "eval.ssim_samples", DEFAULT_SSIM_SAMPLES)
-        ),
+        "ssim_samples": int(args.ssim_samples if args.ssim_samples is not None else cfg_value(config, "eval.ssim_samples", DEFAULT_SSIM_SAMPLES)),
         "lpips_samples": int(
-            args.lpips_samples
-            if args.lpips_samples is not None
-            else cfg_value(config, "eval.lpips_samples", DEFAULT_LPIPS_SAMPLES)
+            args.lpips_samples if args.lpips_samples is not None else cfg_value(config, "eval.lpips_samples", DEFAULT_LPIPS_SAMPLES)
         ),
         "device": args.device or str(cfg_value(config, "eval.device", "cuda")),
     }
@@ -354,16 +346,10 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
         value = cfg_value(config, key)
         if value is not None:
             protocol[name] = value
-    metadata = resolve_path(
-        args.metadata or str(cfg_value(config, "data.metadata", "data/metadata/robotwin")), root
-    )
+    metadata = resolve_path(args.metadata or str(cfg_value(config, "data.metadata", "data/metadata/robotwin")), root)
     mlr_path = resolve_path(args.mlr_rows, root) if args.mlr_rows else None
     output = resolve_path(args.output or DEFAULT_OUTPUT, root)
-    rows = (
-        resolve_path(args.rows, root)
-        if args.rows
-        else output.with_suffix(ROWS_SUFFIX)
-    )
+    rows = resolve_path(args.rows, root) if args.rows else output.with_suffix(ROWS_SUFFIX)
     return EvalPlan(
         config_path=config_path,
         config=config,
@@ -375,20 +361,14 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
         mlr=load_mlr_rows(mlr_path),
         output=output,
         rows=rows,
-        command=" ".join(
-            shlex.quote(part) for part in ("python", "scripts/evaluate/eval_robotwin.py", *argv)
-        ),
+        command=" ".join(shlex.quote(part) for part in ("python", "scripts/evaluate/eval_robotwin.py", *argv)),
         dry_run=bool(args.dry_run),
     )
 
 
 def metrics_line(protocol: dict[str, Any]) -> str:
     """Human-readable metric selection of the run."""
-    samples = [
-        f"{name} {int(protocol[f'{name}_samples'])} samples"
-        for name in ("ssim", "lpips")
-        if name in protocol["metrics"]
-    ]
+    samples = [f"{name} {int(protocol[f'{name}_samples'])} samples" for name in ("ssim", "lpips") if name in protocol["metrics"]]
     return ", ".join(protocol["metrics"]) + (f" ({', '.join(samples)})" if samples else "")
 
 
@@ -487,15 +467,11 @@ def run_evaluation(plan: EvalPlan) -> tuple[dict[str, Any], list[dict[str, Any]]
         if not spec.pred_dir.is_dir():
             raise FileNotFoundError(f"prediction directory {spec.pred_dir} does not exist")
         if spec.target_dir is None:
-            raise FileNotFoundError(
-                f"no reference directory for {spec.name}; pass --target-dir or --pair"
-            )
+            raise FileNotFoundError(f"no reference directory for {spec.name}; pass --target-dir or --pair")
         if not spec.target_dir.is_dir():
             raise FileNotFoundError(f"reference directory {spec.target_dir} does not exist")
         if not spec.clips:
-            raise FileNotFoundError(
-                f"no clip of {spec.pred_dir} matches a reference recording under {spec.target_dir}"
-            )
+            raise FileNotFoundError(f"no clip of {spec.pred_dir} matches a reference recording under {spec.target_dir}")
     rows: list[dict[str, Any]] = []
     for spec in plan.pairs:
         rows.extend(score_pair(plan, spec))

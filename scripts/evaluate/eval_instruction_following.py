@@ -93,10 +93,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     run.add_argument(
         "--config",
         default=os.environ.get("EVEWORLD_CONFIG"),
-        help=(
-            "evaluation configuration, e.g. configs/eval/instruction_following/qwen_if.yaml "
-            "(default: $EVEWORLD_CONFIG)"
-        ),
+        help=("evaluation configuration, e.g. configs/eval/instruction_following/qwen_if.yaml " "(default: $EVEWORLD_CONFIG)"),
     )
     run.add_argument(
         "--pred-dir",
@@ -189,24 +186,13 @@ def protocol_settings(config: Any, args: argparse.Namespace, judge: str) -> dict
         "protocol": PROTOCOL,
         "judge": judge,
         "jpeg_quality": DEFAULT_JPEG_QUALITY,
-        "frame_count": int(
-            args.frame_count
-            if args.frame_count is not None
-            else cfg_value(config, "eval.frame_count", DEFAULT_FRAME_COUNT)
-        ),
-        "max_side": int(
-            args.max_side
-            if args.max_side is not None
-            else cfg_value(config, "eval.max_side", DEFAULT_MAX_SIDE)
-        ),
+        "frame_count": int(args.frame_count if args.frame_count is not None else cfg_value(config, "eval.frame_count", DEFAULT_FRAME_COUNT)),
+        "max_side": int(args.max_side if args.max_side is not None else cfg_value(config, "eval.max_side", DEFAULT_MAX_SIDE)),
         "temperature": float(cfg_value(config, "eval.temperature", DEFAULT_TEMPERATURE)),
         "max_tokens": int(cfg_value(config, "eval.max_tokens", DEFAULT_MAX_TOKENS)),
         "timeout": float(cfg_value(config, "eval.timeout", DEFAULT_TIMEOUT)),
         "retries": int(cfg_value(config, "eval.retries", DEFAULT_RETRIES)),
-        "model": str(
-            args.judge_model
-            or cfg_value(config, "eval.model", DEFAULT_JUDGE_MODEL.get(judge, ""))
-        ),
+        "model": str(args.judge_model or cfg_value(config, "eval.model", DEFAULT_JUDGE_MODEL.get(judge, ""))),
         "concurrency": int(cfg_value(config, "eval.concurrency", 1)),
         "disable_thinking": bool(cfg_value(config, "eval.disable_thinking", True)),
     }
@@ -240,11 +226,7 @@ def select_clips(pred_dir: Path, limit: int | None) -> list[Path]:
     if not pred_dir.is_dir():
         return []
     clips = sorted(
-        (
-            path
-            for path in pred_dir.iterdir()
-            if path.is_file() and path.suffix.lower() in VIDEO_SUFFIXES
-        ),
+        (path for path in pred_dir.iterdir() if path.is_file() and path.suffix.lower() in VIDEO_SUFFIXES),
         key=lambda path: path.name,
     )
     return clips if limit is None else clips[: int(limit)]
@@ -259,9 +241,7 @@ def load_entries(metadata: Path) -> dict[str, Any]:
         if not candidate.is_file():
             continue
         document = read_json(candidate)
-        if isinstance(document, dict) and any(
-            isinstance(entry, dict) for entry in document.values()
-        ):
+        if isinstance(document, dict) and any(isinstance(entry, dict) for entry in document.values()):
             return {str(key): entry for key, entry in document.items()}
     return {}
 
@@ -375,9 +355,7 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
     root = repo_root()
     config = load_config(config_path, [])
     pred_dir = resolve_pred_dir(args.pred_dir, config, root)
-    metadata = resolve_path(
-        args.metadata or str(cfg_value(config, "data.metadata", DEFAULT_METADATA)), root
-    )
+    metadata = resolve_path(args.metadata or str(cfg_value(config, "data.metadata", DEFAULT_METADATA)), root)
     judge = judge_of(config, args.judge)
     protocol = protocol_settings(config, args, judge)
     output = None if not args.output else resolve_path(args.output, root)
@@ -392,11 +370,7 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
     else:
         model = args.model or pred_dir.name
     resumed = read_rows(rows_path) if args.resume else []
-    decided = {
-        str(row.get("request_id"))
-        for row in resumed
-        if row.get("request_id") is not None
-    }
+    decided = {str(row.get("request_id")) for row in resumed if row.get("request_id") is not None}
     clips = select_clips(pred_dir, args.limit)
     plan = EvalPlan(
         config_path=config_path,
@@ -414,10 +388,7 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
         entries=load_entries(metadata),
         output=output,
         rows=rows_path,
-        command=" ".join(
-            shlex.quote(part)
-            for part in ("python", "scripts/evaluate/eval_instruction_following.py", *argv)
-        ),
+        command=" ".join(shlex.quote(part) for part in ("python", "scripts/evaluate/eval_instruction_following.py", *argv)),
         dry_run=bool(args.dry_run),
     )
     plan.records = [record_of(plan, path) for path in clips if path.stem not in decided]
@@ -439,7 +410,6 @@ def print_plan(plan: EvalPlan) -> None:
     """Print the run, one aligned field per line."""
     protocol = plan.protocol
     found = "" if plan.pred_dir.is_dir() else " (not found)"
-    decided = len(plan.resumed)
     print(f"config:       {plan.config_path}")
     print(f"run:          {plan.name}")
     print(
@@ -454,10 +424,7 @@ def print_plan(plan: EvalPlan) -> None:
         f"{int(protocol['retries'])}, timeout {float(protocol['timeout']):g} s, "
         f"frames at most {int(protocol['max_side'])} px on the longest side"
     )
-    print(
-        f"concurrency:  {int(protocol['concurrency'])} configured, the judge class "
-        "asks one clip after another"
-    )
+    print(f"concurrency:  {int(protocol['concurrency'])} configured, the judge class " "asks one clip after another")
     print(f"pred dir:     {plan.pred_dir}{found}")
     print(f"model:        {plan.model}")
     print(f"metadata:     {plan.metadata}")

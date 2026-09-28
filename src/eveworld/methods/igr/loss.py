@@ -52,9 +52,7 @@ def edm_weight(sigma: Any, sigma_data: float = 0.5) -> Any:
     if torch.is_tensor(sigma):
         minimum = float(sigma.min())
         if not math.isfinite(minimum) or minimum <= 0.0:
-            raise ValueError(
-                f"sigma must be finite and positive for the EDM weighting, got a minimum of {minimum}"
-            )
+            raise ValueError(f"sigma must be finite and positive for the EDM weighting, got a minimum of {minimum}")
         return (sigma**2 + data**2) / (sigma * data) ** 2
     level = float(sigma)
     if not math.isfinite(level) or level <= 0.0:
@@ -109,20 +107,13 @@ def igr_loss(
     prediction = pred if torch.is_tensor(pred) else torch.as_tensor(pred)
     clean = target if torch.is_tensor(target) else torch.as_tensor(target)
     if prediction.ndim not in (4, 5):
-        raise ValueError(
-            f"Expected a (C, T, h, w) or (B, C, T, h, w) latent, got {tuple(prediction.shape)}"
-        )
+        raise ValueError(f"Expected a (C, T, h, w) or (B, C, T, h, w) latent, got {tuple(prediction.shape)}")
     if tuple(prediction.shape) != tuple(clean.shape):
-        raise ValueError(
-            f"pred and target must have the same shape, got {tuple(prediction.shape)} and "
-            f"{tuple(clean.shape)}"
-        )
+        raise ValueError(f"pred and target must have the same shape, got {tuple(prediction.shape)} and " f"{tuple(clean.shape)}")
     if eps <= 0.0:
         raise ValueError(f"eps must be positive, got {eps}")
     difference = prediction - clean
-    weight = _broadcast_weight(
-        _weight_tensor(weight_map, prediction, latent_size), tuple(prediction.shape)
-    )
+    weight = _broadcast_weight(_weight_tensor(weight_map, prediction, latent_size), tuple(prediction.shape))
     weighted = weight * difference * difference
     if weighted.ndim == 4:
         reduction = weighted.mean()
@@ -132,9 +123,7 @@ def igr_loss(
     return (edm_weight(levels, sigma_data) * reduction).mean()
 
 
-def _weight_tensor(
-    weight_map: Any, pred: torch.Tensor, latent_size: tuple[int, int] | None
-) -> torch.Tensor:
+def _weight_tensor(weight_map: Any, pred: torch.Tensor, latent_size: tuple[int, int] | None) -> torch.Tensor:
     """Put `weight_map` on the latent grid and device of `pred` as a tensor."""
     grid = (int(pred.shape[-2]), int(pred.shape[-1]))
     _check_latent_size(latent_size, grid)

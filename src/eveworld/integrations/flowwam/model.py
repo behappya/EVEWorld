@@ -201,10 +201,7 @@ class FlowWAMConfig:
     def __post_init__(self) -> None:
         self.variant = str(self.variant).strip().lower()
         if self.variant not in _VARIANT_PRESETS:
-            raise ValueError(
-                f"Unknown FlowWAM variant {self.variant!r}; expected one of "
-                f"{sorted(_VARIANT_PRESETS)}"
-            )
+            raise ValueError(f"Unknown FlowWAM variant {self.variant!r}; expected one of " f"{sorted(_VARIANT_PRESETS)}")
         for name, value in _VARIANT_PRESETS[self.variant].items():
             if getattr(self, name) is None:
                 setattr(self, name, value)
@@ -413,9 +410,7 @@ def load_backbone(config: Any = None, *, device: Any = None, **overrides: Any) -
         logger.info("%s is not importable, building the pipeline with diffsynth directly", _LOADER_MODULE)
         pipeline = _build_pipeline_fallback(cfg, target, base_dir, weight)
     else:
-        pipeline, flow_stream = builder(
-            local_model_path=str(base_dir), device=target, full_path=str(weight)
-        )
+        pipeline, flow_stream = builder(local_model_path=str(base_dir), device=target, full_path=str(weight))
         _attach_flow_stream(pipeline, flow_stream)
     _register_checkpoint_adapter(pipeline, weight, cfg)
     return pipeline
@@ -524,10 +519,7 @@ class FlowWAMModel:
                 return value
         if not required:
             return None
-        raise RuntimeError(
-            f"The pipeline carries no {name!r}, tried {list(aliases)}; it carries "
-            f"{_public_names(pipeline)}."
-        )
+        raise RuntimeError(f"The pipeline carries no {name!r}, tried {list(aliases)}; it carries " f"{_public_names(pipeline)}.")
 
     @property
     def denoiser(self) -> Any:
@@ -698,8 +690,7 @@ class FlowWAMModel:
         encoder = self._component("text_encoder", required=False)
         if tokenizer is None or encoder is None:
             raise RuntimeError(
-                "The pipeline carries no way to encode text: expected a `prompter` with "
-                "`encode_prompt` or a `tokenizer` beside the text encoder."
+                "The pipeline carries no way to encode text: expected a `prompter` with " "`encode_prompt` or a `tokenizer` beside the text encoder."
             )
         for prompt in prompts:
             tokens = tokenizer(prompt, return_tensors="pt")
@@ -799,9 +790,7 @@ class FlowWAMModel:
         state.update(_hooks().tia_state_dict(self.denoiser))
         return state
 
-    def load_state_dict(
-        self, state: Mapping[str, Any], *, strict: bool = False
-    ) -> dict[str, Any]:
+    def load_state_dict(self, state: Mapping[str, Any], *, strict: bool = False) -> dict[str, Any]:
         """Load a checkpoint into the denoiser, the flow stream and the TIA adapter.
 
         Keys under `dit.` go to the denoiser, keys under `flow_stream.` to the flow stream
@@ -913,24 +902,14 @@ class FlowWAMModel:
         else:
             flow_latents = _as_rank5(self.encode_video(flow_video))
         batch_size = int(target.shape[0])
-        sigma = self.sample_sigma(
-            batch_size, device=target.device, dtype=torch.float32, generator=generator
-        )
+        sigma = self.sample_sigma(batch_size, device=target.device, dtype=torch.float32, generator=generator)
         level = _batch_sigma(sigma).to(device=target.device, dtype=target.dtype)
-        rgb_noise = _randn(
-            target.shape, generator=generator, device=target.device, dtype=target.dtype
-        )
-        flow_noise = _randn(
-            flow_latents.shape, generator=generator, device=target.device, dtype=target.dtype
-        )
+        rgb_noise = _randn(target.shape, generator=generator, device=target.device, dtype=target.dtype)
+        flow_noise = _randn(flow_latents.shape, generator=generator, device=target.device, dtype=target.dtype)
         rgb_noisy = _pin_first_frame((1.0 - level) * source + level * rgb_noise, source)
-        flow_noisy = _pin_first_frame(
-            (1.0 - level) * flow_latents + level * flow_noise, flow_latents
-        )
+        flow_noisy = _pin_first_frame((1.0 - level) * flow_latents + level * flow_noise, flow_latents)
         if context is None:
-            context = self.encode_text(
-                _batch_captions(batch, batch_size), positive=True, device=target.device
-            )
+            context = self.encode_text(_batch_captions(batch, batch_size), positive=True, device=target.device)
         timestep = sigma.reshape(-1) * _TIMESTEP_SCALE
         rgb_velocity, flow_velocity = _call_dual_stream(
             self,
@@ -1006,10 +985,7 @@ class FlowWAMModel:
         prediction = _as_rank5(pred).float()
         truth = _as_rank5(target).float()
         if prediction.shape != truth.shape:
-            raise ValueError(
-                f"pred and target must share a shape, got {tuple(prediction.shape)} and "
-                f"{tuple(truth.shape)}"
-            )
+            raise ValueError(f"pred and target must share a shape, got {tuple(prediction.shape)} and " f"{tuple(truth.shape)}")
         frames = int(prediction.shape[2])
         mask = torch.ones(
             (prediction.shape[0], 1, frames, prediction.shape[3], prediction.shape[4]),
@@ -1188,9 +1164,7 @@ class FlowWAMModel:
         if image is None:
             logger.warning("No conditioning frame was given: the clip starts from a white frame")
             image = _white_frame(width, height)
-        rgb[:, :, :1] = _prefix_latents(
-            vae, image, height=height, width=width, device=device, dtype=dtype
-        )
+        rgb[:, :, :1] = _prefix_latents(vae, image, height=height, width=width, device=device, dtype=dtype)
         conditioned = flow_cond == "robot_only" and flow_video is not None
         if conditioned:
             flow = _flow_condition_latents(
@@ -1223,13 +1197,9 @@ class FlowWAMModel:
                 sigma = sigmas[index]
                 step = (sigmas[index + 1] - sigma).to(dtype=rgb.dtype)
                 timestep = sigma.reshape(1) * _TIMESTEP_SCALE
-                rgb_velocity, flow_velocity = _call_dual_stream(
-                    self, rgb, flow, timestep, context, flow_cond=conditioned
-                )
+                rgb_velocity, flow_velocity = _call_dual_stream(self, rgb, flow, timestep, context, flow_cond=conditioned)
                 if cfg_scale != 1.0 and negative_context is not None:
-                    negative_rgb, negative_flow = _call_dual_stream(
-                        self, rgb, flow, timestep, negative_context, flow_cond=conditioned
-                    )
+                    negative_rgb, negative_flow = _call_dual_stream(self, rgb, flow, timestep, negative_context, flow_cond=conditioned)
                     rgb_velocity = negative_rgb + cfg_scale * (rgb_velocity - negative_rgb)
                     flow_velocity = negative_flow + cfg_scale * (flow_velocity - negative_flow)
                 rgb = rgb + step * rgb_velocity.to(dtype=rgb.dtype)
@@ -1388,8 +1358,7 @@ def _resolve_base(cfg: FlowWAMConfig) -> Path:
         if explicit.is_dir():
             return explicit.resolve()
         raise FileNotFoundError(
-            f"model.base_path {cfg.base_path!r} is not a directory; point it at a Wan base "
-            "checkpoint directory such as checkpoints/wan2.2-ti2v-5b"
+            f"model.base_path {cfg.base_path!r} is not a directory; point it at a Wan base " "checkpoint directory such as checkpoints/wan2.2-ti2v-5b"
         )
     value = str(cfg.base_model).strip()
     normalised = _normalise_name(value)
@@ -1435,16 +1404,13 @@ def _resolve_weight(cfg: FlowWAMConfig) -> Path:
     value = "" if cfg.checkpoint is None else str(cfg.checkpoint).strip()
     if not value:
         raise FileNotFoundError(
-            "model.checkpoint is empty; name the released weights such as "
-            f"{DEFAULT_MODEL_NAME} or point it at a .safetensors file"
+            "model.checkpoint is empty; name the released weights such as " f"{DEFAULT_MODEL_NAME} or point it at a .safetensors file"
         )
     normalised = _normalise_name(value)
     alias = _WEIGHT_ALIASES.get(normalised)
     names = [name for name in (alias, normalised) if name]
     if normalised:
-        names.extend(
-            [f"{normalised}.safetensors", f"flowwam/{normalised}.safetensors"]
-        )
+        names.extend([f"{normalised}.safetensors", f"flowwam/{normalised}.safetensors"])
     roots = _checkpoint_roots()
     tried: list[Path] = [Path(value).expanduser()]
     for name in names:
@@ -1537,17 +1503,11 @@ def _register_checkpoint_adapter(pipeline: Any, weight: Any, cfg: FlowWAMConfig)
             _public_names(pipeline),
         )
         return None
-    state = {
-        key[len("tia_adapter.") :]: value
-        for key, value in _load_safetensors(weight).items()
-        if key.startswith("tia_adapter.")
-    }
+    state = {key[len("tia_adapter.") :]: value for key, value in _load_safetensors(weight).items() if key.startswith("tia_adapter.")}
     if not state:
         return None
     try:
-        adapter = _hooks().register_tia(
-            dit, state_dict=state, layer_index=cfg.block_index, grid=cfg.tia_grid
-        )
+        adapter = _hooks().register_tia(dit, state_dict=state, layer_index=cfg.block_index, grid=cfg.tia_grid)
     except (KeyError, RuntimeError, TypeError, ValueError) as error:
         logger.warning("Could not register the TIA adapter carried by %s: %s", weight, error)
         return None
@@ -1589,11 +1549,7 @@ def _restore_fp32_modulation(dit: Any, values: Mapping[str, torch.Tensor]) -> in
             continue
         parameter.data = value.to(device=parameter.device)
         restored += int(parameter.numel())
-    sequences = [
-        module
-        for module in (getattr(dit, "time_embedding", None), getattr(dit, "time_projection", None))
-        if module is not None
-    ]
+    sequences = [module for module in (getattr(dit, "time_embedding", None), getattr(dit, "time_projection", None)) if module is not None]
     for sequence in sequences:
         for module in sequence.modules():
             if isinstance(module, AutoWrappedLinear):
@@ -1617,9 +1573,7 @@ def _restore_fp32_modulation(dit: Any, values: Mapping[str, torch.Tensor]) -> in
     return restored
 
 
-def _build_pipeline_fallback(
-    cfg: FlowWAMConfig, device: torch.device, base_dir: Path, weight: Path
-) -> Any:
+def _build_pipeline_fallback(cfg: FlowWAMConfig, device: torch.device, base_dir: Path, weight: Path) -> Any:
     """Build the released pipeline out of `diffsynth` when its own loader is missing.
 
     Mirrors `inference/pipeline_loader.build_pipeline`: the Wan2.2 text encoder, DiT and
@@ -1674,9 +1628,7 @@ def _build_pipeline_fallback(
             ),
         )
     except (OSError, RuntimeError, TypeError, ValueError) as error:
-        raise RuntimeError(
-            f"Building the Wan2.2 pipeline from {base_dir} failed: {error}"
-        ) from error
+        raise RuntimeError(f"Building the Wan2.2 pipeline from {base_dir} failed: {error}") from error
     flow_stream = init_flow_stream(pipeline.dit)
     dit_keys: dict[str, torch.Tensor] = {}
     flow_keys: dict[str, torch.Tensor] = {}
@@ -1710,8 +1662,7 @@ def _build_pipeline_fallback(
         pipeline.enable_vram_management()
     else:
         logger.info(
-            "Running the pipeline on %s without the VRAM management of the release, which "
-            "needs a CUDA device",
+            "Running the pipeline on %s without the VRAM management of the release, which " "needs a CUDA device",
             device,
         )
     if fp32_values:
@@ -1866,10 +1817,7 @@ def _as_video_batch(video: Any) -> tuple[list[torch.Tensor], bool]:
     elif tensor.dim() == 4:
         tensor = tensor[None]
     if tensor.dim() != 5 or tensor.shape[1] != 3:
-        raise ValueError(
-            f"Expected (T, H, W, 3) frames, a (C, T, H, W) clip or a batch, got "
-            f"{tuple(tensor.shape)}"
-        )
+        raise ValueError(f"Expected (T, H, W, 3) frames, a (C, T, H, W) clip or a batch, got " f"{tuple(tensor.shape)}")
     tensor = _to_unit_range(tensor)
     return [clip for clip in tensor], batched
 
@@ -1944,10 +1892,7 @@ def _batch_captions(batch: Any, batch_size: int) -> list[str]:
         value = batch.get(key)
         if value is not None:
             return _as_text_list(value, expected=batch_size)
-    raise KeyError(
-        "The batch carries no caption; expected one of instruction, caption, prompt, "
-        "text or task"
-    )
+    raise KeyError("The batch carries no caption; expected one of instruction, caption, prompt, " "text or task")
 
 
 def _first_value(mapping: Any, keys: Sequence[str]) -> Any:
@@ -2296,14 +2241,9 @@ def _flow_condition_latents(
         if start:
             frames = frames[int(start) :]
     if frames.shape[0] < int(num_frames):
-        raise ValueError(
-            f"The flow video holds {frames.shape[0]} frames at or after {start}, the clip "
-            f"needs {num_frames}"
-        )
+        raise ValueError(f"The flow video holds {frames.shape[0]} frames at or after {start}, the clip " f"needs {num_frames}")
     frames = frames[: int(num_frames)]
-    extractor = tools["RAFTFlowExtractor"](
-        device=str(torch.device(device)) if device is not None else "cpu"
-    )
+    extractor = tools["RAFTFlowExtractor"](device=str(torch.device(device)) if device is not None else "cpu")
     pictures, _ = tools["process_camera_flow"](
         [np.ascontiguousarray(frame) for frame in frames],
         (int(width), int(height)),
@@ -2311,9 +2251,7 @@ def _flow_condition_latents(
         flow_method="raft",
         raft_extractor=extractor,
     )
-    encoded = np.stack(
-        [np.asarray(picture, dtype=np.float32) for picture in pictures[: int(num_frames)]]
-    )
+    encoded = np.stack([np.asarray(picture, dtype=np.float32) for picture in pictures[: int(num_frames)]])
     encoded = encoded * (2.0 / 255.0) - 1.0
     clip = torch.from_numpy(np.ascontiguousarray(encoded)).permute(3, 0, 1, 2)
     latent = _encode_clip(vae, clip, device=device)
@@ -2367,10 +2305,7 @@ def _weight_map_for(
     else:
         map_tensor = torch.as_tensor(np.asarray(weight_map))
     if map_tensor.dim() < 2 or map_tensor.dim() > 5:
-        raise ValueError(
-            "Expected a (h, w), (T, h, w), (B, T, h, w) or (B, 1, T, h, w) weight map, got "
-            f"{tuple(map_tensor.shape)}"
-        )
+        raise ValueError("Expected a (h, w), (T, h, w), (B, T, h, w) or (B, 1, T, h, w) weight map, got " f"{tuple(map_tensor.shape)}")
     resized = resize_weight_map(map_tensor.float(), (int(grid[0]), int(grid[1])))
     if resized.dim() == 4:
         resized = resized.unsqueeze(1)
@@ -2380,9 +2315,7 @@ def _weight_map_for(
     if num_frames is not None and axis >= 0:
         length = int(resized.shape[axis])
         if length not in (1, int(num_frames)):
-            raise ValueError(
-                f"Expected a weight map of 1 or {int(num_frames)} frames, got {length}"
-            )
+            raise ValueError(f"Expected a weight map of 1 or {int(num_frames)} frames, got {length}")
         weights = resized if length == 1 else resized.narrow(axis, 1, length - 1)
         resized = resized / weights.mean().clamp(min=eps)
     return resized.to(device=device, dtype=dtype)
@@ -2404,9 +2337,7 @@ def _pin_first_frame(noisy: torch.Tensor, clean: torch.Tensor) -> torch.Tensor:
         ValueError: If the two tensors do not share a shape.
     """
     if tuple(noisy.shape) != tuple(clean.shape):
-        raise ValueError(
-            f"Expected matching shapes, got {tuple(noisy.shape)} and {tuple(clean.shape)}"
-        )
+        raise ValueError(f"Expected matching shapes, got {tuple(noisy.shape)} and {tuple(clean.shape)}")
     if noisy.shape[2] > 1:
         noisy[:, :, :1] = clean[:, :, :1]
     return noisy
@@ -2602,8 +2533,7 @@ def _dual_stream_model_fn() -> Any:
     function = getattr(module, "model_fn_wan_video_dual_stream", None)
     if not callable(function):
         raise RuntimeError(
-            f"{module.__name__} carries no model_fn_wan_video_dual_stream; the FlowWAM "
-            "checkout is not the revision this integration targets"
+            f"{module.__name__} carries no model_fn_wan_video_dual_stream; the FlowWAM " "checkout is not the revision this integration targets"
         )
     return function
 
@@ -2632,8 +2562,7 @@ def _flow_cond_model_fn() -> Any:
     function = getattr(module, "model_fn_wan_video_dual_stream", None)
     if not callable(function):
         raise RuntimeError(
-            f"{module.__name__} carries no model_fn_wan_video_dual_stream; the FlowWAM "
-            "checkout is not the revision this integration targets"
+            f"{module.__name__} carries no model_fn_wan_video_dual_stream; the FlowWAM " "checkout is not the revision this integration targets"
         )
     try:
         source = inspect.getsource(function)
@@ -2656,38 +2585,27 @@ def _flow_cond_model_fn() -> Any:
     marker = source.find("]).flatten()", start)
     if marker < 0:
         raise RuntimeError(
-            "The flow timestep statement of model_fn_wan_video_dual_stream does not end "
-            "with `]).flatten()`; the statement was not recognised"
+            "The flow timestep statement of model_fn_wan_video_dual_stream does not end " "with `]).flatten()`; the statement was not recognised"
         )
     stop = source.find("\n", marker)
     if stop < 0:
         raise RuntimeError(
-            "The flow timestep statement of model_fn_wan_video_dual_stream is the last "
-            "line of the function; the statement was not recognised"
+            "The flow timestep statement of model_fn_wan_video_dual_stream is the last " "line of the function; the statement was not recognised"
         )
     indent = source[source.rfind("\n", 0, start) + 1 : start]
-    replacement = (
-        f"{indent}flow_tpt = torch.zeros(flow_temporal * flow_spatial,\n"
-        f"{indent}    dtype=latents.dtype, device=latents.device)"
-    )
+    replacement = f"{indent}flow_tpt = torch.zeros(flow_temporal * flow_spatial,\n" f"{indent}    dtype=latents.dtype, device=latents.device)"
     patched = source[:start] + replacement + source[stop:]
-    patched = patched.replace(
-        "def model_fn_wan_video_dual_stream(", "def _eveworld_flow_cond_model_fn(", 1
-    )
+    patched = patched.replace("def model_fn_wan_video_dual_stream(", "def _eveworld_flow_cond_model_fn(", 1)
     try:
         code = compile(patched, "<eveworld flow-cond codegen>", "exec")
     except SyntaxError as error:
         raise RuntimeError(
-            "The flow-conditioned variant of model_fn_wan_video_dual_stream does not "
-            "compile; the released source changed shape"
+            "The flow-conditioned variant of model_fn_wan_video_dual_stream does not " "compile; the released source changed shape"
         ) from error
     exec(code, module.__dict__)
     generated = module.__dict__.get("_eveworld_flow_cond_model_fn")
     if not callable(generated):
-        raise RuntimeError(
-            "The flow-conditioned variant of model_fn_wan_video_dual_stream produced no "
-            "callable"
-        )
+        raise RuntimeError("The flow-conditioned variant of model_fn_wan_video_dual_stream produced no " "callable")
     _FLOW_COND_FUNCTIONS[key] = generated
     return generated
 
@@ -2715,8 +2633,7 @@ def _call_dual_stream(
     flow_stream = getattr(model, "flow_stream", None)
     if flow_stream is None:
         raise RuntimeError(
-            "The backbone carries no flow stream; load a FlowWAM checkpoint with "
-            "load_backbone() before running the dual-stream denoiser"
+            "The backbone carries no flow stream; load a FlowWAM checkpoint with " "load_backbone() before running the dual-stream denoiser"
         )
     function = _flow_cond_model_fn() if flow_cond else _dual_stream_model_fn()
     output = function(

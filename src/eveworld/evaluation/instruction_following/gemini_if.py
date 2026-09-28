@@ -36,17 +36,9 @@ from urllib.parse import urlparse
 
 import numpy as np
 
-from eveworld.evaluation.instruction_following.qwen_if import (
-    DEFAULT_FRAME_COUNT,
-    DEFAULT_MAX_SIDE,
-    ensure_no_proxy,
-    frames_for_judge,
-    load_judge_template as _load_judge_template,
-    parse_verdict,
-    render_judge_prompt,
-    score_records,
-    summarize,
-)
+from eveworld.evaluation.instruction_following.qwen_if import DEFAULT_FRAME_COUNT, DEFAULT_MAX_SIDE, ensure_no_proxy, frames_for_judge
+from eveworld.evaluation.instruction_following.qwen_if import load_judge_template as _load_judge_template
+from eveworld.evaluation.instruction_following.qwen_if import parse_verdict, render_judge_prompt, score_records, summarize
 from eveworld.utils.io import list_files, read_jsonl, write_json, write_jsonl
 from eveworld.utils.logging import get_logger
 
@@ -207,16 +199,9 @@ class GeminiIFJudge:
         client: Any = None,
     ) -> None:
         self.model = model
-        raw_base = str(
-            base_url or os.environ.get("GEMINI_BASE_URL") or os.environ.get("DIFROST_GENAI_BASE_URL") or ""
-        ).strip()
+        raw_base = str(base_url or os.environ.get("GEMINI_BASE_URL") or os.environ.get("DIFROST_GENAI_BASE_URL") or "").strip()
         self.base_url = normalize_base_url(raw_base) if raw_base else ""
-        self.api_key = (
-            api_key
-            or os.environ.get("GEMINI_API_KEY")
-            or os.environ.get("GOOGLE_API_KEY")
-            or ""
-        )
+        self.api_key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or ""
         self.api_token = api_token or os.environ.get("DIFROST_API_TOKEN") or ""
         self.host = host or os.environ.get("DIFROST_HOST") or (urlparse(self.base_url).hostname or "")
         self.temperature = float(temperature)
@@ -342,9 +327,7 @@ class GeminiIFJudge:
             from google.genai import types as gt
 
             if self.base_url:
-                self.client = _gateway_client(
-                    genai, gt, self.base_url, self.api_token, self.host, self.timeout
-                )
+                self.client = _gateway_client(genai, gt, self.base_url, self.api_token, self.host, self.timeout)
                 logger.debug("judging with %s through %s", self.model, self.base_url)
             else:
                 if not self.api_key:
@@ -461,10 +444,7 @@ def _load_cli_records(args: argparse.Namespace) -> list[dict[str, Any]]:
     if args.manifest is not None:
         records = list(read_jsonl(args.manifest))
     elif args.video_dir is not None:
-        records = [
-            {"video": str(path), "prompt": _prompt_from_path(path)}
-            for path in list_files(args.video_dir, suffix=".mp4")
-        ]
+        records = [{"video": str(path), "prompt": _prompt_from_path(path)} for path in list_files(args.video_dir, suffix=".mp4")]
     else:
         raise ValueError("pass --manifest or --video-dir")
     if args.limit is not None:

@@ -240,9 +240,7 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
     else:
         layout = resolve_path(str(cfg_value(config, "eval.layout", DEFAULT_LAYOUT)), root)
     scores, searched = find_scores(layout, args.scores, root)
-    output = resolve_path(args.output, root) if args.output else resolve_path(
-        DEFAULT_OUTPUT, root
-    )
+    output = resolve_path(args.output, root) if args.output else resolve_path(DEFAULT_OUTPUT, root)
     rows = resolve_path(args.rows, root) if args.rows else output.with_suffix(ROWS_SUFFIX)
     return EvalPlan(
         config_path=config_path,
@@ -255,9 +253,7 @@ def build_plan(args: argparse.Namespace, config_path: Path, argv: Sequence[str])
         limit=args.limit,
         output=output,
         rows=rows,
-        command=" ".join(
-            shlex.quote(part) for part in ("python", "scripts/evaluate/eval_ewmbench.py", *argv)
-        ),
+        command=" ".join(shlex.quote(part) for part in ("python", "scripts/evaluate/eval_ewmbench.py", *argv)),
         dry_run=bool(args.dry_run),
     )
 

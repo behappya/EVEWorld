@@ -5,15 +5,7 @@ a location the world model can actually render, so the repaired clip follows the
 prompt without being dragged around by the layout of the source video.
 """
 
-from .corruption import (
-    IGREvent,
-    IGRSample,
-    as_clean_sample,
-    build_sample,
-    insert_duplicate,
-    interaction_region,
-    relocate_instance,
-)
+from .corruption import IGREvent, IGRSample, as_clean_sample, build_sample, insert_duplicate, interaction_region, relocate_instance
 from .loss import edm_weight, igr_loss, resize_weight_map
 from .paste_region import (
     admissible_regions,
@@ -27,25 +19,8 @@ from .paste_region import (
     paste_box_region,
     select_paste_region,
 )
-from .trajectory import (
-    Track,
-    build_tracks,
-    displacement,
-    interaction_box,
-    most_reliable_frame,
-    reliability,
-    trajectory_center,
-)
-from .weight_map import (
-    BACKGROUND,
-    DISTURBED,
-    boxes_to_mask,
-    build_weight_map,
-    clip_boxes,
-    normalize_unit_mean,
-    stamp_regions,
-    support_mask,
-)
+from .trajectory import Track, build_tracks, displacement, interaction_box, most_reliable_frame, reliability, trajectory_center
+from .weight_map import BACKGROUND, DISTURBED, boxes_to_mask, build_weight_map, clip_boxes, normalize_unit_mean, stamp_regions, support_mask
 
 __all__ = [
     "BACKGROUND",

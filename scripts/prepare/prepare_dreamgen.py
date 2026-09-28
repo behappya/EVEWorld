@@ -296,10 +296,7 @@ def load_training_clips(root: Path) -> list[Clip]:
             text = video.with_suffix(".txt")
             prompt = text.read_text(encoding="utf-8").strip() if text.is_file() else None
         if prompt is None:
-            raise ValueError(
-                f"{video} has no instruction: expected {sidecar_path.name} with a prompt key "
-                f"or {video.with_suffix('.txt').name}"
-            )
+            raise ValueError(f"{video} has no instruction: expected {sidecar_path.name} with a prompt key " f"or {video.with_suffix('.txt').name}")
         clips.append(
             Clip(
                 vid=video.stem,
@@ -330,10 +327,7 @@ def split_clips(clips: Sequence[Clip], limit: int | None) -> tuple[list[Clip], l
 
 def benchmark_clips(table: Sequence[dict[str, Any]]) -> list[Clip]:
     """One evaluation clip per request of the prompt table, in manifest order."""
-    return [
-        Clip(vid=record["id"], prompt=record["prompt"], split="test", category=record["category"])
-        for record in table
-    ]
+    return [Clip(vid=record["id"], prompt=record["prompt"], split="test", category=record["category"]) for record in table]
 
 
 def sample_timestamps(num_frames: int = NUM_FRAMES, count: int = SAMPLE_COUNT) -> list[int]:
@@ -520,8 +514,7 @@ def prepare(args: argparse.Namespace, data_root: Path, output_dir: Path) -> int:
             return 1
         if len(table) != BENCHMARK_PROMPT_COUNT:
             print(
-                f"error: found {len(table)} benchmark prompts, DreamGenBench has "
-                f"{BENCHMARK_PROMPT_COUNT}",
+                f"error: found {len(table)} benchmark prompts, DreamGenBench has " f"{BENCHMARK_PROMPT_COUNT}",
                 file=sys.stderr,
             )
             return 1

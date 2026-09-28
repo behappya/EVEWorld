@@ -154,8 +154,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         from sklearn.linear_model import LogisticRegression
     except ImportError:
         print(
-            "scikit-learn is required to fit the probe; install the evaluation extras with "
-            'pip install -e ".[eval]"',
+            "scikit-learn is required to fit the probe; install the evaluation extras with " 'pip install -e ".[eval]"',
             file=sys.stderr,
         )
         return 1
@@ -174,8 +173,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         meta = json.loads(str(cache["meta"]))
         if meta.get("cic_block") != CIC_BLOCK:
             print(
-                f"the cache was built on {meta.get('cic_block')!r}, "
-                f"expected {CIC_BLOCK!r}",
+                f"the cache was built on {meta.get('cic_block')!r}, " f"expected {CIC_BLOCK!r}",
                 file=sys.stderr,
             )
             return 1
@@ -184,8 +182,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     for sigma, matrix in matrices.items():
         if matrix.shape[0] != labels_one.shape[0]:
             print(
-                f"X_{BLOCKS[0]}_{sigma:g} has {matrix.shape[0]} rows, "
-                f"y has {labels_one.shape[0]}",
+                f"X_{BLOCKS[0]}_{sigma:g} has {matrix.shape[0]} rows, " f"y has {labels_one.shape[0]}",
                 file=sys.stderr,
             )
             return 1
@@ -219,9 +216,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     for sigma in args.sigmas:
         count = labels_one.shape[0]
         offset = count * list(args.sigmas).index(sigma)
-        stats[f"{sigma:g}"] = _report(
-            f"sigma {sigma:g}", scores[offset : offset + count], labels[offset : offset + count]
-        )
+        stats[f"{sigma:g}"] = _report(f"sigma {sigma:g}", scores[offset : offset + count], labels[offset : offset + count])
 
     if args.loo:
         held_out = leave_one_out_scores(standardised, labels, max_iter=1000)

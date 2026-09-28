@@ -78,10 +78,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     run.add_argument(
         "--config",
         default=os.environ.get("EVEWORLD_CONFIG"),
-        help=(
-            "run configuration, e.g. configs/paper/flowwam/robotwin/eveworld.yaml "
-            "(default: $EVEWORLD_CONFIG)"
-        ),
+        help=("run configuration, e.g. configs/paper/flowwam/robotwin/eveworld.yaml " "(default: $EVEWORLD_CONFIG)"),
     )
     run.add_argument("--prompt-file", help="requests to generate, one per clip (default: data.split)")
     run.add_argument("--checkpoint", help="override model.checkpoint, a release name or a path")
@@ -175,10 +172,7 @@ def requests_from_document(document: Any) -> list[Request]:
     if isinstance(document, dict):
         return [Request(str(key), prompt_of(value)) for key, value in document.items()]
     if isinstance(document, list):
-        return [
-            Request(request_id_of(item, index), prompt_of(item))
-            for index, item in enumerate(document, 1)
-        ]
+        return [Request(request_id_of(item, index), prompt_of(item)) for index, item in enumerate(document, 1)]
     raise ValueError(f"prompt document is a {type(document).__name__}, expected an object or a list")
 
 
@@ -256,10 +250,7 @@ def with_metadata_prompts(requests: Sequence[Request], metadata: Path) -> list[R
     if not named:
         return list(requests)
     index = metadata_prompts(metadata, named)
-    return [
-        Request(request.request_id, index.get(request.request_id, request.prompt))
-        for request in requests
-    ]
+    return [Request(request.request_id, index.get(request.request_id, request.prompt)) for request in requests]
 
 
 @dataclass
@@ -364,8 +355,7 @@ def build_plan(args: argparse.Namespace, config_path: Path) -> InferencePlan:
         unresolved = sum(1 for request in requests if request.prompt == request.request_id)
         if unresolved:
             print(
-                f"warning: {metadata} carries no prompt for {unresolved} of {len(requests)} "
-                "requests, their request id is used as the prompt",
+                f"warning: {metadata} carries no prompt for {unresolved} of {len(requests)} " "requests, their request id is used as the prompt",
                 file=sys.stderr,
             )
     total = len(requests)
@@ -373,9 +363,9 @@ def build_plan(args: argparse.Namespace, config_path: Path) -> InferencePlan:
     requests = requests[start:stop]
     if args.limit is not None:
         requests = requests[: args.limit]
-    output_dir = resolve_path(args.output_dir, root) if args.output_dir else resolve_path(
-        cfg_value(config, "output_dir", "outputs/run"), root
-    ) / "inference"
+    output_dir = (
+        resolve_path(args.output_dir, root) if args.output_dir else resolve_path(cfg_value(config, "output_dir", "outputs/run"), root) / "inference"
+    )
     tia_inject = cfg_value(config, "inference.tia_inject")
     full_traj = cfg_value(config, "inference.full_traj")
     return InferencePlan(
@@ -391,9 +381,7 @@ def build_plan(args: argparse.Namespace, config_path: Path) -> InferencePlan:
         seed=int(cfg_value(config, "seed", 0)),
         checkpoint=str(cfg_value(config, "model.checkpoint", "-")),
         fps=float(cfg_value(config, "model.fps", 0.0)),
-        flow_cond=None if not cfg_value(config, "inference.flow_cond") else str(
-            cfg_value(config, "inference.flow_cond")
-        ),
+        flow_cond=None if not cfg_value(config, "inference.flow_cond") else str(cfg_value(config, "inference.flow_cond")),
         tia_inject=None if tia_inject is None else bool(tia_inject),
         full_traj=None if not full_traj else str(full_traj),
         device=args.device,
@@ -420,10 +408,7 @@ def print_plan(plan: InferencePlan) -> None:
         f"{int(resolution[0])}x{int(resolution[1])}, block "
         f"{int(cfg_value(config, 'model.block_index', 0))}, seed {plan.seed}"
     )
-    print(
-        f"conditioning: flow {plan.flow_cond or 'default'}, tia injection {tia}, "
-        f"full trajectory {plan.full_traj or 'default'}"
-    )
+    print(f"conditioning: flow {plan.flow_cond or 'default'}, tia injection {tia}, " f"full trajectory {plan.full_traj or 'default'}")
     print(f"device:       {plan.device or 'auto'}")
     for request in plan.requests[:PREVIEW]:
         prompt = request.prompt if len(request.prompt) <= 72 else f"{request.prompt[:69]}..."
@@ -500,9 +485,7 @@ def generate(plan: InferencePlan) -> int:
     if is_run_checkpoint(checkpoint):
         from eveworld.integrations.flowwam import FlowWAMTrainer
 
-        trainer = FlowWAMTrainer(
-            config=plan.config, output_dir=plan.output_dir, device=plan.device
-        )
+        trainer = FlowWAMTrainer(config=plan.config, output_dir=plan.output_dir, device=plan.device)
         step = trainer.load_checkpoint(checkpoint)
         model = trainer.model.eval()
         print(f"model:        the run of step {step} at {checkpoint}")

@@ -75,10 +75,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     run.add_argument(
         "--config",
         default=os.environ.get("EVEWORLD_CONFIG"),
-        help=(
-            "run configuration, e.g. configs/paper/gigaworld/dreamgen/eveworld.yaml "
-            "(default: $EVEWORLD_CONFIG)"
-        ),
+        help=("run configuration, e.g. configs/paper/gigaworld/dreamgen/eveworld.yaml " "(default: $EVEWORLD_CONFIG)"),
     )
     run.add_argument("--prompt-file", help="requests to generate, one per clip (default: data.split)")
     run.add_argument(
@@ -161,10 +158,7 @@ def requests_from_document(document: Any) -> list[Request]:
     if isinstance(document, dict):
         return [Request(str(key), prompt_of(value)) for key, value in document.items()]
     if isinstance(document, list):
-        return [
-            Request(request_id_of(item, index), prompt_of(item))
-            for index, item in enumerate(document, 1)
-        ]
+        return [Request(request_id_of(item, index), prompt_of(item)) for index, item in enumerate(document, 1)]
     raise ValueError(f"prompt document is a {type(document).__name__}, expected an object or a list")
 
 
@@ -242,10 +236,7 @@ def with_metadata_prompts(requests: Sequence[Request], metadata: Path) -> list[R
     if not named:
         return list(requests)
     index = metadata_prompts(metadata, named)
-    return [
-        Request(request.request_id, index.get(request.request_id, request.prompt))
-        for request in requests
-    ]
+    return [Request(request.request_id, index.get(request.request_id, request.prompt)) for request in requests]
 
 
 @dataclass
@@ -338,8 +329,7 @@ def build_plan(args: argparse.Namespace, config_path: Path) -> InferencePlan:
         unresolved = sum(1 for request in requests if request.prompt == request.request_id)
         if unresolved:
             print(
-                f"warning: {metadata} carries no prompt for {unresolved} of {len(requests)} "
-                "requests, their request id is used as the prompt",
+                f"warning: {metadata} carries no prompt for {unresolved} of {len(requests)} " "requests, their request id is used as the prompt",
                 file=sys.stderr,
             )
     total = len(requests)
@@ -347,9 +337,9 @@ def build_plan(args: argparse.Namespace, config_path: Path) -> InferencePlan:
     requests = requests[start:stop]
     if args.limit is not None:
         requests = requests[: args.limit]
-    output_dir = resolve_path(args.output_dir, root) if args.output_dir else resolve_path(
-        cfg_value(config, "output_dir", "outputs/run"), root
-    ) / "inference"
+    output_dir = (
+        resolve_path(args.output_dir, root) if args.output_dir else resolve_path(cfg_value(config, "output_dir", "outputs/run"), root) / "inference"
+    )
     return InferencePlan(
         config_path=config_path,
         config=config,
@@ -462,9 +452,7 @@ def generate(plan: InferencePlan) -> int:
     if is_run_checkpoint(checkpoint):
         from eveworld.integrations.gigaworld import GigaWorldTrainer
 
-        trainer = GigaWorldTrainer(
-            config=plan.config, output_dir=plan.output_dir, device=plan.device
-        )
+        trainer = GigaWorldTrainer(config=plan.config, output_dir=plan.output_dir, device=plan.device)
         step = trainer.load_checkpoint(checkpoint)
         model = trainer.model.eval()
         print(f"model:        the run of step {step} at {checkpoint}")

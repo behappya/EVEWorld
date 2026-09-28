@@ -131,11 +131,7 @@ class GroundingDinoDetector:
     ) -> None:
         config_path = config_path or os.environ.get(CONFIG_ENV_VAR)
         weights_path = weights_path or os.environ.get(WEIGHTS_ENV_VAR)
-        missing = [
-            name
-            for name, value in ((CONFIG_ENV_VAR, config_path), (WEIGHTS_ENV_VAR, weights_path))
-            if not value
-        ]
+        missing = [name for name, value in ((CONFIG_ENV_VAR, config_path), (WEIGHTS_ENV_VAR, weights_path)) if not value]
         if missing:
             raise RuntimeError(
                 "GroundingDINO config and weights must be provided either as arguments or through "
@@ -179,9 +175,7 @@ class GroundingDinoDetector:
         missing = [name for name in (CONFIG_ENV_VAR, WEIGHTS_ENV_VAR) if not os.environ.get(name)]
         if missing:
             raise RuntimeError(
-                "Missing environment variable(s) "
-                + ", ".join(missing)
-                + " required to locate the GroundingDINO config and checkpoint."
+                "Missing environment variable(s) " + ", ".join(missing) + " required to locate the GroundingDINO config and checkpoint."
             )
         overrides.setdefault("config_path", os.environ[CONFIG_ENV_VAR])
         overrides.setdefault("weights_path", os.environ[WEIGHTS_ENV_VAR])
@@ -247,10 +241,7 @@ class GroundingDinoDetector:
         boxes = _clip_boxes(_cxcywh_to_xyxy(boxes), height, width)
         labels = [str(phrase) for phrase in phrases]
         order = np.argsort(-scores, kind="stable")
-        return [
-            Detection(box=boxes[index], score=float(scores[index]), label=labels[index])
-            for index in order
-        ]
+        return [Detection(box=boxes[index], score=float(scores[index]), label=labels[index]) for index in order]
 
 
 def _as_caption(prompt: str) -> str:
@@ -365,9 +356,7 @@ def _as_uint8_frames(frames: Any) -> np.ndarray:
     if array.ndim == 3:
         array = array[None]
     if array.ndim != 4:
-        raise ValueError(
-            f"expected frames shaped (T, H, W, 3), (H, W, 3) or (C, T, H, W), got {array.shape}"
-        )
+        raise ValueError(f"expected frames shaped (T, H, W, 3), (H, W, 3) or (C, T, H, W), got {array.shape}")
     if array.shape[-1] != 3:
         array = np.transpose(array, (1, 2, 3, 0))
     if array.shape[-1] != 3:

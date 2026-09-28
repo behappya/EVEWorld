@@ -42,14 +42,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 from eveworld.integrations.gigaworld.dataset import DEFAULT_SEED, collate_fn
-from eveworld.integrations.gigaworld.hooks import (
-    IGRCollator,
-    TIAHook,
-    _resolve_block,
-    build_igr_transform,
-    mix_batches,
-    register_tia,
-)
+from eveworld.integrations.gigaworld.hooks import IGRCollator, TIAHook, _resolve_block, build_igr_transform, mix_batches, register_tia
 from eveworld.integrations.gigaworld.model import (
     CELL_SIZE,
     TEMPORAL_STRIDE,
@@ -133,10 +126,7 @@ def build_optimizer(
     """
     values = [parameter for parameter in parameters if parameter.requires_grad]
     if not values:
-        raise ValueError(
-            "no trainable parameter to optimise; build the model and the adapter before "
-            "calling build_optimizer"
-        )
+        raise ValueError("no trainable parameter to optimise; build the model and the adapter before " "calling build_optimizer")
     normalized = str(kind).strip().lower().replace("-", "").replace("_", "")
     if normalized in {value.replace("-", "").replace("_", "") for value in CAME_KINDS}:
         optimiser = _came_optimizer(values, lr=lr, weight_decay=weight_decay, betas=betas)
@@ -167,9 +157,7 @@ def _came_optimizer(
     if not callable(builder):
         builder = getattr(came_pytorch, "CAME", None)
     if not callable(builder):
-        logger.warning(
-            "came_pytorch exposes neither CAME8bit nor CAME; falling back to AdamW"
-        )
+        logger.warning("came_pytorch exposes neither CAME8bit nor CAME; falling back to AdamW")
         return None
     candidates: list[dict[str, Any]] = [
         {"lr": float(lr), "weight_decay": float(weight_decay), "betas": tuple(betas)},
@@ -298,9 +286,7 @@ class GigaWorldTrainer:
         self.config = _as_config(config)
         self.dataset = dataset
         self.output_dir = Path(str(output_dir)).expanduser()
-        self.device = torch.device(
-            device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
-        )
+        self.device = torch.device(device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu"))
         self.resume = None if resume is None else Path(str(resume)).expanduser()
         self.optimizer_kind = str(optimizer_kind)
         self.lr = float(lr)
@@ -337,22 +323,10 @@ class GigaWorldTrainer:
             }
         )
         defaults = TIAConfig()
-        self.layer_index = int(
-            layer_index
-            if layer_index is not None
-            else cfg_get(config, "method.layer", None) or self.config.block_index
-        )
-        self.window = int(
-            window if window is not None else cfg_get(config, "method.window", None) or defaults.window
-        )
-        self.temperature = float(
-            temperature
-            if temperature is not None
-            else cfg_get(config, "method.temperature", None) or defaults.temperature
-        )
-        self.gamma = float(
-            gamma if gamma is not None else cfg_get(config, "method.gamma", None) or defaults.gamma
-        )
+        self.layer_index = int(layer_index if layer_index is not None else cfg_get(config, "method.layer", None) or self.config.block_index)
+        self.window = int(window if window is not None else cfg_get(config, "method.window", None) or defaults.window)
+        self.temperature = float(temperature if temperature is not None else cfg_get(config, "method.temperature", None) or defaults.temperature)
+        self.gamma = float(gamma if gamma is not None else cfg_get(config, "method.gamma", None) or defaults.gamma)
         if self.layer_index < 0:
             raise ValueError(f"layer_index must be non-negative, got {self.layer_index}")
         if self.window < 1 or self.window % 2 == 0:
@@ -392,8 +366,7 @@ class GigaWorldTrainer:
         set_seed(self.seed)
         if self.dataset is None:
             raise ValueError(
-                "GigaWorldTrainer.train() needs a dataset; pass one to the constructor, or use "
-                "dry_run() to step the loop on synthetic clips"
+                "GigaWorldTrainer.train() needs a dataset; pass one to the constructor, or use " "dry_run() to step the loop on synthetic clips"
             )
         self._prepare()
         if self.resume is not None:
@@ -459,8 +432,7 @@ class GigaWorldTrainer:
             num_frames=int(num_frames) if num_frames is not None else SMOKE_FRAMES,
         )
         logger.warning(
-            "dry run: %d step(s) at the smoke geometry %dx%d with %d frames, not the %dx%d "
-            "with %d frames of the run",
+            "dry run: %d step(s) at the smoke geometry %dx%d with %d frames, not the %dx%d " "with %d frames of the run",
             count,
             smoke.width,
             smoke.height,
@@ -489,11 +461,7 @@ class GigaWorldTrainer:
                 self.optimizer = None
                 self._loaders_cache = None
             self._prepare(stand_in=allow_stand_in, config=smoke)
-            batch = (
-                self._synthetic_batch(smoke)
-                if self._stand_in or self.dataset is None
-                else next(self._stream())
-            )
+            batch = self._synthetic_batch(smoke) if self._stand_in or self.dataset is None else next(self._stream())
             losses = [self._step(_constant_stream(batch)) for _ in range(count)]
             parameters = self._parameters()
             summary = {
@@ -601,8 +569,7 @@ class GigaWorldTrainer:
             unexpected = list(getattr(report, "unexpected_keys", []))
             if missing or unexpected:
                 logger.warning(
-                    "checkpoint %s does not match the model exactly: %d missing and %d "
-                    "unexpected keys",
+                    "checkpoint %s does not match the model exactly: %d missing and %d " "unexpected keys",
                     target,
                     len(missing),
                     len(unexpected),
@@ -665,9 +632,7 @@ class GigaWorldTrainer:
                 logger.warning("latest.json points at %s, which is not there", recorded)
         if directory.is_dir():
             return _latest_checkpoint(directory)
-        raise FileNotFoundError(
-            f"no checkpoint to resume from: {latest} is missing and {directory} does not exist"
-        )
+        raise FileNotFoundError(f"no checkpoint to resume from: {latest} is missing and {directory} does not exist")
 
     def _prepare(self, *, stand_in: bool = False, config: Any = None) -> None:
         """Build the model, the adapter, the hook, the optimiser and the generator once."""
@@ -710,8 +675,7 @@ class GigaWorldTrainer:
             return
         except (ImportError, OSError, RuntimeError, FileNotFoundError) as error:
             logger.warning(
-                "the released GigaWorld-0 backbone is not available (%s); the dry run continues "
-                "on the stand-in pipeline at %dx%d with %d frames",
+                "the released GigaWorld-0 backbone is not available (%s); the dry run continues " "on the stand-in pipeline at %dx%d with %d frames",
                 error,
                 config.width,
                 config.height,
@@ -801,10 +765,7 @@ class GigaWorldTrainer:
         if self._loaders_cache is not None:
             return self._loaders_cache
         if self.dataset is None:
-            raise ValueError(
-                "no dataset to stream from; pass one to the constructor, or use dry_run() to "
-                "step the loop on synthetic clips"
-            )
+            raise ValueError("no dataset to stream from; pass one to the constructor, or use dry_run() to " "step the loop on synthetic clips")
         collator = self.collator
         if collator is None:
             transform = self.transform
@@ -839,10 +800,7 @@ class GigaWorldTrainer:
     def _stream(self) -> Iterator[dict[str, Any]]:
         """Endless stream of mixed clean and disturbed batches, one per step."""
         clean, disturbed = self._loaders()
-        return (
-            mix_batches(clean_batch, igr_batch, p_dup=self.method.p_dup, rng=self.rng)
-            for clean_batch, igr_batch in zip(clean, disturbed)
-        )
+        return (mix_batches(clean_batch, igr_batch, p_dup=self.method.p_dup, rng=self.rng) for clean_batch, igr_batch in zip(clean, disturbed))
 
     def _step(self, stream: Iterator[Mapping[str, Any]]) -> dict[str, Any]:
         """One optimisation step: accumulate `grad_accum` micro-batches and update."""
@@ -880,9 +838,7 @@ class GigaWorldTrainer:
         self.hook.set_targets(batch.get("tia_cells"))
         calls = int(self.hook.calls)
         output = self.model.forward(batch, generator=self.generator)
-        igr = self.model.igr_loss(
-            output["pred"], output["target"], output["weight_map"], output["sigma"]
-        )
+        igr = self.model.igr_loss(output["pred"], output["target"], output["weight_map"], output["sigma"])
         tia = self.hook.loss_tensor if int(self.hook.calls) != calls else None
         total, stats = self.objective(igr, tia, step=int(self.step), sigma=output["sigma"])
         (total / float(self.grad_accum)).backward()
@@ -946,11 +902,7 @@ def _constant_stream(batch: Mapping[str, Any]) -> Iterator[Mapping[str, Any]]:
 
 def _mean_of(losses: Sequence[Mapping[str, Any]], key: str) -> float:
     """Mean of a numeric key over the steps of a dry run, `nan` when it was never set."""
-    values = [
-        float(entry[key])
-        for entry in losses
-        if isinstance(entry.get(key), (int, float)) and not isinstance(entry.get(key), bool)
-    ]
+    values = [float(entry[key]) for entry in losses if isinstance(entry.get(key), (int, float)) and not isinstance(entry.get(key), bool)]
     if not values:
         return float("nan")
     return float(sum(values) / len(values))
@@ -975,11 +927,7 @@ def _mean_stats(entries: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         if key == "step":
             stats[key] = int(values[-1])
             continue
-        numbers = [
-            float(value)
-            for value in values
-            if isinstance(value, (int, float)) and not isinstance(value, bool)
-        ]
+        numbers = [float(value) for value in values if isinstance(value, (int, float)) and not isinstance(value, bool)]
         presented = [value for value in values if value is not None]
         if numbers and len(numbers) == len(presented):
             stats[key] = float(sum(numbers) / len(numbers))
@@ -1013,9 +961,7 @@ class _StandInDenoiser(nn.Module):
     def __init__(self, hidden: int = 64, blocks: int = 24, patch: int = 2, channels: int = 16) -> None:
         super().__init__()
         self.patch_size = int(patch)
-        self.blocks = nn.ModuleDict(
-            {f"block{index}": _StandInBlock(hidden) for index in range(int(blocks))}
-        )
+        self.blocks = nn.ModuleDict({f"block{index}": _StandInBlock(hidden) for index in range(int(blocks))})
         self.projection = nn.Linear(int(channels) * int(patch) ** 2, int(hidden))
 
     def forward(

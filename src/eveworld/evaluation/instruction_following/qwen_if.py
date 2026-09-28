@@ -321,12 +321,7 @@ class QwenIFJudge:
     ) -> None:
         self.model = model
         self.base_url = normalize_base_url(base_url or os.environ.get("QWEN_BASE_URL"))
-        self.api_key = (
-            api_key
-            or os.environ.get("DASHSCOPE_API_KEY")
-            or os.environ.get("OPENAI_API_KEY")
-            or "EMPTY"
-        )
+        self.api_key = api_key or os.environ.get("DASHSCOPE_API_KEY") or os.environ.get("OPENAI_API_KEY") or "EMPTY"
         self.temperature = float(temperature)
         self.max_tokens = int(max_tokens)
         self.timeout = float(timeout)
@@ -509,15 +504,9 @@ def main(argv: list[str] | None = None) -> int:
         prog="eveworld.evaluation.instruction_following.qwen_if",
         description="Score clips with the Qwen instruction-following judge.",
     )
-    parser.add_argument(
-        "--manifest", type=Path, default=None, help="JSONL with a prompt and a video per line"
-    )
-    parser.add_argument(
-        "--video-dir", type=Path, default=None, help="clips whose prompt is read from the file name"
-    )
-    parser.add_argument(
-        "--output", type=Path, default=None, help="summary JSON and, next to it, a JSONL of records"
-    )
+    parser.add_argument("--manifest", type=Path, default=None, help="JSONL with a prompt and a video per line")
+    parser.add_argument("--video-dir", type=Path, default=None, help="clips whose prompt is read from the file name")
+    parser.add_argument("--output", type=Path, default=None, help="summary JSON and, next to it, a JSONL of records")
     parser.add_argument("--model", default=DEFAULT_MODEL, help="model name at the endpoint")
     parser.add_argument("--base-url", default=None, help="OpenAI-compatible endpoint")
     parser.add_argument("--frame-count", type=int, default=DEFAULT_FRAME_COUNT)
@@ -555,10 +544,7 @@ def _load_cli_records(args: argparse.Namespace) -> list[dict[str, Any]]:
     if args.manifest is not None:
         records = list(read_jsonl(args.manifest))
     elif args.video_dir is not None:
-        records = [
-            {"video": str(path), "prompt": _prompt_from_path(path)}
-            for path in list_files(args.video_dir, suffix=".mp4")
-        ]
+        records = [{"video": str(path), "prompt": _prompt_from_path(path)} for path in list_files(args.video_dir, suffix=".mp4")]
     else:
         raise ValueError("pass --manifest or --video-dir")
     if args.limit is not None:

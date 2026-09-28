@@ -43,9 +43,7 @@ def _masks(values: Any, name: str) -> np.ndarray:
     """Boolean view of ``values`` after checking that it is an array of 3 or 4 dimensions."""
     array = np.asarray(values, dtype=bool)
     if array.ndim not in (3, 4):
-        raise ValueError(
-            f"{name} must have shape (N, H, W), (T, H, W) or (T, N, H, W), got {array.shape}"
-        )
+        raise ValueError(f"{name} must have shape (N, H, W), (T, H, W) or (T, N, H, W), got {array.shape}")
     return array
 
 
@@ -59,9 +57,7 @@ def _robot_frames(robot_mask: Any, num_times: int) -> np.ndarray:
             return robot
         if robot.shape[0] == 1:
             return np.broadcast_to(robot[0], (num_times,) + robot.shape[1:])
-        raise ValueError(
-            f"robot_mask has {robot.shape[0]} frames but the target masks have {num_times}"
-        )
+        raise ValueError(f"robot_mask has {robot.shape[0]} frames but the target masks have {num_times}")
     raise ValueError(f"robot_mask must have shape (H, W) or (T, H, W), got {robot.shape}")
 
 
@@ -91,9 +87,7 @@ def occlusion_ratio(target_mask: np.ndarray, robot_mask: np.ndarray) -> float:
     return float(np.count_nonzero(target & robot)) / area
 
 
-def is_occluded(
-    target_mask: np.ndarray, robot_mask: np.ndarray, tau_occ: float = DEFAULT_TAU_OCC
-) -> bool:
+def is_occluded(target_mask: np.ndarray, robot_mask: np.ndarray, tau_occ: float = DEFAULT_TAU_OCC) -> bool:
     """Whether a single instance is exempt because the robot arm covers it.
 
     Args:
@@ -108,9 +102,7 @@ def is_occluded(
     return occlusion_ratio(target_mask, robot_mask) > tau_occ
 
 
-def occlusion_table(
-    target_masks: np.ndarray, robot_mask: np.ndarray, tau_occ: float = DEFAULT_TAU_OCC
-) -> np.ndarray:
+def occlusion_table(target_masks: np.ndarray, robot_mask: np.ndarray, tau_occ: float = DEFAULT_TAU_OCC) -> np.ndarray:
     """Per-instance occlusion table over the sampled timeline.
 
     Args:
@@ -154,9 +146,7 @@ def occlusion_table(
     return _occlusion(areas, hits, tau_occ)
 
 
-def reliable_targets(
-    target_masks: np.ndarray, *, area_ratio: float = RELIABLE_AREA_RATIO
-) -> np.ndarray:
+def reliable_targets(target_masks: np.ndarray, *, area_ratio: float = RELIABLE_AREA_RATIO) -> np.ndarray:
     """Masks large enough to vote in the exemption.
 
     A tracked instance votes only while its mask area is at least ``area_ratio`` times its own

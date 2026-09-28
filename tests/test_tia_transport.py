@@ -13,12 +13,7 @@ import torch
 
 from eveworld.methods.tia.adapter import TIAConfig, build_adapter
 from eveworld.methods.tia.loss import contrastive_loss, lambda_schedule, noise_gate
-from eveworld.methods.tia.matcher import (
-    correlation_matrix,
-    local_window_indices,
-    normalize_features,
-    select_layer,
-)
+from eveworld.methods.tia.matcher import correlation_matrix, local_window_indices, normalize_features, select_layer
 from eveworld.methods.tia.transport import transport, transport_weights
 
 

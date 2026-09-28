@@ -14,12 +14,7 @@ import pytest
 from eveworld.data.grounding.grounding_dino import Detection
 from eveworld.data.parsers.instruction_parser import ParsedInstruction
 from eveworld.data.tracking.sam2_tracker import associate_boxes
-from eveworld.methods.igr.corruption import (
-    as_clean_sample,
-    build_sample,
-    insert_duplicate,
-    interaction_region,
-)
+from eveworld.methods.igr.corruption import as_clean_sample, build_sample, insert_duplicate, interaction_region
 from eveworld.methods.igr.trajectory import Track, build_tracks
 from eveworld.methods.igr.weight_map import BACKGROUND, DISTURBED
 
@@ -123,9 +118,7 @@ def test_build_sample_is_reproducible_for_a_given_seed():
 
 def test_a_duplicate_sample_reports_an_event_and_a_two_level_map():
     frames = make_frames()
-    sample = build_sample(
-        frames, make_track(), PARSED, p_dup=1.0, shape=SHAPE, rng=np.random.default_rng(3)
-    )
+    sample = build_sample(frames, make_track(), PARSED, p_dup=1.0, shape=SHAPE, rng=np.random.default_rng(3))
 
     assert sample.fallback is False
     assert len(sample.events) >= 1
@@ -143,9 +136,7 @@ def test_a_duplicate_sample_reports_an_event_and_a_two_level_map():
 
 def test_a_sample_built_without_the_duplicate_branch_stays_consistent():
     frames = make_frames()
-    sample = build_sample(
-        frames, make_track(), PARSED, p_dup=0.0, shape=SHAPE, rng=np.random.default_rng(5)
-    )
+    sample = build_sample(frames, make_track(), PARSED, p_dup=0.0, shape=SHAPE, rng=np.random.default_rng(5))
 
     assert sample.frames.shape == frames.shape
     assert sample.weight_map.shape == SHAPE

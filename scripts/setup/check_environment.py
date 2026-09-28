@@ -277,9 +277,7 @@ def check_library() -> tuple[list[tuple[str, ...]], list[str]]:
     if module_available("eveworld"):
         version = installed_version("eveworld") or "not installed (on PYTHONPATH)"
         return [("eveworld", "ok", version, "package under test", "")], []
-    return [
-        ("eveworld", "missing", "-", "run pip install -e .", "required")
-    ], ["the eveworld package is not importable"]
+    return [("eveworld", "missing", "-", "run pip install -e .", "required")], ["the eveworld package is not importable"]
 
 
 def print_plan(root: Path, args: argparse.Namespace) -> None:
@@ -352,15 +350,9 @@ def main(argv: list[str] | None = None) -> int:
                 "train": [package_record(row) for row in train_rows],
                 "eval": [package_record(row) for row in eval_rows],
             },
-            "environment": [
-                {"variable": row[0], "status": row[1], "note": row[3]} for row in env_rows
-            ],
-            "checkouts": [
-                {"item": row[0], "status": row[1], "location": row[2], "note": row[3]} for row in path_rows
-            ],
-            "library": [
-                {"item": row[0], "status": row[1], "version": row[2], "note": row[4]} for row in library_rows
-            ],
+            "environment": [{"variable": row[0], "status": row[1], "note": row[3]} for row in env_rows],
+            "checkouts": [{"item": row[0], "status": row[1], "location": row[2], "note": row[3]} for row in path_rows],
+            "library": [{"item": row[0], "status": row[1], "version": row[2], "note": row[4]} for row in library_rows],
         }
         print(json.dumps(summary, indent=2, sort_keys=True))
     else:

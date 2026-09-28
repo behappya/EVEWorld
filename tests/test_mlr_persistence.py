@@ -8,11 +8,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from eveworld.evaluation.mlr.persistence import (
-    PersistenceResult,
-    PersistenceTracker,
-    detect_events,
-)
+from eveworld.evaluation.mlr.persistence import PersistenceResult, PersistenceTracker, detect_events
 
 
 def test_two_consecutive_deviations_are_needed():
@@ -63,9 +59,7 @@ def test_tracker_and_vectorised_helper_agree():
     exemptions = rng.random(256) < 0.15
 
     tracker = PersistenceTracker(k=2)
-    stepwise = np.array(
-        [tracker.update(bool(d), exempt=bool(e)) for d, e in zip(deviations, exemptions)]
-    )
+    stepwise = np.array([tracker.update(bool(d), exempt=bool(e)) for d, e in zip(deviations, exemptions)])
     assert np.array_equal(stepwise, detect_events(deviations, exemptions, k=2))
 
 

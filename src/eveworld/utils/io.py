@@ -65,6 +65,7 @@ def write_json(obj: Any, path: str | os.PathLike[str], indent: int = 2) -> Path:
     temporary file in the destination directory and moved into place with :func:`os.replace`, so
     a reader either sees the previous file or the complete new one.
     """
+
     def dump(handle: TextIO) -> None:
         json.dump(obj, handle, indent=indent, ensure_ascii=False)
         handle.write("\n")
@@ -90,6 +91,7 @@ def write_jsonl(rows: Iterable[Mapping[str, Any]], path: str | os.PathLike[str])
     long evaluation and therefore have to be readable after a crash: the write is atomic like
     :func:`write_json`.
     """
+
     def dump(handle: TextIO) -> None:
         for row in rows:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -140,9 +142,7 @@ def is_run_checkpoint(path: str | os.PathLike[str]) -> bool:
     if candidate.is_file():
         return candidate.suffix in _RUN_CHECKPOINT_SUFFIXES
     if candidate.is_dir():
-        return (candidate / "latest.json").is_file() or any(
-            candidate.glob(_RUN_CHECKPOINT_GLOB)
-        )
+        return (candidate / "latest.json").is_file() or any(candidate.glob(_RUN_CHECKPOINT_GLOB))
     return False
 
 

@@ -361,10 +361,7 @@ def build_metadata(
     else:
         provided_counts = mapping.get("expected_counts")
         if isinstance(provided_counts, Mapping):
-            expected_counts = [
-                _as_count(provided_counts.get(str(int(stamp)), provided_counts.get(int(stamp))))
-                for stamp in timestamps
-            ]
+            expected_counts = [_as_count(provided_counts.get(str(int(stamp)), provided_counts.get(int(stamp)))) for stamp in timestamps]
         elif provided_counts is not None and _length_of(provided_counts):
             values = list(provided_counts)
             expected_counts = [_as_count(values[index]) for index in range(count)]

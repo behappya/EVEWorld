@@ -77,9 +77,27 @@ SPLIT_HEADER = (
 # The 21 episodes of the EWMBench test set, the guard of eveworld/agibot/w9_extract_agibot.py.
 HOLDOUT_EPISODES = frozenset(
     {
-        "649524", "649559", "650191", "651464", "664600", "681186", "766602",
-        "773025", "773496", "743247", "743964", "744776", "798615", "798749",
-        "807480", "787136", "789120", "791059", "808158", "824748", "834014",
+        "649524",
+        "649559",
+        "650191",
+        "651464",
+        "664600",
+        "681186",
+        "766602",
+        "773025",
+        "773496",
+        "743247",
+        "743964",
+        "744776",
+        "798615",
+        "798749",
+        "807480",
+        "787136",
+        "789120",
+        "791059",
+        "808158",
+        "824748",
+        "834014",
     }
 )
 
@@ -186,13 +204,7 @@ def holdout_episodes(ewmbench_root: Path | None) -> tuple[frozenset[str], str]:
         return HOLDOUT_EPISODES | ids, str(listed)
     gt_root = ewmbench_root / "GT"
     if gt_root.is_dir():
-        ids = {
-            episode.name
-            for task in sorted(gt_root.iterdir())
-            if task.is_dir()
-            for episode in sorted(task.iterdir())
-            if episode.is_dir()
-        }
+        ids = {episode.name for task in sorted(gt_root.iterdir()) if task.is_dir() for episode in sorted(task.iterdir()) if episode.is_dir()}
         if ids:
             return HOLDOUT_EPISODES | ids, str(gt_root)
     return HOLDOUT_EPISODES, "built-in EWMBench release list"
@@ -250,10 +262,7 @@ def load_clips(root: Path, holdout: frozenset[str]) -> tuple[list[Clip], list[st
             text = video.with_suffix(".txt")
             prompt = text.read_text(encoding="utf-8").strip() if text.is_file() else None
         if prompt is None:
-            raise ValueError(
-                f"{video} has no instruction: expected {video.with_suffix('.txt').name} "
-                f"or an annotation carrying a prompt key"
-            )
+            raise ValueError(f"{video} has no instruction: expected {video.with_suffix('.txt').name} " f"or an annotation carrying a prompt key")
         clips.append(Clip(vid=stem, prompt=str(prompt), split="train", video=video, sidecar=sidecar))
     if not clips:
         raise FileNotFoundError(f"no clip found below {directory}")
@@ -439,8 +448,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     clips, guarded, previews = load_clips(data_root, holdout)
     if args.limit is None and len(clips) != TRAIN_CLIP_COUNT:
         print(
-            f"error: found {len(clips)} clips outside the EWMBench holdout, the recipe uses "
-            f"{TRAIN_CLIP_COUNT}",
+            f"error: found {len(clips)} clips outside the EWMBench holdout, the recipe uses " f"{TRAIN_CLIP_COUNT}",
             file=sys.stderr,
         )
         return 1
@@ -458,10 +466,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     annotated = sum(1 for clip in clips if clip.sidecar)
     print(f"data root:    {data_root}")
     print(f"output dir:   {output_dir}")
-    print(
-        f"clips:        {len(clips)} ({TRAIN_CLIP_COUNT} in the recipe, "
-        f"{previews} preview duplicates skipped)"
-    )
+    print(f"clips:        {len(clips)} ({TRAIN_CLIP_COUNT} in the recipe, " f"{previews} preview duplicates skipped)")
     print(f"guard:        {len(holdout)} EWMBench test episodes from {guard_source}")
     print(f"guard drops:  {len(guarded)} clips of this tree")
     print(f"annotations:  {annotated} clips carry an upstream annotation sidecar")

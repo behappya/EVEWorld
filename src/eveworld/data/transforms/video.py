@@ -190,9 +190,7 @@ def sample_indices(num_frames: int, num_out: int, mode: str = "linspace") -> np.
     return np.clip(indices, 0, last).astype(np.int64)
 
 
-def _read_frames(
-    path: Path, start: int | None, length: int | None
-) -> tuple[np.ndarray, float]:
+def _read_frames(path: Path, start: int | None, length: int | None) -> tuple[np.ndarray, float]:
     """Decode frames with PyAV, falling back to imageio when PyAV is missing."""
     try:
         return _read_with_av(path, start, length)
@@ -217,10 +215,8 @@ def _read_with_av(path: Path, start: int | None, length: int | None) -> tuple[np
     return _stack_frames(frames), fps
 
 
-def _read_with_imageio(
-    path: Path, start: int | None, length: int | None
-) -> tuple[np.ndarray, float]:
-    from imageio.v3 import immeta, imiter
+def _read_with_imageio(path: Path, start: int | None, length: int | None) -> tuple[np.ndarray, float]:
+    from imageio.v3 import imiter, immeta
 
     metadata = immeta(str(path))
     fps = float(metadata.get("fps") or 0.0)
@@ -279,16 +275,12 @@ def _resize_stack(array: np.ndarray, width: int, height: int) -> np.ndarray:
         import cv2
 
         interpolation = cv2.INTER_AREA if downscaling else cv2.INTER_LINEAR
-        return np.stack(
-            [cv2.resize(frame, (width, height), interpolation=interpolation) for frame in array]
-        )
+        return np.stack([cv2.resize(frame, (width, height), interpolation=interpolation) for frame in array])
     except ImportError:
         from PIL import Image
 
         resample = Image.BILINEAR
-        return np.stack(
-            [np.asarray(Image.fromarray(frame).resize((width, height), resample)) for frame in array]
-        )
+        return np.stack([np.asarray(Image.fromarray(frame).resize((width, height), resample)) for frame in array])
 
 
 def _stack_frames(frames: list[np.ndarray]) -> np.ndarray:
