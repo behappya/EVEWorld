@@ -13,5 +13,4 @@ eval:
   metrics: [subject_consistency, background_consistency, motion_smoothness, dynamic_degree,
             aesthetic_quality, image_quality, flow_score, photometric_smoothness, overall]
   num_prompts: 1000
-notes: WorldArena 1.0 over 1,000 prompts; the paper reports 53.95 Overall /
-  27.39 MLR for SFT against 56.76 / 13.38 for EVEWorld.
+notes: WorldArena 1.0 over 1,000 prompts.

@@ -1,4 +1,4 @@
-"""Occlusion exemption for the Multi-Instance Localisation Rate protocol.
+"""Occlusion exemption for the Model Laziness Rate protocol.
 
 Algorithm 1 skips a timestamp whose instance count falls below the frame-0 inventory only
 when every instance that went missing is plausibly hidden behind the robot arm. For target

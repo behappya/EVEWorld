@@ -42,4 +42,4 @@ eval:
   metrics: [mlr, qwen_if, gemini_if]
   tau_occ: 0.15
   k: 2
-notes: IGR-only arm, 250 steps; the paper reports 4.76 MLR and 51.85 Gemini-IF overall.
+notes: IGR-only arm, 250 steps.

@@ -4,7 +4,7 @@ The metadata that drives training and evaluation is JSON: one object per clip fo
 metadata files, one object per line for per-sample results and audit records. :func:`write_json`
 and :func:`write_jsonl` are atomic, so an interrupted job leaves the previous file intact instead
 of a truncated one, and they keep the insertion order of the keys so that records diff cleanly
-against the ones committed under ``results/``.
+against the ones committed under ``outputs/evaluation/``.
 """
 
 from __future__ import annotations

@@ -44,5 +44,4 @@ eval:
   metrics: [mlr, robotwin]
   tau_occ: 0.15
   k: 2
-notes: TIA-only transfer arm; the paper reports 13.445 PSNR, 0.776 SSIM,
-  0.333 LPIPS, 1.850 flow-EPE and 22.54 MLR.
+notes: TIA-only transfer arm.

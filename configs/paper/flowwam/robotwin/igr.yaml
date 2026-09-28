@@ -43,5 +43,4 @@ eval:
   metrics: [mlr, robotwin]
   tau_occ: 0.15
   k: 2
-notes: IGR-only transfer arm; the paper reports 12.544 PSNR, 0.770 SSIM,
-  0.380 LPIPS, 2.487 flow-EPE and 40.03 MLR.
+notes: IGR-only transfer arm.

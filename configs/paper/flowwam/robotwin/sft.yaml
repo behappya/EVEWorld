@@ -43,6 +43,4 @@ eval:
   metrics: [mlr, robotwin]
   tau_occ: 0.15
   k: 2
-notes: RoboTwin SFT baseline, 1128 steps over 2250 episodes; the paper
-  reports 11.687 PSNR, 0.735 SSIM, 0.414 LPIPS, 2.828 flow-EPE and
-  47.89 MLR.
+notes: RoboTwin SFT baseline, 1128 steps over 2250 episodes.

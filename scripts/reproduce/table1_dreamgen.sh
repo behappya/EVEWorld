@@ -4,8 +4,8 @@
 #
 # Stages, in order:
 #   1. build the DreamGen splits and the per-clip metadata under data/
-#   2. fine-tune the two GigaWorld-0 arms this repository owns, SFT for 200 steps and
-#      EVEWorld for 250 steps, at the Table 1 recipe
+#   2. fine-tune the two GigaWorld-0 arms this repository owns, SFT and EVEWorld,
+#      at the shared 250-step budget of the Table 1 recipe
 #   3. generate the 126 evaluation prompts once per arm, 30 denoising steps at CFG 7.0
 #   4. score every arm with the MLR protocol, then with the Qwen and the Gemini judge
 #
@@ -21,7 +21,7 @@
 #   PYTHON                 interpreter of the stages (default: python)
 #   DREAMGEN_DATA_ROOT     DreamGen source tree, read by the preparation stage
 #   EVEWORLD_RUN_ROOT      training runs and generated clips (default: outputs)
-#   EVEWORLD_RESULTS_ROOT  item-level results (default: results)
+#   EVEWORLD_RESULTS_ROOT  item-level results (default: outputs/evaluation)
 #   SHARDS                 generation shards, run one after another (default: 1)
 #   LIMIT                  cap the clips of every stage, for a smoke run
 #   DRY_RUN                1 prints the commands of every stage instead of running them
@@ -39,7 +39,7 @@ cd "${repo_root}"
 
 PYTHON="${PYTHON:-python}"
 RUN_ROOT="${EVEWORLD_RUN_ROOT:-outputs}"
-RESULTS_ROOT="${EVEWORLD_RESULTS_ROOT:-results}"
+RESULTS_ROOT="${EVEWORLD_RESULTS_ROOT:-outputs/evaluation}"
 SHARDS="${SHARDS:-1}"
 LIMIT="${LIMIT:-}"
 DRY_RUN="${DRY_RUN:-0}"
@@ -48,7 +48,7 @@ FAILED=0
 SPLIT="data/splits/dreamgen/test.txt"
 METADATA="data/metadata/dreamgenbench"
 ARMS=(sft eveworld)
-declare -A RUN_STEPS=([sft]=200 [eveworld]=250)
+declare -A RUN_STEPS=([sft]=250 [eveworld]=250)
 declare -A CONFIG=(
     [sft]="configs/paper/gigaworld/dreamgen/sft.yaml"
     [eveworld]="configs/paper/gigaworld/dreamgen/eveworld.yaml"

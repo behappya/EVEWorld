@@ -1,5 +1,5 @@
 # EVEWorld for the AgiBot transfer experiment (paper Table 4, tab:agibot_transfer).
-# IGR plus TIA at block 23 on the same 777 clips; EWMBench Overall 3.7525 in the paper.
+# IGR plus TIA at block 23 on the same 777 clips.
 name: agibot_eveworld
 seed: 42
 output_dir: outputs/${name}
@@ -41,5 +41,4 @@ eval:
   metrics: [ewmbench]
   tau_occ: 0.15
   k: 2
-notes: Full method on the AgiBot transfer set, 50 steps; EWMBench Motion
-  63.65, DYN 17.55, Scene 86.37 and Overall 3.7525 in the paper.
+notes: Full method on the AgiBot transfer set, 50 steps.

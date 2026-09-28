@@ -3,21 +3,20 @@
 The second of the two instruction-following judges. It asks the same binary question as
 :mod:`~eveworld.evaluation.instruction_following.qwen_if` -- does the clip follow the instruction?
 -- and shares that module's prompt rendering, verdict parsing and scoring, so the two judges differ
-only in their transport and their model. EVEWorld answers yes on 60.85% of the DreamGenBench
-prompts, against 53.57% for Standard SFT and 60.19% for the GigaWorld-0 baseline.
+only in their transport and their model.
 
 Gemini does not take JPEG data URLs through an OpenAI-compatible client, so the frames are sent as
 PNG ``file_uri`` parts, images first and the instruction last, and the reply is read back from the
-non-thought parts of the returned candidates. The published numbers were produced through a
-Difrost-style GenAI gateway, which is what ``base_url`` selects: a bearer token, an explicit
-``Host`` header and a per-client session affinity header, with certificate verification left to the
-gateway. Without ``base_url`` the judge talks to the public Gemini API with :data:`DEFAULT_MODEL`.
+non-thought parts of the returned candidates. The evaluation runs go through a Difrost-style GenAI
+gateway, which is what ``base_url`` selects: a bearer token, an explicit ``Host`` header and a
+per-client session affinity header, with certificate verification left to the gateway. Without
+``base_url`` the judge talks to the public Gemini API with :data:`DEFAULT_MODEL`.
 
 ``google-genai`` is imported inside :meth:`GeminiIFJudge._get_client`, so this module imports
 without the SDK. The same module runs from the shell::
 
     python -m eveworld.evaluation.instruction_following.gemini_if \\
-        --manifest data/metadata/dreamgenbench/manifest.jsonl --output results/gemini_if.json
+        --manifest data/metadata/dreamgenbench/manifest.jsonl --output outputs/evaluation/gemini_if.json
 """
 
 from __future__ import annotations

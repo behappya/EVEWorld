@@ -9,7 +9,7 @@ equal-weight mean. This script locates that root, reads it with
     python scripts/evaluate/eval_worldarena.py \
         --config configs/eval/worldarena.yaml \
         --pred-dir outputs/worldarena_eveworld/generated_only \
-        --output results/item_level/worldarena/table3.json
+        --output outputs/evaluation/item_level/worldarena/table3.json
 
 ``--scores`` names the evaluation root, one model directory under it or a single metric file when
 the default does not find them. Without it the script looks for metric files in ``--pred-dir``,
@@ -49,7 +49,7 @@ CORE_METRICS = (
 CANDIDATE_SUBDIRS = ("evaluation", "scores", "metrics", "core")
 PREVIEW = 3
 ROWS_SUFFIX = ".jsonl"
-DEFAULT_OUTPUT = "results/item_level/worldarena/table3.json"
+DEFAULT_OUTPUT = "outputs/evaluation/item_level/worldarena/table3.json"
 UNKNOWN = "unknown"
 
 LAYOUT = """\

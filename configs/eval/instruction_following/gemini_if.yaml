@@ -16,6 +16,4 @@ eval:
   disable_thinking: true
   concurrency: 4
   max_tokens: 32000
-notes: Gemini-IF judge with 49 frames per clip; the paper reports 60.85
-  overall for EVEWorld, 60.19 for the GigaWorld-0 backbone and 5.56 to
-  24.60 for the cross-model baselines.
+notes: Gemini-IF judge with 49 frames per clip.

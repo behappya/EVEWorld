@@ -5,20 +5,20 @@ The script reads the DreamGen tree pointed to by ``--data-root`` (the ``DREAMGEN
 environment variable) and writes:
 
 ``<output-dir>/splits/dreamgen/train.txt``
-    The 92 GR1 fine-tuning clips behind the GigaWorld-0 arms of paper Table 1: a ``#``
+    The 92 GR1 fine-tuning clips of the GigaWorld-0 post-training arms: a ``#``
     comment header, one blank line and then one 5-digit clip stem per line.
 ``<output-dir>/splits/dreamgen/val.txt``
     The 12 clips held out of the 92-clip post-training set for checkpoint selection and
-    protocol development. They are excluded from the reported DreamGenBench numbers, which
-    come from ``test.txt``.
+    protocol development. They are excluded from the DreamGenBench evaluation, which
+    comes from ``test.txt``.
 ``<output-dir>/splits/dreamgen/test.txt``
     The 126 DreamGenBench evaluation request ids, one per line, in manifest order.
 ``<output-dir>/metadata/dreamgenbench/target_queries.json``
     The prompt, target, source and destination of every request, plus the eligibility flag
-    the shared eligible set ``U_63`` is built from.
+    the shared eligible set is built from.
 ``<output-dir>/metadata/dreamgenbench/eligible_ids.json``
-    ``U_63``, the 63 requests eligible for Model Laziness Rate and for both
-    instruction-following judges (coverage 50.00% of the 126 prompts).
+    The requests eligible for Model Laziness Rate and for both instruction-following
+    judges, with their counts and the coverage.
 ``<output-dir>/metadata/dreamgenbench/<vid>.json``
     Prompt, latent geometry, the per-timestamp expected instance count and, for the 104
     post-training clips, the IGR annotation of ``docs/data_preparation.md``, whose keys sit
@@ -87,7 +87,7 @@ TRAIN_HEADER = (
     "# DreamGen / GR1 fine-tuning split - training clips.",
     "#",
     "# 92 clips of 93 frames at 480 x 768, 16 FPS. This is the post-training set of",
-    "# the GigaWorld-0 arms (Table 1, Table 6); the DreamGenBench evaluation",
+    "# the GigaWorld-0 arms; the DreamGenBench evaluation",
     "# split is test.txt. One 5-digit clip stem per line: the stems are manifest ids,",
     "# not media, and scripts/prepare/prepare_dreamgen.py regenerates the file from a",
     "# data root.",
@@ -97,18 +97,17 @@ VAL_HEADER = (
     "#",
     "# 12 clips held out of the 92-clip post-training set. They are used for",
     "# checkpoint selection and protocol development and are excluded from the",
-    "# reported DreamGenBench numbers, which come from test.txt. One 5-digit clip",
+    "# DreamGenBench evaluation, which comes from test.txt. One 5-digit clip",
     "# stem per line; scripts/prepare/prepare_dreamgen.py regenerates the file.",
 )
 TEST_HEADER = (
     "# DreamGenBench evaluation split.",
     "#",
     "# The 126 evaluation prompts of the benchmark, one 5-digit clip stem per line.",
-    "# 63 of the 126 clips form the shared eligible set U_63 used by Model Laziness",
-    "# Rate and by both instruction-following judges (coverage 50.00%); the eligible",
-    "# ids are listed in data/metadata/dreamgenbench/eligible_ids.json. The stems are",
-    "# manifest ids, not media; scripts/prepare/prepare_dreamgen.py regenerates the",
-    "# file from a data root.",
+    "# The clips eligible for Model Laziness Rate and for both instruction-following",
+    "# judges are listed in data/metadata/dreamgenbench/eligible_ids.json. The stems",
+    "# are manifest ids, not media; scripts/prepare/prepare_dreamgen.py regenerates",
+    "# the file from a data root.",
 )
 
 

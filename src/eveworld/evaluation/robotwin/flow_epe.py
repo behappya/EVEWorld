@@ -1,9 +1,9 @@
 """Optical-flow end-point error for the RoboTwin transfer study (Table 5).
 
-Flow is the strongest signal in the table: EVEWorld reaches 2.207 px against 3.033 px for the
-FlowWAM Stage-1 control, because a world model that predicts temporally consistent motion needs
-less motion supervision at inference time. Both clips of a pair are converted to dense RAFT flow
-and compared pixel by pixel with the end-point error ``||flow_pred - flow_target||_2``; the score
+Flow end-point error is the motion metric of the table, and the one expected to separate the
+transfer arms: a world model that predicts temporally consistent motion keeps its predicted flow
+closer to the demonstration. Both clips of a pair are converted to dense RAFT flow and compared
+pixel by pixel with the end-point error ``||flow_pred - flow_target||_2``; the score
 of a pair is the mean error over the image, and the score of a clip is the mean over its
 consecutive frame pairs.
 

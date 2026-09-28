@@ -1,7 +1,7 @@
 # Ablation: classifier-free guidance grid, the experiment behind Figure 4 (fig:cfg) and
 # tab:cfg_main. Six training steps x four guidance weights, generated at seed 4 for the 126
-# DreamGenBench request ids with 30 denoising steps; Gemini-IF rises with CFG while MLR does
-# not fall monotonically, which motivates explicit supervision instead of guidance tuning.
+# DreamGenBench request ids with 30 denoising steps; the sweep motivates explicit supervision
+# instead of guidance tuning.
 name: ablate_cfg_grid
 seed: 42
 output_dir: outputs/${name}

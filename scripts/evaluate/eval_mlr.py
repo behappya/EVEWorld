@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Score generated clips with the Missing-instance rate (MLR).
+"""Score generated clips with the Model Laziness Rate (MLR).
 
 The script resolves the frozen protocol of ``--config``, scores the clips of ``--pred-dir``
 with ``eveworld.evaluation.mlr`` and writes the aggregate to ``--output``::
@@ -8,7 +8,7 @@ with ``eveworld.evaluation.mlr`` and writes the aggregate to ``--output``::
         --config configs/eval/mlr/dreamgen.yaml \
         --pred-dir outputs/dreamgen_eveworld/generated_only \
         --metadata data/metadata/dreamgenbench \
-        --output results/item_level/dreamgen/mlr_eveworld.json
+        --output outputs/evaluation/item_level/dreamgen/mlr_eveworld.json
 
 Every clip is scored on the sampled timestamps of the protocol, ``eval.sample_count`` of them
 in ``eval.sample_mode`` order: Grounding-DINO counts the instances of the target named by the
@@ -33,7 +33,7 @@ eligible share of the benchmark, read from ``eligible_ids.json`` when the metada
 publishes one, otherwise the eligible share of the run itself.
 
 ``--output`` receives the summary and ``--rows`` the per-clip rows, one JSON object per line in
-the schema of ``results/item_level/README.md``; ``--rows`` defaults to ``--output`` with a
+the schema of ``docs/item_level.md``; ``--rows`` defaults to ``--output`` with a
 ``.jsonl`` suffix. ``--limit`` caps the number of clips for a smoke run, and ``--dry-run``
 prints the plan and the resolved clips without building a detector or touching a device.
 """
@@ -90,14 +90,14 @@ files written by a run:
     --rows      the rows it was computed from, one JSON object per clip
 
 A row carries request_id, model, mlr, eligible, events and coverage next to the counting detail
-of the clip, as documented in results/item_level/README.md.
+of the clip, as documented in docs/item_level.md.
 """
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     """Parse the command line of the MLR evaluation script."""
     parser = argparse.ArgumentParser(
-        description="Score generated clips with the Missing-instance rate (MLR).",
+        description="Score generated clips with the Model Laziness Rate (MLR).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=LAYOUT,
     )

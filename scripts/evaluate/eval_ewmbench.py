@@ -9,7 +9,7 @@ layout directory, rebuilds the ``MEAN`` row from the data rows with
     python scripts/evaluate/eval_ewmbench.py \
         --config configs/eval/ewmbench.yaml \
         --pred-dir eval_layout/eveworld_dataset \
-        --output results/item_level/ewmbench/ewmbench_eveworld.json
+        --output outputs/evaluation/item_level/ewmbench/ewmbench_eveworld.json
 
 ``--scores`` names the CSV, or the directory holding it, when the layout is not the one the
 toolkit wrote. Without it the script looks for ``final_results.csv``, ``results.csv`` and
@@ -45,7 +45,7 @@ SEARCH_DEPTH = 2
 PREVIEW = 3
 MODEL_SUFFIX = "_dataset"
 DEFAULT_LAYOUT = "eval_layout"
-DEFAULT_OUTPUT = "results/item_level/ewmbench/table4.json"
+DEFAULT_OUTPUT = "outputs/evaluation/item_level/ewmbench/table4.json"
 ROWS_SUFFIX = ".jsonl"
 
 LAYOUT = """\

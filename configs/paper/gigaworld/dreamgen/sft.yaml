@@ -29,7 +29,7 @@ train:
   weight_decay: 0.01
   batch_size: 8
   grad_accum: 8
-  max_steps: 200
+  max_steps: 250
   save_every: 50
 data:
   root: .
@@ -42,5 +42,4 @@ eval:
   metrics: [mlr, qwen_if, gemini_if]
   tau_occ: 0.15
   k: 2
-notes: Standard SFT baseline, 200 steps at effective batch 64; the paper
-  reports 11.11 MLR, 73.81 Qwen-IF and 53.57 Gemini-IF overall.
+notes: Standard SFT baseline, 250 steps at effective batch 64.

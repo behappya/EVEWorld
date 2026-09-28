@@ -8,7 +8,7 @@ reference recording of the same episode and writes the five-row table to ``--out
         --config configs/eval/mlr/robotwin.yaml \
         --pred-dir outputs/robotwin_eveworld/generated_only \
         --target-dir data/robotwin/heldout \
-        --output results/item_level/robotwin/table5.json
+        --output outputs/evaluation/item_level/robotwin/table5.json
 
 Every clip pair is truncated to the frames the two recordings share and scored with the metrics of
 ``--metrics``: PSNR with a data range of 255, SSIM over ``--ssim-samples`` frames, LPIPS over
@@ -29,7 +29,7 @@ well as a flat one.
 
 ``--output`` receives the five-row report as JSON with the CSV rendering of the table next to it,
 and ``--rows`` the per-clip rows, one JSON object per line in the schema of
-``results/item_level/README.md``; ``--rows`` defaults to ``--output`` with a ``.jsonl`` suffix. A
+``docs/item_level.md``; ``--rows`` defaults to ``--output`` with a ``.jsonl`` suffix. A
 clip that could not be scored is reported under ``errors`` and kept in the row file with its
 error, while the table is pooled from the clips that were scored. ``--limit`` caps the clips of
 every pair for a smoke run, and ``--dry-run`` prints the plan and the matched clips without
@@ -53,7 +53,7 @@ ROWS_SUFFIX = ".jsonl"
 PREVIEW = 3
 PROTOCOL = "robotwin_table5_v1"
 DEFAULT_VARIANT = "eve"
-DEFAULT_OUTPUT = "results/item_level/robotwin/table5.json"
+DEFAULT_OUTPUT = "outputs/evaluation/item_level/robotwin/table5.json"
 METRICS = ("psnr", "ssim", "lpips", "flow_epe")
 DEFAULT_SSIM_SAMPLES = 16
 DEFAULT_LPIPS_SAMPLES = 8
@@ -66,7 +66,7 @@ files written by a run:
     --rows      the clips it was pooled from, one JSON object per clip
 
 A row carries request_id, model and the variant of the clip next to the metrics of the table and
-the mlr keys of the annotation stage, as documented in results/item_level/README.md.
+the mlr keys of the annotation stage, as documented in docs/item_level.md.
 """
 
 

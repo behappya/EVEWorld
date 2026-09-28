@@ -16,4 +16,4 @@ eval:
   concurrency: 4
   max_tokens: 32000
 notes: Qwen-IF judge with 49 frames per clip at temperature 0 and thinking
-  disabled; the paper reports 80.16 overall for EVEWorld on DreamGenBench.
+  disabled.

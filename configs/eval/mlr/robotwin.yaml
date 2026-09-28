@@ -17,5 +17,5 @@ eval:
   sample_count: 24
   # tau_occ and k are not repeated here: both keep the frozen values of the WorldArena
   # protocol in configs/eval/mlr/worldarena.yaml (tau_occ 0.15, k 2).
-notes: RoboTwin MLR, PSNR, SSIM, LPIPS and flow-EPE; paper values run from
-  FlowWAM 52.05 MLR / 12.218 PSNR to EVEWorld 35.21 MLR / 12.765 PSNR.
+notes: RoboTwin MLR, PSNR, SSIM, LPIPS and flow-EPE for the cross-backbone
+  transfer arms.

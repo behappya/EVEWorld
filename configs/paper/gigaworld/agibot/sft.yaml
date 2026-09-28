@@ -41,4 +41,4 @@ eval:
   metrics: [ewmbench]
   tau_occ: 0.15
   k: 2
-notes: SFT baseline on 777 AgiBot clips, 50 steps; the paper reports EWMBench Overall 3.7066.
+notes: SFT baseline on 777 AgiBot clips, 50 steps.

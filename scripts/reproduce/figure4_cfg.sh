@@ -26,7 +26,7 @@
 #   PYTHON                 interpreter of the stages (default: python)
 #   DREAMGEN_DATA_ROOT     DreamGen source tree, read by the preparation stage
 #   EVEWORLD_RUN_ROOT      training runs and generated clips (default: outputs)
-#   EVEWORLD_RESULTS_ROOT  item-level results (default: results)
+#   EVEWORLD_RESULTS_ROOT  item-level results (default: outputs/evaluation)
 #   GRID_ROOT              output tree of the grid (default: <grid run>/grid)
 #   SHARDS                 generation shards per cell, run one after another (default: 1)
 #   LIMIT                  cap the clips of every stage, for a smoke run
@@ -44,7 +44,7 @@ cd "${repo_root}"
 
 PYTHON="${PYTHON:-python}"
 RUN_ROOT="${EVEWORLD_RUN_ROOT:-outputs}"
-RESULTS_ROOT="${EVEWORLD_RESULTS_ROOT:-results}"
+RESULTS_ROOT="${EVEWORLD_RESULTS_ROOT:-outputs/evaluation}"
 SHARDS="${SHARDS:-1}"
 LIMIT="${LIMIT:-}"
 DRY_RUN="${DRY_RUN:-0}"

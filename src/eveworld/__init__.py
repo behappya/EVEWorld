@@ -14,7 +14,7 @@ The package is organised in four layers:
     Instruction parsing, open-vocabulary grounding, instance tracking and the
     video/latent transforms shared by training, inference and evaluation.
 ``eveworld.evaluation``
-    The Multi-Instance Localisation Rate (MLR) metric and wrappers for the
+    The Model Laziness Rate (MLR) metric and wrappers for the
     external benchmarks (DreamGenBench, WorldArena, EWMBench, PBench, RoboTwin).
 
 Submodules are resolved lazily, so ``import eveworld`` stays cheap and does not

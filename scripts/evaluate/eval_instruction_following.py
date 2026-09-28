@@ -7,7 +7,7 @@ The script resolves the judging protocol of ``--config``, asks the judge named b
     python scripts/evaluate/eval_instruction_following.py \
         --config configs/eval/instruction_following/qwen_if.yaml \
         --pred-dir outputs/dreamgen_eveworld/generated_only \
-        --output results/item_level/dreamgen/qwen_if_eveworld.json
+        --output outputs/evaluation/item_level/dreamgen/qwen_if_eveworld.json
 
 Every clip is decoded to ``eval.frame_count`` frames whose longest side is at most
 ``eval.max_side`` pixels, JPEG-encoded at quality 85 and sent to the judge together with the
@@ -27,7 +27,7 @@ category, a split or a task type is counted under it, so a benchmark that publis
 Environment / Object / Behavior split gets the breakdown of the released table.
 
 ``--output`` receives the summary and ``--rows`` the per-clip rows, one JSON object per line in
-the schema of ``results/item_level/README.md``; ``--rows`` defaults to ``--output`` with a
+the schema of ``docs/item_level.md``; ``--rows`` defaults to ``--output`` with a
 ``.jsonl`` suffix. ``--resume`` reads the rows of an earlier run back, skips the clips they
 decided and carries those rows into the new row file, while a clip whose earlier judgement errored
 is tried again; that is how the release ran a judge over a benchmark in several sittings.
@@ -78,7 +78,7 @@ files written by a run:
 
 A row carries request_id, model and the judge key of the run - qwen_if or gemini_if, 100.0 for a
 followed instruction, 0.0 for a broken one and null for an undecided clip - next to the verdict
-and the error of the clip, as documented in results/item_level/README.md.
+and the error of the clip, as documented in docs/item_level.md.
 """
 
 
@@ -480,7 +480,7 @@ def build_judge(plan: EvalPlan) -> Any:
 
 
 def row_of(scored: dict[str, Any], plan: EvalPlan) -> dict[str, Any]:
-    """Item-level row of one judged clip, under the schema of ``results/item_level/README.md``."""
+    """Item-level row of one judged clip, under the schema of ``docs/item_level.md``."""
     verdict = scored.get("verdict")
     row: dict[str, Any] = {
         "request_id": scored.get("request_id", ""),

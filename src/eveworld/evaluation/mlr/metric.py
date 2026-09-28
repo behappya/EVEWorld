@@ -1,21 +1,15 @@
-"""Aggregate MLR numbers into the figures the paper reports.
+"""Aggregation utilities of the Model Laziness Rate (MLR) protocol.
 
-The metric itself is the Multi-Instance Localisation Rate (MLR): the share of
-sampled timestamps of a clip at which the instruction's target is missing, with
-a deviation counted only when it persists and when it is not explained by robot
-occlusion (``persistence`` and ``occlusion`` modules). A clip is *eligible*
-when its instruction asks for a target and the generated clip has somewhere for
-that target to be; ineligible clips are excluded from both the numerator and
-the denominator.
-
-Reference figures, quoted from the paper's released numbers:
-
-* DreamGenBench ``U_63``: 63 of 126 clips are eligible, i.e. a coverage of
-  50.00%, and the MLR is reported over those 63 clips.
-* WorldArena: 157 eligible clips, MLR 19.22%.
-* The sensitivity grid over detection and occlusion thresholds moves the MLR
-  by 70.0-88.9% in relative terms, which is why ``aggregate`` reports coverage
-  and clip counts next to the MLR itself.
+The metric itself is the Model Laziness Rate (MLR): the share of sampled
+timestamps of a clip at which the adjusted instance count of the instruction's
+target deviates from its count in the conditioning state. A deviation is
+counted only when it persists over consecutive sampled timestamps
+(:mod:`eveworld.evaluation.mlr.persistence`) and when an under-count is not
+explained by robot occlusion (:mod:`eveworld.evaluation.mlr.occlusion`);
+over-counts are always retained. A clip is *eligible* when its instruction
+resolves to a target and the first sampled timestamp holds at least one
+instance of it; ineligible clips are excluded from both the numerator and the
+denominator.
 
 Every rate is reported in percent, so a clip with an MLR of 1.0 means 100%.
 """
@@ -34,7 +28,7 @@ __all__ = [
     "common_eligible",
     "coverage",
     "exact_mcnemar",
-    "missing_rate",
+    "mean_mlr",
     "wilson_interval",
 ]
 
@@ -86,7 +80,7 @@ def coverage(num_eligible: int, num_total: int) -> float:
     return float(100.0 * float(num_eligible) / float(total))
 
 
-def missing_rate(rates: Iterable[Any], eligible: Sequence[bool] | None = None) -> tuple[float, int]:
+def mean_mlr(rates: Iterable[Any], eligible: Sequence[bool] | None = None) -> tuple[float, int]:
     """Average per-clip MLR values across clips into ``(mean, contributing)``.
 
     ``rates`` holds one entry per clip; a boolean entry means a clip whose
@@ -171,8 +165,7 @@ def exact_mcnemar(a: int, b: int) -> float:
     ``a`` and ``b`` are the two discordant cell counts; the statistic follows a
     binomial distribution with ``n = a + b`` and ``p = 0.5``. ``scipy`` is used
     when it is installed, otherwise the binomial sum is evaluated directly with
-    ``math.comb``. The released WorldArena comparison of 34 against 12 gives
-    ``0.0016414913408482334``.
+    ``math.comb``.
     """
     left = int(a)
     right = int(b)

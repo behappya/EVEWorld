@@ -47,5 +47,5 @@ ablation:
   artifact: app:evaluation_stability
   select: seed
   seeds: [42, 43, 44]
-notes: Three-repeat generation protocol; the paper reports that repeated
-  judgments and matched inference seeds leave the main ordering unchanged.
+notes: Three-repeat generation protocol over repeated judgments and matched
+  inference seeds.

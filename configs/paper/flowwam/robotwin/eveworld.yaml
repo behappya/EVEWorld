@@ -1,5 +1,5 @@
 # EVEWorld on RoboTwin, the cross-backbone transfer row of paper Table 5
-# (tab:flowwam_transfer): 12.765 PSNR, 0.769 SSIM, 0.365 LPIPS, 2.207 flow-EPE, 35.21 MLR.
+# (tab:flowwam_transfer).
 # Generation follows the paper protocol: --cfg-scale 5.0 --steps 40 --tia-inject off
 # --full-traj direct --flow-cond robot_only --seed 42.
 name: robotwin_flowwam_eveworld

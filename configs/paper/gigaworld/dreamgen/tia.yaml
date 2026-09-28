@@ -43,4 +43,4 @@ eval:
   metrics: [mlr, qwen_if, gemini_if]
   tau_occ: 0.15
   k: 2
-notes: TIA-only arm, 250 steps; the paper reports 7.94 MLR and 55.29 Gemini-IF overall.
+notes: TIA-only arm, 250 steps.

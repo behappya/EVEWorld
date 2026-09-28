@@ -21,7 +21,7 @@ of the tier whose first record looks like PBench data.
 A tier with no score file is listed in the report and left out of the table, and the run stops
 only when no tier of the sweep has one. ``--weighting`` chooses the released per-clip estimator
 (``sample``) or question pooling. ``--output`` receives one block of scores per tier plus the
-means the paper reports, ``--rows`` the per-question records of every tier with their tier and
+means over the tiers, ``--rows`` the per-question records of every tier with their tier and
 protocol, one JSON object per line, ``--limit`` caps the questions a tier is scored on and
 ``--dry-run`` prints the plan and the score file of every tier without scoring one.
 """

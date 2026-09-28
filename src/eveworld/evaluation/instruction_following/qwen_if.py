@@ -1,21 +1,19 @@
 """Qwen instruction-following judge for Table 1 and Table 6.
 
 The judge is shown a handful of frames spread over the clip and asked one binary question: does
-the clip follow the instruction? EVEWorld answers yes on 80.16% of the DreamGenBench prompts,
-against 73.81% for Standard SFT and 79.37% for the GigaWorld-0 baseline, and the same protocol is
-used on the held-out RoboTwin instructions of Table 6. Cost is dominated by the image tokens, so
-the clips are reduced to :data:`DEFAULT_FRAME_COUNT` frames whose longest side is at most
-:data:`DEFAULT_MAX_SIDE` pixels before they are sent as JPEG data URLs.
+the clip follow the instruction? The same protocol is also used on the held-out RoboTwin
+instructions of Table 6. Cost is dominated by the image tokens, so the clips are reduced to
+:data:`DEFAULT_FRAME_COUNT` frames whose longest side is at most :data:`DEFAULT_MAX_SIDE` pixels
+before they are sent as JPEG data URLs.
 
-The default rubric is the one used for the published numbers and lives in the module as
-:data:`DEFAULT_RUBRIC`; a checkout that ships ``data/prompts/qwen_if.txt`` overrides it, and the
-``template`` argument of :func:`build_judge_prompt` overrides both. The endpoint is reached
-through the OpenAI-compatible client, which is imported inside
-:meth:`QwenIFJudge._get_client` so that this module imports without the SDK and without network
-access. The same module runs from the shell::
+The default rubric lives in the module as :data:`DEFAULT_RUBRIC`; a checkout that ships
+``data/prompts/qwen_if.txt`` overrides it, and the ``template`` argument of
+:func:`build_judge_prompt` overrides both. The endpoint is reached through the
+OpenAI-compatible client, which is imported inside :meth:`QwenIFJudge._get_client` so that this
+module imports without the SDK and without network access. The same module runs from the shell::
 
     python -m eveworld.evaluation.instruction_following.qwen_if \\
-        --manifest data/metadata/dreamgenbench/manifest.jsonl --output results/qwen_if.json
+        --manifest data/metadata/dreamgenbench/manifest.jsonl --output outputs/evaluation/qwen_if.json
 """
 
 from __future__ import annotations

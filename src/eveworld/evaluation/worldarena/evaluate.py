@@ -8,9 +8,9 @@ writes one file per metric per model, ``<root>/<model>/core/<metric>.json``, eac
 :func:`load_scores` turns them into one record per clip and :func:`aggregate` reports the table on
 the 0-100 scale the paper prints::
 
-    python -m eveworld.evaluation.worldarena.evaluate --input results/worldarena --model eveworld
+    python -m eveworld.evaluation.worldarena.evaluate --input outputs/worldarena --model eveworld
 
-Clips are generated at ``480 x 768`` and scored on the 157 prompts that pass the shared
+Clips are generated at ``480 x 768`` and scored on the prompts that pass the shared
 detector-eligible filter, after normalization to the ``640 x 480``, 121 frames, 24 fps contract of
 the cross-model comparison. The per-clip records keep the evaluator's ``[0, 1]`` values and carry
 ``overall`` as the legacy EWMScore-local-8; MLR is reported beside this table and is computed by

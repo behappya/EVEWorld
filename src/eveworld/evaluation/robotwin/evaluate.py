@@ -2,10 +2,9 @@
 
 Each variant is transferred to the 250 held-out RoboTwin episodes (50 tasks, episodes 45 to 49)
 and scored clip by clip against the reference recording of the same episode: PSNR, SSIM and LPIPS
-for appearance and flow end-point error for motion. EVEWorld finishes at 12.765 / 0.769 / 0.365 /
-2.207 against 12.218 / 0.748 / 0.383 / 3.033 for the FlowWAM Stage-1 control, and the ranking on
-flow error is the point of the table: injecting the interaction-aware objective keeps motion
-closer to the demonstration than either baseline.
+for appearance and flow end-point error for motion. The suite separates appearance from motion,
+and flow end-point error is the metric expected to separate the transfer arms, because an
+interaction-aware objective keeps predicted motion closer to the demonstration.
 
 :func:`evaluate_clip` works from paths because the generated and reference clips live in separate
 directories of the campaign layout, and because decoding a clip once per metric would multiply
@@ -16,7 +15,7 @@ carry the ``mlr_*`` keys are pooled by :func:`aggregate` into the MLR columns of
 The module runs as a script::
 
     python -m eveworld.evaluation.robotwin.evaluate \\
-        --pair eve=/results/heldout/eve:/data/robotwin/reference
+        --pair eve=outputs/heldout/eve:/data/robotwin/reference
 
 ``--pair`` follows the ``--variant NAME=VIDEO_DIR`` flag of the FlowWAM campaign scripts but takes
 the reference directory as well, so one invocation scores a whole variant.
@@ -52,7 +51,7 @@ VARIANTS: tuple[dict[str, Any], ...] = (
 )
 
 DEFAULT_METRICS: tuple[str, ...] = ("psnr", "ssim", "lpips", "flow_epe")
-DEFAULT_OUTPUT = Path("aggregate/table5.json")
+DEFAULT_OUTPUT = Path("outputs/evaluation/item_level/robotwin/table5.json")
 PROTOCOL = "robotwin_table5_v1"
 VIDEO_SUFFIXES = (".mp4", ".mov", ".mkv", ".webm", ".avi")
 _CSV_HEADER = (
@@ -190,7 +189,7 @@ def aggregate(rows: Iterable[dict[str, Any]], *, output: str | Path | None = Non
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Command-line entry point; scores every ``--pair`` and writes ``aggregate/table5.json``."""
+    """Command-line entry point; scores every ``--pair`` and writes the default JSON report."""
     parser = argparse.ArgumentParser(
         prog="eveworld.evaluation.robotwin.evaluate",
         description="Score the five Table 5 variants on the held-out RoboTwin episodes.",

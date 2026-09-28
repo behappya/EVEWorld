@@ -48,5 +48,5 @@ ablation:
   artifact: tab:weightmap_design
   select: method.weight_map
   values: [1.0, 3.0]
-notes: Default IGR weight map; the legacy multi-level and binary 3x designs
-  perform comparably in development, so the simpler binary design is kept.
+notes: Default IGR weight map; the binary 3x variant is kept as the simpler
+  design.

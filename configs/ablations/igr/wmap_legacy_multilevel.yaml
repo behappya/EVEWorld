@@ -48,5 +48,5 @@ ablation:
   artifact: tab:weightmap_design
   select: method.weight_map
   values: [0.5, 2.0, 3.0, 4.0, 6.0]
-notes: Original five-level weighting; comparable to the adopted binary 3x
-  design on development data but with more free parameters.
+notes: Original five-level weighting; kept as the reference variant, with
+  more free parameters than the adopted binary 3x design.

@@ -8,7 +8,7 @@ The script reads the frozen WorldArena 1.0 manifest that ``--data-root``
     The manipulated object and the manipulator of all 1,000 requests, keyed by the request
     id of the manifest position.
 ``<output-dir>/metadata/worldarena/eligible_ids.json``
-    The 157 requests that are eligible for Model Laziness Rate, with the counts and the
+    The requests that are eligible for Model Laziness Rate, with the counts and the
     coverage of the published protocol.
 ``<output-dir>/splits/worldarena/train.txt``
     The 16 requests that freeze the detector thresholds and the occlusion rule before the
@@ -25,8 +25,8 @@ manipulator exists to be lazy. The frozen manifest renders every instruction fro
 small set of frames; the frame that matches a prompt fixes the object and, where the text
 determines it, the manipulator. Prompts outside the object frames are robot navigation,
 collective tidying or scene inspection: they carry no object and are not eligible. The
-coverage denominator is the number of requests that name a manipulator, 817 of 1,000,
-which is what the published 19.22% is measured against.
+coverage denominator is the number of requests that name a manipulator, which is what the
+published coverage is measured against.
 
 Upstream layout under ``--data-root``::
 
@@ -72,8 +72,8 @@ ROBOT_BASE = "robot_base"
 NO_ARM = None
 # 133 requests act with a single arm and the instruction does not say which one: the manifest
 # generator sampled the arm, and the same verb with the same object appears on both sides.
-# An unnamed arm is recorded as both, the union the detector already works with, which keeps
-# ``num_resolved`` at 817 and the coverage at 19.22%.
+# An unnamed arm is recorded as both, the union the detector already works with, so the
+# resolved count stays the one of the published protocol.
 SINGLE_GRIPPER = "single_gripper"
 DEFAULT_MOVER = BOTH_GRIPPERS
 # The instruction frames of the frozen manifest. Each frame marks one noun phrase as the
@@ -113,10 +113,9 @@ TRAIN_HEADER = (
 EVAL_HEADER = (
     "# WorldArena 1.0 evaluation manifest.",
     "#",
-    "# The 1,000 requests of the frozen WorldArena 1.0 manifest, in manifest order.",
-    "# 157 requests are eligible for Model Laziness Rate (coverage 19.22%); the",
-    "# eligible ids are listed in data/metadata/worldarena/eligible_ids.json and the",
-    "# parsed target and mover of every request in",
+    "# The frozen WorldArena 1.0 manifest, in manifest order. The requests eligible",
+    "# for Model Laziness Rate are listed in data/metadata/worldarena/eligible_ids.json",
+    "# and the parsed target and mover of every request in",
     "# data/metadata/worldarena/parsed_targets.json.",
     "# scripts/prepare/build_mlr_metadata.py regenerates the file from a data root.",
 )

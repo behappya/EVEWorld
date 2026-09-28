@@ -23,7 +23,7 @@
 #   AGIBOT_DATA_ROOT       AgiBot source clips, read by the preparation stage
 #   EWMBENCH_DATA_ROOT     EWMBench checkout holding the GT/ episodes
 #   EVEWORLD_RUN_ROOT      training runs and generated clips (default: outputs)
-#   EVEWORLD_RESULTS_ROOT  item-level results (default: results)
+#   EVEWORLD_RESULTS_ROOT  item-level results (default: outputs/evaluation)
 #   SHARDS                 generation shards, run one after another (default: 1)
 #   LIMIT                  cap the clips of every stage, for a smoke run
 #   DRY_RUN                1 prints the commands of every stage instead of running them
@@ -39,7 +39,7 @@ cd "${repo_root}"
 
 PYTHON="${PYTHON:-python}"
 RUN_ROOT="${EVEWORLD_RUN_ROOT:-outputs}"
-RESULTS_ROOT="${EVEWORLD_RESULTS_ROOT:-results}"
+RESULTS_ROOT="${EVEWORLD_RESULTS_ROOT:-outputs/evaluation}"
 SHARDS="${SHARDS:-1}"
 LIMIT="${LIMIT:-}"
 DRY_RUN="${DRY_RUN:-0}"

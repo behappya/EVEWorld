@@ -1,6 +1,6 @@
 # Ablation: checkpoint-step selection under a multiseed replay (paper app:evaluation_stability,
 # tab:seed_variance_full). Checkpoints at steps 150 and 250 are replayed over seeds 1 to 70
-# with 30 inference steps; the paper reports the step-250 raw checkpoint.
+# with 30 inference steps; the paper uses the step-250 raw checkpoint.
 name: ablate_checkpoint_steps
 seed: 42
 output_dir: outputs/${name}
@@ -49,5 +49,5 @@ ablation:
   checkpoints: [150, 250]
   seed_range: [1, 70]
   inference_steps: 30
-notes: Checkpoint-step sweep with the 70-seed replay; the ordering of the
-  compared arms is stable across seeds.
+notes: Checkpoint-step sweep with the 70-seed replay, used to check the
+  ordering of the compared arms across seeds.

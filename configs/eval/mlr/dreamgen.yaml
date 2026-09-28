@@ -1,5 +1,5 @@
 # MLR protocol for DreamGenBench, the worldarena-protocol defaults of mlr_occlusion.py.
-# DreamGenBench has 126 clips, of which the shared eligible set U_63 holds 63 (coverage 50.00%).
+# DreamGenBench has 126 clips; the shared eligible set U_63 is defined by the metadata.
 name: eval_mlr_dreamgen
 seed: 42
 output_dir: outputs/${name}
@@ -19,5 +19,4 @@ eval:
   gripper_overlap_threshold: 0.35
   robot_prompt: "robot gripper"
 notes: DreamGenBench MLR evaluation with the Grounding-DINO plus SAM2
-  occlusion rule; sensitivity over tau_occ and k spans 70.0 to 88.9 percent
-  relative reduction and the main configuration gives 85.7 percent.
+  occlusion rule; the protocol is swept over tau_occ and k.

@@ -1,5 +1,5 @@
-# EVEWorld on DreamGenBench: the configuration behind the paper's 1.59 MLR / 80.16 Qwen-IF /
-# 60.85 Gemini-IF row (Table 1, Table 6). Joint objective L = L_IGR + lambda_TIA * L_TIA.
+# EVEWorld on DreamGenBench: the configuration behind the EVEWorld row of
+# Table 1 and Table 6. Joint objective L = L_IGR + lambda_TIA * L_TIA.
 name: dreamgen_eveworld
 seed: 42
 output_dir: outputs/${name}
@@ -41,5 +41,4 @@ eval:
   metrics: [mlr, qwen_if, gemini_if]
   tau_occ: 0.15
   k: 2
-notes: Full method on DreamGenBench, 250 steps; best reported row of Table 1
-  with 1.59 MLR, 80.16 Qwen-IF and 60.85 Gemini-IF.
+notes: Full method on DreamGenBench, 250 steps.

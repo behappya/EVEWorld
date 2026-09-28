@@ -4,8 +4,7 @@ The three scores follow the FlowWAM metric stack used for the held-out RoboTwin 
 PSNR is ``10 * log10(255^2 / mse)`` per frame, averaged over the frames the two clips share;
 SSIM averages :data:`DEFAULT_SSIM_SAMPLES` frames spread evenly over the clip; LPIPS uses the
 AlexNet backbone on ``256 x 256`` frames rescaled to ``[-1, 1]``, on the same even spread with
-:data:`DEFAULT_LPIPS_SAMPLES` frames. Table 5 reports EVEWorld at 12.765 / 0.769 / 0.365
-against 12.218 / 0.748 / 0.383 for the FlowWAM Stage-1 control.
+:data:`DEFAULT_LPIPS_SAMPLES` frames.
 
 Frames are ``(T, H, W, 3)`` uint8 RGB clips or a single ``(H, W, 3)`` frame. SSIM and LPIPS
 decode their dependencies lazily, so importing this module costs one numpy import, while
