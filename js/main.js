@@ -33,11 +33,15 @@
       row.innerHTML += row.innerHTML; /* seamless -50% marquee loop */
     });
     var reelVideos = reel.querySelectorAll("video");
-    /* the reel tiles carry preload="none", so borrow the qualitative posters to
-       paint them immediately instead of showing black until playback starts */
+    /* the reel tiles carry preload="none", so paint a poster frame immediately
+       instead of showing black until playback starts: the gr1 strips borrow the
+       qualitative posters, every other clip sits next to its own poster */
     reelVideos.forEach(function (v) {
       var s = v.getAttribute("src");
-      if (s) v.poster = s.replace("videos/gr1/", "videos/posters/").replace(/([^/]+)\/([^/]+)\.mp4$/, "$1-$2.jpg");
+      if (!s) return;
+      v.poster = s.indexOf("videos/gr1/") !== -1
+        ? s.replace("videos/gr1/", "videos/posters/").replace(/([^/]+)\/([^/]+)\.mp4$/, "$1-$2.jpg")
+        : s.replace(/\.mp4$/, ".jpg");
     });
     if ("IntersectionObserver" in window) {
       var rio = new IntersectionObserver(function (entries) {

@@ -726,6 +726,10 @@ table.data td.best { font-weight: 650; }
   background: var(--tone); z-index: 2;
 }
 
+/* the world-arena clips are 4:3, so centre-crop them rather than keeping the
+   right edge the way the 3:1 gr1 strips are cropped */
+.reel-tile.wa-src video { object-position: 50% 50%; }
+
 /* ---------- failure-mode widget (three tabs) ---------- */
 
 .lvl-tabs.three { grid-template-columns: repeat(3, 1fr); }
