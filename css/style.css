@@ -232,8 +232,8 @@ a:hover { text-decoration: underline; }
 .btn.primary .btn-tag { color: rgba(255,255,255,.9); background: rgba(255,255,255,.18); }
 
 .hero-metrics {
-  display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px;
-  max-width: 980px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+  max-width: 860px; margin: 0 auto;
 }
 .hero-metrics.tight { grid-template-columns: repeat(5, 1fr); max-width: 860px; margin: 26px auto 10px; }
 .hm {
