@@ -1,10 +1,10 @@
 # Assets
 
-Figures and media used by [the README](../README.md) and by the project page
-([`index.html`](../index.html)). The root `.gitignore` drops `*.png`, `*.jpg`,
-`*.pdf` and `*.mp4`; `assets/.gitignore` and `assets/site/.gitignore` re-allow
-the extensions this directory needs, so add new media types in those files
-rather than at the repository root.
+Figures used by [the README](../README.md). The project-page media lives in the
+`gh-pages` branch, so nothing here is served as part of the website. The root
+`.gitignore` drops `*.png`, `*.jpg`, `*.pdf` and `*.mp4`; `assets/.gitignore`
+re-allows the extensions this directory needs, so add new media types in that
+file rather than at the repository root.
 
 ## Figures
 
@@ -17,33 +17,3 @@ rather than at the repository root.
 
 The PNGs are rendered from the camera-ready vector figures at 200 dpi and
 capped at 2400 px on the long edge.
-
-## `qualitative/`
-
-Panels behind the quantitative claims. Each file is rendered at 150 dpi and
-capped at 2000 px wide.
-
-| File | Content |
-|---|---|
-| `fig_igr_weightmap24.png` | Regional weighting in IGR: the restoration region and the pasted-instance region carry three times the reconstruction weight before unit-mean normalization. |
-| `fig_mechanism.png` | Controlled restoration analysis. Retention of an injected duplicate drops from 92--99% (Standard SFT) to 23--42% after 50 IGR steps across corruption strengths $\alpha$ and $\sigma$; the directional cosine follows. |
-| `fig_persistence.png` | Persistence length and cumulative onset of occlusion-aware count violations across models. |
-| `fig_mlr_occlusion_montage.png` | One rollout with target detections and robot occlusion across the sampled timestamps. |
-| `fig_mlr_count_example.png` | MLR counting examples: red marks a retained persistent violation, green an under-count excluded by the occlusion check. |
-| `fig_qual_dup1.png`, `fig_qual_dup2.png` | Cross-frame target consistency. Standard SFT and IGR-only duplicate, drift or deform the target; EVEWorld preserves its identity. |
-| `570_{sft,igr,eve}_mlr.png` | Per-timestamp audit of task 570 over the 24 fixed MLR timestamps: instance inconsistency, cross-frame inconsistency, physical consistency. |
-| `637_{sft,igr,eve}_mlr.png` | Same audit for task 637. |
-
-## `site/`
-
-Media for the project page: `figures/` holds vector SVG copies exported from the
-paper figures together with the appendix plates rasterized from `paper/figures/`
-as JPEG, `videos/hero` the looped banner, `videos/submission` the qualified
-rollouts of the hero reel, `videos/gr1` the AgiBot-GR1 comparison of the
-limitations section, and `videos/posters/` the first-frame stills that keep the
-grid layout from jumping while clips load.
-
-Section 05 shows the appendix plates themselves — the pages that carry the red and
-green Model Laziness annotation — rather than re-cut stills, so the figures there
-are the published visualizations of the paper and the page never selects its own
-examples.
