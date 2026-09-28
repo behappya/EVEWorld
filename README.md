@@ -39,8 +39,6 @@ Quantitative and qualitative results are available on the [project page](https:/
 - [x] the item-level evaluation-row schema in [`docs/item_level.md`](docs/item_level.md)
 - [x] environment and third-party-backbone setup scripts
 - [x] the project page and its qualitative media (served from the `gh-pages` branch)
-- [ ] model weights — not released yet; the reproduction scripts train them from the released backbones
-- [ ] per-item evaluation outputs — the harnesses under `scripts/evaluate/` regenerate them
 
 ## Quick Start
 
