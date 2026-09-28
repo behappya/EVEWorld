@@ -4,7 +4,7 @@ The released images are rendered from the camera-ready vector figures, so a figu
 regenerated at another resolution without keeping any intermediate PDF in the repository.
 The sources live in the paper source tree (`paper/figures/`, kept local while the paper is
 under review); the releases live under `assets/`, where the root `.gitignore` re-allows
-`*.png`, and the project page reads the web-sized copies from `assets/site/figures/`.
+`*.png`, and the project page reads the vector copies from `assets/site/figures/`.
 
 ## Releases
 
@@ -61,6 +61,7 @@ for src, dst, dpi, max_edge in RENDERS:
 ```
 
 Save the snippet next to the paper sources and run it with the evaluation interpreter; each
-entry rewrites one release in place. The site copies are rendered from the same sources and
-are re-exported whenever the paper figures change, so a figure only ever has one source of
+entry rewrites one release in place. The site copies under `assets/site/figures/` are
+exported as vector SVG from the same sources (`page.get_svg_image(text_as_path=True)`) and
+follow the paper figures whenever they change, so a figure only ever has one source of
 truth.

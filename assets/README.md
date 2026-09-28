@@ -35,7 +35,7 @@ capped at 2000 px wide.
 
 ## `site/`
 
-Media for the project page: `figures/` holds the downscaled web variants of the
+Media for the project page: `figures/` holds vector SVG copies exported from the
 paper figures, `videos/hero` the looped banner, `videos/gr1` and `videos/wa` the
 qualitative comparisons (AgiBot-GR1 and WorldArena rollouts), and
 `videos/posters/` the first-frame stills that keep the grid layout from jumping

@@ -149,7 +149,7 @@
     </div>
 
     <figure class="figcard wide reveal">
-      <img src="assets/site/figures/fig2.png" alt="Model Laziness under standard supervised fine-tuning: the manipulated target is duplicated in Task A and disappears in Task B, while EVEWorld preserves a single target throughout" loading="eager" fetchpriority="high">
+      <img src="assets/site/figures/fig2.svg" alt="Model Laziness under standard supervised fine-tuning: the manipulated target is duplicated in Task A and disappears in Task B, while EVEWorld preserves a single target throughout" loading="eager" fetchpriority="high">
       <figcaption><b>Model Laziness.</b> Standard SFT can duplicate or lose the manipulated target even when individual frames remain visually plausible. EVEWorld preserves the target across the interaction. <span style="color:var(--arm-sft)">Red</span> marks Standard SFT; <span style="color:var(--arm-eve)">green</span> marks EVEWorld; dashed arrows trace target evolution over time.</figcaption>
     </figure>
   </div>
@@ -208,7 +208,7 @@
     </div>
 
     <figure class="figcard reveal">
-      <img src="assets/site/figures/fig1.png" alt="Comparison of Standard SFT, IGR, and EVEWorld: Standard SFT reaches the goal by duplicating the target, IGR suppresses duplication but leaves cross-frame distortion, EVEWorld preserves a single continuously evolving target" loading="lazy">
+      <img src="assets/site/figures/fig1.svg" alt="Comparison of Standard SFT, IGR, and EVEWorld: Standard SFT reaches the goal by duplicating the target, IGR suppresses duplication but leaves cross-frame distortion, EVEWorld preserves a single continuously evolving target" loading="lazy">
       <figcaption><b>Count alone is not enough.</b> IGR reduces instance-count failures, but count alone is not enough. Adding TIA preserves the target across time. <b>(a)</b> Standard SFT may reach the goal by duplicating the manipulated target. <b>(b)</b> IGR suppresses duplication, but cross-frame distortion can remain. <b>(c)</b> EVEWorld combines IGR and TIA to preserve a single target with continuous evolution throughout the interaction.</figcaption>
     </figure>
   </div>
@@ -222,7 +222,7 @@
     <p class="band-lede">EVEWorld retains the host model's native representation and adds two complementary forms of evolution supervision during post-training: <b>IGR</b> for instance consistency and <b>TIA</b> for cross-frame consistency.</p>
 
     <figure class="figcard wide reveal">
-      <img src="assets/site/figures/fig3.png" alt="EVEWorld architecture: Instance-Guided Restoration on the left restores a clean video from a duplicate-corrupted input, Temporal Instance Alignment on the right aligns the target across adjacent frames" loading="lazy">
+      <img src="assets/site/figures/fig3.svg" alt="EVEWorld architecture: Instance-Guided Restoration on the left restores a clean video from a duplicate-corrupted input, Temporal Instance Alignment on the right aligns the target across adjacent frames" loading="lazy">
       <figcaption><b>EVEWorld overview.</b> During training, IGR restores count-edited demonstrations while TIA aligns target features at a selected transformer layer. <b>At inference, the model still takes only the initial image and instruction.</b></figcaption>
     </figure>
 
@@ -257,7 +257,7 @@
       <summary>Method details</summary>
       <div class="acc-body">
         <figure class="figcard">
-          <img src="assets/site/figures/fig_igr_weightmap24.png" alt="IGR region weighting map: the pasted target and robot-arm interaction region receives a higher weight while the background keeps a base weight" loading="lazy">
+          <img src="assets/site/figures/fig_igr_weightmap24.svg" alt="IGR region weighting map: the pasted target and robot-arm interaction region receives a higher weight while the background keeps a base weight" loading="lazy">
           <figcaption><b>IGR region weighting.</b> The pasted target&ndash;arm interaction region receives a higher reconstruction weight, while the background keeps a base weight. The weight map is normalized to unit mean, so the global loss scale is left intact.</figcaption>
         </figure>
 
@@ -353,12 +353,12 @@
 
     <div class="find-pair">
       <figure class="figcard reveal">
-        <img src="assets/site/figures/fig_mlr_count_example.png" alt="How MLR counts: a red case where the deviation persists across two consecutive sampled frames is counted, a green case where a single frame is occluded is discarded" loading="lazy">
+        <img src="assets/site/figures/fig_mlr_count_example.svg" alt="How MLR counts: a red case where the deviation persists across two consecutive sampled frames is counted, a green case where a single frame is occluded is discarded" loading="lazy">
         <figcaption><b>What counts as a violation.</b> <span style="color:var(--arm-sft);font-weight:600">Red</span> marks a count that stays deviated across two consecutive sampled frames and is therefore counted; <span style="color:var(--good);font-weight:600">green</span> marks a single-frame deviation that the persistence rule discards.</figcaption>
       </figure>
 
       <figure class="figcard reveal">
-        <img src="assets/site/figures/fig_persistence.png" alt="Persistence analysis: the share of videos whose deviation lasts at least k consecutive sampled timestamps, and the cumulative share of videos that have shown a deviation by each sampled timestamp" loading="lazy">
+        <img src="assets/site/figures/fig_persistence.svg" alt="Persistence analysis: the share of videos whose deviation lasts at least k consecutive sampled timestamps, and the cumulative share of videos that have shown a deviation by each sampled timestamp" loading="lazy">
         <figcaption><b>How long a violation lasts, and when it starts.</b> <b>(a)</b> Share of detector-eligible videos whose deviation lasts for at least <span class="mono">k</span> consecutive sampled timestamps. <b>(b)</b> Cumulative share of videos that have shown a deviation by each sampled timestamp. The single EVEWorld violation is confined to short persistence lengths, while the general image-to-video baselines extend to larger <span class="mono">k</span>.</figcaption>
       </figure>
     </div>
@@ -555,35 +555,35 @@
       <div class="acc-body">
         <div class="stills-grid">
           <figure class="figcard">
-            <img src="assets/site/figures/fig_conservation_dup_a.png" alt="Target-instance conservation under duplication: red marks the Standard SFT rollout that keeps an extra duplicate, green marks EVEWorld" loading="lazy">
+            <img src="assets/site/figures/fig_conservation_dup_a.svg" alt="Target-instance conservation under duplication: red marks the Standard SFT rollout that keeps an extra duplicate, green marks EVEWorld" loading="lazy">
             <figcaption><b>One target stays one target.</b> <span style="color:var(--arm-sft);font-weight:600">Red</span> marks a Standard SFT rollout that violates conservation; <span style="color:var(--good);font-weight:600">green</span> marks EVEWorld, which keeps the count conserved throughout.</figcaption>
           </figure>
           <figure class="figcard">
-            <img src="assets/site/figures/fig_conservation_dup_b.png" alt="Additional duplication cases comparing Standard SFT with EVEWorld" loading="lazy">
+            <img src="assets/site/figures/fig_conservation_dup_b.svg" alt="Additional duplication cases comparing Standard SFT with EVEWorld" loading="lazy">
             <figcaption><b>Further duplication cases.</b> The same comparison on additional instructions, where Standard SFT again leaves a second instance behind.</figcaption>
           </figure>
           <figure class="figcard">
-            <img src="assets/site/figures/fig_conservation_dup_c.png" alt="Further duplication cases where Standard SFT adds an extra instance and EVEWorld does not" loading="lazy">
+            <img src="assets/site/figures/fig_conservation_dup_c.svg" alt="Further duplication cases where Standard SFT adds an extra instance and EVEWorld does not" loading="lazy">
             <figcaption><b>Duplication is systematic, not incidental.</b> The pattern repeats across unrelated objects and scene layouts, which is what motivates treating it as a property of the supervision rather than of any one task.</figcaption>
           </figure>
           <figure class="figcard">
-            <img src="assets/site/figures/fig_conservation_distort.png" alt="Target distortion: the instance count is preserved but the target shape drifts, green marks EVEWorld" loading="lazy">
+            <img src="assets/site/figures/fig_conservation_distort.svg" alt="Target distortion: the instance count is preserved but the target shape drifts, green marks EVEWorld" loading="lazy">
             <figcaption><b>Counting right is not enough.</b> Here the count is preserved but the target deforms over the rollout. EVEWorld keeps the instance shape, which is the failure mode TIA is meant to address.</figcaption>
           </figure>
           <figure class="figcard">
-            <img src="assets/site/figures/fig_qual_dup1.png" alt="Qualitative component comparison on a duplication instruction: red boxes mark Model Laziness, green boxes mark EVEWorld conservation" loading="lazy">
+            <img src="assets/site/figures/fig_qual_dup1.svg" alt="Qualitative component comparison on a duplication instruction: red boxes mark Model Laziness, green boxes mark EVEWorld conservation" loading="lazy">
             <figcaption><b>Matched interaction stages.</b> Four instructions shown at the same point of the interaction. <span style="color:var(--arm-sft);font-weight:600">Red boxes</span> mark Model Laziness; <span style="color:var(--good);font-weight:600">green boxes</span> mark where EVEWorld conserves the target.</figcaption>
           </figure>
           <figure class="figcard">
-            <img src="assets/site/figures/fig_qual_dup2.png" alt="Continuation of the qualitative duplication comparison across components" loading="lazy">
+            <img src="assets/site/figures/fig_qual_dup2.svg" alt="Continuation of the qualitative duplication comparison across components" loading="lazy">
             <figcaption><b>Continuation of the duplication comparison.</b> Same layout, further instructions and objects.</figcaption>
           </figure>
           <figure class="figcard">
-            <img src="assets/site/figures/fig_qual_vanish1.png" alt="Qualitative component comparison on a disappearance instruction" loading="lazy">
+            <img src="assets/site/figures/fig_qual_vanish1.svg" alt="Qualitative component comparison on a disappearance instruction" loading="lazy">
             <figcaption><b>The other direction.</b> Instructions where the target leaves the scene before the interaction closes, again at matched interaction stages.</figcaption>
           </figure>
           <figure class="figcard">
-            <img src="assets/site/figures/fig_qual_vanish2.png" alt="Continuation of the qualitative disappearance comparison across components" loading="lazy">
+            <img src="assets/site/figures/fig_qual_vanish2.svg" alt="Continuation of the qualitative disappearance comparison across components" loading="lazy">
             <figcaption><b>Continuation of the disappearance comparison.</b> Same layout, further instructions and objects.</figcaption>
           </figure>
         </div>
@@ -992,7 +992,7 @@
         <li>Residual directional cosine decreases as well, indicating that the reconstruction error becomes less aligned with the injected duplicate.</li>
       </ul>
       <figure class="figcard">
-        <img src="assets/site/figures/fig_mechanism.png" alt="Mechanism analysis: Standard SFT rarely removes the injected duplicate while IGR removes most of it, and the alignment residual concentrates on the injected duplicate" loading="lazy">
+        <img src="assets/site/figures/fig_mechanism.svg" alt="Mechanism analysis: Standard SFT rarely removes the injected duplicate while IGR removes most of it, and the alignment residual concentrates on the injected duplicate" loading="lazy">
         <figcaption><b>Why the shortcut survives, and what removes it.</b> <b>(a)</b> Standard SFT very rarely removes the injected duplicate, whereas IGR improves removal substantially. <b>(b)</b> The alignment residual under Standard SFT concentrates on the injected duplicate; IGR reduces that alignment. Standard SFT retains 92&ndash;99% of the injected area, while IGR brings it down to 23&ndash;42% after 50 steps.</figcaption>
       </figure>
     </div>
@@ -1046,11 +1046,11 @@
       <div class="acc-body">
         <div class="find-pair">
           <figure class="figcard">
-            <img src="assets/site/figures/fig_cfg.png" alt="Gemini instruction-following and Model Laziness Rate as a function of classifier-free guidance scale, one curve per training stage" loading="lazy">
+            <img src="assets/site/figures/fig_cfg.svg" alt="Gemini instruction-following and Model Laziness Rate as a function of classifier-free guidance scale, one curve per training stage" loading="lazy">
             <figcaption><b>Guidance is not the lever.</b> <b>(a)</b> Gemini-IF and <b>(b)</b> MLR as a function of the classifier-free guidance weight <span class="mono">w</span>, one curve per training stage. Stronger guidance generally raises Gemini-IF, but MLR is substantially less monotonic: the lowest values occur only at particular stage&ndash;weight combinations rather than systematically at the strongest guidance. The configuration we report is <span class="mono">step&nbsp;250</span> at <span class="mono">w&nbsp;=&nbsp;7.0</span>, with Gemini-IF <b>60.85</b> and MLR <b>1.59%</b>. The complete CFG-weight &times; training-step sensitivity grid is reported in the paper's CFG sensitivity table.</figcaption>
           </figure>
           <figure class="figcard">
-            <img src="assets/site/figures/fig_mlr_vs_step.png" alt="Model Laziness Rate decreasing and Qwen instruction following rising over training steps" loading="lazy">
+            <img src="assets/site/figures/fig_mlr_vs_step.svg" alt="Model Laziness Rate decreasing and Qwen instruction following rising over training steps" loading="lazy">
             <figcaption><b>The two objectives move together.</b> <b>(a)</b> MLR falls over the course of training. <b>(b)</b> Qwen-IF rises over the same interval &mdash; suppressing the shortcut does not cost instruction following.</figcaption>
           </figure>
         </div>
