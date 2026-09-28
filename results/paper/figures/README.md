@@ -10,6 +10,8 @@ under review); the releases live under `assets/`, where the root `.gitignore` re
 
 Each release is one camera-ready figure, kept at the stem it was exported from:
 
+- `figures/fig1.pdf` → `assets/comparison.png` — the component contrast: Standard SFT, IGR
+  only and EVEWorld on one clip.
 - `figures/fig2.pdf` → `assets/teaser.png` — teaser: the two DreamGen tasks with per-rollout
   Model Laziness annotations, Standard SFT against EVEWorld.
 - `figures/fig3.pdf` → `assets/method_overview.png` — overall architecture: IGR builds
@@ -43,6 +45,7 @@ import fitz
 from PIL import Image
 
 RENDERS = [
+    ("paper/figures/fig1.pdf", "assets/comparison.png", 200, 2400),
     ("paper/figures/fig2.pdf", "assets/teaser.png", 200, 2400),
     ("paper/figures/fig3.pdf", "assets/method_overview.png", 200, 2400),
     ("paper/figures/fig_igr_weightmap24.pdf",
