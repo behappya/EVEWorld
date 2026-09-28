@@ -27,17 +27,7 @@ Visual plausibility does not guarantee physically consistent target evolution. I
 
 **EVEWorld** introduces two complementary forms of evolution supervision: **Instance-Guided Restoration (IGR)** restores clean demonstrations from count-perturbed inputs to promote target-instance consistency, while **Temporal Instance Alignment (TIA)** aligns target representations across adjacent frames to promote cross-frame consistency. We further introduce **Model Laziness Rate (MLR)**, a rollout-level, occlusion-aware and persistence-aware diagnostic for persistent target-instance violations.
 
-## Key results
-
-| Setting | Standard SFT | EVEWorld | Main observation |
-|---|---:|---:|---|
-| DreamGenBench · MLR ↓ | 11.11% | **1.59%** | −85.7% relative |
-| DreamGenBench · Qwen-IF ↑ | 73.81 | **80.16** | improved instruction following |
-| DreamGenBench · Gemini-IF ↑ | 53.57 | **60.85** | improved instruction following |
-| WorldArena 1.0 · Overall ↑ | 53.95 | **56.76** | zero-shot domain transfer |
-| WorldArena 1.0 · MLR ↓ | 27.39% | **13.38%** | fewer persistent count violations |
-
-The main DreamGen comparison uses matched post-training settings. Cross-backbone FlowWAM/RoboTwin results are reported separately because component contributions are backbone-dependent.
+Quantitative and qualitative results are available on the [project page](https://behappya.github.io/EVEWorld/) and in the paper.
 
 ## What is released
 
@@ -46,9 +36,9 @@ The main DreamGen comparison uses matched post-training settings. Cross-backbone
 - [x] MLR evaluation protocol
 - [x] DreamGen / WorldArena / EWMBench / RoboTwin evaluation entry points
 - [x] paper-table reproduction scripts
-- [x] aggregate paper tables under `results/paper/tables/` and the item-level row schema in `results/item_level/README.md`
+- [x] the item-level evaluation-row schema in [`docs/item_level.md`](docs/item_level.md)
 - [x] environment and third-party-backbone setup scripts
-- [x] qualitative project-page assets
+- [x] the project page and its qualitative media (served from the `gh-pages` branch)
 - [ ] model weights — not released yet; the reproduction scripts train them from the released backbones
 - [ ] per-item evaluation outputs — the harnesses under `scripts/evaluate/` regenerate them
 
@@ -118,76 +108,14 @@ Each paper artifact has a script under `scripts/reproduce/`:
 
 | Paper artifact | Command | Output |
 |---|---|---|
-| Table 1 · DreamGenBench | `bash scripts/reproduce/table1_dreamgen.sh` | `results/item_level/dreamgen/` |
-| Table 3 · WorldArena 1.0 | `bash scripts/reproduce/table3_worldarena.sh` | `results/item_level/worldarena/` |
-| Table 4 · EWMBench (AgiBot) | `bash scripts/reproduce/table4_ewmbench.sh` | `results/item_level/ewmbench/` |
-| Table 5 · RoboTwin (FlowWAM) | `bash scripts/reproduce/table5_robotwin.sh` | `results/item_level/robotwin/table5.json` |
-| Table 6 · Component ablation | `bash scripts/reproduce/table6_ablation.sh` | `results/item_level/dreamgen/` |
-| Figure 4 · CFG grid | `bash scripts/reproduce/figure4_cfg.sh` | grid cells under `${GRID_ROOT}`; summaries under `results/item_level/dreamgen/` |
+| Table 1 · DreamGenBench | `bash scripts/reproduce/table1_dreamgen.sh` | `outputs/evaluation/item_level/dreamgen/` |
+| Table 3 · WorldArena 1.0 | `bash scripts/reproduce/table3_worldarena.sh` | `outputs/evaluation/item_level/worldarena/` |
+| Table 4 · EWMBench (AgiBot) | `bash scripts/reproduce/table4_ewmbench.sh` | `outputs/evaluation/item_level/ewmbench/` |
+| Table 5 · RoboTwin (FlowWAM) | `bash scripts/reproduce/table5_robotwin.sh` | `outputs/evaluation/item_level/robotwin/table5.json` |
+| Table 6 · Component ablation | `bash scripts/reproduce/table6_ablation.sh` | `outputs/evaluation/item_level/dreamgen/` |
+| Figure 4 · CFG grid | `bash scripts/reproduce/figure4_cfg.sh` | grid cells under `${GRID_ROOT}`; summaries under `outputs/evaluation/item_level/dreamgen/` |
 
-See [`docs/reproduction.md`](docs/reproduction.md) for inputs, compute requirements, and expected values.
-
-## Results
-
-### DreamGenBench — main GigaWorld-based setting
-
-DreamGenBench with the GigaWorld-0 backbone. The general video models are evaluated zero-shot; Standard SFT and EVEWorld are post-trained on the 92 DreamGen clips with the same initialization and the same 250-step budget.
-
-| Method | MLR (%) ↓ | Qwen-IF (%) ↑ | Gemini-IF (%) ↑ |
-|---|---|---|---|
-| CogVideoX1.5-5B-I2V | 28.57 | 38.89 | 5.56 |
-| Wan2.2-TI2V-5B | 17.46 | 38.89 | 10.32 |
-| Wan2.2-I2V-A14B | 11.11 | 64.29 | 15.87 |
-| Cosmos-Predict2-2B | 14.29 | 62.70 | 24.60 |
-| GigaWorld-0 | 12.70 | 79.37 | 60.19 |
-| Standard SFT | 11.11 | 73.81 | 53.57 |
-| **EVEWorld** | **1.59** | **80.16** | **60.85** |
-
-MLR is computed on the shared eligible set `U_63` for every model. EVEWorld reduces MLR from 11.11% to 1.59% against Standard SFT, an 85.7% relative reduction, while instruction following improves on both judges.
-
-### Component ablation
-
-All four variants share the initialization, the 92-clip training set and the 250-step optimization budget, so the differences isolate IGR and TIA. Gemini-IF is broken down over the three generalization splits: unseen environments, unseen objects and unseen behaviors.
-
-| Variant | IGR | TIA | Env ↑ | Object ↑ | Behavior ↑ | Overall ↑ | MLR (%) ↓ |
-|---|---|---|---|---|---|---|---|
-| Standard SFT | | | 51.72 | 42.00 | 67.02 | 53.57 | 11.11 |
-| IGR only | ✓ | | 49.43 | 36.67 | **69.50** | 51.85 | 4.76 |
-| TIA only | | ✓ | 55.17 | 42.67 | 68.79 | 55.29 | 7.94 |
-| **EVEWorld** | ✓ | ✓ | **72.41** | **50.33** | 64.89 | **60.85** | **1.59** |
-
-### Cross-backbone evaluation — FlowWAM / RoboTwin
-
-Component contributions are backbone-dependent: TIA-only is strongest on several FlowWAM metrics, while the full model remains better than matched Standard SFT on every reported metric.
-
-| Variant | IGR | TIA | PSNR (dB) ↑ | SSIM ↑ | LPIPS ↓ | Flow-EPE ↓ | MLR (%) ↓ |
-|---|---|---|---|---|---|---|---|
-| FlowWAM | | | 12.218 | 0.748 | 0.383 | 3.033 | 52.05 |
-| Standard SFT | | | 11.687 | 0.735 | 0.414 | 2.828 | 47.89 |
-| + IGR | ✓ | | 12.544 | 0.770 | 0.380 | 2.487 | 40.03 |
-| + TIA | | ✓ | **13.445** | **0.776** | **0.333** | **1.850** | **22.54** |
-| **EVEWorld** | ✓ | ✓ | 12.765 | 0.769 | 0.365 | 2.207 | 35.21 |
-
-The FlowWAM arm is a rank-32 LoRA fine-tune over the 2,250 RoboTwin training episodes, evaluated on 250 held-out episodes at 40 denoising steps and CFG 5.0 with the robot-only flow condition.
-
-### Generalization results
-
-WorldArena 1.0 transfer: 1,000 prompts evaluated zero-shot from the step-250 DreamGenBench checkpoint of each arm, so the table measures transfer to a different prompt distribution and a different generation setting.
-
-| Model | Overall ↑ | MLR (%) ↓ |
-|---|---|---|
-| Standard SFT | 53.95 | 27.39 |
-| **EVEWorld** | **56.76** | **13.38** |
-
-EWMBench after AgiBot post-training: both arms start from the GigaWorld-0 video-pretrain checkpoint, use the same AgiBot clips and the same optimization budget, and are scored by the official suite on 777 AgiBot clips generated three times each.
-
-| Model | Motion ↑ | Semantics ↑ | DYN ↑ | HSD ↑ | nDTW ↑ | Scene ↑ | Overall ↑ |
-|---|---|---|---|---|---|---|---|
-| GigaWorld-0 (pretrained) | 50.30 | 2.2497 | 7.19 | 23.29 | 19.83 | **89.58** | 3.6486 |
-| Standard SFT | 61.51 | 2.2477 | 14.88 | **24.35** | **22.28** | 84.38 | 3.7066 |
-| **EVEWorld** | **63.65** | **2.2524** | **17.55** | 24.12 | 21.97 | 86.37 | **3.7525** |
-
-Protocols, metrics, and judge details are in [`docs/evaluation.md`](docs/evaluation.md).
+See [`docs/reproduction.md`](docs/reproduction.md) for inputs, compute requirements, and per-artifact protocols. Quantitative and qualitative results are on the [project page](https://behappya.github.io/EVEWorld/) and in the paper; the protocols, metrics, and judge details are in [`docs/evaluation.md`](docs/evaluation.md).
 
 ## Data and checkpoints
 
@@ -197,19 +125,18 @@ Protocols, metrics, and judge details are in [`docs/evaluation.md`](docs/evaluat
 
 ```text
 EVEWorld/
-├── assets/        figures, qualitative panels, and project-page media
+├── assets/        README figures; the project-page media lives in the gh-pages branch
 ├── checkpoints/   download instructions for the released weights
 ├── configs/       training, evaluation, and ablation run configurations
 ├── data/          splits, per-clip metadata, and judge prompts (datasets stay outside the repo)
 ├── docs/          installation, data, training, inference, evaluation, reproduction, checkpoints, third party
 ├── envs/          conda environment files (gigaworld, flowwam, eveworld-eval)
 ├── experiments/   alternative supervision designs and the analyses behind the paper figures
-├── results/       aggregate paper tables and the item-level row schema
+├── outputs/       evaluation outputs of the reproduction scripts (gitignored)
 ├── scripts/       setup, prepare, train, inference, evaluate, and reproduce entry points
 ├── src/eveworld/  the library: IGR, TIA, data tooling, integrations, and evaluation
 ├── tests/         unit tests for the IGR, TIA, and MLR components
-├── third_party/   clone instructions for the two backbones (checkouts are gitignored)
-└── index.html  css/  js/   static project page
+└── third_party/   clone instructions for the two backbones (checkouts are gitignored)
 ```
 
 ## Documentation
@@ -221,7 +148,8 @@ EVEWorld/
 | [`docs/training.md`](docs/training.md) | training recipes, schedules, and commands |
 | [`docs/inference.md`](docs/inference.md) | inference entry points and generation settings |
 | [`docs/evaluation.md`](docs/evaluation.md) | MLR, judges, and the benchmark harnesses |
-| [`docs/reproduction.md`](docs/reproduction.md) | inputs, compute, and expected values per artifact |
+| [`docs/item_level.md`](docs/item_level.md) | the per-item evaluation-row schema |
+| [`docs/reproduction.md`](docs/reproduction.md) | inputs, compute, and per-artifact protocols |
 | [`docs/checkpoints.md`](docs/checkpoints.md) | downloader flags, landing paths, and checkpoint layout |
 | [`docs/third_party.md`](docs/third_party.md) | backbones, weights, and licenses |
 

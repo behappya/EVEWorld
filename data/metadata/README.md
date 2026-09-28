@@ -52,8 +52,7 @@ the instruction moves the target from one surface to another. The remaining 63 c
 instructions with a `source` and no `destination` (a hold or a lift in place, e.g. `00107`) and 9
 scene instructions with neither (e.g. `00113`); none of them is eligible, because there is no
 arrival surface to disappear from and a lazily generated clip would be indistinguishable from a
-correct one. The eligible 63 of 126 clips are the `U_63` set reported by
-[Table 1](../../results/paper/tables/table1_dreamgen.md).
+correct one. The eligible 63 of 126 clips are the shared `U_63` set.
 
 ## WorldArena
 
@@ -84,9 +83,8 @@ field and the remaining 660 name only a mover.
 **Eligibility rule.** A request is eligible when `target` and `mover` both parsed: a movable
 object exists and some agent has to move it, which is the pair of conditions under which a missing
 object can be blamed on the generator instead of on the scene. The rule selects 157 requests, of
-which 40 have a target but no mover and 660 have a mover but no target. The 157 ids are the ones
-scored by [Table 3](../../results/paper/tables/table3_worldarena.md) and are the denominator of
-the WorldArena Model Laziness Rate.
+which 40 have a target but no mover and 660 have a mover but no target. The 157 ids are the
+denominator of the WorldArena Model Laziness Rate.
 
 ## Coverage
 
@@ -94,10 +92,9 @@ The two benchmarks disagree on the denominator, and both files state theirs expl
 
 - DreamGenBench: `coverage = 100 * 63 / 126 = 50.0`. Every clip is resolved, so the eligible set
   is half of the benchmark and `num_total` doubles as the denominator.
-- WorldArena: `coverage = 100 * 157 / 817 = 19.22`. `num_resolved` is 817, which is exactly the
-  number of requests whose `mover` parsed; the 183 requests without a mover fall outside the
-  denominator because the protocol cannot say which agent should have acted. Dividing by
-  `num_total` instead would read 15.70 and contradict the released WorldArena numbers.
+- WorldArena: `coverage = 100 * 157 / 817 = 19.22`. `num_resolved` is 817, the number of
+  requests whose `mover` parsed; the 183 requests without a mover fall outside the denominator
+  because the protocol cannot say which agent should have acted.
 
 ## Regenerating the versioned files
 

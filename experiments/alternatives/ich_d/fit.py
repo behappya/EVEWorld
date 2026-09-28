@@ -41,7 +41,6 @@ BLOCKS = ("block10", "block12", "block16")
 DEFAULT_SIGMAS = (0.2, 0.4)
 CIC_BLOCK = "block22"
 NUM_DIM = 16
-LOO_REFERENCE = 0.8261
 
 
 def _parse_args(argv: Sequence[str] | None) -> argparse.Namespace:
@@ -221,7 +220,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.loo:
         held_out = leave_one_out_scores(standardised, labels, max_iter=1000)
         loo_auc = rank_auc(held_out[labels == 1], held_out[labels == 0])
-        print(f"leave-one-out AUC {loo_auc:.4f} (16-dimensional reference at sigma 0.4: {LOO_REFERENCE:.4f})")
+        print(f"leave-one-out AUC {loo_auc:.4f}")
         stats["leave_one_out"] = {"auc": loo_auc}
 
     if args.out:

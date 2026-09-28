@@ -46,30 +46,6 @@ python scripts/inference/infer_gigaworld.py --config configs/paper/gigaworld/dre
 The paired run needs both arms at the same seed, so the control is generated
 with the weight set to zero rather than with a different sampler.
 
-## Outcome
-
-| Arm | MLR (%) | Gemini-IF (mean ± s.e.) |
-|---|---|---|
-| Control, guidance weight 0 | 15.38 | 41.67 ± 3.61 |
-| EAG, guidance weight 0.03 | 38.46 | 45.83 ± 9.55 |
-| Relative change | +150.0%, 95% CI [0.0, +500.0] | +10.0%, 95% CI [−15.8, +54.5] |
-
-The comparison ran over 16 prompt-seed pairs, of which 13 were
-detector-eligible, so the MLR pool is the smallest of the five routes.
-Instruction following moved by a small positive amount that its interval does
-not separate from zero, while MLR rose by 150%: the energy was steering the
-sample toward transitions the action model found plausible without regard for
-whether the requested object was still on screen, which is the opposite of what
-the benchmark measures.
-
-The route was dropped because the contact-event detector underneath the energy
-was the bottleneck: the energy is only as good as the action model's notion of
-a legal transition, and on clips where the detector missed the grasp the
-guidance walked the sample away from the instruction. The released method keeps
-the insight that motion has to be supervised — and applies it as a weight map
-inside the training loss, where the supervision points at the region the
-instruction refers to, instead of as an inference-time push.
-
 ## Where the record lives
 
 The energy and the guidance step are the two functions the study consists of:

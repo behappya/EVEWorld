@@ -1,7 +1,7 @@
 # LAD-LoRA: the transition energy as a training regulariser
 
-The EAG route moved the same energy to inference time and failed there, so this
-route moved it into training instead: the frozen latent-action model scores the
+The EAG route moved the same energy to inference time, and this route moves it
+into training instead: the frozen latent-action model scores the
 clean latent the denoiser predicts, and that score is added to the denoising
 loss with a per-step weight, backpropagating only into a rank-64 attention
 LoRA.
@@ -54,29 +54,6 @@ Both arms were generated with the released sampler settings, at 30 inference
 steps and the paper's guidance weight, over the same prompts and seeds, and
 judged by both instruction-following judges.
 
-## Outcome
-
-| Arm | MLR (%) | Gemini-IF (mean ± s.e.) |
-|---|---|---|
-| LoRA control, energy weight 0 | 3.85 (1 of 26) | 51.04 ± 1.80 |
-| LAD-LoRA, energy weight on | 3.85 (1 of 26) | 47.92 ± 4.77 |
-| Relative change | 0.0%, 95% CI [0.0, 0.0] | −6.1%, 95% CI [−24.1, +13.3] |
-
-The comparison ran over 32 matched prompt-seed pairs. MLR does not move at
-all: the same single event in the same clip is the whole numerator in both
-arms, and the difference between them is zero rather than inside an interval.
-Instruction following drops by a small amount that its interval does not
-separate from zero.
-
-The flat MLR is the interesting part of the result. The energy measures
-whether consecutive frames are connected by a transition the action model
-considers executable; it says nothing about whether the object the instruction
-names is still in the scene. A rollout can be perfectly smooth in its motion
-and still have dropped the target, and conversely a clip can keep the target
-while jittering. That is the same failure that ended the EAG route, seen from
-the training side: the metric that the paper moves is presence, and the energy
-optimises smoothness, so the two do not trade.
-
 ## Reading the record
 
 - The energy head, the gradient-ratio weight and the gate are the three parts
@@ -84,5 +61,5 @@ optimises smoothness, so the two do not trade.
 - The matched control is the same trainer with the energy weight set to zero,
   which is why the pair isolates the regulariser rather than the adapter.
 - The metric definitions and the eligible set are in
-  [`../../../docs/evaluation.md`](../../../docs/evaluation.md); the route is a
-  negative control and is kept here as the record of the study.
+  [`../../../docs/evaluation.md`](../../../docs/evaluation.md); the route is
+  kept here as the record of the study.

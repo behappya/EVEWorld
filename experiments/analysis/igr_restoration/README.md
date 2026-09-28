@@ -37,26 +37,15 @@ emphasized set with a larger weight; coverage is the fraction of
 spatiotemporal latent locations that fall in the emphasized set. The designs
 differ in how much of the manipulation scene the emphasized set covers.
 
-| Design | Path/Loc. | Arm/Grip. | Paste | Base | Emph. | Median coverage | MLR (%) | IF |
-|---|---|---|---|---|---|---|---|---|
-| Legacy multi-level | yes | yes | yes | 0.5 | 2/3/4/6 | 0.2679 | 2.18 | 60.31 |
-| Binary-3 | yes | yes | yes | 1 | 3 | 0.2685 | 2.21 | 60.26 |
-| Path+Loc-2x | yes | no | yes | 1 | 2 | 0.2380 | 3.34 | 59.82 |
-| Path+Loc-3x | yes | no | yes | 1 | 3 | 0.2147 | 3.08 | 59.96 |
-| Interaction-2x | yes | yes | yes | 1 | 2 | 0.5361 | 2.06 | 60.42 |
-| Interaction-3x | yes | yes | yes | 1 | 3 | 0.5361 | 1.94 | 60.57 |
-
 The multi-level map hands different weights to the target path, destination,
 vacated foreground, gripper, distractors and pasted instance; the binary
 designs use a single emphasis factor. Restricting the support to the target
-path and its source and destination regions is more sensitive to incomplete
-localisation, because restoration errors also arise near the gripper, along
-the arm corridor and around the two endpoint regions, and the two Path+Loc
-rows pay for that with both metrics. The wider interaction support and the
-five-level legacy map land at the same average performance, so the simpler
-binary map wins: ordinary locations get relative weight 1, the interaction
-support and the pasted instance get relative weight 3, and the map is
-normalised to unit mean before it enters the loss.
+path and its source and destination regions leaves the restoration errors
+near the gripper, along the arm corridor and around the two endpoint regions
+unweighted, so the released map uses the wider interaction support: ordinary
+locations get relative weight 1, the interaction support and the pasted
+instance get relative weight 3, and the map is normalised to unit mean before
+it enters the loss.
 
 ## The restoration reading
 
@@ -66,32 +55,6 @@ opacity and diffusion noise level, and repeats the same measurement after 50
 IGR fine-tuning steps. Retention is the fraction of the injected duplicate
 area the reconstruction preserves; the direction cosine is the alignment of
 the residual error with the injected duplicate.
-
-| Opacity | sigma | Retention before | Retention after | Relative reduction (%) | Dir. cos. before / after |
-|---|---|---|---|---|---|
-| 0.5 | 0.3 | 0.992 | 0.421 | 57.5 | 0.983 / 0.627 |
-| 0.5 | 0.8 | 0.955 | 0.325 | 66.0 | 0.950 / 0.378 |
-| 0.5 | 1.5 | 0.922 | 0.275 | 70.2 | 0.907 / 0.263 |
-| 1.0 | 0.3 | 0.986 | 0.419 | 57.5 | 0.993 / 0.695 |
-| 1.0 | 0.8 | 0.968 | 0.268 | 72.3 | 0.980 / 0.406 |
-| 1.0 | 1.5 | 0.935 | 0.229 | 75.5 | 0.961 / 0.295 |
-
-The Standard SFT checkpoint keeps 92–99% of the injected area, and the number
-barely moves with the corruption strength: the reconstruction treats the
-injected instance as content to preserve. After 50 IGR steps retention falls
-to 23–42% in every setting, and the direction cosine falls with it, so the
-residual is not only smaller but also less aligned with the injected
-duplicate. The effect is stronger at the higher noise level, where the
-reconstruction has more freedom to move away from the corrupted input.
-
-Restoration controls separate the two halves of the objective on
-DreamGenBench: dropping the spatial emphasis still improves on Standard SFT
-but leaves substantially more violations (MLR 6.35 against 1.59), and
-applying the emphasis without the restoration target does not help at all
-(MLR 14.29). The variant without spatial emphasis reaches a slightly higher
-overall instruction-following score than the complete objective (61.11
-against 60.85) at four times the MLR, which is why the complete objective is
-the one the paper reports.
 
 ## Running it
 
@@ -120,8 +83,7 @@ table that lines the arms up region by region.
   [`../../../docs/training.md`](../../../docs/training.md); the metric side of
   the corruption experiment is in
   [`../../../docs/evaluation.md`](../../../docs/evaluation.md).
-- The alternative weighting designs that lost this comparison were kept as
-  negative results under
+- The alternative weighting designs are kept under
   [`../../alternatives/`](../../alternatives/), and the probe that localises
   where the temporal adapter should sit is in
   [`../tia_layer_probe/`](../tia_layer_probe/).

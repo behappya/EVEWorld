@@ -35,11 +35,10 @@ question-answer pairs of the upstream dataset are mounted before the horizon swe
 ## Splits
 
 **DreamGenBench.** One line per clip stem, zero-padded to five digits, with a comment header
-that states the role and the count. `train.txt` lists the 92 clips behind
-[Table 1](../results/paper/tables/table1_dreamgen.md) and
-[Table 6](../results/paper/tables/table6_ablation.md); `val.txt` lists 12 clips that were
-held out of that post-training set; `test.txt` lists the 126 clips behind the benchmark's
-evaluation prompts, of which 63 belong to the shared eligible set `U_63`.
+that states the role and the count. `train.txt` lists the 92 clips that post-train the
+GigaWorld-0 arms; `val.txt` lists 12 clips that were held out of that post-training set;
+`test.txt` lists the 126 clips behind the benchmark's evaluation prompts, of which 63 belong
+to the shared eligible set `U_63`.
 
 **WorldArena 1.0.** `eval.txt` lists the 1,000 request ids `fixed_scene_task_episode1` to
 `fixed_scene_task_episode1000` in manifest order. 157 of them are eligible for Model
@@ -48,10 +47,9 @@ thresholds were frozen before the final evaluation, and the remaining requests a
 with that frozen protocol.
 
 **RoboTwin.** `heldout.txt` lists 250 rows, `task_<task>_episode_<45..49>` for each of the 50
-tasks, ordered by task and then by episode, and [Table 5](../results/paper/tables/table5_robotwin.md)
-reports all 250. `dev.txt` is the episode-45 row of every task: a 50-row screen that is
-disjoint from the 200 confirmation rows of episodes 46-49 and from the 2,250 training
-episodes of episodes 0-44.
+tasks, ordered by task and then by episode; the 250 rows are held out of training. `dev.txt`
+is the episode-45 row of every task: a 50-row screen that is disjoint from the 200
+confirmation rows of episodes 46-49 and from the 2,250 training episodes of episodes 0-44.
 
 ## Metadata
 

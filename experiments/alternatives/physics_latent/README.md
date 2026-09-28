@@ -61,35 +61,13 @@ The three stages differ in which parameters are unfrozen and which losses are
 active, not in the data pipeline, so the same command with the stage flags is
 what a re-run reproduces.
 
-## Outcome
-
-The route moved MLR in the wanted direction and lost instruction fidelity:
-
-| Arm | MLR (%) | Gemini-IF (mean ± s.e.) |
-|---|---|---|
-| Pretrained backbone, 5.8 s (control) | 17.39 | 45.65 ± 3.92 |
-| PhysicsLatent | 16.18 | 40.22 ± 3.26 |
-| Relative change | −7.0%, 95% CI [−51.5, +69.1] | −11.9%, 95% CI [−29.8, +7.9] |
-
-The comparison ran over 92 matched prompt-seed pairs. It is the only one of the
-five alternative routes that lowered MLR at all, and the reason it was still
-dropped is the coupling visible in the table: the process tokens compete with
-the prompt embeddings for cross-attention, so the more the tokens carry the
-physical state, the less the conditioning follows the wording of the
-instruction. The MLR gain is also inside its own interval, while the
-instruction-following loss is not recovered by any later stage of the route.
-
-The released method keeps the part of the idea that survives: the disturbed
-region of the clip is supervised directly, in reconstruction space, where the
-instruction conditioning is not a competitor.
-
 ## Reading the record
 
 - The auxiliary heads and their losses are described by the four label groups
   above; each label group maps to one head and one term of the auxiliary sum.
-- The matched-control numbers come from the DreamGenBench pool used by the
+- The matched control comes from the DreamGenBench pool used by the
   paper's comparison of alternative designs, and the MLR protocol, including
   the eligible set and the occlusion rule, is documented in
   [`../../../docs/evaluation.md`](../../../docs/evaluation.md).
-- The route is a negative control: it is kept in this directory as the record
-  of the study, not as a supported arm of the released model.
+- The route is kept in this directory as the record of the study, not as a
+  supported arm of the released model.

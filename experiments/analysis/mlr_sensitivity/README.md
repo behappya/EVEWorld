@@ -51,25 +51,6 @@ the share of clips with at least one event; the second table reports the mean
 per-clip event share, which weights every clip by how much of it was flagged
 instead of counting it once.
 
-## Outcome
-
-Events / eligible with the MLR in parentheses, on the shared 63-clip eligible
-set:
-
-| `tau_occ` | SFT `k=1` | SFT `k=2` | SFT `k=3` | EVEWorld `k=1` | EVEWorld `k=2` | EVEWorld `k=3` |
-|---|---|---|---|---|---|---|
-| 0.10 | 11/63 (17.46) | 5/63 (7.94) | 4/63 (6.35) | 2/63 (3.17) | 1/63 (1.59) | 1/63 (1.59) |
-| 0.15 | 14/63 (22.22) | 7/63 (11.11) | 5/63 (7.94) | 3/63 (4.76) | 1/63 (1.59) | 1/63 (1.59) |
-| 0.20 | 17/63 (26.98) | 9/63 (14.29) | 6/63 (9.52) | 3/63 (4.76) | 1/63 (1.59) | 1/63 (1.59) |
-| 0.25 | 20/63 (31.75) | 10/63 (15.87) | 7/63 (11.11) | 4/63 (6.35) | 3/63 (4.76) | 1/63 (1.59) |
-
-Across all twelve configurations the relative reduction against the standard
-SFT baseline stays between 70.0% and 88.9% and the comparison never reverses.
-Under the main setting, `tau_occ = 0.15` and `k = 2`, MLR falls from 7/63
-(11.11%) to 1/63 (1.59%), an 85.7% relative reduction. The 87.5% quoted in the
-abstract compares against the pretrained GigaWorld-0 backbone (12.70% to
-1.59%) and is a different baseline; the two figures are not interchangeable.
-
 ## Reading the record
 
 - [`sweep.py`](sweep.py) is the whole experiment: it reads one directory per

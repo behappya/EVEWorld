@@ -31,7 +31,7 @@ the three `eveworld.yaml` files under `configs/paper/`
 ([`gigaworld/dreamgen`](../configs/paper/gigaworld/dreamgen/eveworld.yaml),
 [`gigaworld/agibot`](../configs/paper/gigaworld/agibot/eveworld.yaml) and
 [`flowwam/robotwin`](../configs/paper/flowwam/robotwin/eveworld.yaml)).
-The Standard SFT baselines use the same budget with a uniform loss: 200 steps
+The Standard SFT baselines use the same budget with a uniform loss: 250 steps
 at effective batch 64 on DreamGenBench, 50 steps on AgiBot, and the same
 1,128-step LoRA on RoboTwin.
 

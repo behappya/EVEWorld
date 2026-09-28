@@ -70,9 +70,9 @@ Nothing from the projects listed above. The repository ships code, split files,
 per-clip metadata and prompt templates; the two backbone checkouts are dropped
 by the root `.gitignore`, the downloaded weights land under the gitignored
 `checkpoints/` root, and the datasets stay under the data roots named in
-`.env`. The comparison models quoted in the results tables
-(CogVideoX1.5-5B-I2V, Wan2.2-I2V-A14B, Cosmos-Predict2-2B) are obtained from
-their own projects and scored zero-shot in the same way.
+`.env`. The comparison models (CogVideoX1.5-5B-I2V, Wan2.2-I2V-A14B,
+Cosmos-Predict2-2B) are obtained from their own projects and scored zero-shot
+in the same way.
 
 Two rows above have no upstream licence file, and PBench is published for
 non-commercial use; check the upstream page of a component before reusing

@@ -15,7 +15,7 @@ holding one JSON file per inference seed:
 
 ```text
 <root>/250/seed004.json
-{"seed": 4, "mlr": 1.59, "qwen_if": 62.4, "gemini_if": 60.85}
+{"seed": 4, "mlr": 2.5, "qwen_if": 60.1, "gemini_if": 58.4}
 ```
 
 `seed` is required and must agree with the file name; at least one of the
@@ -44,40 +44,6 @@ subset and `--out` writes the markdown table to a file. The companion repeat
 protocol regenerates every clip three times, the repeat layout of the EWMBench
 evaluation directories; its config is
 [`seed_stability.yaml`](../../../configs/ablations/checkpoint/seed_stability.yaml).
-
-## Outcome
-
-**Judge variance on fixed videos.** Gemini-IF was rerun several times on the
-same generated videos and every repeat is reported alongside its mean; the
-main ordering remains unchanged.
-
-| Model | Repeats | Gemini-IF (%) |
-|---|---:|---:|
-| CogVideoX1.5-5B-I2V | 2 | 5.56 ± 1.12 |
-| Wan2.2-TI2V-5B | 2 | 10.32 ± 1.12 |
-| Wan2.2-I2V-A14B | 2 | 15.87 ± 3.37 |
-| Cosmos-Predict2-2B | 2 | 24.60 ± 1.12 |
-| GigaWorld-0 | 6 | 60.19 ± 2.90 |
-| Official GR1 fine-tune | 2 | 63.10 ± 6.17 |
-| Standard SFT | 6 | 53.57 ± 2.92 |
-| EVEWorld | 6 | 60.85 ± 1.79 |
-
-**Matched inference seeds.** Under the same inference seed and otherwise
-identical settings, the gain of EVEWorld over Standard SFT persists at both
-sampled seeds. `Δ` is in percentage points.
-
-| Seed | Judge repeats | Standard SFT (%) | EVEWorld (%) | Δ (pp) |
-|---|---:|---:|---:|---:|
-| 004 | 6 | 53.57 ± 2.92 | 60.85 ± 1.79 | +7.28 |
-| 061 | 3 | 57.41 ± 2.79 | 58.73 ± 1.37 | +1.32 |
-
-**Five-seed transfer replay.** Under the full-1000 transfer protocol the same
-FlowWAM checkpoint generated five complete runs that differ by at most 0.68
-points on the project-local 11-metric evaluator (`Local-11`), 57.28 ± 0.28
-over seeds 6, 12, 20, 42 and 70. Per-component scores on a 50-prompt probe set
-move more for motion-related metrics than for appearance-related ones —
-Dynamic Degree spans 30.37 ± 2.01 and Flow Score 18.59 ± 1.95, while Aesthetic
-stays at 44.35 ± 0.14 — but the aggregate stays stable.
 
 ## Reading the record
 

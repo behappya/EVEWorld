@@ -50,37 +50,15 @@ deletion path rather than a training change. Generation used the released
 sampler settings, 30 inference steps at the paper's guidance weight, and the
 comparison ran over 368 matched prompt-seed pairs across four seeds.
 
-## Outcome
-
-| Arm | MLR (%) | Gemini-IF |
-|---|---|---|
-| Control, pretrained, 4 seeds | 11.23 | 45.83 |
-| ICH-D | 13.09 | 31.79 |
-| Relative change | +16.6%, 95% CI [−19.4, +70.8] | −30.6%, 95% CI [−40.1, −20.2] |
-
-Both metrics move the wrong way, and this time the instruction-following drop
-is the one the interval separates from zero: the deletion path introduces its
-own errors. The probe answers one question — does this cell look like a repeat
-of earlier content — and the metric asks a different one, whether the object
-the instruction names is on screen. A cell that repeats real background motion
-is indistinguishable from a cell that repeats a deleted target, so the residual
-erases content the clip needed. The probe's own separation is not the
-bottleneck: a probe of the same family detects an injected duplicate in the
-early blocks with an AUC of 0.79–0.80, and the leave-one-out read-out of the
-16-dimensional fit is above 0.8. The route failed because detection accuracy on
-the training corruption does not transfer into a deletion decision that is safe
-in every frame of a free-running rollout.
-
 ## Reading the record
 
 - [`fit.py`](fit.py) is the offline fitting job: it reads the per-block feature
   cache, verifies the consistency block, merges the noise levels, fits the
   standardised logistic probe and writes the frozen parameters together with
-  their mean and scale. `--loo` adds the leave-one-out AUC next to the value
-  recorded for the 16-dimensional probe at the higher noise level.
+  their mean and scale. `--loo` adds the leave-one-out AUC.
 - The probe features come from the same feature-probe family as the TIA probe
   scan; the per-block evidence behind that scan is in
   [`../../analysis/tia_layer_probe/`](../../analysis/tia_layer_probe/).
 - The metric definitions and the eligible set are in
-  [`../../../docs/evaluation.md`](../../../docs/evaluation.md); the route is a
-  negative result and is kept here as the record of the study.
+  [`../../../docs/evaluation.md`](../../../docs/evaluation.md); the route is
+  kept here as the record of the study.

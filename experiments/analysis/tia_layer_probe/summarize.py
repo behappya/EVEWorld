@@ -12,7 +12,7 @@ The probe writes one JSON per candidate block into a per-domain directory,
 ``<root>/<domain>/blockNN.json``, with the fields
 
 ```text
-{"block": 23, "epe": 0.55, "reliability": {"metric": 0.12, "...": 0.34}}
+{"block": 8, "epe": 1.23, "reliability": {"metric": 0.12, "...": 0.34}}
 ```
 
 ``reliability`` is optional and either a mapping of setting-specific scores or a

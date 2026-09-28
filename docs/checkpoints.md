@@ -122,7 +122,7 @@ tree above is read-only and no script writes into it.
 | Paper row | Initialisation | Checkpoint scored |
 |---|---|---|
 | Table 1, GigaWorld-0 (pretrained) | none | the released video-pretrain weights as downloaded |
-| Table 1 and Table 6, Standard SFT | `Video-Pretrain-2B` | raw step 200 |
+| Table 1 and Table 6, Standard SFT | `Video-Pretrain-2B` | raw step 250 |
 | Table 1, Table 3 and Table 6, EVEWorld | `Video-Pretrain-2B` | raw step 250 |
 | Table 6, IGR only and TIA only | `Video-Pretrain-2B` | raw step 250 |
 | Table 4, AgiBot transfer (EWMBench) | `Video-Pretrain-2B` | raw step 50 |
@@ -135,7 +135,7 @@ checkpoint-step study in `configs/ablations/checkpoint/steps.yaml` re-scores
 steps 150 and 250 over the seed range 1-70 instead of averaging weights.
 Which checkpoint produced a published number is recoverable from the run's
 `trainer_state.json` and from the settings each evaluator records beside its
-item-level output under `results/item_level/<benchmark>/` — see
+item-level output under `outputs/evaluation/item_level/<benchmark>/` — see
 [`reproduction.md`](reproduction.md).
 
 ## Verifying a download

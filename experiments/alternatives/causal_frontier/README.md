@@ -53,33 +53,11 @@ The route's generation is the block loop described above with `loss.py`'s
 geometry; the sampling settings inside a block are the released ones, which is
 what makes the comparison about the frontier rather than about the sampler.
 
-## Outcome
-
-| Arm | MLR (%) | Gemini-IF (mean ± s.e.) |
-|---|---|---|
-| Control, full-clip objective | 30.77 | 27.08 ± 3.61 |
-| Causal frontier, block-sequential | 41.67 | 12.50 ± 6.25 |
-| Relative change | +35.4%, 95% CI [−42.9, +300.0] | −53.8%, 95% CI [−100.0, +85.7] |
-
-The comparison ran over 16 matched prompt-seed pairs. MLR rose by roughly a
-third and the instruction-following score fell by more than half, and although
-the 16-pair intervals are wide, the direction is the same on both metrics.
-
-The failure has a mechanism rather than a story: with no future frames in the
-input and no correction after a block is committed, the prediction error of one
-block becomes part of the conditioning of the next, so error accumulates along
-the rollout. That is also what the diagnostic in [`loss.py`](loss.py) shows when
-it is run with `--demo`: scoring a synthetic reconstruction whose error grows
-with the frontier index produces a loss that grows in the same order. The route
-was therefore dropped in favour of keeping the whole-clip objective and
-weighting the region the instruction refers to, which is what the released IGR
-term does.
-
 ## Reading the record
 
 - [`loss.py`](loss.py) is self-contained: the block geometry, the prefix
   handling and the active-only loss are the three pieces the variant is built
   from, and `python loss.py --demo` prints the per-frontier scores.
 - The metric definitions and the eligible set are in
-  [`../../../docs/evaluation.md`](../../../docs/evaluation.md); the route is a
-  negative control and is kept here as the record of the study.
+  [`../../../docs/evaluation.md`](../../../docs/evaluation.md); the route is
+  kept here as the record of the study.
