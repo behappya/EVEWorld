@@ -12,6 +12,7 @@
   <a href="https://behappya.github.io/EVEWorld/"><img src="https://img.shields.io/badge/Project%20Page-EVEWorld-4c4cf0" alt="Project page"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue" alt="License: Apache-2.0"></a>
   <a href="docs/installation.md"><img src="https://img.shields.io/badge/Python-3.11-3776ab" alt="Python 3.11"></a>
+  <a href="https://github.com/behappya/EVEWorld/actions/workflows/tests.yml"><img src="https://github.com/behappya/EVEWorld/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
 </p>
 
 <p align="center">
@@ -250,4 +251,4 @@ EVEWorld builds on the GigaWorld-0 and FlowWAM backbones, and relies on Groundin
 
 ## Contributing
 
-Contributions are welcome; see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Contributions are welcome; see [`CONTRIBUTING.md`](CONTRIBUTING.md). The unit tests run with `pytest -q`, and the formatting and lint hooks with `pre-commit run --all-files`; the `tests` workflow runs both on every push.
