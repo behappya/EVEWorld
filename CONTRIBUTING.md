@@ -10,9 +10,11 @@ change.
 - Never commit credentials. API keys, tokens and judge endpoints belong in
   environment variables; [`docs/installation.md`](docs/installation.md) lists
   the ones the code reads.
-- `third_party/` and `outputs/` are never committed, and neither are datasets,
-  checkpoints or generated videos. Those trees are gitignored, and anything
-  large or redistributable belongs outside the repository.
+- `third_party/`, `outputs/` and `results/` are never committed, and neither are
+  datasets, checkpoints or generated videos. Those trees are gitignored, and
+  anything large or redistributable belongs outside the repository. The paper
+  outcome tables live with the paper and the project page, not in this branch;
+  `scripts/check_release_hygiene.sh` enforces the boundary.
 - A reported number should be reproducible from the commands in
   [`docs/reproduction.md`](docs/reproduction.md). When you report a benchmark
   discrepancy, state the protocol you used: detector settings, seeds, guidance

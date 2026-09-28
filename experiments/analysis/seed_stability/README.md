@@ -15,7 +15,7 @@ holding one JSON file per inference seed:
 
 ```text
 <root>/250/seed004.json
-{"seed": 4, "mlr": 2.5, "qwen_if": 60.1, "gemini_if": 58.4}
+{"seed": 4, "mlr": 1.0, "qwen_if": 50.0, "gemini_if": 50.0}
 ```
 
 `seed` is required and must agree with the file name; at least one of the
