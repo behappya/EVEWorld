@@ -12,7 +12,7 @@
        unreachable get the system font stack instantly instead of a white page. -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=5">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='4' fill='%230071e3'/><path d='M6.5 4.5l5.5 3.5-5.5 3.5z' fill='white'/></svg>">
   <link rel="canonical" href="https://behappya.github.io/EVEWorld/">
   <meta property="og:type" content="website">
@@ -110,7 +110,7 @@
       <div class="hm"><b>&minus;85.7%</b><span>MLR vs. matched Standard SFT<br>11.11 &rarr; 1.59</span></div>
       <div class="hm"><b>80.16</b><span>Qwen-IF<br>73.81 &rarr; 80.16</span></div>
       <div class="hm"><b>60.85</b><span>Gemini-IF<br>53.57 &rarr; 60.85</span></div>
-      <div class="hm"><b>70.17</b><span>WorldArena 2.0 EWMScore-P<br>#6 JEPA Similarity &middot; #17 overall</span></div>
+      <a class="hm" href="#worldarena2" title="Jump to the WorldArena 2.0 leaderboard highlight"><b>70.17</b><span>WorldArena 2.0 EWMScore-P<br>#6 JEPA Similarity &middot; #17 overall</span></a>
     </div>
 
     <p class="hero-provenance">Background rollouts: our WorldArena 2.0 Track 1 submission. DreamGenBench metrics use the main GigaWorld-based setting unless otherwise noted.</p>
@@ -493,6 +493,51 @@
   </div>
 </section>
 
+<!-- ============ HIGHLIGHT · WORLD ARENA 2.0 LEADERBOARD ============ -->
+<section class="band wa2" id="worldarena2">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">&#9733;</span><span class="e-label">WorldArena 2.0 &middot; Track 1</span><span class="e-rule"></span></div>
+    <h2 class="band-title">WorldArena 2.0 Leaderboard</h2>
+    <p class="band-lede">Simulator Video Quality</p>
+
+    <div class="wa2-grid">
+      <div class="wa2-panel">
+        <div class="wa2-cards">
+          <div class="wa2-card main">
+            <b>70.17</b>
+            <span class="wa2-k">EWMScore-P</span>
+            <span class="wa2-n">Difficulty/OOD Adjusted</span>
+          </div>
+          <div class="wa2-card">
+            <b>#6</b>
+            <span class="wa2-k">JEPA Similarity</span>
+          </div>
+          <div class="wa2-card">
+            <b>#17</b>
+            <span class="wa2-k">Overall</span>
+          </div>
+        </div>
+
+        <p class="wa2-copy">Our FlowWAM-based EVEWorld submission, listed as <b>Supervision_WM</b>, achieves an <b>EWMScore-P of 70.17</b> on the official WorldArena 2.0 Track 1 leaderboard, ranking <b>17th overall</b> and <b>6th in JEPA Similarity</b>.</p>
+        <p class="wa2-copy">Track 1 evaluates simulator video quality under WorldArena 2.0, with EWMScore-P reporting the difficulty- and out-of-distribution-adjusted aggregate score.</p>
+
+        <p class="wa2-cta">
+          <a class="btn primary" href="https://huggingface.co/spaces/WorldArena/WorldArena2.0" target="_blank" rel="noopener noreferrer">View Official Leaderboard &#8599;</a>
+        </p>
+      </div>
+
+      <figure class="wa2-figure">
+        <a class="wa2-zoom" href="https://huggingface.co/spaces/WorldArena/WorldArena2.0" target="_blank" rel="noopener noreferrer" title="Open the official WorldArena 2.0 leaderboard">
+          <img src="assets/site/figures/worldarena2_track1_leaderboard.png" alt="WorldArena 2.0 Track 1 leaderboard showing the Supervision_WM submission with EWMScore-P 70.17 and overall rank 17." loading="lazy">
+        </a>
+        <figcaption>Official WorldArena 2.0 Track 1 leaderboard. The FlowWAM-based EVEWorld submission is listed as <b>Supervision_WM</b>.</figcaption>
+      </figure>
+    </div>
+
+    <p class="wa2-note">Protocol reference rollouts from the public evaluation harness &mdash; external baseline material rather than EVEWorld outputs &mdash; are collected on the <a href="protocol.html">protocol reference page</a>.</p>
+  </div>
+</section>
+
 <!-- ================= 06 GENERALIZATION ================= -->
 <section class="band alt" id="generalization">
   <div class="lp-inner wide">
@@ -582,13 +627,6 @@
       </div>
 
     </div>
-
-    <div class="wa-strip">
-      <p class="wa-strip-main">WorldArena 2.0 Track 1 &middot; EWMScore-P <b>70.17</b> &middot; 6th in JEPA Similarity &middot; 17th overall</p>
-      <p class="wa-strip-note">Official leaderboard result of the FlowWAM-based EVEWorld submission reported in the paper.</p>
-    </div>
-
-    <p class="arm-note">WorldArena 2.0 Track 1 evaluates full rollouts on the official leaderboard; our submitted entry reaches EWMScore-P 70.17, ranking 6th in JEPA Similarity and 17th overall. The protocol reference montages from the public leaderboard, which are external baseline material and not EVEWorld outputs, are collected on the <a href="protocol.html">protocol reference page</a>.</p>
   </div>
 </section>
 
@@ -1076,6 +1114,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=4" defer></script>
+<script src="js/main.js?v=5" defer></script>
 </body>
 </html>
