@@ -35,6 +35,26 @@ The two top-level images are rendered at 200 dpi and capped at 2400 px on the lo
 qualitative panels at 150 dpi and capped at 2000 px, so a release is readable at full width
 on the project page without shipping a raster larger than the page needs.
 
+## Appendix plates on the project page
+
+Section 05 of the project page shows the paper's own qualitative visualizations rather than
+re-cut stills, so the appendix plates are rasterized straight onto the page at their
+published geometry. Every plate keeps the red and green annotation the appendix prints, and
+each caption on the page reproduces the appendix's own reading of that plate:
+
+- `figures/fig_conservation_dup_a.pdf` → `assets/site/figures/fig_conservation_dup_a.jpg`
+  (300 dpi, quality 88: the page is one large raster, so it gets the higher sampling).
+- `figures/fig_conservation_dup_b.pdf` → `assets/site/figures/fig_conservation_dup_b.jpg`
+- `figures/fig_conservation_dup_c.pdf` → `assets/site/figures/fig_conservation_dup_c.jpg`
+- `figures/fig_conservation_distort.pdf` → `assets/site/figures/fig_conservation_distort.jpg`
+- `figures/fig_qual_dup1.pdf` → `assets/site/figures/fig_qual_dup1.jpg`
+- `figures/fig_qual_dup2.pdf` → `assets/site/figures/fig_qual_dup2.jpg`
+- `figures/{570,637}_{sft,igr,eve}_mlr.pdf` → `assets/site/figures/{570,637}_{sft,igr,eve}_mlr.jpg`
+
+Those eleven pages are rendered at 150 dpi, the audit pages at quality 82 and the
+conservation and duplication pages at quality 84. The instruction each plate prints
+internally is quoted alongside it, so the page and the appendix cannot drift apart.
+
 ## Re-rendering
 
 The renderer is PyMuPDF for the page raster and Pillow for the cap, both already installed
@@ -67,4 +87,29 @@ Save the snippet next to the paper sources and run it with the evaluation interp
 entry rewrites one release in place. The site copies under `assets/site/figures/` are
 exported as vector SVG from the same sources (`page.get_svg_image(text_as_path=True)`) and
 follow the paper figures whenever they change, so a figure only ever has one source of
-truth.
+truth. The appendix plates of section 05 are the exception: they are page rasters rather
+than vector drawings, so they are published as JPEG and re-rendered with
+
+```python
+import pymupdf, os
+
+jobs = [
+    ("fig_conservation_dup_a", 300, 88),
+    ("fig_conservation_dup_b", 150, 84),
+    ("fig_conservation_dup_c", 150, 84),
+    ("fig_conservation_distort", 150, 84),
+    ("fig_qual_dup1", 150, 84),
+    ("fig_qual_dup2", 150, 84),
+    ("570_sft_mlr", 150, 82),
+    ("570_igr_mlr", 150, 82),
+    ("570_eve_mlr", 150, 82),
+    ("637_sft_mlr", 150, 82),
+    ("637_igr_mlr", 150, 82),
+    ("637_eve_mlr", 150, 82),
+]
+
+for name, dpi, quality in jobs:
+    page = pymupdf.open(f"paper/figures/{name}.pdf")[0]
+    pix = page.get_pixmap(dpi=dpi, colorspace=pymupdf.csRGB)
+    pix.save(f"assets/site/figures/{name}.jpg", jpg_quality=quality)
+```

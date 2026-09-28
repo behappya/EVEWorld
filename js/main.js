@@ -3,7 +3,7 @@
 
    Hero video reel, scroll progress, click-to-play video tiles,
    synchronized playback for the three featured comparison cards,
-   a pretrained-baseline toggle, nav highlighting, reveal-on-scroll,
+   the figure lightbox, nav highlighting, reveal-on-scroll,
    disclosure state sync and BibTeX copy.
    Honors prefers-reduced-motion.
 
@@ -74,21 +74,6 @@
   document.querySelectorAll('a[aria-disabled="true"]').forEach(function (a) {
     a.addEventListener("click", function (e) { e.preventDefault(); });
   });
-
-  /* ---------- pretrained-baseline toggle (section 05) ---------- */
-
-  var preToggle = document.getElementById("preToggle");
-  var qual = document.getElementById("qualitative");
-  if (preToggle && qual) {
-    preToggle.addEventListener("click", function () {
-      var on = qual.classList.toggle("show-pre");
-      preToggle.setAttribute("aria-pressed", on ? "true" : "false");
-      preToggle.textContent = on ? "Hide pretrained baseline" : "Show pretrained baseline";
-      if (!on) {
-        qual.querySelectorAll(".demo-tile.pre video").forEach(function (v) { v.pause(); });
-      }
-    });
-  }
 
   /* ---------- generic click-to-play video tiles ---------- */
 
@@ -227,6 +212,53 @@
     document.querySelectorAll(".reveal").forEach(function (el) { wio.observe(el); });
   } else {
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+  }
+
+  /* ---------- plate lightbox (section 05) ---------- */
+
+  var zoomLinks = document.querySelectorAll(".plate-zoom");
+  if (zoomLinks.length) {
+    var lb = document.createElement("div");
+    lb.className = "lightbox";
+    lb.setAttribute("role", "dialog");
+    lb.setAttribute("aria-modal", "true");
+    lb.setAttribute("aria-label", "Figure preview");
+    var lbImg = document.createElement("img");
+    lbImg.alt = "";
+    var lbClose = document.createElement("button");
+    lbClose.className = "lightbox-close";
+    lbClose.type = "button";
+    lbClose.setAttribute("aria-label", "Close the preview");
+    lbClose.textContent = "\u00D7";
+    lb.appendChild(lbImg);
+    lb.appendChild(lbClose);
+    document.body.appendChild(lb);
+
+    var closeLb = function () {
+      lb.classList.remove("open");
+      document.body.classList.remove("lb-open");
+      lbImg.removeAttribute("src");
+    };
+    var openLb = function (href, alt) {
+      lbImg.src = href;
+      lbImg.alt = alt || "";
+      lb.classList.add("open");
+      document.body.classList.add("lb-open");
+      lbClose.focus();
+    };
+
+    zoomLinks.forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var img = a.querySelector("img");
+        openLb(a.getAttribute("href"), img ? img.getAttribute("alt") : "");
+      });
+    });
+    lbClose.addEventListener("click", closeLb);
+    lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && lb.classList.contains("open")) closeLb();
+    });
   }
 
   /* ---------- BibTeX copy ---------- */

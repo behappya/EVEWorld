@@ -37,7 +37,13 @@ capped at 2000 px wide.
 ## `site/`
 
 Media for the project page: `figures/` holds vector SVG copies exported from the
-paper figures, `videos/hero` the looped banner, `videos/gr1` and `videos/wa` the
-qualitative comparisons (AgiBot-GR1 and WorldArena rollouts), and
-`videos/posters/` the first-frame stills that keep the grid layout from jumping
-while clips load.
+paper figures together with the appendix plates rasterized from `paper/figures/`
+as JPEG, `videos/hero` the looped banner, `videos/submission` the qualified
+rollouts of the hero reel, `videos/gr1` the AgiBot-GR1 comparison of the
+limitations section, and `videos/posters/` the first-frame stills that keep the
+grid layout from jumping while clips load.
+
+Section 05 shows the appendix plates themselves — the pages that carry the red and
+green Model Laziness annotation — rather than re-cut stills, so the figures there
+are the published visualizations of the paper and the page never selects its own
+examples.

@@ -1025,16 +1025,67 @@ table.data.tight th, table.data.tight td { padding: 5px 8px; }
 
 .stills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
-/* pretrained-arm toggle: the pre tile is hidden until the reader asks for it,
-   and the tile rows re-flow so no row is left half empty */
-#qualitative .demo-tile.pre { display: none; }
-#qualitative.show-pre .demo-tile.pre { display: block; }
-#qualitative .demo-card.featured .demo-tiles { grid-template-columns: repeat(3, 1fr); }
-#qualitative.show-pre .demo-card.featured .demo-tiles { grid-template-columns: repeat(2, 1fr); }
-#qualitative .demo-card:not(.featured) .demo-tiles:not(.trio):not(.single) { grid-template-columns: repeat(3, 1fr); }
-#qualitative.show-pre .demo-card:not(.featured) .demo-tiles:not(.trio):not(.single) { grid-template-columns: repeat(2, 1fr); }
-#qualitative .demo-tiles.trio { grid-template-columns: repeat(2, 1fr); }
-#qualitative.show-pre .demo-tiles.trio { grid-template-columns: repeat(3, 1fr); }
+/* ---------- v3: paper-plate gallery (section 05) ---------- */
+
+.plate-sec { margin-top: 38px; }
+.plate-sec h3 { font-size: 17.5px; letter-spacing: -.01em; margin: 0 0 6px; }
+.plate-sec > p { max-width: 900px; margin: 0 0 18px; font-size: 13.5px; line-height: 1.7; color: var(--text-muted); }
+.plate-sec > p b { color: var(--text); }
+.plate-sec .mono { color: var(--text); }
+
+.plate-task {
+  margin: 4px 0 16px; padding: 10px 15px; font-size: 12.8px; line-height: 1.62;
+  color: var(--text-muted); background: var(--surface);
+  border-left: 3px solid var(--border-strong); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.plate-task b { color: var(--text); }
+.plate-task .mono { color: var(--text); }
+
+.plate-stack { display: flex; flex-direction: column; gap: 16px; }
+.plate-stack .figcard { margin: 0; padding: 14px 14px 10px; }
+.plate-stack .figcard figcaption { padding: 11px 4px 2px; }
+
+.plate-zoom {
+  position: relative; display: block; cursor: zoom-in;
+  border-radius: var(--radius-sm); background: var(--surface);
+}
+.plate-zoom::after {
+  content: "\2197"; position: absolute; right: 10px; bottom: 10px;
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: var(--text-muted);
+  background: rgba(255, 255, 255, .92); border: 1px solid var(--border-strong);
+  opacity: 0; transition: opacity var(--dur-fast) var(--ease);
+}
+.plate-zoom:hover::after, .plate-zoom:focus-visible::after { opacity: 1; }
+
+@media (max-width: 720px) {
+  .plate-sec { margin-top: 30px; }
+  .plate-stack .figcard { padding: 10px 10px 6px; }
+}
+
+/* ---------- v3: figure lightbox ---------- */
+
+.lightbox {
+  position: fixed; inset: 0; z-index: 200; display: none;
+  align-items: center; justify-content: center; padding: 26px;
+  background: rgba(18, 18, 20, .9);
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 100%; max-height: calc(100vh - 52px);
+  border-radius: var(--radius-sm); background: #fff;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .45);
+}
+.lightbox-close {
+  position: absolute; top: 16px; right: 20px; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 22px; line-height: 1; color: #fff;
+  background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .3);
+  border-radius: 50%; cursor: pointer;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, .26); }
+body.lb-open { overflow: hidden; }
 
 /* ---------- v3: generalization cards (section 06) ---------- */
 

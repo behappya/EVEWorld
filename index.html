@@ -373,212 +373,123 @@
   <div class="lp-inner wide">
     <div class="eyebrow"><span class="e-no">05</span><span class="e-label">Qualitative Comparison</span><span class="e-rule"></span></div>
     <h2 class="band-title">Target evolution under matched initial conditions and instructions.</h2>
-    <p class="band-lede">We compare matched rollouts generated from the same initial observation and instruction. The qualitative analysis focuses on whether the manipulated target preserves its instance state and cross-frame identity throughout the interaction.</p>
+    <p class="band-lede">Every plate on this page is one of the paper's own qualitative visualizations, reproduced unchanged from the appendix: matched rollouts generated from the same initial observation and instruction, annotated with the same marks the paper uses. We compare whether the manipulated target preserves its instance state and its cross-frame identity throughout the interaction.</p>
 
     <div class="arm-legend">
       <span class="arm-chip eve"><i></i><b>EVEWorld</b>&nbsp;&mdash; IGR + TIA</span>
-      <span class="arm-chip sft"><i></i><b>Standard SFT</b>&nbsp;&mdash; Conventional fine-tuning</span>
-      <span class="arm-chip igt"><i></i><b>IGR only</b>&nbsp;&mdash; Instance restoration only</span>
-      <span class="arm-chip pre"><i></i><b>GigaWorld-0</b>&nbsp;&mdash; pretrained backbone</span>
-      <button class="toggle-btn" id="preToggle" type="button" aria-pressed="false">Show pretrained baseline</button>
+      <span class="arm-chip sft"><i></i><b>Standard SFT</b>&nbsp;&mdash; Model Laziness</span>
+      <span class="arm-chip igt"><i></i><b>IGR only</b>&nbsp;&mdash; single-component ablation</span>
     </div>
-    <p class="arm-note">Every tile is a generated rollout of the same backbone under the same instruction and start frame; the conditioning still is identical across the arms of a task and is not repeated inside each tile. Click a tile to play it.</p>
+    <p class="arm-note">Each plate is reproduced for exactly the arms and stages the appendix renders. Where the appendix prints arm names or instruction text inside a plate, they are visible in the image itself; where it does not, the caption below the plate supplies the missing label.</p>
+    <p class="arm-note"><b>Reading the plates.</b> <span class="mono">&#10003;</span> count-consistent timestamp &middot; <span class="mono">mlr&times;</span> count deviation recorded by MLR &middot; <span class="mono">distortion&times;</span> count preserved, but the target changes appearance, geometry, or identity &middot; <span style="color:var(--arm-sft);font-weight:600">red</span> box or frame, a consistency violation &middot; <span style="color:var(--good);font-weight:600">green</span> box or frame, the preserved target. Click any plate to open it at full resolution.</p>
 
-    <div class="demo-grid three">
+    <div class="plate-sec">
+      <h3>Instance consistency under Model Laziness</h3>
+      <p>Standard SFT may introduce surplus or missing target instances over the rollout, whereas EVEWorld better maintains target-instance consistency throughout the interaction. The three plates below are the appendix's own examples of this comparison.</p>
+      <div class="plate-stack">
 
-      <div class="demo-card featured">
-        <div class="demo-tiles">
-          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/011-yes/sft.mp4" poster="assets/site/videos/posters/011-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/011-yes/igt.mp4" poster="assets/site/videos/posters/011-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
-          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/011-yes/eve.mp4" poster="assets/site/videos/posters/011-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/011-yes/pre.mp4" poster="assets/site/videos/posters/011-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-        </div>
-        <div class="demo-body">
-          <div class="demo-task">Use the left hand to pick up blue clock from bottom wooden shelf to center of teal plate.</div>
-          <ul class="demo-obs">
-            <li><b>What to compare.</b> Whether the clock keeps a single instance and a stable shape across the four arms as the hand transfers it to the teal plate.</li>
-          </ul>
-          <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-        </div>
-      </div>
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/fig_conservation_dup_a.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/fig_conservation_dup_a.jpg" alt="Matched rollouts annotated as in the paper: red marks Standard SFT violating target-instance consistency, green marks EVEWorld preserving it" loading="lazy">
+        </a>
+        <figcaption><b>Target-instance consistency under Model Laziness.</b> <span style="color:var(--arm-sft);font-weight:600">Red</span> marks the Standard SFT rollout, where Model Laziness violates target-instance consistency during manipulation; <span style="color:var(--good);font-weight:600">green</span> marks EVEWorld, which maintains target-instance consistency throughout the interaction. This plate carries no in-figure instruction label in the appendix.</figcaption>
+      </figure>
 
-      <div class="demo-card featured">
-        <div class="demo-tiles">
-          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/034-yes/sft.mp4" poster="assets/site/videos/posters/034-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/034-yes/igt.mp4" poster="assets/site/videos/posters/034-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
-          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/034-yes/eve.mp4" poster="assets/site/videos/posters/034-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/034-yes/pre.mp4" poster="assets/site/videos/posters/034-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-        </div>
-        <div class="demo-body">
-          <div class="demo-task">Use the left hand to pick up clear blue glass from blue plate to teal plate.</div>
-          <ul class="demo-obs">
-            <li><b>What to compare.</b> Whether the cup keeps its instance state and cross-frame identity across the four arms during the move between plates.</li>
-          </ul>
-          <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-        </div>
-      </div>
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/fig_conservation_dup_b.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/fig_conservation_dup_b.jpg" alt="Additional Model Laziness cases: matched rollouts for the lighter-and-candle instruction and the blue-clock instruction, Standard SFT against EVEWorld" loading="lazy">
+        </a>
+        <figcaption><b>Additional Model Laziness cases.</b> Matched rollouts for <span class="mono">Use the right hand to pick up long-reach lighter to light the candle.</span> and <span class="mono">Use the left hand to pick up blue clock from bottom wooden shelf to center of teal plate.</span> The plate carries its own arm labels on each row, <b>Standard SFT</b> (marked <i>Model Laziness</i>) and <b>EVEWorld (ours)</b>.</figcaption>
+      </figure>
 
-      <div class="demo-card featured">
-        <div class="demo-tiles">
-          <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/367-yes/sft.mp4" poster="assets/site/videos/posters/367-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-          <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/367-yes/igt.mp4" poster="assets/site/videos/posters/367-yes-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
-          <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/367-yes/eve.mp4" poster="assets/site/videos/posters/367-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-          <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/367-yes/pre.mp4" poster="assets/site/videos/posters/367-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-        </div>
-        <div class="demo-body">
-          <div class="demo-task">Use the right hand to pick up the bread slice from the toaster and place it on the blue plate.</div>
-          <ul class="demo-obs">
-            <li><b>What to compare.</b> Whether the bread slice keeps a single instance and a consistent appearance across the four arms through the transfer to the blue plate.</li>
-          </ul>
-          <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-        </div>
-      </div>
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/fig_conservation_dup_c.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/fig_conservation_dup_c.jpg" alt="Further Model Laziness case: matched rollouts for the plate-and-dish-rack instruction, Standard SFT against EVEWorld" loading="lazy">
+        </a>
+        <figcaption><b>Additional Model Laziness case.</b> The same comparison for <span class="mono">Use the right hand to pick up plate and place it onto the dish rack.</span>, shown at matched stages of the interaction.</figcaption>
+      </figure>
+    </div>
+  </div>
 
+  <div class="plate-sec">
+    <h3>Cross-frame target consistency</h3>
+    <p>Standard SFT exhibits target duplication during the rollout, and IGR-only can still retain such cross-frame inconsistencies despite directly supervising instance restoration. With TIA added, EVEWorld maintains a single coherent target across the corresponding interaction stages.</p>
+    <div class="plate-stack">
+
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/fig_qual_dup1.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/fig_qual_dup1.jpg" alt="Three-arm comparison at matched interaction stages for the pink-peach instruction: red boxes mark Model Laziness, green boxes mark EVEWorld keeping a single target" loading="lazy">
+        </a>
+        <figcaption><b>Cross-frame target duplication.</b> <span class="mono">Use the right hand to pick up pink peach from top level of the shelf to bottom level of the shelf.</span> The plate labels all three arms &mdash; <b>Standard SFT</b> (<i>Model Laziness</i>), <b>IGR (ours): a direct approach</b>, and <b>EVEWorld (ours)</b> &mdash; at matched stages of the same interaction. <span style="color:var(--arm-sft);font-weight:600">Red</span> marks the duplicated, drifted, or deformed target; <span style="color:var(--good);font-weight:600">green</span> marks the target EVEWorld keeps single and coherent.</figcaption>
+      </figure>
+
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/fig_qual_dup2.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/fig_qual_dup2.jpg" alt="Second three-arm comparison for the bread-slice instruction, annotated red for Model Laziness and green for EVEWorld" loading="lazy">
+        </a>
+        <figcaption><b>Cross-frame target duplication, second case.</b> <span class="mono">Use the right hand to pick up the bread slice from the toaster and place it on the blue plate.</span> Same three arms and same annotation scheme: IGR-only keeps the instance count yet the duplicated target still carries across frames, while EVEWorld maintains a single target throughout.</figcaption>
+      </figure>
+
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/fig_conservation_distort.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/fig_conservation_distort.jpg" alt="Count-preserving distortion: the target deforms in red-marked Standard SFT and stays stable in green-marked EVEWorld" loading="lazy">
+        </a>
+        <figcaption><b>Count-preserving cross-frame distortion.</b> <span class="mono">Place the rectangular black eraser for whiteboards on the tray with rounded corners, then set the mouse the rounded gray mouse next to the smooth black typing keyboard.</span> <span style="color:var(--arm-sft);font-weight:600">Red</span> marks the Standard SFT rollout, where the target deforms although its instance count is preserved; <span style="color:var(--good);font-weight:600">green</span> marks EVEWorld, which preserves target shape and temporal consistency.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="plate-sec">
+    <h3>Target evolution under the MLR audit</h3>
+    <p>Two representative tasks from the MLR audit, each rendered for all three arms at the same set of <b>24 timestamps</b>. <span class="mono">&#10003;</span> marks a count-consistent state, <span class="mono">mlr&times;</span> a count deviation recorded as a Model Laziness event, and <span class="mono">distortion&times;</span> a state that preserves the count while the target's appearance or geometry changes. Standard SFT loses the target outright, IGR-only keeps the count while the target progressively distorts, and EVEWorld keeps both. The appendix titles the three arms' plates <i>Instance inconsistency</i>, <i>Cross-frame inconsistency</i> and <i>Physical consistency</i>; each caption below follows that reading.</p>
+    <p class="plate-task"><b>Task 1.</b> <span class="mono">Move the boxed drink the drink box with brown circular print onto the coaster the coaster made of smooth wood.</span></p>
+    <div class="plate-stack">
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/570_sft_mlr.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/570_sft_mlr.jpg" alt="MLR audit plate for Task 1 under Standard SFT: green check marks early in the rollout, then red crosses marking count deviations" loading="lazy">
+        </a>
+        <figcaption><b>Task 1 &middot; Standard SFT.</b> Over the audited timestamps the rollout holds <b>14</b> count-consistent states and then <b>10</b> deviations; the first cross marks the onset, and an MLR event is counted only after two consecutive violating timestamps.</figcaption>
+      </figure>
+
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/570_igr_mlr.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/570_igr_mlr.jpg" alt="MLR audit plate for Task 1 under IGR only: the count is kept but the target changes appearance, marked as distortion" loading="lazy">
+        </a>
+        <figcaption><b>Task 1 &middot; IGR only.</b> Same instruction and same timestamps. The count is preserved, but <b>10</b> states change the target's appearance or geometry, so these failures are recorded separately from MLR rather than as count violations.</figcaption>
+      </figure>
+
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/570_eve_mlr.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/570_eve_mlr.jpg" alt="MLR audit plate for Task 1 under EVEWorld: every audited timestamp carries a green check mark" loading="lazy">
+        </a>
+        <figcaption><b>Task 1 &middot; EVEWorld.</b> Same instruction and same timestamps. All <b>24</b> states carry a green check mark: the target keeps both its instance count and its identity throughout the rollout.</figcaption>
+      </figure>
     </div>
 
-    <details class="acc">
-      <summary>Additional examples</summary>
-      <div class="acc-body">
-        <div class="demo-grid three">
+    <p class="plate-task"><b>Task 2.</b> <span class="mono">Put the drink container with tapered shape squarely on top of the smooth round palm-sized coaster.</span></p>
+    <div class="plate-stack">
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/637_sft_mlr.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/637_sft_mlr.jpg" alt="MLR audit plate for Task 2 under Standard SFT: green check marks early in the rollout, then red crosses marking count deviations" loading="lazy">
+        </a>
+        <figcaption><b>Task 2 &middot; Standard SFT.</b> The second audited task under the same protocol: <b>13</b> count-consistent states followed by <b>11</b> deviations, with the first cross marking the onset of the MLR event.</figcaption>
+      </figure>
 
-          <div class="demo-card">
-            <div class="demo-tiles">
-              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/036-no/sft.mp4" poster="assets/site/videos/posters/036-no-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-              <div class="demo-tile igt" data-video><video src="assets/site/videos/gr1/036-no/igt.mp4" poster="assets/site/videos/posters/036-no-igt.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">IGR only</span></div>
-              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/036-no/eve.mp4" poster="assets/site/videos/posters/036-no-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/036-no/pre.mp4" poster="assets/site/videos/posters/036-no-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">Use the right hand to pick up green apple from top tier of wooden shelf to bottom tier of wooden shelf.</div>
-              <ul class="demo-obs">
-                <li><b>What to compare.</b> Whether the manipulated target preserves its instance state and cross-frame identity across the four arms.</li>
-              </ul>
-              <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-            </div>
-          </div>
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/637_igr_mlr.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/637_igr_mlr.jpg" alt="MLR audit plate for Task 2 under IGR only: the count is kept but the target changes appearance, marked as distortion" loading="lazy">
+        </a>
+        <figcaption><b>Task 2 &middot; IGR only.</b> The count survives the rollout, but <b>11</b> states change the target's appearance or geometry, so the failure shows up as distortion rather than as a count violation.</figcaption>
+      </figure>
 
-          <div class="demo-card">
-            <div class="demo-tiles trio">
-              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/035-yes/sft.mp4" poster="assets/site/videos/posters/035-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/035-yes/eve.mp4" poster="assets/site/videos/posters/035-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/035-yes/pre.mp4" poster="assets/site/videos/posters/035-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">Use the right hand to pick up purple grapes from center of table to lower white plastic tray.</div>
-              <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-            </div>
-          </div>
-
-          <div class="demo-card">
-            <div class="demo-tiles trio">
-              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/hlg-yes/sft.mp4" poster="assets/site/videos/posters/hlg-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/hlg-yes/eve.mp4" poster="assets/site/videos/posters/hlg-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/hlg-yes/pre.mp4" poster="assets/site/videos/posters/hlg-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">Use the left hand to pick up dragonfruit from pink plate to teal plate.</div>
-              <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-            </div>
-          </div>
-
-          <div class="demo-card">
-            <div class="demo-tiles trio">
-              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/016-yes/sft.mp4" poster="assets/site/videos/posters/016-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/016-yes/eve.mp4" poster="assets/site/videos/posters/016-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/016-yes/pre.mp4" poster="assets/site/videos/posters/016-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">Use the right hand to pick up red tomato from upper black tray of plastic shelf to inside of brown paper bag.</div>
-              <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-            </div>
-          </div>
-
-          <div class="demo-card">
-            <div class="demo-tiles trio">
-              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/012-yes/sft.mp4" poster="assets/site/videos/posters/012-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/012-yes/eve.mp4" poster="assets/site/videos/posters/012-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/012-yes/pre.mp4" poster="assets/site/videos/posters/012-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">Use the right hand to pick up green grapes from black tray at the center of the table to white circular mat at the right side of the table.</div>
-              <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-            </div>
-          </div>
-
-          <div class="demo-card">
-            <div class="demo-tiles trio">
-              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/033-yes/sft.mp4" poster="assets/site/videos/posters/033-yes-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/033-yes/eve.mp4" poster="assets/site/videos/posters/033-yes-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/033-yes/pre.mp4" poster="assets/site/videos/posters/033-yes-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">Use the right hand to pick up tall red glass from center of tan table to center of bright blue plate.</div>
-              <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-            </div>
-          </div>
-
-          <div class="demo-card">
-            <div class="demo-tiles trio">
-              <div class="demo-tile sft" data-video><video src="assets/site/videos/gr1/fire-no/sft.mp4" poster="assets/site/videos/posters/fire-no-sft.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">Standard SFT</span></div>
-              <div class="demo-tile eve" data-video><video src="assets/site/videos/gr1/fire-no/eve.mp4" poster="assets/site/videos/posters/fire-no-eve.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">EVEWorld</span></div>
-              <div class="demo-tile pre" data-video><video src="assets/site/videos/gr1/fire-no/pre.mp4" poster="assets/site/videos/posters/fire-no-pre.jpg" muted loop playsinline preload="none" disablepictureinpicture></video><span class="demo-tile-label">GigaWorld-0</span></div>
-            </div>
-            <div class="demo-body">
-              <div class="demo-task">Use the right hand to pick up long reach lighter to light the candle.</div>
-              <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </details>
-
-    <details class="acc">
-      <summary>Clip provenance and source notes</summary>
-      <div class="acc-body">
-        <p class="arm-note">Qualitative clips are unedited model rollouts generated under matched instructions and initial conditions. A model arm is omitted only when the corresponding rendering is unavailable; all displayed comparisons preserve the source evaluation setting.</p>
-      </div>
-    </details>
-
-    <details class="acc">
-      <summary>More qualitative stills from the paper</summary>
-      <div class="acc-body">
-        <div class="stills-grid">
-          <figure class="figcard">
-            <img src="assets/site/figures/fig_conservation_dup_a.svg" alt="Target-instance conservation under duplication: red marks the Standard SFT rollout that keeps an extra duplicate, green marks EVEWorld" loading="lazy">
-            <figcaption><b>Target-instance conservation under duplication.</b> <span style="color:var(--arm-sft);font-weight:600">Red</span> marks a Standard SFT rollout that violates conservation; <span style="color:var(--good);font-weight:600">green</span> marks EVEWorld, which keeps the count conserved throughout.</figcaption>
-          </figure>
-          <figure class="figcard">
-            <img src="assets/site/figures/fig_conservation_dup_b.svg" alt="Additional duplication cases comparing Standard SFT with EVEWorld" loading="lazy">
-            <figcaption><b>Additional duplication comparisons.</b> The same comparison on additional instructions, where Standard SFT leaves a second instance behind.</figcaption>
-          </figure>
-          <figure class="figcard">
-            <img src="assets/site/figures/fig_conservation_dup_c.svg" alt="Further duplication cases where Standard SFT adds an extra instance and EVEWorld does not" loading="lazy">
-            <figcaption><b>Duplication across unrelated objects and scene layouts.</b> The pattern repeats across tasks, which motivates treating it as a property of the supervision rather than of any one task.</figcaption>
-          </figure>
-          <figure class="figcard">
-            <img src="assets/site/figures/fig_conservation_distort.svg" alt="Target distortion: the instance count is preserved but the target shape drifts, green marks EVEWorld" loading="lazy">
-            <figcaption><b>Count preservation with shape drift.</b> The count is preserved but the target deforms over the rollout. EVEWorld preserves the instance shape, the failure mode TIA is intended to address.</figcaption>
-          </figure>
-          <figure class="figcard">
-            <img src="assets/site/figures/fig_qual_dup1.svg" alt="Qualitative component comparison on a duplication instruction: red boxes mark Model Laziness, green boxes mark EVEWorld conservation" loading="lazy">
-            <figcaption><b>Matched interaction stages.</b> Four instructions shown at the same point of the interaction. <span style="color:var(--arm-sft);font-weight:600">Red boxes</span> mark Model Laziness; <span style="color:var(--good);font-weight:600">green boxes</span> mark where EVEWorld conserves the target.</figcaption>
-          </figure>
-          <figure class="figcard">
-            <img src="assets/site/figures/fig_qual_dup2.svg" alt="Continuation of the qualitative duplication comparison across components" loading="lazy">
-            <figcaption><b>Continuation of the duplication comparison.</b> Same layout, further instructions and objects.</figcaption>
-          </figure>
-          <figure class="figcard">
-            <img src="assets/site/figures/fig_qual_vanish1.svg" alt="Qualitative component comparison on a disappearance instruction" loading="lazy">
-            <figcaption><b>Disappearance cases.</b> Instructions where the target leaves the scene before the interaction closes, at matched interaction stages.</figcaption>
-          </figure>
-          <figure class="figcard">
-            <img src="assets/site/figures/fig_qual_vanish2.svg" alt="Continuation of the qualitative disappearance comparison across components" loading="lazy">
-            <figcaption><b>Continuation of the disappearance comparison.</b> Same layout, further instructions and objects.</figcaption>
-          </figure>
-        </div>
-      </div>
-    </details>
+      <figure class="figcard">
+        <a class="plate-zoom" href="assets/site/figures/637_eve_mlr.jpg" target="_blank" rel="noopener" title="Open the plate at full resolution">
+          <img src="assets/site/figures/637_eve_mlr.jpg" alt="MLR audit plate for Task 2 under EVEWorld: every audited timestamp carries a green check mark" loading="lazy">
+        </a>
+        <figcaption><b>Task 2 &middot; EVEWorld.</b> All <b>24</b> states carry a green check mark: the container keeps its count and its identity from the first audited timestamp to the last.</figcaption>
+      </figure>
+    </div>
+  </div>
 
   </div>
 </section>
