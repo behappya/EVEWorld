@@ -25,10 +25,10 @@
     <a class="brand" href="#top"><span class="brand-dot"></span>EVE<b>World</b></a>
     <nav class="header-nav" aria-label="Sections">
       <a href="#abstract">Overview</a>
-      <a href="#laziness">Problem</a>
+      <a href="#laziness">Model Laziness</a>
       <a href="#method">Method</a>
       <a href="#metric">MLR</a>
-      <a href="#qualitative">Videos</a>
+      <a href="#qualitative">Qualitative</a>
       <a href="#generalization">Generalization</a>
       <a href="#results">Results</a>
       <a href="#analysis">Robustness</a>
@@ -75,12 +75,12 @@
     <div class="hero-badges">
       <span class="vbadge"><svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M8 1l2 4.2 4.6.6-3.4 3.2.9 4.5L8 11.3 3.9 13.5l.9-4.5L1.4 5.8 6 5.2z"/></svg>ICLR 2027 Submission</span>
       <span class="vbadge">Physical Evolution Supervision</span>
-      <span class="vbadge">MLR &darr;85.7% vs. matched SFT</span>
+      <span class="vbadge">MLR &darr;85.7% vs. Standard SFT</span>
     </div>
 
     <h1 class="hero-title">EVE<span class="hl">World</span></h1>
     <p class="hero-tag"><b>Physical Evolution Supervision</b> for Embodied World Models</p>
-    <p class="hero-value">Supervising how manipulated objects evolve &mdash; not just how frames look.<span>EVEWorld combines instance restoration and temporal alignment to reduce persistent target-instance failures while improving instruction following.</span></p>
+    <p class="hero-value">Process-level supervision for physically consistent target evolution.<span>IGR promotes target-instance consistency, TIA promotes cross-frame consistency, and MLR quantifies persistent target-instance violations.</span></p>
 
     <div class="hero-authors">
       <p class="hero-author-names">{{REAL AUTHORS}}</p>
@@ -96,7 +96,7 @@
         Code</a>
       <a class="btn ghost" href="#qualitative">
         <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M6.6 5.4l4 2.6-4 2.6z" fill="currentColor" stroke="none"/></svg>
-        Video Gallery</a>
+        Qualitative examples</a>
       <a class="btn ghost" href="#citation">
         <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M2.5 2A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h4v-1.3h-4a.2.2 0 0 1-.2-.2v-9a.2.2 0 0 1 .2-.2h4V2h-4zM10.5 2l4 4v8a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h1zm-.2 1.4V6h2.4l-2.4-2.6z"/></svg>
         BibTeX</a>
@@ -111,7 +111,7 @@
       <div class="hm"><b>70.17</b><span>WorldArena 2.0 EWMScore-P<br>#6 JEPA Similarity &middot; #17 overall</span></div>
     </div>
 
-    <p class="hero-provenance">Background rollouts: our WorldArena 2.0 Track 1 submission. Headline DreamGenBench metrics use the main GigaWorld-based setting unless otherwise noted.</p>
+    <p class="hero-provenance">Background rollouts: our WorldArena 2.0 Track 1 submission. DreamGenBench metrics use the main GigaWorld-based setting unless otherwise noted.</p>
   </div>
   <div class="hero-caret" aria-hidden="true"><svg viewBox="0 0 16 16" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6l5 5 5-5"/></svg></div>
 </section>
@@ -120,37 +120,37 @@
 <section class="band" id="abstract">
   <div class="lp-inner">
     <div class="eyebrow"><span class="e-no">01</span><span class="e-label">Overview</span><span class="e-rule"></span></div>
-    <h2 class="band-title">A world model can look right and still evolve wrong.</h2>
+    <h2 class="band-title">Visual plausibility does not guarantee physically consistent target evolution.</h2>
 
     <div class="abstract-card reveal">
-      <p>Embodied world models can generate visually plausible interactions while violating the physical evolution of the object being manipulated. A target may be spuriously duplicated or disappear, or it may preserve its count while its identity and shape drift across frames.</p>
-      <p>EVEWorld adds process-level evolution supervision. <b>Instance-Guided Restoration (IGR)</b> teaches the model to recover the correct target-instance state from count-perturbed demonstrations, while <b>Temporal Instance Alignment (TIA)</b> links the target across adjacent frames. We also introduce <b>Model Laziness Rate (MLR)</b>, an occlusion-aware, persistence-aware diagnostic for target-instance consistency.</p>
+      <p>Embodied world models can generate visually plausible interactions while violating the physical evolution of the manipulated target. During a rollout, the target may undergo unsupported duplication or disappearance, or preserve its instance count while exhibiting deformation or identity drift across frames.</p>
+      <p>EVEWorld introduces process-level evolution supervision for physically consistent target evolution. <b>Instance-Guided Restoration (IGR)</b> promotes target-instance consistency by restoring count-perturbed demonstrations, while <b>Temporal Instance Alignment (TIA)</b> promotes cross-frame consistency by aligning target representations across adjacent frames. We further introduce the <b>Model Laziness Rate (MLR)</b>, an occlusion-aware and persistence-aware rollout-level diagnostic for target-instance consistency.</p>
     </div>
 
     <div class="mcard-grid cols-3">
       <div class="mcard reveal">
-        <div class="mcard-head"><span class="mcard-tag igt">Component 1</span></div>
+        <div class="mcard-head"><span class="mcard-tag igt">INSTANCE CONSISTENCY</span></div>
         <h3>Instance-Guided Restoration</h3>
-        <p class="mcard-lead">Restore the correct instance state.</p>
-        <p>Train on count-perturbed demonstrations and recover the clean target configuration.</p>
+        <p class="mcard-lead">Restoration supervision for target-instance consistency.</p>
+        <p>Restore clean demonstrations from count-perturbed inputs, with stronger supervision on restoration-related regions.</p>
       </div>
       <div class="mcard reveal">
-        <div class="mcard-head"><span class="mcard-tag eve">Component 2</span></div>
+        <div class="mcard-head"><span class="mcard-tag eve">CROSS-FRAME CONSISTENCY</span></div>
         <h3>Temporal Instance Alignment</h3>
-        <p class="mcard-lead">Keep the target coherent across time.</p>
-        <p>Match and transport target features across adjacent frames inside the transformer.</p>
+        <p class="mcard-lead">Temporal alignment for cross-frame target consistency.</p>
+        <p>Align target representations across adjacent frames through local matching and cross-frame feature transport.</p>
       </div>
       <div class="mcard reveal">
-        <div class="mcard-head"><span class="mcard-tag neutral">Diagnostic</span></div>
+        <div class="mcard-head"><span class="mcard-tag neutral">EVALUATION</span></div>
         <h3>Model Laziness Rate</h3>
-        <p class="mcard-lead">Measure persistent instance inconsistency.</p>
-        <p>Count sustained target-instance violations while accounting for robot occlusion.</p>
+        <p class="mcard-lead">Rollout-level diagnosis of persistent target-instance violations.</p>
+        <p>Anchor evaluation to the conditioning observation and combine temporal persistence with occlusion-aware under-count handling.</p>
       </div>
     </div>
 
     <figure class="figcard wide reveal">
       <img src="assets/site/figures/fig2.svg" alt="Model Laziness under standard supervised fine-tuning: the manipulated target is duplicated in Task A and disappears in Task B, while EVEWorld preserves a single target throughout" loading="eager" fetchpriority="high">
-      <figcaption><b>Model Laziness.</b> Standard SFT can duplicate or lose the manipulated target even when individual frames remain visually plausible. EVEWorld preserves the target across the interaction. <span style="color:var(--arm-sft)">Red</span> marks Standard SFT; <span style="color:var(--arm-eve)">green</span> marks EVEWorld; dashed arrows trace target evolution over time.</figcaption>
+      <figcaption><b>Representative Model Laziness failures under Standard SFT.</b> EVEWorld better preserves target-instance consistency across the corresponding interactions. <span style="color:var(--arm-sft)">Red</span> marks Standard SFT; <span style="color:var(--arm-eve)">green</span> marks EVEWorld; dashed arrows trace target evolution over time.</figcaption>
     </figure>
   </div>
 </section>
@@ -158,33 +158,33 @@
 <!-- ================= 02 PROBLEM ================= -->
 <section class="band alt" id="laziness">
   <div class="lp-inner wide">
-    <div class="eyebrow"><span class="e-no">02</span><span class="e-label">Why World Models Become Lazy</span><span class="e-rule"></span></div>
-    <h2 class="band-title">Two ways target evolution breaks.</h2>
-    <p class="band-lede">Frame-level reconstruction can satisfy appearance or endpoint cues without enforcing a physically consistent target trajectory. EVEWorld separates this failure into two complementary supervision gaps.</p>
+    <div class="eyebrow"><span class="e-no">02</span><span class="e-label">Model Laziness</span><span class="e-rule"></span></div>
+    <h2 class="band-title">Two supervision gaps underlie inconsistent target evolution.</h2>
+    <p class="band-lede">Standard frame-level reconstruction emphasizes local visual fidelity but provides limited process-level supervision over target evolution. This leaves two complementary gaps: target-instance consistency and cross-frame consistency.</p>
 
     <div class="fail-grid">
       <div class="fail-card reveal">
-        <div class="mcard-head"><span class="mcard-tag fail">Instance inconsistency</span></div>
+        <div class="mcard-head"><span class="mcard-tag fail">Target-instance inconsistency</span></div>
         <h3>Model Laziness</h3>
         <div class="fail-formula">N<sub>t</sub> &ne; N<sub>0</sub></div>
-        <p>The target population changes without support from the task: an extra instance appears, or an existing target disappears.</p>
+        <p>The target-instance count deviates from the conditioning state without support from the task, producing unsupported duplication or disappearance during the rollout.</p>
         <p class="fail-cue">ML = &#120140;[ &exist;t &isin; {1, &hellip;, T} : N<sub>t</sub> &ne; N<sub>0</sub> ] &mdash; a departure at any sampled timestamp <span class="mono">t</span>.</p>
         <details class="acc-item">
-          <summary>Duplication</summary>
-          <p>A spurious target appears during the rollout, often satisfying an endpoint cue without preserving the original instance trajectory.</p>
+          <summary>Unsupported duplication <span class="mono">N<sub>t</sub> &gt; N<sub>0</sub></span></summary>
+          <p>An additional target instance emerges during the rollout, violating consistency with the initial target state.</p>
         </details>
         <details class="acc-item">
-          <summary>Disappearance</summary>
-          <p>The target is no longer present even after robot occlusion is ruled out.</p>
+          <summary>Unsupported disappearance <span class="mono">N<sub>t</sub> &lt; N<sub>0</sub></span></summary>
+          <p>A target instance remains missing after robot-supported occlusion has been excluded.</p>
         </details>
       </div>
       <div class="fail-card reveal">
         <div class="mcard-head"><span class="mcard-tag neutral">Cross-frame inconsistency</span></div>
-        <h3>Count right, target wrong</h3>
-        <p class="fail-cue">N<sub>t</sub> = N<sub>0</sub> can still be wrong.</p>
-        <p>The count stays correct, but the target can deform, fade, jump, or change identity across adjacent frames.</p>
+        <h3>Cross-frame consistency</h3>
+        <p class="fail-cue">N<sub>t</sub> = N<sub>0</sub> is necessary but not sufficient.</p>
+        <p>Even with the correct instance count, the target may exhibit deformation, fading, abrupt displacement, or identity drift across adjacent frames.</p>
         <div class="chips">
-          <span class="chip">shape drift</span><span class="chip">appearance drift</span><span class="chip">identity drift</span><span class="chip">abrupt motion</span>
+          <span class="chip">deformation</span><span class="chip">appearance drift</span><span class="chip">identity drift</span><span class="chip">abrupt displacement</span>
         </div>
       </div>
     </div>
@@ -194,22 +194,22 @@
         <div class="finding-head"><span class="f-no">1</span>
           <h3>Missing instance-consistency supervision</h3>
         </div>
-        <p>The corrupted target region is small relative to the full frame, so ordinary reconstruction can largely preserve an injected duplicate. In controlled restoration tests, Standard SFT retains <b>92&ndash;99%</b> of the injected duplicate area.</p>
-        <p class="finding-foot">IGR directly supervises recovery of the correct target-instance state.</p>
+        <p>The perturbed target region occupies only a small fraction of the full frame, allowing its reconstruction signal to be diluted by the surrounding scene. In controlled corruption experiments, Standard SFT retains <b>92&ndash;99%</b> of the injected duplicate area.</p>
+        <p class="finding-foot">IGR provides direct restoration supervision for the correct target-instance state.</p>
       </div>
 
       <div class="finding reveal">
         <div class="finding-head"><span class="f-no">2</span>
           <h3>Missing cross-frame consistency supervision</h3>
         </div>
-        <p>A correct count does not connect the target at frame <span class="mono">t&minus;1</span> to the same target at frame <span class="mono">t</span>. The object can remain locally plausible while drifting in shape, appearance, or identity.</p>
-        <p class="finding-foot">TIA explicitly links the target across adjacent frames.</p>
+        <p>Correct target count alone does not establish correspondence between the target at adjacent frames. Consequently, locally plausible predictions may still drift in appearance, geometry, or identity over time.</p>
+        <p class="finding-foot">TIA introduces explicit cross-frame alignment of target representations.</p>
       </div>
     </div>
 
     <figure class="figcard reveal">
       <img src="assets/site/figures/fig1.svg" alt="Comparison of Standard SFT, IGR, and EVEWorld: Standard SFT reaches the goal by duplicating the target, IGR suppresses duplication but leaves cross-frame distortion, EVEWorld preserves a single continuously evolving target" loading="lazy">
-      <figcaption><b>Count alone is not enough.</b> IGR reduces instance-count failures, but count alone is not enough. Adding TIA preserves the target across time. <b>(a)</b> Standard SFT may reach the goal by duplicating the manipulated target. <b>(b)</b> IGR suppresses duplication, but cross-frame distortion can remain. <b>(c)</b> EVEWorld combines IGR and TIA to preserve a single target with continuous evolution throughout the interaction.</figcaption>
+      <figcaption><b>IGR substantially improves target-instance consistency, while residual cross-frame distortion can remain.</b> Combining IGR with TIA promotes physically consistent target evolution across the interaction. <b>(a)</b> Standard SFT may reach the goal by duplicating the manipulated target. <b>(b)</b> IGR suppresses duplication, but cross-frame distortion can remain. <b>(c)</b> EVEWorld combines IGR and TIA to preserve a single target with continuous evolution throughout the interaction.</figcaption>
     </figure>
   </div>
 </section>
@@ -218,40 +218,40 @@
 <section class="band" id="method">
   <div class="lp-inner wide">
     <div class="eyebrow"><span class="e-no">03</span><span class="e-label">Method</span><span class="e-rule"></span></div>
-    <h2 class="band-title">Restore the instance. Align it through time.</h2>
-    <p class="band-lede">EVEWorld retains the host model's native representation and adds two complementary forms of evolution supervision during post-training: <b>IGR</b> for instance consistency and <b>TIA</b> for cross-frame consistency.</p>
+    <h2 class="band-title">Instance restoration and temporal alignment for physically consistent target evolution.</h2>
+    <p class="band-lede">EVEWorld retains the host model's native representation and introduces two complementary forms of evolution supervision during post-training: <b>IGR</b> promotes target-instance consistency through restoration supervision, while <b>TIA</b> promotes cross-frame consistency through temporal feature alignment.</p>
 
     <figure class="figcard wide reveal">
       <img src="assets/site/figures/fig3.svg" alt="EVEWorld architecture: Instance-Guided Restoration on the left restores a clean video from a duplicate-corrupted input, Temporal Instance Alignment on the right aligns the target across adjacent frames" loading="lazy">
-      <figcaption><b>EVEWorld overview.</b> During training, IGR restores count-edited demonstrations while TIA aligns target features at a selected transformer layer. <b>At inference, the model still takes only the initial image and instruction.</b></figcaption>
+      <figcaption><b>EVEWorld training framework.</b> IGR constructs count-edited demonstrations and supervises restoration of the clean target state, while TIA performs cross-frame instance matching and residual feature transport at a selected transformer layer. <b>At inference, EVEWorld requires only the initial image and instruction.</b></figcaption>
     </figure>
 
     <div class="mcard-grid cols-2">
       <div class="mcard reveal">
         <div class="mcard-head"><span class="mcard-tag igt">Component 1</span></div>
         <h3>Instance-Guided Restoration (IGR)</h3>
-        <p class="mcard-lead">Learn to undo an unsupported duplicate.</p>
+        <p class="mcard-lead">Restoring the correct target-instance state from count-perturbed demonstrations.</p>
         <ol class="mcard-steps">
-          <li>Detect the manipulated target and create a count-edited demonstration by inserting an extra instance.</li>
-          <li>Encode the corrupted and clean videos with the pretrained VAE.</li>
-          <li>Train the model to reconstruct the clean latent, giving restoration-related regions <b>3&times;</b> the reconstruction weight and normalizing the spatial map to unit mean.</li>
+          <li>Construct count-edited demonstrations by inserting an additional target instance into clean training videos.</li>
+          <li>Encode the clean and count-edited videos in the pretrained VAE latent space.</li>
+          <li>Optimize restoration toward the clean latent representation, assigning <b>3&times;</b> reconstruction weight to restoration-related regions and normalizing the spatial weight map to unit mean.</li>
         </ol>
         <p class="mcard-flow">clean demo &rarr; + duplicate &rarr; count-edited demo &rarr; world model &rarr; clean target state</p>
       </div>
       <div class="mcard reveal">
         <div class="mcard-head"><span class="mcard-tag eve">Component 2</span></div>
         <h3>Temporal Instance Alignment (TIA)</h3>
-        <p class="mcard-lead">Connect the same target across adjacent frames.</p>
+        <p class="mcard-lead">Aligning target representations across adjacent frames.</p>
         <ol class="mcard-steps">
-          <li>Probe candidate transformer layers offline and select the layer with the lowest target-matching EPE.</li>
-          <li>Match the target within a local neighborhood across adjacent frames.</li>
-          <li>Transport the previous-frame feature into the current representation through a bounded, zero-initialized residual and supervise correspondence to the true next-frame location.</li>
+          <li>Select the attachment layer using an offline layer-wise target-matching probe.</li>
+          <li>Perform local cross-frame instance matching at the selected layer.</li>
+          <li>Transport matched previous-frame features into the current representation through a bounded, zero-initialized residual, with correspondence supervision toward the true next-frame target location.</li>
         </ol>
         <p class="mcard-flow">frame t&minus;1 target &rarr; local matching &rarr; feature transport &rarr; &Delta;H &rarr; frame t representation</p>
       </div>
     </div>
 
-    <p class="callout"><b>Inference:</b> no GroundingDINO target localization or external tracker is required; matching operates on the model's hidden features.</p>
+    <p class="callout"><b>Training-only localization supervision.</b> At inference, cross-frame matching operates directly on the model's hidden features and requires neither target localization nor an external tracker.</p>
 
     <details class="acc">
       <summary>Method details</summary>
@@ -299,8 +299,8 @@
 <section class="band alt" id="metric">
   <div class="lp-inner wide">
     <div class="eyebrow"><span class="e-no">04</span><span class="e-label">Model Laziness Rate</span><span class="e-rule"></span></div>
-    <h2 class="band-title">Measure persistent inconsistency, not one noisy frame.</h2>
-    <p class="band-lede">MLR is a rollout-level diagnostic for persistent target-instance inconsistency. It is anchored to the conditioning observation, requires no ground-truth future, ignores robot-supported under-counts, and suppresses isolated detector noise through temporal persistence.</p>
+    <h2 class="band-title">Rollout-level evaluation of persistent target-instance violations.</h2>
+    <p class="band-lede">MLR is a dedicated diagnostic for persistent target-instance inconsistency. It derives the expected target count from the conditioning observation, requires no ground-truth future, excludes robot-supported under-counts, and uses temporal persistence to suppress isolated detector fluctuations.</p>
 
     <div class="chips chips-lg">
       <span class="chip">Initial-state anchored</span><span class="chip">Reference-free</span><span class="chip">Persistence-aware</span><span class="chip">Occlusion-aware</span>
@@ -320,16 +320,16 @@
 
     <div class="tl-cases">
       <div class="tl-case reveal">
-        <h3>Case A &mdash; Temporary robot occlusion</h3>
-        <p class="tl-logic"><span class="mono">N<sub>t</sub> &lt; N<sub>0</sub></span> &rarr; robot overlap supports occlusion &rarr; <span class="mono">N&#771;<sub>t</sub> = N<sub>0</sub></span> &rarr; not a violation.</p>
+        <h3>Case A &mdash; Robot-supported occlusion</h3>
+        <p class="tl-logic">An under-count is exempted when target&ndash;robot overlap supports temporary occlusion, so the adjusted count remains consistent with the initial target state.</p>
       </div>
       <div class="tl-case reveal">
         <h3>Case B &mdash; Persistent disappearance</h3>
-        <p class="tl-logic">robot moves away &rarr; <span class="mono">N&#771;<sub>t</sub> &ne; N<sub>0</sub></span> for two consecutive sampled timestamps &rarr; MLR event.</p>
+        <p class="tl-logic">If the target remains missing after the occluder moves away and the adjusted count deviates at consecutive sampled timestamps, the rollout is marked as an MLR event.</p>
       </div>
       <div class="tl-case reveal">
-        <h3>Case C &mdash; Duplication</h3>
-        <p class="tl-logic"><span class="mono">N<sub>t</sub> &gt; N<sub>0</sub></span> &rarr; always retained as duplication evidence.</p>
+        <h3>Case C &mdash; Unsupported duplication</h3>
+        <p class="tl-logic">Over-counts are always retained as duplication evidence and are not eligible for the occlusion exemption.</p>
       </div>
     </div>
 
@@ -349,7 +349,7 @@
 
     <p class="band-lede">Eligibility is fixed from the conditioning observation. A rollout is counted as Model Laziness only when the adjusted target count remains inconsistent for at least two consecutive sampled timestamps.</p>
 
-    <p class="callout">MLR is not an overall video-quality score. It should be read together with motion, visual-quality, and instruction-following metrics. A model can preserve target count simply by producing weak or static dynamics.</p>
+    <p class="callout">MLR is a dedicated consistency diagnostic rather than a composite measure of overall video quality. It should therefore be interpreted jointly with motion, visual-quality, and instruction-following metrics. A low MLR alone does not imply strong dynamics or task execution.</p>
 
     <div class="find-pair">
       <figure class="figcard reveal">
@@ -369,13 +369,13 @@
 <section class="band" id="qualitative">
   <div class="lp-inner wide">
     <div class="eyebrow"><span class="e-no">05</span><span class="e-label">Qualitative Comparison</span><span class="e-rule"></span></div>
-    <h2 class="band-title">Watch the target, not just the last frame.</h2>
-    <p class="band-lede">Compare matched rollouts from the same initial condition and instruction. The key question is not only whether the endpoint looks plausible, but whether the same target evolves coherently throughout the interaction.</p>
+    <h2 class="band-title">Target evolution under matched initial conditions and instructions.</h2>
+    <p class="band-lede">We compare matched rollouts generated from the same initial observation and instruction. The qualitative analysis focuses on whether the manipulated target preserves its instance state and cross-frame identity throughout the interaction.</p>
 
     <div class="arm-legend">
       <span class="arm-chip eve"><i></i><b>EVEWorld</b>&nbsp;&mdash; IGR + TIA</span>
-      <span class="arm-chip sft"><i></i><b>Standard SFT</b>&nbsp;&mdash; conventional fine-tune</span>
-      <span class="arm-chip igt"><i></i><b>IGR only</b>&nbsp;&mdash; no temporal alignment</span>
+      <span class="arm-chip sft"><i></i><b>Standard SFT</b>&nbsp;&mdash; Conventional fine-tuning</span>
+      <span class="arm-chip igt"><i></i><b>IGR only</b>&nbsp;&mdash; Instance restoration only</span>
       <span class="arm-chip pre"><i></i><b>GigaWorld-0</b>&nbsp;&mdash; pre-trained backbone</span>
       <button class="toggle-btn" id="preToggle" type="button" aria-pressed="false">Show pretrained baseline</button>
     </div>
@@ -393,7 +393,7 @@
         <div class="demo-body">
           <div class="demo-task">Use the right hand to pick up green apple from top tier of wooden shelf to bottom tier of wooden shelf.</div>
           <ul class="demo-obs">
-            <li><b>Borderline case:</b> the target stays in the gripper through the sampled window, so the informative signal is its identity and shape rather than the final placement.</li>
+            <li><b>Borderline case.</b> The target remains in the gripper throughout the sampled window, so the informative signal is its identity and shape rather than the final placement.</li>
           </ul>
           <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
         </div>
@@ -409,7 +409,7 @@
         <div class="demo-body">
           <div class="demo-task">Use the right hand to pick up red apple from pink plate to teal plate.</div>
           <ul class="demo-obs">
-            <li><b>Residual failure case:</b> in the EVEWorld rollout the target drifts out of the workspace region near the end of the interaction &mdash; long-horizon drift is not fully removed by the current supervision.</li>
+            <li><b>Residual failure case.</b> In the EVEWorld rollout the target drifts out of the workspace region near the end of the interaction &mdash; long-horizon drift is not fully removed by the current supervision.</li>
           </ul>
           <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
         </div>
@@ -425,9 +425,9 @@
         <div class="demo-body">
           <div class="demo-task">Use the right hand to pick up the bread slice from the toaster and place it on the blue plate.</div>
           <ul class="demo-obs">
-            <li><b>Standard SFT:</b> target duplication, appearance drift, or deformation during the interaction.</li>
-            <li><b>IGR only:</b> the same comparison still shows duplication, drift, or deformation.</li>
-            <li><b>EVEWorld:</b> the target keeps its identity and appearance across matched interaction stages.</li>
+            <li><b>Standard SFT</b> exhibits duplication, drift, or deformation during the interaction.</li>
+            <li><b>IGR only</b> exhibits duplication, drift, or deformation in the same comparison.</li>
+            <li><b>EVEWorld</b> preserves its identity and appearance across matched interaction stages.</li>
           </ul>
           <div class="demo-meta"><span class="suite-tag">GR1 tabletop manipulation</span></div>
         </div>
@@ -436,7 +436,7 @@
     </div>
 
     <details class="acc">
-      <summary>Explore 8 more examples</summary>
+      <summary>Additional examples</summary>
       <div class="acc-body">
         <div class="demo-grid three">
 
@@ -556,19 +556,19 @@
         <div class="stills-grid">
           <figure class="figcard">
             <img src="assets/site/figures/fig_conservation_dup_a.svg" alt="Target-instance conservation under duplication: red marks the Standard SFT rollout that keeps an extra duplicate, green marks EVEWorld" loading="lazy">
-            <figcaption><b>One target stays one target.</b> <span style="color:var(--arm-sft);font-weight:600">Red</span> marks a Standard SFT rollout that violates conservation; <span style="color:var(--good);font-weight:600">green</span> marks EVEWorld, which keeps the count conserved throughout.</figcaption>
+            <figcaption><b>Target-instance conservation under duplication.</b> <span style="color:var(--arm-sft);font-weight:600">Red</span> marks a Standard SFT rollout that violates conservation; <span style="color:var(--good);font-weight:600">green</span> marks EVEWorld, which keeps the count conserved throughout.</figcaption>
           </figure>
           <figure class="figcard">
             <img src="assets/site/figures/fig_conservation_dup_b.svg" alt="Additional duplication cases comparing Standard SFT with EVEWorld" loading="lazy">
-            <figcaption><b>Further duplication cases.</b> The same comparison on additional instructions, where Standard SFT again leaves a second instance behind.</figcaption>
+            <figcaption><b>Additional duplication comparisons.</b> The same comparison on additional instructions, where Standard SFT leaves a second instance behind.</figcaption>
           </figure>
           <figure class="figcard">
             <img src="assets/site/figures/fig_conservation_dup_c.svg" alt="Further duplication cases where Standard SFT adds an extra instance and EVEWorld does not" loading="lazy">
-            <figcaption><b>Duplication is systematic, not incidental.</b> The pattern repeats across unrelated objects and scene layouts, which is what motivates treating it as a property of the supervision rather than of any one task.</figcaption>
+            <figcaption><b>Duplication across unrelated objects and scene layouts.</b> The pattern repeats across tasks, which motivates treating it as a property of the supervision rather than of any one task.</figcaption>
           </figure>
           <figure class="figcard">
             <img src="assets/site/figures/fig_conservation_distort.svg" alt="Target distortion: the instance count is preserved but the target shape drifts, green marks EVEWorld" loading="lazy">
-            <figcaption><b>Counting right is not enough.</b> Here the count is preserved but the target deforms over the rollout. EVEWorld keeps the instance shape, which is the failure mode TIA is meant to address.</figcaption>
+            <figcaption><b>Count preservation with shape drift.</b> The count is preserved but the target deforms over the rollout. EVEWorld preserves the instance shape, the failure mode TIA is intended to address.</figcaption>
           </figure>
           <figure class="figcard">
             <img src="assets/site/figures/fig_qual_dup1.svg" alt="Qualitative component comparison on a duplication instruction: red boxes mark Model Laziness, green boxes mark EVEWorld conservation" loading="lazy">
@@ -580,7 +580,7 @@
           </figure>
           <figure class="figcard">
             <img src="assets/site/figures/fig_qual_vanish1.svg" alt="Qualitative component comparison on a disappearance instruction" loading="lazy">
-            <figcaption><b>The other direction.</b> Instructions where the target leaves the scene before the interaction closes, again at matched interaction stages.</figcaption>
+            <figcaption><b>Disappearance cases.</b> Instructions where the target leaves the scene before the interaction closes, at matched interaction stages.</figcaption>
           </figure>
           <figure class="figcard">
             <img src="assets/site/figures/fig_qual_vanish2.svg" alt="Continuation of the qualitative disappearance comparison across components" loading="lazy">
@@ -597,15 +597,15 @@
 <section class="band alt" id="generalization">
   <div class="lp-inner wide">
     <div class="eyebrow"><span class="e-no">06</span><span class="e-label">Generalization</span><span class="e-rule"></span></div>
-    <h2 class="band-title">The supervision transfers.</h2>
-    <p class="band-lede">The same evolution-supervision idea is evaluated under matched settings across new domains, training distributions, and backbones.</p>
+    <h2 class="band-title">Generalization across domains, training distributions, and model backbones.</h2>
+    <p class="band-lede">We evaluate evolution supervision beyond the main DreamGen setting through zero-shot domain transfer, post-training on a different data distribution, and cross-backbone transfer to FlowWAM.</p>
 
     <div class="gen-grid">
 
       <div class="gen-card">
-        <div class="gen-head"><span class="gen-tag">Unseen domain</span><h3>WorldArena 1.0</h3></div>
-        <p>Evaluated zero-shot on the <b>157 shared eligible prompts</b>, EVEWorld raises the overall score from <b>53.95</b> to <b>56.76</b> over the matched <b>Standard SFT</b> control and cuts <b>MLR</b> from <b>27.39</b> to <b>13.38</b>, with the movement concentrated in <b>Dynamic Degree 48.49 &rarr; 62.90</b> and <b>Flow 7.82 &rarr; 10.98</b>.</p>
-        <p>The gain is strongest in motion-sensitive metrics and overall score. Not every appearance/consistency submetric improves, so MLR is shown together with the full evaluation profile: Image Quality moves 60.71 &rarr; 59.82. A low MLR on its own is not a quality claim &mdash; the weakest baseline of the table posts the lowest MLR (2.55) together with the lowest Dynamic Degree (20.71).</p>
+        <div class="gen-head"><span class="gen-tag">Zero-shot domain generalization</span><h3>WorldArena 1.0</h3></div>
+        <p>Under the released WorldArena 1.0 evaluation protocol on the <b>157 shared eligible prompts</b>, EVEWorld improves Overall from <b>53.95</b> to <b>56.76</b> and reduces MLR from <b>27.39%</b> to <b>13.38%</b> relative to Standard SFT. The largest gains occur in motion-sensitive metrics, including <b>Dynamic Degree 48.49 &rarr; 62.90</b> and <b>Flow 7.82 &rarr; 10.98</b>.</p>
+        <p>Not every appearance/consistency submetric improves, so MLR is shown together with the full evaluation profile: Image Quality moves 60.71 &rarr; 59.82. A low MLR on its own is not a quality claim &mdash; the weakest baseline of the table posts the lowest MLR (2.55) together with the lowest Dynamic Degree (20.71).</p>
         <div class="kv-row">
           <div class="kv"><span class="kv-k">Overall &uarr;</span><span class="kv-v">53.95 &rarr; <b>56.76</b></span></div>
           <div class="kv"><span class="kv-k">MLR (%) &darr;</span><span class="kv-v">27.39 &rarr; <b>13.38</b></span></div>
@@ -646,8 +646,8 @@
       </div>
 
       <div class="gen-card">
-        <div class="gen-head"><span class="gen-tag">New training distribution</span><h3>EWMBench</h3></div>
-        <p>After moving to the <b>AgiBot</b> data regime and scoring on EWMBench, EVEWorld improves <b>Overall</b> from <b>3.7066</b> to <b>3.7525</b> over Standard SFT, with the largest single movement in motion dynamics (<b>DYN 14.88 &rarr; 17.55</b>) and <b>Motion 61.51 &rarr; 63.65</b>.</p>
+        <div class="gen-head"><span class="gen-tag">Generalization across training distributions</span><h3>EWMBench</h3></div>
+        <p>Using the same <b>AgiBot</b> training data and optimization budget, EVEWorld improves <b>Motion</b> from <b>61.51</b> to <b>63.65</b> and <b>Overall</b> from <b>3.7066</b> to <b>3.7525</b> over Standard SFT, with the largest gain in <b>DYN 14.88 &rarr; 17.55</b>. Individual component metrics remain mixed rather than improving uniformly.</p>
         <p>The table below reports the whole profile: <b>Scene</b> improves over Standard SFT (84.38 &rarr; 86.37) while remaining below the untuned backbone, and <b>HSD</b> and <b>nDTW</b> stay close to, but slightly below, the Standard SFT values.</p>
         <div class="table-card">
           <p class="t-caption">AgiBot &rarr; EWMBench transfer. EVEWorld improves Motion, DYN, Scene, and Overall over Standard SFT; HSD and nDTW remain slightly below.</p>
@@ -663,9 +663,9 @@
       </div>
 
       <div class="gen-card wide">
-        <div class="gen-head"><span class="gen-tag">New backbone</span><h3>FlowWAM / RoboTwin</h3></div>
-        <p>With the backbone swapped to <b>FlowWAM</b> and reference-video fidelity evaluated on RoboTwin, EVEWorld is compared against a <b>matched Standard SFT control</b> trained under the same recipe, so every row below shares the same backbone and data. EVEWorld improves <b>MLR by 12.68 points</b> (47.89 &rarr; 35.21) over that control, with <b>PSNR 11.687 &rarr; 12.765</b>, <b>SSIM 0.735 &rarr; 0.769</b>, <b>LPIPS 0.414 &rarr; 0.365</b>, and <b>Flow-EPE 2.828 &rarr; 2.207</b>.</p>
-        <p>The full method improves every reported metric over Standard SFT, but TIA-only is stronger on this backbone. The contribution of IGR and TIA is therefore backbone-dependent rather than universally additive. The <b>+ IGR</b> and <b>+ TIA</b> rows are the same Standard SFT initialization with one supervisor added at a time, and <b>TIA alone</b> reaches the lowest MLR here (22.54).</p>
+        <div class="gen-head"><span class="gen-tag">Cross-backbone generalization</span><h3>FlowWAM / RoboTwin</h3></div>
+        <p>With the backbone swapped to <b>FlowWAM</b> and reference-video fidelity evaluated on RoboTwin, EVEWorld is compared against a <b>matched Standard SFT control</b> trained under the same recipe, so every row below shares the same backbone and data. Relative to matched Standard SFT, the full EVEWorld model improves every reported fidelity and consistency metric: MLR by <b>12.68 points</b> (<b>47.89 &rarr; 35.21</b>), <b>PSNR 11.687 &rarr; 12.765</b>, <b>SSIM 0.735 &rarr; 0.769</b>, <b>LPIPS 0.414 &rarr; 0.365</b>, and <b>Flow-EPE 2.828 &rarr; 2.207</b>.</p>
+        <p>TIA-only is stronger on this backbone, indicating that the relative contribution of IGR and TIA depends on the host architecture. The <b>+ IGR</b> and <b>+ TIA</b> rows are the same Standard SFT initialization with one supervisor added at a time, and <b>TIA alone</b> reaches the lowest MLR here (22.54).</p>
         <div class="table-card">
           <p class="t-caption">FlowWAM &rarr; RoboTwin transfer. Reference-video fidelity and MLR under each component combination.</p>
           <table class="data tight">
@@ -684,8 +684,8 @@
     </div>
 
     <div class="wa-strip">
-      <p class="wa-strip-main">EWMScore-P <b>70.17</b> &middot; #6 JEPA Similarity &middot; #17 overall</p>
-      <p class="wa-strip-note">Reported for the FlowWAM-based EVEWorld submission (SupervisionWM) on the official leaderboard referenced in the paper.</p>
+      <p class="wa-strip-main">WorldArena 2.0 Track 1 &middot; EWMScore-P <b>70.17</b> &middot; 6th in JEPA Similarity &middot; 17th overall</p>
+      <p class="wa-strip-note">Official leaderboard result of the FlowWAM-based EVEWorld submission reported in the paper.</p>
     </div>
 
     <details class="acc">
@@ -821,27 +821,27 @@
 <section class="band" id="results">
   <div class="lp-inner wide">
     <div class="eyebrow"><span class="e-no">07</span><span class="e-label">Main Results</span><span class="e-rule"></span></div>
-    <h2 class="band-title">Consistency improves without sacrificing instruction following.</h2>
+    <h2 class="band-title">EVEWorld reduces Model Laziness while improving instruction following on DreamGenBench.</h2>
 
     <div class="kpi-trio">
       <div class="kpi">
-        <div class="kpi-label">Model Laziness Rate</div>
+        <div class="kpi-label">Target-instance consistency</div>
         <div class="kpi-value"><span class="kpi-from">11.11%</span><span class="kpi-arrow">&rarr;</span><b>1.59%</b></div>
         <div class="kpi-note"><b>&minus;85.7%</b> relative</div>
       </div>
       <div class="kpi">
-        <div class="kpi-label">Qwen-IF</div>
+        <div class="kpi-label">Instruction following &middot; Qwen</div>
         <div class="kpi-value"><span class="kpi-from">73.81</span><span class="kpi-arrow">&rarr;</span><b>80.16</b></div>
         <div class="kpi-note">Standard SFT &rarr; EVEWorld</div>
       </div>
       <div class="kpi">
-        <div class="kpi-label">Gemini-IF</div>
+        <div class="kpi-label">Instruction following &middot; Gemini</div>
         <div class="kpi-value"><span class="kpi-from">53.57</span><span class="kpi-arrow">&rarr;</span><b>60.85</b></div>
         <div class="kpi-note">Standard SFT &rarr; EVEWorld</div>
       </div>
     </div>
 
-    <p class="kpi-lede">Compared with matched Standard SFT on DreamGenBench, EVEWorld sharply reduces persistent target-instance failures while improving instruction following under both evaluators.</p>
+    <p class="kpi-lede">Under the matched DreamGen post-training setting, EVEWorld reduces MLR from 11.11% to 1.59% while increasing Qwen-IF from 73.81% to 80.16% and Gemini-IF from 53.57% to 60.85%.</p>
 
     <div class="table-card">
       <p class="t-caption">DreamGenBench overall results. Best values among the models reported in this DreamGenBench comparison.</p>
@@ -865,7 +865,7 @@
 
     <figure class="scatter">
       <svg viewBox="0 0 520 380" role="img" aria-label="Scatter plot of Model Laziness Rate against Gemini-IF Overall for Standard SFT, IGR only, TIA only, and EVEWorld. Lower MLR and higher Gemini-IF are better, so the ideal direction points to the lower right; EVEWorld sits closest to it.">
-        <title>Component ablation: Model Laziness Rate against Gemini-IF Overall</title>
+        <title>Complementary effects of IGR and TIA</title>
         <defs>
           <marker id="idealArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
             <path d="M0 0L10 5L0 10z" fill="#9aa0a6"></path>
@@ -912,22 +912,22 @@
           <text x="430" y="277" text-anchor="end">EVEWorld</text>
         </g>
       </svg>
-      <p class="scatter-note">IGR directly attacks instance-count failures, TIA adds cross-frame consistency and improves overall instruction following, and the full model combines both effects in the main GigaWorld-based setting.</p>
+      <p class="scatter-note">IGR provides the strongest direct reduction in MLR, whereas TIA improves overall Gemini-IF while also reducing MLR. Their combination yields the lowest MLR and highest overall Gemini-IF in the main GigaWorld-based setting.</p>
       <figcaption>Ablation on DreamGenBench: MLR (y-axis, lower is better) against Gemini-IF Overall (x-axis, higher is better). Standard SFT (11.11, 53.57); IGR only (4.76, 51.85); TIA only (7.94, 55.29); EVEWorld (1.59, 60.85).</figcaption>
     </figure>
 
     <div class="findings" style="margin-top:26px">
       <div class="finding reveal">
-        <div class="finding-head"><span class="f-no">1</span><h3>Model Laziness collapses, instruction following does not</h3></div>
-        <p>Against Standard SFT, MLR drops from <b>11.11%</b> to <b>1.59%</b> &mdash; a <span class="pos">85.7% relative reduction</span> &mdash; while Qwen-IF rises 73.81 &rarr; <b>80.16</b> and Gemini-IF rises 53.57 &rarr; <b>60.85</b>. The reduction is not bought by trading away instruction following; both move in the preferred direction.</p>
+        <div class="finding-head"><span class="f-no">1</span><h3>Model Laziness decreases while instruction following improves</h3></div>
+        <p>Against Standard SFT, MLR drops from <b>11.11%</b> to <b>1.59%</b> &mdash; a <span class="pos">85.7% relative reduction</span> &mdash; while Qwen-IF rises 73.81 &rarr; <b>80.16</b> and Gemini-IF rises 53.57 &rarr; <b>60.85</b>. The reduction is not obtained at the expense of instruction following; both move in the preferred direction.</p>
       </div>
       <div class="finding reveal">
         <div class="finding-head"><span class="f-no">2</span><h3>The gain spans the generalization splits</h3></div>
         <p>Relative to Standard SFT, Qwen-IF improves on all three splits &mdash; Environment, Object, and Behavior &mdash; with the largest gain on Behavior (<b>68.09</b> &rarr; <b>76.60</b>), while Gemini-IF improves notably on Environment (<b>51.72</b> &rarr; <b>72.41</b>) and Object (<b>42.00</b> &rarr; <b>50.33</b>). One column moves the other way: <b>Gemini-IF on Behavior falls from 67.02 to 64.89</b>, which we report as-is.</p>
       </div>
       <div class="finding reveal">
-        <div class="finding-head"><span class="f-no">3</span><h3>Both supervisors are needed</h3></div>
-        <p>Neither component alone reproduces the full effect. IGR alone suppresses duplication but drags the overall Gemini-IF <b>below</b> Standard SFT (51.85 vs.&nbsp;53.57); TIA alone raises the overall score to 55.29 but leaves MLR at 7.94%. Only the combination reaches <b>1.59%</b> MLR with a <b>60.85</b> overall score.</p>
+        <div class="finding-head"><span class="f-no">3</span><h3>Complementary effects of IGR and TIA</h3></div>
+        <p>In the main GigaWorld-based setting, neither component alone reproduces the full effect. IGR alone suppresses duplication but lowers the overall Gemini-IF <b>below</b> Standard SFT (51.85 vs.&nbsp;53.57); TIA alone raises the overall score to 55.29 but leaves MLR at 7.94%. Only the combination reaches <b>1.59%</b> MLR with a <b>60.85</b> overall score.</p>
       </div>
     </div>
 
@@ -981,24 +981,24 @@
 <section class="band" id="analysis">
   <div class="lp-inner wide">
     <div class="eyebrow"><span class="e-no">08</span><span class="e-label">Robustness &amp; Scope</span><span class="e-rule"></span></div>
-    <h2 class="band-title">Headline results, stress-tested.</h2>
-    <p class="band-lede">We use the appendix to test whether the headline effects depend on one corruption strength, one MLR threshold, one inference seed, or one VLM judgment.</p>
+    <h2 class="band-title">Robustness across evaluation settings and stochastic variation.</h2>
+    <p class="band-lede">We examine whether the reported gains depend on the corruption strength used for restoration analysis, the MLR evaluation parameters, inference sampling, or repeated VLM-based instruction-following judgments.</p>
 
     <div class="evidence-card reveal">
-      <h3>IGR learns to remove the wrong instance&mdash;not just preserve the input.</h3>
+      <h3>Controlled restoration confirms active correction of injected count errors.</h3>
       <ul class="evidence-list">
-        <li>Standard SFT retains <b>92&ndash;99%</b> of the injected duplicate area.</li>
-        <li>After 50 IGR steps, retention falls to <b>23&ndash;42%</b> across six corruption settings.</li>
+        <li>Standard SFT retains <b>92&ndash;99%</b> of the injected duplicate area across the six tested corruption settings.</li>
+        <li>After 50 IGR fine-tuning steps, retention decreases to <b>23&ndash;42%</b>.</li>
         <li>Residual directional cosine decreases as well, indicating that the reconstruction error becomes less aligned with the injected duplicate.</li>
       </ul>
       <figure class="figcard">
         <img src="assets/site/figures/fig_mechanism.svg" alt="Mechanism analysis: Standard SFT rarely removes the injected duplicate while IGR removes most of it, and the alignment residual concentrates on the injected duplicate" loading="lazy">
-        <figcaption><b>Why the shortcut survives, and what removes it.</b> <b>(a)</b> Standard SFT very rarely removes the injected duplicate, whereas IGR improves removal substantially. <b>(b)</b> The alignment residual under Standard SFT concentrates on the injected duplicate; IGR reduces that alignment. Standard SFT retains 92&ndash;99% of the injected area, while IGR brings it down to 23&ndash;42% after 50 steps.</figcaption>
+        <figcaption><b>Mechanism analysis.</b> <b>(a)</b> Standard SFT rarely removes the injected duplicate, whereas IGR removes most of it. <b>(b)</b> The alignment residual under Standard SFT concentrates on the injected duplicate; IGR reduces that alignment. Standard SFT retains 92&ndash;99% of the injected area, while IGR brings it down to 23&ndash;42% after 50 steps.</figcaption>
       </figure>
     </div>
 
     <div class="table-card reveal">
-      <p class="t-caption"><b>Sensitivity of MLR to the occlusion-overlap threshold and the persistence requirement.</b> Each cell is events / 63 (MLR in %); every setting uses the same eligible set. The main setting (&tau;<sub>occ</sub> = 0.15, k = 2) is highlighted. EVEWorld sits below Standard SFT in all twelve configurations, with relative reductions between 70.0% and 88.9%.</p>
+      <p class="t-caption"><b>MLR remains stable across nearby evaluation choices.</b> Sensitivity of MLR to the occlusion-overlap threshold and the persistence requirement; each cell is events / 63 (MLR in %), and every setting uses the same eligible set. The main setting (&tau;<sub>occ</sub> = 0.15, k = 2) is highlighted. Across nearby occlusion-overlap thresholds and persistence requirements, EVEWorld exhibits fewer persistent target-instance violations than Standard SFT in all twelve configurations, with relative reductions between 70.0% and 88.9%.</p>
       <table class="data tight">
         <thead>
           <tr><th rowspan="2">&tau;<sub>occ</sub></th><th colspan="3">Standard SFT</th><th colspan="3">EVEWorld</th></tr>
@@ -1016,8 +1016,8 @@
 
     <div class="fact-pair">
       <div class="fact-card reveal">
-        <div class="fact-label">Gemini-IF repeated evaluation</div>
-        <p>Standard SFT <b>53.57 &plusmn; 2.92</b> &middot; EVEWorld <b>60.85 &plusmn; 1.79</b></p>
+        <div class="fact-label">Instruction-following gains persist under repeated evaluation</div>
+        <p>Repeated Gemini-IF evaluation yields <b>53.57 &plusmn; 2.92</b> for Standard SFT and <b>60.85 &plusmn; 1.79</b> for EVEWorld.</p>
       </div>
       <div class="fact-card reveal">
         <div class="fact-label">PBench Robot, matched inference trials</div>
@@ -1025,17 +1025,17 @@
       </div>
     </div>
 
-    <p class="t-note">Matched-seed evaluations in the appendix also retain the advantage, reducing the likelihood that the main result is a favorable-sampling artifact.</p>
+    <p class="t-note">Matched-seed evaluations in the appendix retain the advantage and further control for generation stochasticity.</p>
 
     <div class="scope-grid">
       <div class="scope-card reveal">
         <h3>Scope of MLR</h3>
-        <p>MLR is intended for manipulation tasks whose target-instance count should remain unchanged. Tasks that intentionally change the count &mdash; such as cutting, splitting, assembly, or disassembly &mdash; require an instruction-conditioned expected-count model.</p>
-        <p>MLR also does not capture count-preserving deformation or identity drift; those failures motivate TIA and are evaluated separately.</p>
+        <p>MLR is designed for manipulation tasks in which the target-instance count is expected to remain unchanged. Tasks that intentionally alter the count, including cutting, splitting, assembly, or disassembly, require an instruction-conditioned expected-count model.</p>
+        <p>MLR does not capture count-preserving failures such as deformation or identity drift; these form a complementary class of temporal inconsistency addressed by TIA.</p>
       </div>
       <div class="scope-card reveal">
-        <h3>Scope of EVEWorld</h3>
-        <p>The current supervision is local and pairwise. It does not explicitly model long-horizon state dependencies or complex multi-object interactions.</p>
+        <h3>Limitations of EVEWorld</h3>
+        <p>The current supervision is local and pairwise and does not explicitly model long-horizon state dependencies or complex multi-object interactions.</p>
       </div>
     </div>
 
@@ -1047,11 +1047,11 @@
         <div class="find-pair">
           <figure class="figcard">
             <img src="assets/site/figures/fig_cfg.svg" alt="Gemini instruction-following and Model Laziness Rate as a function of classifier-free guidance scale, one curve per training stage" loading="lazy">
-            <figcaption><b>Guidance is not the lever.</b> <b>(a)</b> Gemini-IF and <b>(b)</b> MLR as a function of the classifier-free guidance weight <span class="mono">w</span>, one curve per training stage. Stronger guidance generally raises Gemini-IF, but MLR is substantially less monotonic: the lowest values occur only at particular stage&ndash;weight combinations rather than systematically at the strongest guidance. The configuration we report is <span class="mono">step&nbsp;250</span> at <span class="mono">w&nbsp;=&nbsp;7.0</span>, with Gemini-IF <b>60.85</b> and MLR <b>1.59%</b>. The complete CFG-weight &times; training-step sensitivity grid is reported in the paper's CFG sensitivity table.</figcaption>
+            <figcaption><b>Classifier-free guidance sensitivity.</b> <b>(a)</b> Gemini-IF and <b>(b)</b> MLR as a function of the classifier-free guidance weight <span class="mono">w</span>, one curve per training stage. Stronger guidance generally raises Gemini-IF, but MLR is substantially less monotonic: the lowest values occur only at particular stage&ndash;weight combinations rather than systematically at the strongest guidance. The configuration we report is <span class="mono">step&nbsp;250</span> at <span class="mono">w&nbsp;=&nbsp;7.0</span>, with Gemini-IF <b>60.85</b> and MLR <b>1.59%</b>. The complete CFG-weight &times; training-step sensitivity grid is reported in the paper's CFG sensitivity table.</figcaption>
           </figure>
           <figure class="figcard">
             <img src="assets/site/figures/fig_mlr_vs_step.svg" alt="Model Laziness Rate decreasing and Qwen instruction following rising over training steps" loading="lazy">
-            <figcaption><b>The two objectives move together.</b> <b>(a)</b> MLR falls over the course of training. <b>(b)</b> Qwen-IF rises over the same interval &mdash; suppressing the shortcut does not cost instruction following.</figcaption>
+            <figcaption><b>MLR and instruction following over training.</b> <b>(a)</b> MLR falls over the course of training. <b>(b)</b> Qwen-IF rises over the same interval, indicating that reduced Model Laziness is not obtained at the expense of instruction following.</figcaption>
           </figure>
         </div>
 
@@ -1169,7 +1169,7 @@
             </table>
           </div>
           <div class="table-card">
-            <p class="t-caption"><b>Matched inference seeds.</b> Standard SFT and EVEWorld run under the same seeds and the same judge budget, so the advantage is not a favourable draw. Under the FlowWAM transfer protocol, five complete generations from one checkpoint differ by at most 0.68 Local-11 points (57.28 &plusmn; 0.28).</p>
+            <p class="t-caption"><b>Matched inference seeds.</b> Standard SFT and EVEWorld run under the same seeds and the same judge budget, so the advantage is not attributable to favorable sampling. Under the FlowWAM transfer protocol, five complete generations from one checkpoint differ by at most 0.68 Local-11 points (57.28 &plusmn; 0.28).</p>
             <table class="data tight">
               <thead><tr><th>Seed</th><th>Judge repeats</th><th>Standard SFT (%)</th><th>EVEWorld (%)</th><th>&Delta; (pp)</th></tr></thead>
               <tbody>
@@ -1217,7 +1217,7 @@
         </div>
 
         <div class="table-card">
-          <p class="t-caption">Cross-trial robustness on PBench Robot. Each SFT<sub>250</sub>&ndash;EVEWorld pair uses the same inference seed and the three trials use different seeds under otherwise identical settings; scores are the overall PBench Robot score judged by Gemini-3.8-Flash. EVEWorld wins all six paired trials, so the gain is not an artifact of a single lucky seed.</p>
+          <p class="t-caption">Cross-trial robustness on PBench Robot. Each SFT<sub>250</sub>&ndash;EVEWorld pair uses the same inference seed and the three trials use different seeds under otherwise identical settings; scores are the overall PBench Robot score judged by Gemini-3.8-Flash. EVEWorld wins all six paired trials, so the gain is not an artifact of a single sampled seed.</p>
           <table class="data tight">
             <thead>
               <tr><th rowspan="2">Horizon</th><th colspan="3">Trial 1</th><th colspan="3">Trial 2</th><th colspan="3">Trial 3</th><th rowspan="2">Mean &Delta; &uarr;</th></tr>
@@ -1247,7 +1247,7 @@
               <tr><td>19.8 s &middot; 317</td><td>41.737 / 45.007</td><td>443.3</td><td>40.70</td><td>95.34</td></tr>
             </tbody>
           </table>
-          <p class="t-note">Peak memory stays essentially flat across output lengths (38.19 &rarr; 41.47 GiB), so the additional cost of longer rollouts is latency and GPU-hours rather than model size. The cost is rollout length, not the method.</p>
+          <p class="t-note">Peak memory stays essentially flat across output lengths (38.19 &rarr; 41.47 GiB), so the additional cost of longer rollouts is latency and GPU-hours rather than model size. The cost therefore scales with rollout length rather than with the method.</p>
         </div>
       </div>
     </details>
@@ -1258,14 +1258,14 @@
 <section class="band alt" id="citation">
   <div class="lp-inner">
     <div class="eyebrow"><span class="e-no">09</span><span class="e-label">Citation &amp; Resources</span><span class="e-rule"></span></div>
-    <h2 class="band-title">Paper, code, and citation.</h2>
+    <h2 class="band-title">Resources and citation.</h2>
     <p class="band-lede">Everything needed to read about, run, and cite this work.</p>
 
     <div class="cite-links">
       <a class="hbtn" href="{{PAPER_URL}}" aria-disabled="true">Paper</a>
       <a class="hbtn" href="{{SUPPLEMENT_URL}}" aria-disabled="true">Supplement</a>
       <a class="hbtn" href="{{CODE_URL}}" aria-disabled="true">Code</a>
-      <a class="hbtn ghost" href="#qualitative">Video Gallery</a>
+      <a class="hbtn ghost" href="#qualitative">Qualitative examples</a>
     </div>
 
     <div class="bibtex-box reveal">
@@ -1283,7 +1283,7 @@
     <p class="foot-title">EVEWorld &mdash; Physical Evolution Supervision for Embodied World Models</p>
     <p>Project page for research communication. Evaluation settings and model variants are labeled in the corresponding sections.</p>
     <p class="foot-links"><a href="{{PAPER_URL}}" aria-disabled="true">Paper</a> &middot; <a href="{{SUPPLEMENT_URL}}" aria-disabled="true">Supplement</a> &middot; <a href="{{CODE_URL}}" aria-disabled="true">Code</a> &middot; <a href="#citation">Citation</a></p>
-    <p>Hero background videos are WorldArena 2.0 rollouts from our submitted system; qualitative sections label the compared checkpoints explicitly.</p>
+    <p>Hero background videos are WorldArena 2.0 rollouts from the submitted entry; qualitative sections label the compared checkpoints explicitly.</p>
   </div>
 </footer>
 
