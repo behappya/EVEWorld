@@ -5,13 +5,14 @@ abstract: >-
   EVEWorld supervises target-instance evolution in embodied video world
   models to overcome Model Laziness: Instance-Guided Restoration (IGR)
   restores clean videos from duplicate-corrupted inputs, Temporal Instance
-  Alignment (TIA) enforces local cross-frame target correspondence, and the
+  Alignment (TIA) promotes local cross-frame target correspondence, and the
   Model Laziness Rate (MLR) measures persistent target-count violations.
 authors:
-  - name: "The EVEWorld Authors"
+  - name: "Anonymous Author(s)"
 type: software
 license: Apache-2.0
 version: "1.0.0"
+url: "https://behappya.github.io/EVEWorld/"
 repository-code: "https://github.com/behappya/EVEWorld"
 keywords:
   - world models
