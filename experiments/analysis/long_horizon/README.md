@@ -64,7 +64,7 @@ under `outputs/`.
   FPS by default; `--fps` re-derives the durations for another frame rate.
 - The sweep configuration is
   [`../../../configs/eval/pbench.yaml`](../../../configs/eval/pbench.yaml);
-  the protocol, the metric definitions and the reference numbers are in
+  the protocol and the metric definitions are in
   [`../../../docs/evaluation.md`](../../../docs/evaluation.md), and the study
   is scheduled among the additional analyses in
   [`../../../docs/reproduction.md`](../../../docs/reproduction.md).
