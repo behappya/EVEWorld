@@ -14,17 +14,41 @@
 :root {
   color-scheme: light;
 
-  --bg:            #fafaf9;   /* off-white canvas */
-  --surface:       #f5f5f7;   /* system-gray band */
-  --on-bg:         #ffffff;   /* pure white cards */
-  --border:        rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.14);
-  --text:          #1d1d1f;
-  --text-muted:    #6e6e73;
+  /* v11 palette — one source of truth for every site colour.
+     Blue is the structural / brand accent, green marks consistency
+     gains, amber marks the IGR component, teal marks cross-backbone
+     transfer. Text and surface ramps are cool-neutral. */
+  --c-blue:       #1D7CF2;
+  --c-blue-deep:  #1259C3;
+  --c-blue-soft:  #EAF3FF;
+  --c-green:      #2FAF7D;
+  --c-green-soft: #EAF8F2;
+  --c-amber:      #F0B429;
+  --c-amber-soft: #FFF6DF;
+  --c-teal:       #2D9CBE;
+  --c-teal-soft:  #EAF7FB;
+  --c-bg:         #F7F8FA;
+  --c-bg-alt:     #FBFCFE;
+  --c-bg-cool:    #F8FBFF;
+  --c-bg-fx:      #F8FAFD;
+  --c-card:       #FFFFFF;
+  --c-text:       #151A22;
+  --c-muted:      #5F6B7A;
+  --c-border:     #E6EAF0;
+  --c-shadow:     0 8px 24px rgba(16, 24, 40, .05);
+  --c-shadow-lg:  0 10px 28px rgba(16, 24, 40, .05);
 
-  --primary:       #0071e3;   /* Apple blue */
-  --primary-hover: #0058b3;
-  --primary-bg:    #e8f1fd;
+  --bg:            var(--c-bg);      /* off-white canvas */
+  --surface:       #f5f5f7;          /* inset panels inside white bands */
+  --on-bg:         var(--c-card);    /* pure white cards */
+  --border:        var(--c-border);
+  --border-strong: rgba(21, 26, 34, 0.16);
+  --text:          var(--c-text);
+  --text-muted:    var(--c-muted);
+
+  --primary:       var(--c-blue);
+  --primary-hover: var(--c-blue-deep);
+  --primary-bg:    var(--c-blue-soft);
   --good:          #006300;
 
   /* Failure modes — validated 4-slot categorical (light mode).
@@ -1718,160 +1742,203 @@ a.hm:hover {
   .hero-metrics { grid-template-columns: 1fr; gap: 12px; margin-top: 54px; }
 }
 
-/* ---------- v10: section 07 experiments (finding explorer) ---------- */
+/* ---------- v11: static evidence grid + site-wide palette pass ---------- */
 
-/* This section reads a little wider than the text bands, but stays a band,
-   not a full-bleed layout. */
-.fx-wrap { max-width: min(92vw, 1380px); }
-
-.fx { margin-top: 46px; }
-
-/* bar: finding tabs on the left, pager on the right ------------------- */
-.fx-bar {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: 14px 18px;
-  padding-bottom: 14px; border-bottom: 1px solid var(--border);
-}
-.fx-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-
-.fx-tab {
-  position: relative;
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 9px 15px; border-radius: 999px;
-  border: 1px solid var(--border); background: var(--on-bg);
-  font: inherit; font-size: 13.5px; font-weight: 550; letter-spacing: -.005em;
-  color: var(--text-muted); cursor: pointer;
-  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
-}
-.fx-tab:hover { color: var(--text); border-color: var(--border-strong); }
-.fx-tab:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-.fx-tab.is-active {
-  color: var(--text);
-  border-color: color-mix(in srgb, var(--primary) 32%, transparent);
-  background: var(--primary-bg);
-}
-.fx-tab-no { font-size: 11.5px; font-weight: 650; font-variant-numeric: tabular-nums; color: var(--text-muted); }
-.fx-tab.is-active .fx-tab-no { color: var(--primary); }
-
-.fx-nav { display: flex; align-items: center; gap: 10px; }
-.fx-arrow {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px; border-radius: 50%;
-  border: 1px solid var(--border); background: var(--on-bg);
-  color: var(--text-muted); font: inherit; font-size: 17px; line-height: 1; cursor: pointer;
-  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
-}
-.fx-arrow:hover { color: var(--text); border-color: var(--border-strong); }
-.fx-arrow:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-.fx-count { font-size: 12.5px; font-variant-numeric: tabular-nums; color: var(--text-muted); }
-.fx-count b { font-weight: 650; color: var(--text); }
-
-/* one finding at a time ------------------------------------------------- */
-.fx-panels { margin-top: 30px; }
-.fx-panel[hidden] { display: none; }
-.fx-panel.is-active { animation: fxIn .34s var(--ease) both; }
-@keyframes fxIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .fx-panel.is-active { animation: none; }
+/* A2 — hero atmosphere. A cool off-white base with two very soft radial
+   washes (blue upper-left, green lower-right): depth without a visible
+   "blob" or any darkening of the first screen. */
+.hero-band {
+  background-color: var(--c-bg);
+  background-image:
+    radial-gradient(58% 50% at 20% 20%, rgba(29, 124, 242, .08), transparent 66%),
+    radial-gradient(54% 46% at 80% 78%, rgba(47, 175, 125, .06), transparent 66%);
 }
 
-.fx-label {
+/* The scrim keeps the montage subordinate to the copy. The top two layers
+   are new: they carry the blue/green cast through the whole first screen;
+   the middle radial still fades the montage behind the text, and the final
+   linear layer still dissolves the band's top and bottom edges. */
+.hero-scrim {
+  background:
+    radial-gradient(72% 62% at 50% 6%, rgba(29, 124, 242, .06), transparent 70%),
+    radial-gradient(64% 56% at 62% 102%, rgba(47, 175, 125, .05), transparent 70%),
+    radial-gradient(46% 58% at 50% 44%, rgba(247, 248, 250, .86), rgba(247, 248, 250, .30) 62%, transparent 78%),
+    linear-gradient(180deg, var(--c-bg) 0%, transparent 12%, transparent 88%, var(--c-bg) 100%);
+}
+
+/* Fade the reel horizontally so tiles dissolve at the edges instead of
+   being clipped mid-card. */
+.hero-reel {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+
+/* Neutralise the montage: tiles support the title, they do not compete with
+   it. Cool-grey shadows and borders, and the arm accents reduced to a thin
+   strip so no single tile shouts. */
+.reel-tile {
+  border-color: rgba(16, 24, 40, .10);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, .10);
+}
+.reel-tile.lv { box-shadow: 0 6px 18px rgba(16, 24, 40, .10); }
+.reel-tile.arm-eve, .reel-tile.arm-sft {
+  border-color: color-mix(in srgb, var(--tone) 24%, rgba(16, 24, 40, .12));
+}
+.reel-tile.arm-eve::after, .reel-tile.arm-sft::after { height: 2px; opacity: .7; }
+
+/* A3 — navigation: translucent white; the hairline border stays, and a soft
+   shadow appears only once the page has scrolled (js toggles .is-scrolled). */
+.site-header { background: rgba(255, 255, 255, .78); }
+.header-nav a:hover { background: color-mix(in srgb, var(--c-blue) 7%, transparent); }
+.site-header.is-scrolled {
+  box-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 6px 20px rgba(16, 24, 40, .05);
+}
+
+/* A6 — hero result strip: one accent line per card, tidier surface. */
+.hm {
+  border: 1px solid var(--c-border);
+  box-shadow: var(--c-shadow);
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.hm:hover { transform: translateY(-2px); box-shadow: var(--c-shadow-lg); }
+.hm-arena::before { background: var(--c-blue); }
+.hm-mlr::before   { background: var(--c-green); }
+.hm-if::before    { background: var(--c-amber); }
+.hm-xb::before    { background: var(--c-teal); }
+
+/* A7 — section background rhythm: a subtle alternation so the page reads as
+   layered instead of one flat sheet. Id selectors outrank `.band.alt`. */
+#comparison { background: var(--c-card); }
+#results { background: var(--c-bg-alt); }
+#laziness { background: var(--c-card); }
+#method { background: var(--c-bg-cool); }
+#metric { background: var(--c-card); }
+#qualitative { background: var(--c-bg-alt); }
+#experiments { background: var(--c-bg-fx); }
+#citation { background: var(--c-card); }
+
+/* A8 — results cards round up to the shared 18px card radius. */
+.res-card { border-radius: 18px; }
+
+/* ---------- section 07 experiments: static 2x2 evidence grid ---------- */
+
+.fx-wrap { max-width: min(92vw, 1420px); }
+#experiments .band-lede { max-width: 900px; }
+
+.fx-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px; margin-top: 56px;
+}
+
+.fx-card {
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: var(--c-card); border: 1px solid var(--c-border);
+  border-radius: 20px; box-shadow: var(--c-shadow-lg);
+  padding: 30px;
+}
+.fx-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.fx-card-1::before { background: var(--c-green); }
+.fx-card-2::before { background: linear-gradient(90deg, var(--c-amber) 0 50%, var(--c-green) 50% 100%); }
+.fx-card-3::before { background: var(--c-teal); }
+.fx-card-4::before { background: var(--c-blue); }
+
+.fx-cat {
   font-size: 11.5px; font-weight: 650; letter-spacing: .12em;
   text-transform: uppercase; color: var(--text-muted);
 }
 .fx-h {
-  margin-top: 9px; font-size: clamp(20px, 2.2vw, 27px); line-height: 1.24;
-  letter-spacing: -.02em; font-weight: 650; color: var(--text); max-width: 30ch;
+  margin-top: 10px; font-size: clamp(19px, 2vw, 24px); line-height: 1.28;
+  letter-spacing: -.02em; font-weight: 650; color: var(--text);
 }
-
-.fx-split {
-  display: grid; grid-template-columns: 57fr 43fr; gap: 34px;
-  margin-top: 26px; align-items: start;
+.fx-main { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.fx-main b {
+  font-size: clamp(26px, 3vw, 34px); font-weight: 700;
+  letter-spacing: -.03em; font-variant-numeric: tabular-nums; color: var(--text);
 }
+.fx-card-2 .fx-main b { font-size: clamp(20px, 2.2vw, 26px); }
+.fx-mk {
+  font-size: 12px; font-weight: 650; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.fx-sub { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.fx-src { margin-top: 4px; font-size: 11.5px; line-height: 1.5; color: var(--text-muted); }
 
-/* table side ------------------------------------------------------------ */
-.fx-tcap { font-size: 12.5px; line-height: 1.55; color: var(--text-muted); max-width: 62ch; }
-.fx-tablecard { margin-top: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
+.fx-tablecard { margin-top: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .fx-table {
   width: 100%; border-collapse: collapse;
-  font-size: 14px; font-variant-numeric: tabular-nums;
+  font-size: 13.5px; font-variant-numeric: tabular-nums;
 }
-.fx-table th, .fx-table td { padding: 11px 12px; text-align: left; vertical-align: baseline; }
+.fx-table th, .fx-table td { padding: 10px 12px; text-align: left; vertical-align: baseline; }
 .fx-table thead th {
-  padding-bottom: 9px; white-space: nowrap;
+  padding-bottom: 8px; white-space: nowrap;
   font-size: 11.5px; font-weight: 600; letter-spacing: .06em;
   text-transform: uppercase; color: var(--text-muted);
-  border-bottom: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--c-border);
 }
-.fx-table tbody tr + tr { border-top: 1px solid var(--border); }
+.fx-table tbody tr + tr { border-top: 1px solid var(--c-border); }
 .fx-table tbody th { font-weight: 550; color: var(--text); white-space: nowrap; }
 .fx-table .fx-num { text-align: right; }
-
-.fx-table-sm { font-size: 13px; }
-.fx-table-sm th, .fx-table-sm td { padding: 8px 10px; }
-
-.fx-row-eve { background: color-mix(in srgb, var(--arm-eve) 7%, transparent); }
+.fx-row-eve { background: color-mix(in srgb, var(--c-green) 7%, transparent); }
 .fx-best { font-weight: 650; color: var(--text); }
 .fx-off { color: var(--text-muted); }
-.fx-on-igt { color: var(--arm-igt); font-weight: 650; }
-.fx-on-eve { color: var(--arm-eve); font-weight: 650; }
-
-.fx-note { margin-top: 12px; font-size: 12.5px; line-height: 1.6; color: var(--text-muted); }
-.fx-chip {
-  display: inline-block; margin-right: 8px; padding: 2px 8px; border-radius: 999px;
-  font-size: 10.5px; font-weight: 650; letter-spacing: .07em; text-transform: uppercase;
-  color: color-mix(in srgb, var(--arm-igt) 86%, #000);
-  background: color-mix(in srgb, var(--arm-igt) 13%, transparent);
-}
-
-/* copy side ------------------------------------------------------------- */
-.fx-key { padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-.fx-key b {
-  display: block; font-size: clamp(22px, 2.4vw, 29px); font-weight: 650;
-  letter-spacing: -.025em; color: var(--text); font-variant-numeric: tabular-nums;
-}
-.fx-key span { display: block; margin-top: 7px; font-size: 13px; color: var(--text-muted); }
-.fx-ftext { margin-top: 16px; font-size: 15px; line-height: 1.68; color: var(--text); }
-.fx-foot { margin-top: 10px; font-size: 12.5px; color: var(--text-muted); }
-
-.fx-stat { display: flex; align-items: baseline; gap: 10px; margin-top: 16px; }
-.fx-stat b {
-  font-size: 26px; font-weight: 650; letter-spacing: -.02em;
-  color: var(--arm-eve); font-variant-numeric: tabular-nums;
-}
-.fx-stat span { font-size: 13.5px; color: var(--text-muted); }
-
-.fx-details { margin-top: 20px; }
-.fx-details > p { margin-top: 10px; font-size: 12.5px; line-height: 1.6; color: var(--text-muted); }
-.fx-details .fx-tablecard { margin-top: 10px; }
+.fx-chip-igt { color: var(--c-amber); font-weight: 650; }
+.fx-chip-eve { color: var(--c-green); font-weight: 650; }
 
 .fx-take {
-  margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--border);
+  margin-top: auto; padding-top: 18px;
+  font-size: 13.5px; line-height: 1.65; color: var(--text-muted);
+}
+
+/* finding 04: paired-trial bars. The track keeps the scale honest (width =
+   share of the largest gain); the value label rides the track, so short bars
+   still read. */
+.fx-chart { margin-top: 18px; }
+.fx-chart-row {
+  display: grid; grid-template-columns: 46px repeat(3, minmax(0, 1fr)) auto;
+  gap: 10px; align-items: center;
+}
+.fx-chart-row + .fx-chart-row { margin-top: 12px; }
+.fx-chart-k { font-size: 12.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.fx-bar {
+  position: relative; display: block; height: 22px; border-radius: 6px;
+  background: color-mix(in srgb, var(--c-green) 7%, transparent);
+}
+.fx-bar i {
+  position: absolute; inset: 0 auto 0 0; width: var(--w, 0);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--c-green) 26%, transparent);
+}
+.fx-bar em {
+  position: relative; display: block; padding-left: 9px;
+  font-size: 11.5px; font-style: normal; font-weight: 650; line-height: 22px;
+  color: color-mix(in srgb, var(--c-green) 62%, #000);
+  font-variant-numeric: tabular-nums;
+}
+.fx-chart-m {
+  font-size: 12px; font-weight: 600; color: var(--text-muted);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+
+.fx-summary {
+  margin-top: 52px; padding-top: 22px; border-top: 1px solid var(--c-border);
   max-width: 76ch; font-size: 14.5px; line-height: 1.7; color: var(--text-muted);
 }
 
 @media (max-width: 1080px) {
-  .fx-split { grid-template-columns: 1fr; gap: 26px; }
-  .fx-h { max-width: none; }
+  .fx-grid { gap: 22px; }
+}
+
+@media (max-width: 980px) {
+  .fx-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
   .fx-wrap { max-width: none; }
-  .fx { margin-top: 34px; }
-  .fx-bar { justify-content: flex-start; }
-  .fx-tab { padding: 8px 12px; font-size: 12.5px; }
-  .fx-tab-no { font-size: 12px; }
-  /* the visible pill narrows to its number; the label stays for screen readers */
-  .fx-tab-label {
-    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
-    overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
-  }
-  .fx-table { font-size: 13px; }
-  .fx-table th, .fx-table td { padding: 9px; }
-  .fx-key b { font-size: 22px; }
-  .fx-stat b { font-size: 22px; }
+  .fx-card { padding: 22px; }
+  .fx-chart-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .fx-chart-k { grid-column: 1 / -1; }
+  .fx-chart-m { grid-column: 1 / -1; text-align: right; }
 }

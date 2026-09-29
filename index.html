@@ -12,7 +12,7 @@
        unreachable get the system font stack instantly instead of a white page. -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="css/style.css?v=12">
+  <link rel="stylesheet" href="css/style.css?v=13">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='4' fill='%230071e3'/><path d='M6.5 4.5l5.5 3.5-5.5 3.5z' fill='white'/></svg>">
   <link rel="canonical" href="https://behappya.github.io/EVEWorld/">
   <meta property="og:type" content="website">
@@ -648,189 +648,118 @@
   <div class="lp-inner fx-wrap">
     <div class="eyebrow"><span class="e-no">07</span><span class="e-label">Experiments</span><span class="e-rule"></span></div>
     <h2 class="band-title">Four findings from our evaluation.</h2>
-    <p class="band-lede">EVEWorld improves target-instance consistency while preserving task fidelity, with consistent gains across supervision variants, model backbones, and stochastic inference trials.</p>
+    <p class="band-lede">EVEWorld improves target-instance consistency across controlled ablations, backbone transfer, and stochastic inference.</p>
 
-    <div class="fx reveal" data-fx>
-      <div class="fx-bar">
-        <div class="fx-tabs" role="tablist" aria-label="Experiment findings">
-          <button class="fx-tab is-active" type="button" role="tab" id="fx-tab-1" aria-controls="fx-panel-1" aria-selected="true" data-fx-tab><span class="fx-tab-no">01</span><span class="fx-tab-label">Main</span></button>
-          <button class="fx-tab" type="button" role="tab" id="fx-tab-2" aria-controls="fx-panel-2" aria-selected="false" tabindex="-1" data-fx-tab><span class="fx-tab-no">02</span><span class="fx-tab-label">Ablation</span></button>
-          <button class="fx-tab" type="button" role="tab" id="fx-tab-3" aria-controls="fx-panel-3" aria-selected="false" tabindex="-1" data-fx-tab><span class="fx-tab-no">03</span><span class="fx-tab-label">Cross-backbone</span></button>
-          <button class="fx-tab" type="button" role="tab" id="fx-tab-4" aria-controls="fx-panel-4" aria-selected="false" tabindex="-1" data-fx-tab><span class="fx-tab-no">04</span><span class="fx-tab-label">Robustness</span></button>
+    <div class="fx-grid reveal">
+
+      <article class="fx-card fx-card-1">
+        <p class="fx-cat">01 &middot; Main result</p>
+        <h3 class="fx-h">Evolution supervision sharply reduces Model Laziness.</h3>
+        <p class="fx-main"><b>&minus;85.7%</b><span class="fx-mk">MLR</span></p>
+        <p class="fx-sub">11.11% &rarr; 1.59%</p>
+        <p class="fx-src">DreamGenBench &middot; vs. matched Standard SFT</p>
+        <div class="fx-tablecard">
+          <table class="fx-table">
+            <thead>
+              <tr>
+                <th scope="col">Method</th>
+                <th scope="col" class="fx-num">MLR (%) &darr;</th>
+                <th scope="col" class="fx-num">Gemini-IF (%) &uarr;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">GigaWorld-0</th><td class="fx-num">12.70</td><td class="fx-num">60.19</td></tr>
+              <tr><th scope="row">Standard SFT</th><td class="fx-num">11.11</td><td class="fx-num">53.57</td></tr>
+              <tr class="fx-row-eve"><th scope="row">EVEWorld</th><td class="fx-num fx-best">1.59</td><td class="fx-num fx-best">60.85</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="fx-nav">
-          <button class="fx-arrow" type="button" data-fx-prev aria-label="Previous finding">&#8249;</button>
-          <span class="fx-count"><b data-fx-now>1</b> / 4</span>
-          <button class="fx-arrow" type="button" data-fx-next aria-label="Next finding">&#8250;</button>
+        <p class="fx-take">Relative to the matched Standard-SFT baseline, EVEWorld reduces persistent target-instance violations while preserving instruction fidelity.</p>
+      </article>
+
+      <article class="fx-card fx-card-2">
+        <p class="fx-cat">02 &middot; Component ablation</p>
+        <h3 class="fx-h">IGR and TIA provide complementary supervision.</h3>
+        <p class="fx-main"><b>IGR + TIA</b><span class="fx-mk">both components</span></p>
+        <p class="fx-sub">1.59 MLR &middot; 60.85 Gemini-IF</p>
+        <p class="fx-src">DreamGenBench &middot; GigaWorld-based setting</p>
+        <div class="fx-tablecard">
+          <table class="fx-table">
+            <thead>
+              <tr>
+                <th scope="col">Variant</th>
+                <th scope="col" class="fx-num">IGR</th>
+                <th scope="col" class="fx-num">TIA</th>
+                <th scope="col" class="fx-num">MLR (%) &darr;</th>
+                <th scope="col" class="fx-num">Gemini-IF (%) &uarr;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Standard SFT</th><td class="fx-num fx-off">&ndash;</td><td class="fx-num fx-off">&ndash;</td><td class="fx-num">11.11</td><td class="fx-num">53.57</td></tr>
+              <tr><th scope="row">IGR only</th><td class="fx-num fx-chip-igt">&#10003;</td><td class="fx-num fx-off">&ndash;</td><td class="fx-num">4.76</td><td class="fx-num">51.85</td></tr>
+              <tr><th scope="row">TIA only</th><td class="fx-num fx-off">&ndash;</td><td class="fx-num fx-chip-eve">&#10003;</td><td class="fx-num">7.94</td><td class="fx-num">55.29</td></tr>
+              <tr class="fx-row-eve"><th scope="row">EVEWorld</th><td class="fx-num fx-chip-igt">&#10003;</td><td class="fx-num fx-chip-eve">&#10003;</td><td class="fx-num fx-best">1.59</td><td class="fx-num fx-best">60.85</td></tr>
+            </tbody>
+          </table>
         </div>
-      </div>
+        <p class="fx-take">IGR strengthens target-instance consistency, while TIA adds cross-frame supervision; combining both gives the strongest result on the GigaWorld-based setting.</p>
+      </article>
 
-      <div class="fx-panels">
+      <article class="fx-card fx-card-3">
+        <p class="fx-cat">03 &middot; Cross-backbone</p>
+        <h3 class="fx-h">Evolution supervision transfers to FlowWAM.</h3>
+        <p class="fx-main"><b>47.89% &rarr; 35.21%</b><span class="fx-mk">MLR</span></p>
+        <p class="fx-sub">Standard SFT &rarr; EVEWorld</p>
+        <p class="fx-src">FlowWAM &middot; RoboTwin &middot; held-out actions</p>
+        <div class="fx-tablecard">
+          <table class="fx-table">
+            <thead>
+              <tr>
+                <th scope="col">Variant</th>
+                <th scope="col" class="fx-num">PSNR (dB) &uarr;</th>
+                <th scope="col" class="fx-num">Flow-EPE &darr;</th>
+                <th scope="col" class="fx-num">MLR (%) &darr;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Standard SFT</th><td class="fx-num">11.687</td><td class="fx-num">2.828</td><td class="fx-num">47.89</td></tr>
+              <tr><th scope="row">+ IGR</th><td class="fx-num">12.544</td><td class="fx-num">2.487</td><td class="fx-num">40.03</td></tr>
+              <tr><th scope="row">+ TIA</th><td class="fx-num fx-best">13.445</td><td class="fx-num fx-best">1.850</td><td class="fx-num fx-best">22.54</td></tr>
+              <tr class="fx-row-eve"><th scope="row">EVEWorld</th><td class="fx-num">12.765</td><td class="fx-num">2.207</td><td class="fx-num">35.21</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fx-take">TIA is particularly effective on this architecture, while the full EVEWorld model still improves substantially over Standard SFT, showing backbone-dependent component contributions.</p>
+      </article>
 
-        <article class="fx-panel is-active" id="fx-panel-1" role="tabpanel" aria-labelledby="fx-tab-1" data-fx-panel>
-          <div class="fx-head">
-            <p class="fx-label">Finding 01 &middot; Main result</p>
-            <h3 class="fx-h">Evolution supervision sharply reduces Model Laziness.</h3>
+      <article class="fx-card fx-card-4">
+        <p class="fx-cat">04 &middot; Robustness</p>
+        <h3 class="fx-h">Gains persist across stochastic inference trials.</h3>
+        <p class="fx-main"><b>6 / 6</b><span class="fx-mk">paired trials improve</span></p>
+        <p class="fx-sub">PBench Robot QA</p>
+        <p class="fx-src">Gemini-3.8-Flash re-evaluation</p>
+        <div class="fx-chart">
+          <div class="fx-chart-row">
+            <span class="fx-chart-k">3.8 s</span>
+            <span class="fx-bar"><i style="--w: 71%"></i><em>+1.90</em></span>
+            <span class="fx-bar"><i style="--w: 63%"></i><em>+1.67</em></span>
+            <span class="fx-bar"><i style="--w: 39%"></i><em>+1.04</em></span>
+            <span class="fx-chart-m">Mean +1.54</span>
           </div>
-          <div class="fx-split">
-            <div class="fx-visual">
-              <p class="fx-tcap">DreamGenBench &middot; MLR is computed on a shared set of 63 eligible items across all models.</p>
-              <div class="fx-tablecard">
-                <table class="fx-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Method</th>
-                      <th scope="col" class="fx-num">MLR (%) &darr;</th>
-                      <th scope="col" class="fx-num">Qwen-IF (%) &uarr;</th>
-                      <th scope="col" class="fx-num">Gemini-IF (%) &uarr;</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><th scope="row">GigaWorld-0</th><td class="fx-num">12.70</td><td class="fx-num">79.37</td><td class="fx-num">60.19</td></tr>
-                    <tr><th scope="row">Standard SFT</th><td class="fx-num">11.11</td><td class="fx-num">73.81</td><td class="fx-num">53.57</td></tr>
-                    <tr class="fx-row-eve"><th scope="row">EVEWorld</th><td class="fx-num fx-best">1.59</td><td class="fx-num fx-best">80.16</td><td class="fx-num fx-best">60.85</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="fx-copy">
-              <p class="fx-key"><b>11.11% &rarr; 1.59%</b><span>&minus;85.7% MLR vs. matched Standard SFT</span></p>
-              <p class="fx-ftext">EVEWorld reduces persistent target-instance violations from 11.11% to 1.59% relative to the matched Standard-SFT baseline, while also improving instruction-following performance.</p>
-            </div>
+          <div class="fx-chart-row">
+            <span class="fx-chart-k">5.8 s</span>
+            <span class="fx-bar"><i style="--w: 23%"></i><em>+0.60</em></span>
+            <span class="fx-bar"><i style="--w: 100%"></i><em>+2.66</em></span>
+            <span class="fx-bar"><i style="--w: 53%"></i><em>+1.42</em></span>
+            <span class="fx-chart-m">Mean +1.56</span>
           </div>
-        </article>
+        </div>
+        <p class="fx-take">Across three matched inference seeds and two rollout horizons, EVEWorld improves all six evaluated pairs.</p>
+      </article>
 
-        <article class="fx-panel" id="fx-panel-2" role="tabpanel" aria-labelledby="fx-tab-2" data-fx-panel hidden>
-          <div class="fx-head">
-            <p class="fx-label">Finding 02 &middot; Component ablation</p>
-            <h3 class="fx-h">IGR and TIA provide complementary supervision.</h3>
-          </div>
-          <div class="fx-split">
-            <div class="fx-visual">
-              <p class="fx-tcap">Component ablation on DreamGenBench &middot; identical initialization, training data, and optimization budget.</p>
-              <div class="fx-tablecard">
-                <table class="fx-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Variant</th>
-                      <th scope="col" class="fx-num">IGR</th>
-                      <th scope="col" class="fx-num">TIA</th>
-                      <th scope="col" class="fx-num">Gemini-IF (%) &uarr;</th>
-                      <th scope="col" class="fx-num">MLR (%) &darr;</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><th scope="row">Standard SFT</th><td class="fx-num fx-off">&ndash;</td><td class="fx-num fx-off">&ndash;</td><td class="fx-num">53.57</td><td class="fx-num">11.11</td></tr>
-                    <tr><th scope="row">IGR only</th><td class="fx-num fx-on-igt">&#10003;</td><td class="fx-num fx-off">&ndash;</td><td class="fx-num">51.85</td><td class="fx-num">4.76</td></tr>
-                    <tr><th scope="row">TIA only</th><td class="fx-num fx-off">&ndash;</td><td class="fx-num fx-on-eve">&#10003;</td><td class="fx-num">55.29</td><td class="fx-num">7.94</td></tr>
-                    <tr class="fx-row-eve"><th scope="row">EVEWorld</th><td class="fx-num fx-on-igt">&#10003;</td><td class="fx-num fx-on-eve">&#10003;</td><td class="fx-num fx-best">60.85</td><td class="fx-num fx-best">1.59</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="fx-copy">
-              <p class="fx-key"><b>1.59% MLR</b><span>IGR + TIA combined &middot; 60.85 Gemini-IF overall</span></p>
-              <p class="fx-ftext">IGR directly improves target-instance consistency, while TIA contributes cross-frame supervision. Combining both yields the lowest MLR and the highest overall Gemini-IF on the GigaWorld-based setting.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="fx-panel" id="fx-panel-3" role="tabpanel" aria-labelledby="fx-tab-3" data-fx-panel hidden>
-          <div class="fx-head">
-            <p class="fx-label">Finding 03 &middot; Cross-backbone</p>
-            <h3 class="fx-h">The gains transfer to FlowWAM.</h3>
-          </div>
-          <div class="fx-split">
-            <div class="fx-visual">
-              <p class="fx-tcap">Cross-backbone evaluation on RoboTwin &middot; held-out actions.</p>
-              <div class="fx-tablecard">
-                <table class="fx-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Variant</th>
-                      <th scope="col" class="fx-num">PSNR (dB) &uarr;</th>
-                      <th scope="col" class="fx-num">LPIPS &darr;</th>
-                      <th scope="col" class="fx-num">Flow-EPE &darr;</th>
-                      <th scope="col" class="fx-num">MLR (%) &darr;</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><th scope="row">Standard SFT</th><td class="fx-num">11.687</td><td class="fx-num">0.414</td><td class="fx-num">2.828</td><td class="fx-num">47.89</td></tr>
-                    <tr><th scope="row">+ IGR</th><td class="fx-num">12.544</td><td class="fx-num">0.380</td><td class="fx-num">2.487</td><td class="fx-num">40.03</td></tr>
-                    <tr><th scope="row">+ TIA</th><td class="fx-num fx-best">13.445</td><td class="fx-num fx-best">0.333</td><td class="fx-num fx-best">1.850</td><td class="fx-num fx-best">22.54</td></tr>
-                    <tr class="fx-row-eve"><th scope="row">EVEWorld</th><td class="fx-num">12.765</td><td class="fx-num">0.365</td><td class="fx-num">2.207</td><td class="fx-num">35.21</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="fx-note"><span class="fx-chip">Best on this backbone</span>+ TIA is the strongest single-component variant on this backbone; EVEWorld is the combined model.</p>
-            </div>
-            <div class="fx-copy">
-              <p class="fx-key"><b>47.89% &rarr; 35.21%</b><span>MLR on RoboTwin &middot; full EVEWorld vs. Standard SFT</span></p>
-              <p class="fx-ftext">Evolution supervision also improves the FlowWAM backbone on held-out RoboTwin actions. TIA is particularly effective on this architecture, while the full EVEWorld model remains clearly stronger than Standard SFT, showing that component contributions are backbone-dependent.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="fx-panel" id="fx-panel-4" role="tabpanel" aria-labelledby="fx-tab-4" data-fx-panel hidden>
-          <div class="fx-head">
-            <p class="fx-label">Finding 04 &middot; Robustness</p>
-            <h3 class="fx-h">Gains persist across stochastic inference trials.</h3>
-          </div>
-          <div class="fx-split">
-            <div class="fx-visual">
-              <p class="fx-tcap">PBench Robot QA &middot; Gemini-3.8-Flash re-evaluation &middot; paired SFT<sub>250</sub>&ndash;EVEWorld rollouts.</p>
-              <p class="fx-stat"><b>6 / 6</b><span>paired trials improve</span></p>
-              <div class="fx-tablecard">
-                <table class="fx-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Horizon</th>
-                      <th scope="col" class="fx-num">Trial 1</th>
-                      <th scope="col" class="fx-num">Trial 2</th>
-                      <th scope="col" class="fx-num">Trial 3</th>
-                      <th scope="col" class="fx-num">Mean &Delta;</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><th scope="row">3.8 s</th><td class="fx-num fx-best">+1.90</td><td class="fx-num fx-best">+1.67</td><td class="fx-num fx-best">+1.04</td><td class="fx-num fx-best">+1.54</td></tr>
-                    <tr><th scope="row">5.8 s</th><td class="fx-num fx-best">+0.60</td><td class="fx-num fx-best">+2.66</td><td class="fx-num fx-best">+1.42</td><td class="fx-num fx-best">+1.56</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <details class="acc-item fx-details">
-                <summary>Raw paired scores</summary>
-                <p>Each SFT<sub>250</sub>&ndash;EVEWorld pair uses the same inference seed.</p>
-                <div class="fx-tablecard">
-                  <table class="fx-table fx-table-sm">
-                    <thead>
-                      <tr>
-                        <th scope="col">Horizon</th>
-                        <th scope="col" class="fx-num">Pair 1</th>
-                        <th scope="col" class="fx-num">Pair 2</th>
-                        <th scope="col" class="fx-num">Pair 3</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr><th scope="row">3.8 s &middot; SFT</th><td class="fx-num">57.37</td><td class="fx-num">53.40</td><td class="fx-num">59.57</td></tr>
-                      <tr><th scope="row">3.8 s &middot; EVEWorld</th><td class="fx-num">59.27</td><td class="fx-num">55.07</td><td class="fx-num">60.61</td></tr>
-                      <tr><th scope="row">5.8 s &middot; SFT</th><td class="fx-num">59.42</td><td class="fx-num">60.36</td><td class="fx-num">60.79</td></tr>
-                      <tr><th scope="row">5.8 s &middot; EVEWorld</th><td class="fx-num">60.02</td><td class="fx-num">63.02</td><td class="fx-num">62.21</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </details>
-            </div>
-            <div class="fx-copy">
-              <p class="fx-key"><b>+1.54 / +1.56</b><span>mean paired gain at 3.8 s and 5.8 s</span></p>
-              <p class="fx-ftext">Across three matched inference seeds and two rollout horizons, EVEWorld improves all six paired evaluations, with mean gains of +1.54 and +1.56 at 3.8 s and 5.8 s, respectively.</p>
-              <p class="fx-foot">Gains are reported across the evaluated trials only.</p>
-            </div>
-          </div>
-        </article>
-
-      </div>
-      <p class="fx-take">Together, these results support evolution supervision across controlled ablations, backbone transfer, and stochastic inference.</p>
     </div>
+
+    <p class="fx-summary">Together, these results support evolution supervision across controlled ablations, backbone transfer, and stochastic inference.</p>
 
   </div>
 </section>
@@ -872,6 +801,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=12" defer></script>
+<script src="js/main.js?v=13" defer></script>
 </body>
 </html>
