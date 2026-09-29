@@ -866,10 +866,6 @@ table.data.tight th, table.data.tight td { padding: 5px 8px; }
   font-size: clamp(15px, 1.7vw, 18px); line-height: 1.5; color: var(--text);
 }
 .hero-value span { display: block; margin-top: 7px; font-size: 13.5px; color: var(--text-muted); }
-.hero-provenance {
-  max-width: 780px; margin: 24px auto 0;
-  font-size: 12px; line-height: 1.6; color: var(--text-muted); opacity: .85;
-}
 
 /* ---------- v3: inline disclosure blocks ---------- */
 
