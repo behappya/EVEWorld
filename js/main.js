@@ -288,4 +288,28 @@
       } else { fallback(); }
     });
   }
+
+  /* ---------- qualitative comparison: viewport-gated playback ---------- */
+
+  var cmpVideos = Array.prototype.slice.call(document.querySelectorAll("video[data-cmp]"));
+  if (cmpVideos.length && "IntersectionObserver" in window && !reduceMotion) {
+    cmpVideos.forEach(function (v) {
+      /* once the viewer takes manual control, stop auto-playing this clip */
+      v.addEventListener("pointerdown", function () { v.dataset.hold = "1"; });
+    });
+    var cmpIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) {
+          if (!v.dataset.hold && v.paused) {
+            var pr = v.play();
+            if (pr && pr.catch) pr.catch(function () {});
+          }
+        } else if (!v.paused) {
+          v.pause();
+        }
+      });
+    }, { rootMargin: "120px 0px", threshold: 0.35 });
+    cmpVideos.forEach(function (v) { cmpIo.observe(v); });
+  }
 })();

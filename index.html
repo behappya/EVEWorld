@@ -12,7 +12,7 @@
        unreachable get the system font stack instantly instead of a white page. -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='4' fill='%230071e3'/><path d='M6.5 4.5l5.5 3.5-5.5 3.5z' fill='white'/></svg>">
   <link rel="canonical" href="https://behappya.github.io/EVEWorld/">
   <meta property="og:type" content="website">
@@ -36,6 +36,7 @@
     <a class="brand" href="#top"><span class="brand-dot"></span>EVE<b>World</b></a>
     <nav class="header-nav" aria-label="Sections">
       <a href="#abstract">Overview</a>
+      <a href="#comparison">Comparison</a>
       <a href="#laziness">Model Laziness</a>
       <a href="#method">Method</a>
       <a href="#metric">MLR</a>
@@ -152,6 +153,120 @@
       <img src="assets/site/figures/fig2.svg" alt="Model Laziness under standard supervised fine-tuning: the manipulated target is duplicated in Task A and disappears in Task B, while EVEWorld preserves a single target throughout" loading="eager" fetchpriority="high">
       <figcaption><b>Representative Model Laziness failures under Standard SFT.</b> EVEWorld better preserves target-instance consistency across the corresponding interactions. <span style="color:var(--arm-sft)">Red</span> marks Standard SFT; <span style="color:var(--arm-eve)">green</span> marks EVEWorld; dashed arrows trace target evolution over time.</figcaption>
     </figure>
+  </div>
+</section>
+
+<!-- ================= 01b QUALITATIVE ROLLOUT COMPARISON ================= -->
+<section class="band cmp" id="comparison">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">&#9654;</span><span class="e-label">Qualitative Comparison</span><span class="e-rule"></span></div>
+    <h2 class="band-title">Target evolution in motion.</h2>
+    <p class="band-lede">Compare <b>Standard SFT</b>, <b>IGR</b>, and <b>EVEWorld</b> under the same manipulation instruction. Five cases, three arms each: matched rollouts generated from the same initial observation and instruction, so the manipulated target can be followed frame by frame across the three arms.</p>
+
+    <div class="arm-legend">
+      <span class="arm-chip sft"><i></i><b>Standard SFT</b>&nbsp;&mdash; frame-level reconstruction</span>
+      <span class="arm-chip igt"><i></i><b>IGR</b>&nbsp;&mdash; instance restoration supervision</span>
+      <span class="arm-chip eve"><i></i><b>EVEWorld</b>&nbsp;&mdash; restoration + temporal alignment</span>
+    </div>
+
+    <div class="cmp-cases">
+
+      <div class="cmp-case reveal">
+        <div class="cmp-head"><span class="cmp-no">Case 01 / 05</span><span class="cmp-tag">Qualitative rollout</span></div>
+        <p class="cmp-instruction"><span class="cmp-ipill">Instruction</span><span class="cmp-itext">Use the right hand to pick up red tomato from upper black tray of plastic shelf to inside of brown paper bag.</span></p>
+        <div class="cmp-grid">
+          <div class="cmp-armslot sft">
+            <div class="cmp-label"><i></i>Standard SFT</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-01/sft.mp4" poster="assets/site/videos/comparisons/case-01/sft.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot igt">
+            <div class="cmp-label"><i></i>IGR</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-01/igr.mp4" poster="assets/site/videos/comparisons/case-01/igr.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot eve">
+            <div class="cmp-label"><i></i>EVEWorld<span class="cmp-ours">Ours</span></div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-01/eveworld.mp4" poster="assets/site/videos/comparisons/case-01/eveworld.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-case reveal">
+        <div class="cmp-head"><span class="cmp-no">Case 02 / 05</span><span class="cmp-tag">Qualitative rollout</span></div>
+        <p class="cmp-instruction"><span class="cmp-ipill">Instruction</span><span class="cmp-itext">Use the right hand to pick up the bread slice from the toaster and place it on the blue plate.</span></p>
+        <div class="cmp-grid">
+          <div class="cmp-armslot sft">
+            <div class="cmp-label"><i></i>Standard SFT</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-02/sft.mp4" poster="assets/site/videos/comparisons/case-02/sft.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot igt">
+            <div class="cmp-label"><i></i>IGR</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-02/igr.mp4" poster="assets/site/videos/comparisons/case-02/igr.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot eve">
+            <div class="cmp-label"><i></i>EVEWorld<span class="cmp-ours">Ours</span></div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-02/eveworld.mp4" poster="assets/site/videos/comparisons/case-02/eveworld.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-case reveal">
+        <div class="cmp-head"><span class="cmp-no">Case 03 / 05</span><span class="cmp-tag">Qualitative rollout</span></div>
+        <p class="cmp-instruction"><span class="cmp-ipill">Instruction</span><span class="cmp-itext">Move the boxed drink the drink box with brown circular print onto the coaster the coaster made of smooth wood.</span></p>
+        <div class="cmp-grid">
+          <div class="cmp-armslot sft">
+            <div class="cmp-label"><i></i>Standard SFT</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-03/sft.mp4" poster="assets/site/videos/comparisons/case-03/sft.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot igt">
+            <div class="cmp-label"><i></i>IGR</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-03/igr.mp4" poster="assets/site/videos/comparisons/case-03/igr.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot eve">
+            <div class="cmp-label"><i></i>EVEWorld<span class="cmp-ours">Ours</span></div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-03/eveworld.mp4" poster="assets/site/videos/comparisons/case-03/eveworld.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-case reveal">
+        <div class="cmp-head"><span class="cmp-no">Case 04 / 05</span><span class="cmp-tag">Qualitative rollout</span></div>
+        <p class="cmp-instruction"><span class="cmp-ipill">Instruction</span><span class="cmp-itext">Bring large block, medium block, and small block to the center using the left arm, the right arm, and the left arm.</span></p>
+        <div class="cmp-grid">
+          <div class="cmp-armslot sft">
+            <div class="cmp-label"><i></i>Standard SFT</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-04/sft.mp4" poster="assets/site/videos/comparisons/case-04/sft.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot igt">
+            <div class="cmp-label"><i></i>IGR</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-04/igr.mp4" poster="assets/site/videos/comparisons/case-04/igr.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot eve">
+            <div class="cmp-label"><i></i>EVEWorld<span class="cmp-ours">Ours</span></div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-04/eveworld.mp4" poster="assets/site/videos/comparisons/case-04/eveworld.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cmp-case reveal">
+        <div class="cmp-head"><span class="cmp-no">Case 05 / 05</span><span class="cmp-tag">Qualitative rollout</span></div>
+        <p class="cmp-instruction"><span class="cmp-ipill">Instruction</span><span class="cmp-itext">Put the drink container with tapered shape squarely on top of the smooth round palm-sized coaster.</span></p>
+        <div class="cmp-grid">
+          <div class="cmp-armslot sft">
+            <div class="cmp-label"><i></i>Standard SFT</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-05/sft.mp4" poster="assets/site/videos/comparisons/case-05/sft.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot igt">
+            <div class="cmp-label"><i></i>IGR</div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-05/igr.mp4" poster="assets/site/videos/comparisons/case-05/igr.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+          <div class="cmp-armslot eve">
+            <div class="cmp-label"><i></i>EVEWorld<span class="cmp-ours">Ours</span></div>
+            <div class="cmp-video"><video src="assets/site/videos/comparisons/case-05/eveworld.mp4" poster="assets/site/videos/comparisons/case-05/eveworld.jpg" data-cmp muted loop playsinline preload="metadata" controls disablepictureinpicture></video></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1112,6 +1227,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=5" defer></script>
+<script src="js/main.js?v=6" defer></script>
 </body>
 </html>
