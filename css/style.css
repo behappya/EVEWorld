@@ -2005,35 +2005,6 @@ a.hm:hover {
 .hm .hm-m { color: #273244; }
 .hm .hm-x { color: #77808D; }
 
-/* ---------- v13: hero resource row — one unified dark-navy button family ---------- */
+/* ---------- v13: hero resource row — the original blue pill, new content ---------- */
 
-.hero-cta { gap: 24px; align-items: center; margin-top: 34px; margin-bottom: 44px; }
-
-.btn.navy {
-  padding: 15px 26px; border: 1px solid transparent; border-radius: 18px;
-  background: #1B2942; color: #FFFFFF;
-  font-size: clamp(16px, 1.3vw, 18px); font-weight: 700; letter-spacing: -.01em;
-  gap: 12px; box-shadow: 0 10px 24px rgba(16, 24, 40, .14);
-}
-.btn.navy svg { flex: none; }
-.btn.navy:hover {
-  background: #223250; border-color: transparent; color: #FFFFFF;
-  transform: translateY(-1px); box-shadow: 0 14px 28px rgba(16, 24, 40, .18);
-}
-.btn.navy:active { transform: translateY(0); box-shadow: 0 10px 24px rgba(16, 24, 40, .14); }
-.btn.navy:focus-visible { outline: 2px solid var(--c-blue); outline-offset: 3px; }
-
-/* Paper: rendered now, activated by filling the arXiv URL in index.html */
-.btn.navy[aria-disabled="true"] {
-  opacity: .88; cursor: not-allowed;
-  box-shadow: 0 8px 20px rgba(16, 24, 40, .11);
-}
-.btn.navy[aria-disabled="true"]:hover {
-  background: #1B2942; transform: none;
-  box-shadow: 0 8px 20px rgba(16, 24, 40, .11);
-}
-
-@media (max-width: 620px) {
-  .hero-cta { gap: 14px; }
-  .btn.navy { padding: 14px 22px; font-size: 16px; }
-}
+.hero-cta { gap: 12px; margin-top: 28px; }
