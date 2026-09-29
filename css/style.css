@@ -1582,3 +1582,88 @@ a.hm:hover {
   .ff-pair { grid-template-columns: 1fr; }
   .ff-pair > .cmp-arrow { display: none; }
 }
+
+/* ---------- v8: refinement pass (hero results, labelled arrows, results strip) ---------- */
+
+/* 1. hero result strip: WorldArena dominates, MLR follows ----- */
+.hero-metrics {
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px; max-width: min(88vw, 1180px);
+  margin: 88px auto 0;
+}
+.hm { text-align: left; padding: 18px 20px 16px; position: relative; overflow: hidden; }
+.hm::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--border-strong);
+}
+.hm-arena::before { background: color-mix(in srgb, var(--primary) 70%, #fff); }
+.hm-mlr::before { background: color-mix(in srgb, var(--arm-eve) 72%, #fff); }
+.hm b { font-size: clamp(20px, 2.1vw, 26px); }
+.hm-arena b { font-size: clamp(32px, 4.4vw, 52px); letter-spacing: -.03em; }
+.hm .hm-k {
+  font-size: 10.5px; font-weight: 650; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--text-muted); margin-top: 8px;
+}
+.hm .hm-n { font-size: 12px; }
+
+/* 2. supervision labels on the inter-arm arrows ---------------- */
+.cmp-arrow { position: relative; }
+.cmp-arrow[data-tag]::after {
+  content: attr(data-tag);
+  position: absolute; left: 50%; bottom: calc(50% + 10px); transform: translateX(-50%);
+  padding: 2px 7px; border-radius: 999px; white-space: nowrap;
+  background: rgba(255, 255, 255, .92); border: 1px solid var(--border);
+  font-size: 10px; font-weight: 650; letter-spacing: .04em;
+  color: color-mix(in srgb, var(--arm-igt) 82%, #000);
+}
+.cmp-arrow.arrow-eve[data-tag]::after { color: color-mix(in srgb, var(--arm-eve) 84%, #000); }
+
+/* 3. fork edge labels (pretrained -> arms) --------------------- */
+.fk-tag {
+  position: absolute; left: 50%; z-index: 1;
+  padding: 2px 7px; border-radius: 999px; white-space: nowrap;
+  background: rgba(255, 255, 255, .92); border: 1px solid var(--border);
+  font-size: 10px; font-weight: 650; letter-spacing: .04em; color: var(--text-muted);
+}
+.fk-tag-up { top: 24%; transform: translate(-50%, -105%); }
+.fk-tag-down { top: 76%; transform: translate(-50%, 10%); color: color-mix(in srgb, var(--arm-igt) 82%, #000); }
+
+/* 4. one-line notes under the comparison groups ---------------- */
+.cmp-note { max-width: 900px; margin: 18px 0 0; color: var(--text-muted); font-size: 12.5px; line-height: 1.6; }
+
+/* 5. compact results strip (section 06) ------------------------ */
+.res-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 4px 0 30px; }
+.res-card {
+  background: var(--on-bg); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px 18px 15px;
+}
+.res-k {
+  display: block; font-size: 10.5px; font-weight: 650; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.res-v { display: block; margin-top: 8px; font-size: clamp(19px, 2.1vw, 23px); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
+.res-n { display: block; margin-top: 7px; font-size: 11.5px; line-height: 1.5; color: var(--text-muted); }
+
+/* 6. video bands use the widest editorial containers ----------- */
+#comparison .lp-inner.vwide { max-width: min(94vw, 1580px); }
+#qualitative .lp-inner.vwide { max-width: min(96vw, 1660px); }
+
+/* 7. citation breathes at the end of the page ------------------ */
+#citation { padding: 130px 0 160px; }
+
+@media (max-width: 1080px) {
+  .hero-metrics { grid-template-columns: 1fr 1fr; max-width: min(92vw, 940px); margin-top: 72px; }
+  .hm-arena b { font-size: clamp(28px, 5vw, 40px); }
+  .res-strip { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 720px) {
+  .fk-tag { display: none; }
+  .cmp-note { font-size: 12px; }
+}
+
+@media (max-width: 640px) {
+  .hero-metrics { grid-template-columns: 1fr; gap: 10px; margin-top: 54px; }
+  .res-strip { grid-template-columns: 1fr; }
+  #citation { padding: 84px 0 104px; }
+}
