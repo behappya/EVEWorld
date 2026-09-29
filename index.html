@@ -12,7 +12,7 @@
        unreachable get the system font stack instantly instead of a white page. -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="css/style.css?v=10">
+  <link rel="stylesheet" href="css/style.css?v=11">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='4' fill='%230071e3'/><path d='M6.5 4.5l5.5 3.5-5.5 3.5z' fill='white'/></svg>">
   <link rel="canonical" href="https://behappya.github.io/EVEWorld/">
   <meta property="og:type" content="website">
@@ -36,11 +36,11 @@
     <a class="brand" href="#top"><span class="brand-dot"></span>EVE<b>World</b></a>
     <nav class="header-nav" aria-label="Sections">
       <a href="#comparison">Comparison</a>
+      <a href="#results">Results</a>
       <a href="#laziness">Laziness</a>
       <a href="#method">Method</a>
       <a href="#metric">MLR</a>
       <a href="#qualitative">Analysis</a>
-      <a href="#results">Results</a>
       <a href="#citation">Citation</a>
     </nav>
     <div class="header-end">
@@ -104,14 +104,28 @@
 
     <div class="hero-metrics">
       <a class="hm hm-arena" href="#results" title="Jump to the WorldArena 2.0 submission">
-        <b>70.17</b>
-        <span class="hm-k">EWMScore-P &middot; WorldArena 2.0 Track 1</span>
-        <span class="hm-n">#6 JEPA Similarity &middot; #17 Overall</span>
+        <b>#17</b>
+        <span class="hm-k">Overall</span>
+        <span class="hm-m">WorldArena 2.0 &middot; Track 1</span>
+        <span class="hm-x">#6 JEPA Similarity &middot; EWMScore-P 70.17</span>
       </a>
       <div class="hm hm-mlr">
-        <b>11.11% &rarr; 1.59%</b>
+        <b>&minus;85.7%</b>
         <span class="hm-k">Model Laziness Rate</span>
-        <span class="hm-n">&minus;85.7% vs. matched Standard SFT</span>
+        <span class="hm-m">11.11% &rarr; 1.59%</span>
+        <span class="hm-x">DreamGenBench &middot; vs. matched Standard SFT</span>
+      </div>
+      <div class="hm hm-if">
+        <b>+13.6%</b>
+        <span class="hm-k">Instruction Following</span>
+        <span class="hm-m">Gemini-IF</span>
+        <span class="hm-x">53.57 &rarr; 60.85 &middot; DreamGenBench</span>
+      </div>
+      <div class="hm hm-xb">
+        <b>&minus;26.5%</b>
+        <span class="hm-k">Cross-backbone MLR</span>
+        <span class="hm-m">47.89% &rarr; 35.21%</span>
+        <span class="hm-x">FlowWAM &middot; RoboTwin</span>
       </div>
     </div>
   </div>
@@ -244,10 +258,80 @@
   </div>
 </section>
 
-<!-- ================= 02 MODEL LAZINESS ================= -->
-<section class="band alt" id="laziness">
+<!-- ================= 02 RESULTS & GENERALIZATION ================= -->
+<section class="band alt" id="results">
   <div class="lp-inner wide">
-    <div class="eyebrow"><span class="e-no">02</span><span class="e-label">Model Laziness</span><span class="e-rule"></span></div>
+    <div class="eyebrow"><span class="e-no">02</span><span class="e-label">Results &amp; Generalization</span><span class="e-rule"></span></div>
+    <h2 class="band-title">WorldArena 2.0 submission and cross-setting generalization.</h2>
+    <p class="band-lede">Quantitative and qualitative results are available in the paper; we summarize the strongest evidence here.</p>
+
+    <div class="wa2-grid">
+          <div class="wa2-panel">
+            <div class="wa2-cards">
+              <div class="wa2-card main">
+                <b>70.17</b>
+                <span class="wa2-k">EWMScore-P</span>
+                <span class="wa2-n">Difficulty/OOD Adjusted</span>
+              </div>
+              <div class="wa2-card">
+                <b>#6</b>
+                <span class="wa2-k">JEPA Similarity</span>
+              </div>
+              <div class="wa2-card">
+                <b>#17</b>
+                <span class="wa2-k">Overall</span>
+              </div>
+            </div>
+
+            <p class="wa2-copy">Our FlowWAM-based EVEWorld submission, listed as <b>Supervision_WM</b>, achieves an <b>EWMScore-P of 70.17</b> on the official WorldArena 2.0 Track 1 leaderboard, ranking <b>17th overall</b> and <b>6th in JEPA Similarity</b>.</p>
+            <p class="wa2-copy">Track 1 evaluates simulator video quality under WorldArena 2.0, with EWMScore-P reporting the difficulty- and out-of-distribution-adjusted aggregate score.</p>
+
+            <p class="wa2-cta">
+              <a class="btn primary" href="https://huggingface.co/spaces/WorldArena/WorldArena2.0" target="_blank" rel="noopener noreferrer">View Official Leaderboard &#8599;</a>
+            </p>
+          </div>
+
+          <figure class="wa2-figure">
+            <a class="wa2-zoom" href="https://huggingface.co/spaces/WorldArena/WorldArena2.0" target="_blank" rel="noopener noreferrer" title="Open the official WorldArena 2.0 leaderboard">
+              <img src="assets/site/figures/worldarena2_track1_leaderboard.png" alt="WorldArena 2.0 Track 1 leaderboard showing the Supervision_WM submission with EWMScore-P 70.17 and overall rank 17." loading="lazy">
+            </a>
+            <figcaption>Official WorldArena 2.0 Track 1 leaderboard. The FlowWAM-based EVEWorld submission is listed as <b>Supervision_WM</b>.</figcaption>
+          </figure>
+        </div>
+
+    <p class="wa2-note">Protocol reference rollouts from the public evaluation harness &mdash; external baseline material rather than EVEWorld outputs &mdash; are collected on the <a href="protocol.html">protocol reference page</a>.</p>
+
+    <div class="res-strip">
+      <div class="res-card reveal">
+        <span class="res-k">DreamGenBench</span>
+        <b class="res-v">11.11% &rarr; 1.59%</b>
+        <span class="res-n">Model Laziness Rate &middot; &minus;85.7% vs. matched Standard SFT</span>
+      </div>
+      <div class="res-card reveal">
+        <span class="res-k">WorldArena 1.0</span>
+        <b class="res-v">53.95 &rarr; 56.76</b>
+        <span class="res-n">Overall &middot; Dynamic Degree 48.49 &rarr; 62.90 &middot; Flow 7.82 &rarr; 10.98 &middot; Image Quality 60.71 &rarr; 59.82</span>
+      </div>
+      <div class="res-card reveal">
+        <span class="res-k">EWMBench &middot; AgiBot</span>
+        <b class="res-v">3.7066 &rarr; 3.7525</b>
+        <span class="res-n">Overall &middot; Motion 61.51 &rarr; 63.65 &middot; DYN 14.88 &rarr; 17.55 &middot; Scene 84.38 &rarr; 86.37</span>
+      </div>
+      <div class="res-card reveal">
+        <span class="res-k">FlowWAM &middot; RoboTwin</span>
+        <b class="res-v">47.89 &rarr; 35.21</b>
+        <span class="res-n">MLR &middot; PSNR 11.687 &rarr; 12.765 &middot; SSIM 0.735 &rarr; 0.769 &middot; LPIPS 0.414 &rarr; 0.365 &middot; Flow-EPE 2.828 &rarr; 2.207</span>
+      </div>
+    </div>
+
+    <p class="fine-print"><b>Reading these numbers.</b> MLR is a dedicated target-instance consistency diagnostic rather than a composite measure of video quality, and it should be read together with motion, appearance, and instruction-following metrics. Not every component metric improves uniformly: IGR and TIA provide complementary supervision, and their relative contributions can depend on the backbone. Full profiles, the DreamGenBench splits, the component ablation, and the training setup are reported in the paper.</p>
+  </div>
+</section>
+
+<!-- ================= 03 MODEL LAZINESS ================= -->
+<section class="band" id="laziness">
+  <div class="lp-inner wide">
+    <div class="eyebrow"><span class="e-no">03</span><span class="e-label">Model Laziness</span><span class="e-rule"></span></div>
     <h2 class="band-title">Two supervision gaps underlie inconsistent target evolution.</h2>
     <p class="band-lede">Standard frame-level reconstruction emphasizes local visual fidelity but provides limited process-level supervision over target evolution. This leaves two complementary gaps: target-instance consistency and cross-frame consistency.</p>
 
@@ -297,10 +381,10 @@
   </div>
 </section>
 
-<!-- ================= 03 METHOD ================= -->
-<section class="band" id="method">
+<!-- ================= 04 METHOD ================= -->
+<section class="band alt" id="method">
   <div class="lp-inner wide">
-    <div class="eyebrow"><span class="e-no">03</span><span class="e-label">Method</span><span class="e-rule"></span></div>
+    <div class="eyebrow"><span class="e-no">04</span><span class="e-label">Method</span><span class="e-rule"></span></div>
     <h2 class="band-title">Instance restoration and temporal alignment for physically consistent target evolution.</h2>
     <p class="band-lede">EVEWorld retains the host model's native representation and introduces two complementary forms of evolution supervision during post-training: <b>IGR</b> promotes target-instance consistency through restoration supervision, while <b>TIA</b> promotes cross-frame consistency through temporal feature alignment.</p>
 
@@ -340,10 +424,10 @@
   </div>
 </section>
 
-<!-- ================= 04 MODEL LAZINESS RATE ================= -->
-<section class="band alt" id="metric">
+<!-- ================= 05 MODEL LAZINESS RATE ================= -->
+<section class="band" id="metric">
   <div class="lp-inner wide">
-    <div class="eyebrow"><span class="e-no">04</span><span class="e-label">Model Laziness Rate</span><span class="e-rule"></span></div>
+    <div class="eyebrow"><span class="e-no">05</span><span class="e-label">Model Laziness Rate</span><span class="e-rule"></span></div>
     <h2 class="band-title">Measuring persistent target-instance violations.</h2>
     <p class="band-lede">MLR measures persistent deviations from the initial target-instance count while excluding robot-supported occlusion.</p>
 
@@ -389,10 +473,10 @@
   </div>
 </section>
 
-<!-- ================= 05 QUALITATIVE ANALYSIS ================= -->
-<section class="band" id="qualitative">
+<!-- ================= 06 QUALITATIVE ANALYSIS ================= -->
+<section class="band alt" id="qualitative">
   <div class="lp-inner vwide">
-    <div class="eyebrow"><span class="e-no">05</span><span class="e-label">Qualitative Analysis</span><span class="e-rule"></span></div>
+    <div class="eyebrow"><span class="e-no">06</span><span class="e-label">Qualitative Analysis</span><span class="e-rule"></span></div>
     <h2 class="band-title">Target evolution across supervision variants.</h2>
     <p class="band-lede">Additional comparisons highlight instance consistency and cross-frame target consistency across representative manipulation tasks.</p>
 
@@ -558,76 +642,6 @@
   </div>
 </section>
 
-<!-- ================= 06 RESULTS & GENERALIZATION ================= -->
-<section class="band alt" id="results">
-  <div class="lp-inner wide">
-    <div class="eyebrow"><span class="e-no">06</span><span class="e-label">Results &amp; Generalization</span><span class="e-rule"></span></div>
-    <h2 class="band-title">WorldArena 2.0 submission and cross-setting generalization.</h2>
-    <p class="band-lede">Quantitative and qualitative results are available in the paper; we summarize the strongest evidence here.</p>
-
-    <div class="wa2-grid">
-          <div class="wa2-panel">
-            <div class="wa2-cards">
-              <div class="wa2-card main">
-                <b>70.17</b>
-                <span class="wa2-k">EWMScore-P</span>
-                <span class="wa2-n">Difficulty/OOD Adjusted</span>
-              </div>
-              <div class="wa2-card">
-                <b>#6</b>
-                <span class="wa2-k">JEPA Similarity</span>
-              </div>
-              <div class="wa2-card">
-                <b>#17</b>
-                <span class="wa2-k">Overall</span>
-              </div>
-            </div>
-
-            <p class="wa2-copy">Our FlowWAM-based EVEWorld submission, listed as <b>Supervision_WM</b>, achieves an <b>EWMScore-P of 70.17</b> on the official WorldArena 2.0 Track 1 leaderboard, ranking <b>17th overall</b> and <b>6th in JEPA Similarity</b>.</p>
-            <p class="wa2-copy">Track 1 evaluates simulator video quality under WorldArena 2.0, with EWMScore-P reporting the difficulty- and out-of-distribution-adjusted aggregate score.</p>
-
-            <p class="wa2-cta">
-              <a class="btn primary" href="https://huggingface.co/spaces/WorldArena/WorldArena2.0" target="_blank" rel="noopener noreferrer">View Official Leaderboard &#8599;</a>
-            </p>
-          </div>
-
-          <figure class="wa2-figure">
-            <a class="wa2-zoom" href="https://huggingface.co/spaces/WorldArena/WorldArena2.0" target="_blank" rel="noopener noreferrer" title="Open the official WorldArena 2.0 leaderboard">
-              <img src="assets/site/figures/worldarena2_track1_leaderboard.png" alt="WorldArena 2.0 Track 1 leaderboard showing the Supervision_WM submission with EWMScore-P 70.17 and overall rank 17." loading="lazy">
-            </a>
-            <figcaption>Official WorldArena 2.0 Track 1 leaderboard. The FlowWAM-based EVEWorld submission is listed as <b>Supervision_WM</b>.</figcaption>
-          </figure>
-        </div>
-
-    <p class="wa2-note">Protocol reference rollouts from the public evaluation harness &mdash; external baseline material rather than EVEWorld outputs &mdash; are collected on the <a href="protocol.html">protocol reference page</a>.</p>
-
-    <div class="res-strip">
-      <div class="res-card reveal">
-        <span class="res-k">DreamGenBench</span>
-        <b class="res-v">11.11% &rarr; 1.59%</b>
-        <span class="res-n">Model Laziness Rate &middot; &minus;85.7% vs. matched Standard SFT</span>
-      </div>
-      <div class="res-card reveal">
-        <span class="res-k">WorldArena 1.0</span>
-        <b class="res-v">53.95 &rarr; 56.76</b>
-        <span class="res-n">Overall &middot; Dynamic Degree 48.49 &rarr; 62.90 &middot; Flow 7.82 &rarr; 10.98 &middot; Image Quality 60.71 &rarr; 59.82</span>
-      </div>
-      <div class="res-card reveal">
-        <span class="res-k">EWMBench &middot; AgiBot</span>
-        <b class="res-v">3.7066 &rarr; 3.7525</b>
-        <span class="res-n">Overall &middot; Motion 61.51 &rarr; 63.65 &middot; DYN 14.88 &rarr; 17.55 &middot; Scene 84.38 &rarr; 86.37</span>
-      </div>
-      <div class="res-card reveal">
-        <span class="res-k">FlowWAM &middot; RoboTwin</span>
-        <b class="res-v">47.89 &rarr; 35.21</b>
-        <span class="res-n">MLR &middot; PSNR 11.687 &rarr; 12.765 &middot; SSIM 0.735 &rarr; 0.769 &middot; LPIPS 0.414 &rarr; 0.365 &middot; Flow-EPE 2.828 &rarr; 2.207</span>
-      </div>
-    </div>
-
-    <p class="fine-print"><b>Reading these numbers.</b> MLR is a dedicated target-instance consistency diagnostic rather than a composite measure of video quality, and it should be read together with motion, appearance, and instruction-following metrics. Not every component metric improves uniformly: IGR and TIA provide complementary supervision, and their relative contributions can depend on the backbone. Full profiles, the DreamGenBench splits, the component ablation, and the training setup are reported in the paper.</p>
-  </div>
-</section>
-
 <!-- ================= 07 CITATION ================= -->
 <section class="band" id="citation">
   <div class="lp-inner">
@@ -665,6 +679,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=10" defer></script>
+<script src="js/main.js?v=11" defer></script>
 </body>
 </html>

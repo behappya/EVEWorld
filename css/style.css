@@ -1667,3 +1667,53 @@ a.hm:hover {
   .res-strip { grid-template-columns: 1fr; }
   #citation { padding: 84px 0 104px; }
 }
+
+/* ---------- v9: results-first section order + four equal hero cards ---------- */
+
+/* Both the reel and the copy are centred — in the band and in its content box
+   respectively — so the copy's lower edge used to reach past the montage and the
+   result cards overlapped it. Lift the reel and drop the copy relative to each
+   other: 60px of lift (120/2) plus 43px of drop sizes the gap between the
+   montage's bottom edge and the top of the cards at ~80px, and since both boxes
+   stay centred that clearance holds at any viewport height. The bottom padding
+   also keeps the scroll caret clear of the strip. */
+@media (min-width: 641px) {
+  .hero-band { padding: 124px 0 64px; }
+  .hero-reel { padding-bottom: 120px; }
+}
+
+/* hero result strip: four equal cards on a fully opaque surface --------- */
+.hero-metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px; max-width: min(92vw, 1380px);
+  margin: 88px auto 0; align-items: stretch;
+}
+.hm {
+  display: flex; flex-direction: column; height: 100%;
+  background: var(--on-bg);
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+  box-shadow: var(--shadow);
+}
+.hero-metrics .hm b { font-size: clamp(23px, 2.5vw, 33px); }
+/* rank leads the strip: card 1 carries the largest numeral, all cards stay equal */
+.hero-metrics .hm-arena b { font-size: clamp(27px, 3vw, 39px); letter-spacing: -.03em; }
+.hm .hm-k { margin-top: 6px; }
+.hm .hm-m {
+  margin-top: 11px; font-size: 13.5px; font-weight: 600;
+  color: var(--text); letter-spacing: -.005em;
+}
+.hm .hm-x { margin-top: 5px; font-size: 11.5px; line-height: 1.45; }
+
+/* one accent per card, on the card's top edge only --------------------- */
+.hm-arena::before { background: color-mix(in srgb, var(--primary) 70%, #fff); }
+.hm-mlr::before   { background: color-mix(in srgb, var(--arm-eve) 72%, #fff); }
+.hm-if::before    { background: color-mix(in srgb, var(--arm-igt) 72%, #fff); }
+.hm-xb::before    { background: color-mix(in srgb, var(--l1) 45%, var(--l2)); }
+
+@media (max-width: 1080px) {
+  .hero-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: min(92vw, 940px); margin-top: 80px; }
+}
+
+@media (max-width: 640px) {
+  .hero-metrics { grid-template-columns: 1fr; gap: 12px; margin-top: 54px; }
+}
