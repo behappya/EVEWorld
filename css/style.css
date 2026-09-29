@@ -1486,3 +1486,99 @@ a.hm:hover {
   .cmp-instruction { font-size: 16.5px; }
   .cmp-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   v7 — the supervision comparison leads the page, matched arms
+        are joined by arrows, and the qualitative band is rebuilt
+        around progressive and failure-to-fix comparisons
+   ============================================================ */
+
+.lp-inner.vwide { max-width: min(94vw, 1600px); }
+
+.band.cmp { padding: 56px 0 44px; }
+.band.cmp .band-lede { max-width: 760px; }
+#comparison .arm-legend { margin: 0 0 34px; }
+
+/* --- matched arms joined by arrows --------------------------- */
+.cmp-arrow { align-self: center; margin-top: 34px; color: var(--arm-igt); }
+.cmp-arrow.arrow-eve { color: var(--arm-eve); }
+.cmp-arrow svg { display: block; width: 100%; height: auto; }
+/* the shaft keeps a constant 1.8px stroke as the gap widens; the head scales */
+.cmp-arrow svg path[fill="none"] { vector-effect: non-scaling-stroke; }
+
+.cmp-label { height: 33px; }
+.cmp-armslot.pre { --cmp-accent: var(--arm-pre); }
+.cmp-ours.gold { background: color-mix(in srgb, var(--arm-igt) 70%, #000); }
+
+.cmp-grid { grid-template-columns: 1fr 40px 1fr 40px 1fr; gap: 14px; }
+
+/* --- 06 qualitative analysis --------------------------------- */
+.qual-block { margin-top: 52px; }
+.qual-block:first-of-type { margin-top: 0; }
+.qual-h { margin: 0 0 6px; font-size: 19px; font-weight: 650; letter-spacing: -.01em; }
+.qual-p { max-width: 860px; margin: 0 0 26px; color: var(--text-muted); font-size: 15px; }
+
+.prog-cases { display: grid; gap: 52px; }
+.prog-grid {
+  display: grid;
+  grid-template-columns: 1fr 76px 1fr 76px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  row-gap: 26px;
+}
+.prog-grid .pre { grid-area: 1 / 1 / 3 / 2; align-self: center; }
+.prog-grid .sft { grid-area: 1 / 3 / 2 / 4; }
+.prog-grid .igt { grid-area: 2 / 3 / 3 / 4; }
+.prog-grid .eve { grid-area: 2 / 5 / 3 / 6; align-self: center; }
+.prog-grid > .cmp-arrow { grid-area: 2 / 4 / 3 / 5; }
+.prog-case .cmp-instruction { font-size: 17px; }
+
+.prog-fork { grid-area: 1 / 2 / 3 / 3; position: relative; }
+.fk-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.fk-line path { fill: none; stroke-width: 1.8; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.fk-line .fk-pre { stroke: var(--arm-pre); }
+.fk-line .fk-igt { stroke: var(--arm-igt); }
+.fk-head { position: absolute; right: 0; width: 8px; height: 10px; transform: translateY(-50%); }
+.fk-head path { fill: currentColor; }
+.fk-up { top: 24%; color: var(--arm-pre); }
+.fk-down { top: 76%; color: var(--arm-igt); }
+
+.ff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 24px; }
+.ff-pair { display: grid; grid-template-columns: 1fr 36px 1fr; gap: 12px; }
+.ff-case .cmp-instruction { font-size: 15.5px; margin-bottom: 14px; }
+
+@media (max-width: 1000px) {
+  .prog-grid { grid-template-columns: 1fr 1fr; column-gap: 16px; row-gap: 24px; }
+  .prog-grid .pre { grid-area: 1 / 1 / 2 / 2; }
+  .prog-grid .sft { grid-area: 1 / 2 / 2 / 3; }
+  .prog-grid .igt { grid-area: 2 / 1 / 3 / 2; }
+  .prog-grid .eve { grid-area: 2 / 2 / 3 / 3; }
+  .prog-grid .prog-fork,
+  .prog-grid > .cmp-arrow { display: none; }
+  .ff-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  .cmp-grid { grid-template-columns: 1fr 28px 1fr 28px 1fr; gap: 10px; }
+}
+
+@media (max-width: 720px) {
+  .cmp-cases { gap: 40px; }
+  .cmp-instruction { font-size: 16.5px; }
+  .cmp-grid { grid-template-columns: 1fr; }
+  .cmp-grid > .cmp-arrow { display: none; }
+  .qual-block { margin-top: 42px; }
+  .qual-h { font-size: 17.5px; }
+  .prog-cases { gap: 40px; }
+  .prog-case .cmp-instruction { font-size: 15.5px; }
+}
+
+@media (max-width: 520px) {
+  .prog-grid { grid-template-columns: 1fr; }
+  .prog-grid .pre { grid-area: 1 / 1 / 2 / 2; align-self: start; }
+  .prog-grid .sft { grid-area: 2 / 1 / 3 / 2; }
+  .prog-grid .igt { grid-area: 3 / 1 / 4 / 2; }
+  .prog-grid .eve { grid-area: 4 / 1 / 5 / 2; align-self: start; }
+  .ff-pair { grid-template-columns: 1fr; }
+  .ff-pair > .cmp-arrow { display: none; }
+}
