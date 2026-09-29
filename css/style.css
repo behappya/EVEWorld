@@ -14,42 +14,45 @@
 :root {
   color-scheme: light;
 
-  /* v11 palette — one source of truth for every site colour.
-     Blue is the structural / brand accent, green marks consistency
-     gains, amber marks the IGR component, teal marks cross-backbone
-     transfer. Text and surface ramps are cool-neutral. */
-  --c-blue:       #1D7CF2;
-  --c-blue-deep:  #1259C3;
-  --c-blue-soft:  #EAF3FF;
-  --c-green:      #2FAF7D;
-  --c-green-soft: #EAF8F2;
-  --c-amber:      #F0B429;
+  /* v12 palette — one source of truth for every site colour.
+     A deliberately quiet three-part system: graphite carries the
+     typography, muted cobalt is the only brand colour, and a muted
+     eucalyptus green is kept for consistency / improvement. Amber is
+     reserved for the IGR component, red for Standard-SFT failure
+     annotations; every remaining surface stays neutral. */
+  --c-blue:       #3568D4;
+  --c-blue-deep:  #244FA7;
+  --c-blue-hover: #2D5FC7;
+  --c-blue-soft:  #EEF3FC;
+  --c-green:      #3F806A;
+  --c-green-soft: #EDF5F1;
+  --c-amber:      #C98A1B;
   --c-amber-soft: #FFF6DF;
-  --c-teal:       #2D9CBE;
-  --c-teal-soft:  #EAF7FB;
-  --c-bg:         #F7F8FA;
-  --c-bg-alt:     #FBFCFE;
-  --c-bg-cool:    #F8FBFF;
-  --c-bg-fx:      #F8FAFD;
+  --c-teal:       #4A7C93;
+  --c-teal-soft:  #EDF4F7;
+  --c-bg:         #F6F7F9;
+  --c-bg-alt:     #FBFCFD;
+  --c-bg-cool:    #F8FAFC;
+  --c-bg-fx:      #F9FAFC;
   --c-card:       #FFFFFF;
-  --c-text:       #151A22;
-  --c-muted:      #5F6B7A;
-  --c-border:     #E6EAF0;
-  --c-shadow:     0 8px 24px rgba(16, 24, 40, .05);
-  --c-shadow-lg:  0 10px 28px rgba(16, 24, 40, .05);
+  --c-text:       #111827;
+  --c-muted:      #697386;
+  --c-border:     #E3E7ED;
+  --c-shadow:     0 8px 24px rgba(20, 32, 50, .07);
+  --c-shadow-lg:  0 10px 28px rgba(20, 32, 50, .07);
 
   --bg:            var(--c-bg);      /* off-white canvas */
-  --surface:       #f5f5f7;          /* inset panels inside white bands */
+  --surface:       #F9FAFC;          /* inset panels inside white bands */
   --on-bg:         var(--c-card);    /* pure white cards */
   --border:        var(--c-border);
-  --border-strong: rgba(21, 26, 34, 0.16);
+  --border-strong: rgba(17, 24, 39, 0.16);
   --text:          var(--c-text);
   --text-muted:    var(--c-muted);
 
   --primary:       var(--c-blue);
-  --primary-hover: var(--c-blue-deep);
+  --primary-hover: var(--c-blue-hover);
   --primary-bg:    var(--c-blue-soft);
-  --good:          #006300;
+  --good:          var(--c-green);
 
   /* Failure modes — validated 4-slot categorical (light mode).
      Hue pairs always ship with their text labels, never color alone. */
@@ -107,7 +110,7 @@ a:hover { text-decoration: underline; }
 }
 .scroll-progress i {
   display: block; height: 100%; width: 0;
-  background: linear-gradient(90deg, var(--primary), #64b5f6);
+  background: var(--c-blue);
   transition: width 80ms linear;
 }
 
@@ -132,7 +135,7 @@ a:hover { text-decoration: underline; }
 .brand:hover { text-decoration: none; }
 .brand-dot {
   width: 11px; height: 11px; border-radius: 3.5px;
-  background: linear-gradient(135deg, var(--primary), #64b5f6); flex: none;
+  background: var(--c-blue); flex: none;
 }
 .header-nav { display: flex; gap: 2px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
 .header-nav::-webkit-scrollbar { display: none; }
@@ -1744,27 +1747,9 @@ a.hm:hover {
 
 /* ---------- v11: static evidence grid + site-wide palette pass ---------- */
 
-/* A2 — hero atmosphere. A cool off-white base with two very soft radial
-   washes (blue upper-left, green lower-right): depth without a visible
-   "blob" or any darkening of the first screen. */
-.hero-band {
-  background-color: var(--c-bg);
-  background-image:
-    radial-gradient(58% 50% at 20% 20%, rgba(29, 124, 242, .08), transparent 66%),
-    radial-gradient(54% 46% at 80% 78%, rgba(47, 175, 125, .06), transparent 66%);
-}
-
-/* The scrim keeps the montage subordinate to the copy. The top two layers
-   are new: they carry the blue/green cast through the whole first screen;
-   the middle radial still fades the montage behind the text, and the final
-   linear layer still dissolves the band's top and bottom edges. */
-.hero-scrim {
-  background:
-    radial-gradient(72% 62% at 50% 6%, rgba(29, 124, 242, .06), transparent 70%),
-    radial-gradient(64% 56% at 62% 102%, rgba(47, 175, 125, .05), transparent 70%),
-    radial-gradient(46% 58% at 50% 44%, rgba(247, 248, 250, .86), rgba(247, 248, 250, .30) 62%, transparent 78%),
-    linear-gradient(180deg, var(--c-bg) 0%, transparent 12%, transparent 88%, var(--c-bg) 100%);
-}
+/* A2/A3 — the hero surface, the neutralised montage and the header surface
+   used to be defined here; the v12 block at the end of this file now owns
+   them. Only the rules v12 does not restate live on. */
 
 /* Fade the reel horizontally so tiles dissolve at the edges instead of
    being clipped mid-card. */
@@ -1773,23 +1758,8 @@ a.hm:hover {
   mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
 }
 
-/* Neutralise the montage: tiles support the title, they do not compete with
-   it. Cool-grey shadows and borders, and the arm accents reduced to a thin
-   strip so no single tile shouts. */
-.reel-tile {
-  border-color: rgba(16, 24, 40, .10);
-  box-shadow: 0 6px 18px rgba(16, 24, 40, .10);
-}
-.reel-tile.lv { box-shadow: 0 6px 18px rgba(16, 24, 40, .10); }
-.reel-tile.arm-eve, .reel-tile.arm-sft {
-  border-color: color-mix(in srgb, var(--tone) 24%, rgba(16, 24, 40, .12));
-}
-.reel-tile.arm-eve::after, .reel-tile.arm-sft::after { height: 2px; opacity: .7; }
-
-/* A3 — navigation: translucent white; the hairline border stays, and a soft
-   shadow appears only once the page has scrolled (js toggles .is-scrolled). */
-.site-header { background: rgba(255, 255, 255, .78); }
-.header-nav a:hover { background: color-mix(in srgb, var(--c-blue) 7%, transparent); }
+/* A soft header shadow appears only once the page has scrolled (js toggles
+   .is-scrolled). */
 .site-header.is-scrolled {
   box-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 6px 20px rgba(16, 24, 40, .05);
 }
@@ -1942,3 +1912,95 @@ a.hm:hover {
   .fx-chart-k { grid-column: 1 / -1; }
   .fx-chart-m { grid-column: 1 / -1; text-align: right; }
 }
+
+/* ---------- v12: colour-only calm pass on the hero and the site palette ---------- */
+
+/* 2 — hero atmosphere: a cool-neutral base with ONE barely perceptible
+   cobalt wash. The green cast is gone, so the first screen reads as paper
+   rather than as a coloured technology backdrop. */
+.hero-band {
+  background-color: var(--c-bg);
+  background-image:
+    radial-gradient(62% 54% at 32% 24%, rgba(53, 104, 212, .045), transparent 68%),
+    linear-gradient(180deg, #FAFBFC, var(--c-bg) 62%);
+}
+
+/* 2/17 — the scrim loses both coloured layers and gains a soft edge
+   vignette; it now reads as page-coloured air, not as a haze. */
+.hero-scrim {
+  background:
+    radial-gradient(46% 58% at 50% 44%, rgba(246, 247, 249, .86), rgba(246, 247, 249, .30) 62%, transparent 78%),
+    linear-gradient(180deg, var(--c-bg) 0%, transparent 12%, transparent 88%, var(--c-bg) 100%),
+    linear-gradient(to right,
+      rgba(246, 247, 249, .90), rgba(246, 247, 249, 0) 12%,
+      rgba(246, 247, 249, 0) 88%, rgba(246, 247, 249, .90));
+}
+
+/* 3/4 — montage tiles: one neutral hairline, one quiet shadow, no arm glow
+   and no accent strip. Saturation is eased slightly so the clips support
+   the title instead of competing with it. */
+.reel-tile,
+.reel-tile.lv,
+.reel-tile.arm-eve,
+.reel-tile.arm-sft {
+  border: 1px solid rgba(72, 88, 110, .16);
+  box-shadow: 0 6px 18px rgba(25, 35, 50, .055);
+  transition: border-color 180ms var(--ease);
+}
+.reel-tile.arm-eve::after, .reel-tile.arm-sft::after { content: none; }
+.reel-tile:hover { border-color: rgba(53, 104, 212, .30); }
+.reel-tile video { filter: saturate(.88) contrast(.97) brightness(1.02); }
+
+/* 5/6 — hero typography: editorial cobalt instead of electric blue, and
+   neutral greys for every supporting line. No colour in the body copy. */
+.hero-title { color: #111827; }
+.hero-title .hl { color: var(--c-blue); }
+.hero-tag { color: #273244; }
+.hero-tag b { color: #111827; }
+.hero-value { color: #28313F; }
+.hero-value span { color: #737D8B; }
+
+/* 7 — badges stay inside the blue family: a soft tint, cobalt text, no
+   gradient and no hard edge. */
+.vbadge { background: var(--c-blue-soft); color: var(--c-blue); }
+
+/* 8 — navigation: translucent white, hairline rule, and a selection state
+   that is a soft tint rather than a filled pill. */
+.site-header { background: rgba(255, 255, 255, .94); border-bottom-color: #E7EAEF; }
+.header-nav a { color: #6D7582; }
+.header-nav a:hover { color: #111827; background: color-mix(in srgb, var(--c-blue) 6%, transparent); }
+.header-nav a.active { color: var(--c-blue); background: var(--c-blue-soft); }
+.hbtn:hover { border-color: var(--c-blue); color: var(--c-blue); }
+
+/* 9 — exactly one strong action per hero (Code); the rest are quiet text
+   actions tinted cobalt. */
+.btn.primary { background: var(--c-blue); border-color: var(--c-blue); }
+.btn.primary:hover { background: var(--c-blue-hover); border-color: var(--c-blue-hover); }
+.btn.ghost { color: var(--c-blue); }
+.btn.ghost:hover { background: var(--c-blue-soft); }
+
+/* 10/16 — result strip: one structural accent shared by all four cards, so
+   the row stops reading as a four-colour KPI dashboard; hover is a quiet
+   lift with no glow. */
+.hm {
+  border: 1px solid var(--c-border); border-radius: 17px;
+  box-shadow: 0 8px 24px rgba(20, 32, 50, .065);
+  transition: transform 180ms var(--ease), box-shadow 180ms var(--ease),
+              border-color 180ms var(--ease);
+}
+.hm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(20, 32, 50, .08);
+  border-color: rgba(53, 104, 212, .20);
+}
+.hm::before,
+.hm-arena::before, .hm-mlr::before, .hm-if::before, .hm-xb::before {
+  background: color-mix(in srgb, var(--c-blue) 32%, #fff);
+}
+
+/* 11–15 — the numerals stay graphite and the supporting ramp steps down
+   through three quiet greys, so colour is left free to mean something. */
+.hero-metrics .hm b, .hero-metrics .hm-arena b { color: var(--c-text); }
+.hm .hm-k { color: #66717F; }
+.hm .hm-m { color: #273244; }
+.hm .hm-x { color: #77808D; }
