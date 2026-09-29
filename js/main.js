@@ -312,4 +312,67 @@
     }, { rootMargin: "120px 0px", threshold: 0.35 });
     cmpVideos.forEach(function (v) { cmpIo.observe(v); });
   }
+
+  /* ---------- section 07 experiments: finding explorer ---------- */
+
+  var fx = document.querySelector("[data-fx]");
+  if (fx) {
+    var fxTabs = Array.prototype.slice.call(fx.querySelectorAll("[data-fx-tab]"));
+    var fxPanels = Array.prototype.slice.call(fx.querySelectorAll("[data-fx-panel]"));
+    var fxNow = fx.querySelector("[data-fx-now]");
+    var fxIndex = 0;
+
+    function fxShow(i) {
+      if (!fxPanels.length) return;
+      fxIndex = (i % fxPanels.length + fxPanels.length) % fxPanels.length;
+      fxPanels.forEach(function (p, n) {
+        var on = n === fxIndex;
+        if (on) { p.removeAttribute("hidden"); } else { p.setAttribute("hidden", ""); }
+        p.classList.toggle("is-active", on);
+      });
+      fxTabs.forEach(function (t, n) {
+        var on = n === fxIndex;
+        t.classList.toggle("is-active", on);
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.setAttribute("tabindex", on ? "0" : "-1");
+      });
+      if (fxNow) fxNow.textContent = String(fxIndex + 1);
+    }
+
+    fxTabs.forEach(function (t, n) {
+      t.addEventListener("click", function () { fxShow(n); });
+      t.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        e.preventDefault();
+        e.stopPropagation();
+        var next = (n + (e.key === "ArrowRight" ? 1 : -1) + fxTabs.length) % fxTabs.length;
+        fxShow(next);
+        fxTabs[next].focus();
+      });
+    });
+
+    var fxPrev = fx.querySelector("[data-fx-prev]");
+    var fxNext = fx.querySelector("[data-fx-next]");
+    if (fxPrev) fxPrev.addEventListener("click", function () { fxShow(fxIndex - 1); });
+    if (fxNext) fxNext.addEventListener("click", function () { fxShow(fxIndex + 1); });
+
+    /* arrow keys step through findings while the explorer is on screen, and
+       only when the viewer is not typing or scrubbing a clip */
+    var fxInView = false;
+    if ("IntersectionObserver" in window) {
+      var fxIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { fxInView = en.isIntersecting; });
+      }, { threshold: 0.25 });
+      fxIo.observe(fx);
+    }
+    document.addEventListener("keydown", function (e) {
+      if (!fxInView) return;
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var t = e.target;
+      if (t && t.closest && t.closest("input, textarea, select, video, [contenteditable]")) return;
+      e.preventDefault();
+      fxShow(fxIndex + (e.key === "ArrowRight" ? 1 : -1));
+    });
+  }
 })();
