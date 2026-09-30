@@ -227,13 +227,14 @@ python scripts/train/train_flowwam.py \
     --config configs/paper/flowwam/robotwin/eveworld.yaml --dry-run
 ```
 
-A run writes `checkpoints/<run>/checkpoint-<step>.pt` every
-`train.save_every` steps (50 for GigaWorld-0, 100 for FlowWAM) together
+A run writes `checkpoint-<step>.pt` under its `output_dir` (the
+`outputs/<run>/` directory of the config by default) every
+`train.save_every` steps (50 for GigaWorld-0, 100 for FlowWAM), together
 with a `trainer_state.json` that records the step, the seed and the
-resolved config. The checkpoint root is `EVEWORLD_CHECKPOINT_ROOT` when
-set, and `checkpoints/` otherwise; the naming and the per-row checkpoint
-selection are described in [`checkpoints.md`](checkpoints.md). Resuming
-with `--resume` restarts from the newest checkpoint in the run directory.
+resolved config. `--output-dir` moves the run directory; the naming and
+the per-row checkpoint selection are described in
+[`checkpoints.md`](checkpoints.md). Resuming with `--resume` restarts
+from the newest checkpoint in the run directory.
 
 Sampling and generation settings are deliberately not part of training; they
 live in the `inference` block of the same config and are used by
