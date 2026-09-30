@@ -1751,13 +1751,6 @@ a.hm:hover {
    used to be defined here; the v12 block at the end of this file now owns
    them. Only the rules v12 does not restate live on. */
 
-/* Fade the reel horizontally so tiles dissolve at the edges instead of
-   being clipped mid-card. */
-.hero-reel {
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-}
-
 /* A soft header shadow appears only once the page has scrolled (js toggles
    .is-scrolled). */
 .site-header.is-scrolled {
@@ -1925,15 +1918,12 @@ a.hm:hover {
     linear-gradient(180deg, #FAFBFC, var(--c-bg) 62%);
 }
 
-/* 2/17 — the scrim loses both coloured layers and gains a soft edge
-   vignette; it now reads as page-coloured air, not as a haze. */
+/* 2/17 — the scrim loses both coloured layers; it now reads as
+   page-coloured air, not as a haze. */
 .hero-scrim {
   background:
     radial-gradient(46% 58% at 50% 44%, rgba(246, 247, 249, .86), rgba(246, 247, 249, .30) 62%, transparent 78%),
-    linear-gradient(180deg, var(--c-bg) 0%, transparent 12%, transparent 88%, var(--c-bg) 100%),
-    linear-gradient(to right,
-      rgba(246, 247, 249, .90), rgba(246, 247, 249, 0) 12%,
-      rgba(246, 247, 249, 0) 88%, rgba(246, 247, 249, .90));
+    linear-gradient(180deg, var(--c-bg) 0%, transparent 12%, transparent 88%, var(--c-bg) 100%);
 }
 
 /* 3/4 — montage tiles: one neutral hairline, one quiet shadow, no arm glow
