@@ -1379,7 +1379,7 @@ def _resolve_base(cfg: FlowWAMConfig) -> Path:
         f"Wan base checkpoint {value!r} was not found; tried:\n{listing}\n"
         "download it with scripts/setup/download_models.sh (which honours "
         "EVEWORLD_CHECKPOINT_ROOT), point FLOWWAM_MODEL_DIR at it, or pass model.base_path; "
-        "see checkpoints/README.md"
+        "see docs/checkpoints.md"
     )
 
 
@@ -1444,7 +1444,7 @@ def _resolve_weight(cfg: FlowWAMConfig) -> Path:
         "fetch them with scripts/setup/clone_flowwam.sh and "
         "scripts/setup/download_models.sh (which honour EVEWORLD_CHECKPOINT_ROOT), point "
         "FLOWWAM_MODEL_DIR at the directory holding them, or pass model.checkpoint; see "
-        "checkpoints/README.md"
+        "docs/checkpoints.md"
     )
 
 

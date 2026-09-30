@@ -55,8 +55,7 @@ dist/
 *.7z
 /outputs/
 /results/
-/checkpoints/*
-!/checkpoints/README.md
+/checkpoints/
 _tmp/
 
 # --- Media (selectively re-allowed in assets/ via a nested .gitignore) ---

@@ -7,9 +7,6 @@ FlowWAM checkpoints, the GroundingDINO locator, the SAM2.1 tracker and the
 local Qwen judge. Everything lands under
 `${EVEWORLD_CHECKPOINT_ROOT:-checkpoints}`, so a single variable moves the
 whole tree onto a larger volume.
-[`checkpoints/README.md`](../checkpoints/README.md) describes the same layout
-in prose; the table inside the downloader is its executable copy, and a
-checkpoint added in one file has to be added in the other.
 
 ## What the downloader fetches
 

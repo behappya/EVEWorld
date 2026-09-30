@@ -1029,7 +1029,7 @@ def _resolve_checkpoint(name: str | None) -> Path:
         f"GigaWorld-0 checkpoint {value!r} was not found; tried:\n{listing}\n"
         "download it with scripts/setup/download_models.sh (which honours "
         "EVEWORLD_CHECKPOINT_ROOT), point GW0_MODEL_DIR at it, or pass an explicit directory; "
-        "see checkpoints/README.md"
+        "see docs/checkpoints.md"
     )
 
 

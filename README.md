@@ -146,14 +146,13 @@ See [`docs/reproduction.md`](docs/reproduction.md) for inputs, compute requireme
 
 ## Data and checkpoints
 
-`data/` holds the evaluation splits, per-clip metadata, and the judge prompts; the datasets themselves stay outside the repository. `checkpoints/` holds the download instructions, and `bash scripts/setup/download_models.sh` fetches the listed weights into `${EVEWORLD_CHECKPOINT_ROOT:-checkpoints}`, skipping files that already exist. See [`docs/data_preparation.md`](docs/data_preparation.md) and [`docs/checkpoints.md`](docs/checkpoints.md).
+`data/` holds the evaluation splits, per-clip metadata, and the judge prompts; the datasets themselves stay outside the repository. `bash scripts/setup/download_models.sh` fetches the third-party weights the code reads into `${EVEWORLD_CHECKPOINT_ROOT:-checkpoints}`, skipping files that already exist. See [`docs/data_preparation.md`](docs/data_preparation.md) and [`docs/checkpoints.md`](docs/checkpoints.md).
 
 ## Repository structure
 
 ```text
 EVEWorld/
 ├── assets/        README figures; the project-page media lives in the gh-pages branch
-├── checkpoints/   download instructions for the released weights
 ├── configs/       training, evaluation, and ablation run configurations
 ├── data/          splits, per-clip metadata, and judge prompts (datasets stay outside the repo)
 ├── docs/          installation, data, training, inference, evaluation, reproduction, checkpoints, third party

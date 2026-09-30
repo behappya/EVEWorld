@@ -2,9 +2,9 @@
 #
 # Fetch the backbones, the released checkpoints and the third-party weights the
 # EVEWorld recipes need. Everything lands under
-# ${EVEWORLD_CHECKPOINT_ROOT:-checkpoints}, which mirrors the layout described
-# in checkpoints/README.md; the table below is the executable copy of it, so
-# update both when a checkpoint is added.
+# ${EVEWORLD_CHECKPOINT_ROOT:-checkpoints}; docs/checkpoints.md documents the
+# layout, the flags and the verification steps, and the table below is the
+# executable copy of it.
 #
 # Usage:
 #   bash scripts/setup/download_models.sh [--checkpoint-root DIR] [--only NAME]
